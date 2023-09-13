@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.MAX_AFK_TIME;
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.TIMEOUT;
@@ -26,7 +28,7 @@ public class MulticastUDP {
 
     private final String ip;
 
-    private final Map<Long, Date> liveHostMap = new HashMap<>();
+    private final ConcurrentMap<Long, Date> liveHostMap = new ConcurrentHashMap<>();
 
     public MulticastUDP(String ip, int port) throws IOException {
 
@@ -83,6 +85,7 @@ public class MulticastUDP {
     }
 
     public void checkAlive() {
+        log.info("check alive host");
         for(Map.Entry<Long, Date> liveHost : liveHostMap.entrySet()) {
             if(isHostAFK(liveHost.getValue())) {
                 log.info("remove host ip " + liveHost.getKey());
@@ -107,5 +110,9 @@ public class MulticastUDP {
     public void addNewHost(Long pid) {
         log.info("add new host by pid " + pid);
         liveHostMap.put(pid, new Date(System.currentTimeMillis()));
+    }
+
+    public int sizeLiveHosts() {
+        return liveHostMap.size();
     }
 }

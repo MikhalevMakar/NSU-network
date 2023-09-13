@@ -1,8 +1,11 @@
 package nsu.ccfit.ru.mikhalev.service;
 
 import lombok.extern.slf4j.Slf4j;
+import nsu.ccfit.ru.mikhalev.configuration.SchedulerHostAFK;
 import nsu.ccfit.ru.mikhalev.ecxeption.InvalidMulticastIPException;
+import nsu.ccfit.ru.mikhalev.model.CheckerHost;
 import nsu.ccfit.ru.mikhalev.model.MulticastUDP;
+import org.quartz.SchedulerException;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -21,6 +24,23 @@ public class MulticastService {
             throw new InvalidMulticastIPException(ip);
 
         multicastUDP = new MulticastUDP(ip, port);
+
+        initScheduler();
+    }
+
+    private void initScheduler(){
+        CheckerHost hostCheck = () -> {
+            new Thread (() -> {
+                multicastUDP.checkAlive();
+                log.info("host count " + multicastUDP.sizeLiveHosts());
+            }).start();
+        };
+        try {
+            SchedulerService.setHostCheck(hostCheck);
+            SchedulerHostAFK.execution();
+        } catch (SchedulerException ex) {
+            log.warn ("scheduler service has not been initialized");
+        }
     }
 
     public void executeSender() throws InterruptedException {
@@ -29,7 +49,7 @@ public class MulticastService {
         while(countSend++ < NUMBER_MESSAGE_SENT) {
             multicastUDP.send(MESSAGE);
             log.info("send message " + MESSAGE);
-            sleep(TIMEOUT);
+            sleep(TIMEOUT_MILLISECONDS);
         }
         multicastUDP.leaveGroup();
     }
@@ -42,8 +62,9 @@ public class MulticastService {
         }
     }
 
-    public void execute() throws InterruptedException {
+    public void run() throws InterruptedException {
         multicastUDP.addToGroup();
+
         long pid = ProcessHandle.current().pid();
         DatagramPacket packet;
 
