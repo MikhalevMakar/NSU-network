@@ -5,6 +5,7 @@ import nsu.ccfit.ru.mikhalev.ecxeption.JoinGroupException;
 
 import java.io.IOException;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.MAX_AFK_TIME;
@@ -12,6 +13,7 @@ import static nsu.ccfit.ru.mikhalev.context.ContextValue.TIMEOUT;
 
 @Slf4j
 public class MulticastUDP {
+
     private final MulticastSocket multicastSocket;
 
     private final InetAddress multicastGroup;
@@ -24,7 +26,7 @@ public class MulticastUDP {
 
     private final String ip;
 
-    private final Map<String, Date> liveHostMap = new HashMap<>();
+    private final Map<Long, Date> liveHostMap = new HashMap<>();
 
     public MulticastUDP(String ip, int port) throws IOException {
 
@@ -61,8 +63,15 @@ public class MulticastUDP {
         try {
             packet = new DatagramPacket(buffer, buffer.length);
             this.multicastSocket.receive(packet);
-            log.info("receive new message " + Arrays.toString(buffer));
-            liveHostMap.put(packet.getAddress().getHostAddress(), new Date(System.currentTimeMillis()));
+
+            String receivedMessage = new String(buffer, StandardCharsets.UTF_8);
+            log.info("receive new message " + receivedMessage);
+
+            DatagramPacket finalPacket = packet;
+            Optional.ofNullable(liveHostMap.get(packet.getData())).ifPresent(date -> {
+                                                liveHostMap.put(Long.parseLong(Arrays.toString(finalPacket.getData())),
+                                                                new Date(System.currentTimeMillis()));
+                                            });
         } catch(IOException ex) {
             log.error("failed to receive message");
         }
@@ -74,7 +83,7 @@ public class MulticastUDP {
     }
 
     public void checkAlive() {
-        for(Map.Entry<String, Date> liveHost : liveHostMap.entrySet()) {
+        for(Map.Entry<Long, Date> liveHost : liveHostMap.entrySet()) {
             if(isHostAFK(liveHost.getValue())) {
                 log.info("remove host ip " + liveHost.getKey());
                 liveHostMap.remove(liveHost.getKey());
@@ -89,5 +98,14 @@ public class MulticastUDP {
         } catch(IOException ex) {
             log.error("failed to exit from multicast group");
         }
+    }
+
+    public boolean containsHost(Long pid) {
+        return liveHostMap.containsKey(pid);
+    }
+
+    public void addNewHost(Long pid) {
+        log.info("add new host by pid " + pid);
+        liveHostMap.put(pid, new Date(System.currentTimeMillis()));
     }
 }
