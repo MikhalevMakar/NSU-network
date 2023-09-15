@@ -2,8 +2,6 @@ package nsu.ccfit.ru.mikhalev.configuration;
 
 import nsu.ccfit.ru.mikhalev.service.SchedulerService;
 import org.quartz.*;
-
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.TIMEOUT;
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.TIMEOUT_SECOND;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;

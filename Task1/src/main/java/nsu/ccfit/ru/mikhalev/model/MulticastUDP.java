@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.MAX_AFK_TIME;
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.TIMEOUT;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.TIMEOUT_MILLISECONDS;
 
 @Slf4j
 public class MulticastUDP {
@@ -28,7 +28,7 @@ public class MulticastUDP {
 
     private final String ip;
 
-    private final ConcurrentMap<Long, Date> liveHostMap = new ConcurrentHashMap<>();
+    private final ConcurrentMap<NetworkEndpoint, Date> liveHostMap = new ConcurrentHashMap<>();
 
     public MulticastUDP(String ip, int port) throws IOException {
 
@@ -39,7 +39,7 @@ public class MulticastUDP {
         this.portMulticast = port;
         this.buffer = new byte[MAX_SIZE_BUFFER];
 
-        this.multicastSocket.setSoTimeout(TIMEOUT);
+        this.multicastSocket.setSoTimeout(TIMEOUT_MILLISECONDS);
     }
 
     public void addToGroup() {
@@ -71,8 +71,11 @@ public class MulticastUDP {
 
             DatagramPacket finalPacket = packet;
             Optional.ofNullable(liveHostMap.get(packet.getData())).ifPresent(date -> {
-                                                liveHostMap.put(Long.parseLong(Arrays.toString(finalPacket.getData())),
-                                                                new Date(System.currentTimeMillis()));
+                                                liveHostMap.put(new NetworkEndpoint(Long.parseLong(Arrays.toString(finalPacket.getData())),
+                                                                                    finalPacket.getAddress().getHostAddress()
+                                                                ),
+                                                                new Date(System.currentTimeMillis())
+                                                );
                                             });
         } catch(IOException ex) {
             log.error("failed to receive message");
@@ -86,7 +89,7 @@ public class MulticastUDP {
 
     public void checkAlive() {
         log.info("check alive host");
-        for(Map.Entry<Long, Date> liveHost : liveHostMap.entrySet()) {
+        for(Map.Entry<NetworkEndpoint, Date> liveHost : liveHostMap.entrySet()) {
             if(isHostAFK(liveHost.getValue())) {
                 log.info("remove host ip " + liveHost.getKey());
                 liveHostMap.remove(liveHost.getKey());
@@ -107,9 +110,9 @@ public class MulticastUDP {
         return liveHostMap.containsKey(pid);
     }
 
-    public void addNewHost(Long pid) {
+    public void addNewHost(Long pid, String ip) {
         log.info("add new host by pid " + pid);
-        liveHostMap.put(pid, new Date(System.currentTimeMillis()));
+        liveHostMap.put(new NetworkEndpoint(pid, ip), new Date(System.currentTimeMillis()));
     }
 
     public int sizeLiveHosts() {

@@ -74,14 +74,14 @@ public class MulticastService {
             multicastUDP.send(Long.toString(pid).trim());
             log.info("send message " + pid);
 
-            sleep(TIMEOUT);
+            sleep(TIMEOUT_MILLISECONDS);
             packet = multicastUDP.receive();
             String dataAsString = new String(packet.getData(), StandardCharsets.UTF_8).trim();
             log.info("receive message by user " + packet.getAddress());
 
             Long receivePid = Long.parseLong(dataAsString);
             if(!multicastUDP.containsHost(receivePid))
-                multicastUDP.addNewHost(receivePid);
+                multicastUDP.addNewHost(receivePid, packet.getAddress().getHostAddress());
         }
     }
 }
