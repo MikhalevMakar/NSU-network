@@ -16,9 +16,10 @@ import static java.lang.Thread.sleep;
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
 
 @Slf4j
-public class MulticastService {
+public class MulticastService implements AutoCloseable {
 
     private final MulticastUDP multicastUDP;
+
     public MulticastService(String ip, int port) throws IOException {
         if (!InetAddress.getByName(ip).isMulticastAddress())
             throw new InvalidMulticastIPException(ip);
@@ -83,5 +84,11 @@ public class MulticastService {
             if(!multicastUDP.containsHost(receivePid))
                 multicastUDP.addNewHost(receivePid, packet.getAddress().getHostAddress());
         }
+    }
+
+    @Override
+    public void close() throws Exception {
+        log.info("close resources");
+        multicastUDP.close();
     }
 }

@@ -1,13 +1,14 @@
 package nsu.ccfit.ru.mikhalev;
 
+import nsu.ccfit.ru.mikhalev.ecxeption.InvalidMulticastIPException;
 import nsu.ccfit.ru.mikhalev.service.MulticastService;
 
-import java.io.IOException;
-
-
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException {
-        MulticastService multicastService = new MulticastService(args[1], Integer.parseInt(args[2]));
-        multicastService.run();
+    public static void main(String[] args) {
+        try (MulticastService multicastService = new MulticastService(args[0], Integer.parseInt(args[1]))) {
+            multicastService.run();
+        } catch (Exception e) {
+           throw new InvalidMulticastIPException(args[0]);
+        }
     }
 }

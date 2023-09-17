@@ -14,7 +14,7 @@ import static nsu.ccfit.ru.mikhalev.context.ContextValue.MAX_AFK_TIME;
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.TIMEOUT_MILLISECONDS;
 
 @Slf4j
-public class MulticastUDP {
+public class MulticastUDP implements AutoCloseable {
 
     private final MulticastSocket multicastSocket;
 
@@ -53,6 +53,7 @@ public class MulticastUDP {
     }
 
     public void send(String message) {
+        log.info("send message");
         try {
             this.multicastSocket.send(new DatagramPacket(message.getBytes(), message.length(), multicastGroup, portMulticast));
         } catch (IOException ex) {
@@ -61,6 +62,7 @@ public class MulticastUDP {
     }
 
     public DatagramPacket receive() {
+        log.info("receive message");
         DatagramPacket packet = null;
         try {
             packet = new DatagramPacket(buffer, buffer.length);
@@ -117,5 +119,11 @@ public class MulticastUDP {
 
     public int sizeLiveHosts() {
         return liveHostMap.size();
+    }
+
+    @Override
+    public void close() throws Exception {
+        log.info("close resources");
+        this.multicastSocket.close();
     }
 }
