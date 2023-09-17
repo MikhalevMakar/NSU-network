@@ -1,9 +1,9 @@
 plugins {
-    id 'java'
+    id("java")
 }
 
-group 'nsu.ccfit.ru.mikhalev'
-version '1.0-SNAPSHOT'
+group = "nsu.ccfit.ru.mikhalev"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -16,10 +16,11 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.22'
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
     implementation 'org.slf4j:slf4j-api:2.0.0'
     implementation 'org.slf4j:slf4j-simple:2.0.0'
 }
 
-test {
+tasks.test {
     useJUnitPlatform()
 }

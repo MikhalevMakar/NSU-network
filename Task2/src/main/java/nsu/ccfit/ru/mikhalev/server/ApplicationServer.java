@@ -1,6 +1,7 @@
 package nsu.ccfit.ru.mikhalev.server;
 
 
+import nsu.ccfit.ru.mikhalev.exception.ConnectException;
 import nsu.ccfit.ru.mikhalev.server.service.ConnectService;
 
 public class ApplicationServer {
@@ -9,7 +10,7 @@ public class ApplicationServer {
         try(ConnectService server = new ConnectService(Integer.parseInt(args[0]))) {
             server.execute();
         } catch(Exception ex ) {
-
+            throw new ConnectException(args[0]);
         }
     }
 }
