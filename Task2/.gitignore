@@ -5,4 +5,4 @@
 **/gradle/wrapper
 **/gradlew
 **/gradlew.bat
-**/settings.gradle.kts
+**/settings.gradle*
