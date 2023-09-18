@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+
+  node1:
+    build: .
+    image: task1_image
+    container_name: node1
+    environment:
+      - GROUP_ADDRESS=${GROUP_ADDRESS}
+      - GROUP_PORT=${GROUP_PORT}
+    networks:
+      multicast-network:
+        ipv4_address: 172.18.0.2
+        ipv6_address: 2001:db8::2
+
+  node2:
+    image: task1_image
+    container_name: node2
+    depends_on:
+      - node1
+    environment:
+      - GROUP_ADDRESS=${GROUP_ADDRESS}
+      - GROUP_PORT=${GROUP_PORT}
+    networks:
+      multicast-network:
+        ipv4_address: 172.18.0.3
+        ipv6_address: 2001:db8::3
+
+  node3:
+    image: task1_image
+    container_name: node3
+    depends_on:
+      - node1
+    environment:
+      - GROUP_ADDRESS=${GROUP_ADDRESS}
+      - GROUP_PORT=${GROUP_PORT}
+    networks:
+      multicast-network:
+        ipv4_address: 172.18.0.4
+        ipv6_address: 2001:db8::4
+
+  node4:
+    image: task1_image
+    container_name: node4
+    depends_on:
+      - node1
+    environment:
+      - GROUP_ADDRESS=${GROUP_ADDRESS}
+      - GROUP_PORT=${GROUP_PORT}
+    networks:
+      multicast-network:
+        ipv4_address: 172.18.0.5
+        ipv6_address: 2001:db8::5
+
+networks:
+  multicast-network:
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/16
+        - subnet: 2001:db8::/64

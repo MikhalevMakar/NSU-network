@@ -6,11 +6,10 @@ import nsu.ccfit.ru.mikhalev.service.MulticastService;
 
 import java.io.IOException;
 
-//// FF02::1:FF00:0
-
 @Slf4j
 public class Main {
     public static void main(String[] args) {
+        log.info("arg " + args[1]);
         try (MulticastService multicastService = new MulticastService(args[0], Integer.parseInt(args[1]))) {
             log.info("start main and multicastService.run()");
             multicastService.run();
