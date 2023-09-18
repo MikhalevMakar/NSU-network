@@ -8,6 +8,11 @@ import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 public class SchedulerHostAFK {
+
+    private SchedulerHostAFK() {
+         throw new IllegalStateException("utility class");
+    }
+
     public static void execution() throws SchedulerException {
         SchedulerFactory schedulerFact = new org.quartz.impl.StdSchedulerFactory();
 

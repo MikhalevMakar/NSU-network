@@ -3,13 +3,11 @@ package nsu.ccfit.ru.mikhalev.service;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.configuration.SchedulerHostAFK;
 import nsu.ccfit.ru.mikhalev.ecxeption.InvalidMulticastIPException;
-import nsu.ccfit.ru.mikhalev.model.CheckerHost;
-import nsu.ccfit.ru.mikhalev.model.MulticastUDP;
+import nsu.ccfit.ru.mikhalev.model.*;
 import org.quartz.SchedulerException;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 
 import static java.lang.Thread.sleep;
@@ -31,16 +29,14 @@ public class MulticastService implements AutoCloseable {
 
     private void initScheduler(){
         CheckerHost hostCheck = () -> {
-            new Thread (() -> {
-                multicastUDP.checkAlive();
-                log.info("host count " + multicastUDP.sizeLiveHosts());
-            }).start();
+            multicastUDP.checkAlive ();
+            log.info ("host count " + multicastUDP.sizeLiveHosts());
         };
         try {
             SchedulerService.setHostCheck(hostCheck);
             SchedulerHostAFK.execution();
         } catch (SchedulerException ex) {
-            log.warn ("scheduler service has not been initialized");
+            log.warn("scheduler service has not been initialized");
         }
     }
 
@@ -78,16 +74,18 @@ public class MulticastService implements AutoCloseable {
             sleep(TIMEOUT_MILLISECONDS);
             packet = multicastUDP.receive();
             String dataAsString = new String(packet.getData(), StandardCharsets.UTF_8).trim();
-            log.info("receive message by user " + packet.getAddress());
 
+            log.info("receive message by user " + packet.getAddress());
             Long receivePid = Long.parseLong(dataAsString);
-            if(!multicastUDP.containsHost(receivePid))
-                multicastUDP.addNewHost(receivePid, packet.getAddress().getHostAddress());
+
+            String hostAddress = packet.getAddress().getHostAddress();
+            if(!multicastUDP.containsHost(new NetworkEndpoint(receivePid, hostAddress)))
+                multicastUDP.addNewHost(receivePid, hostAddress);
         }
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         log.info("close resources");
         multicastUDP.close();
     }

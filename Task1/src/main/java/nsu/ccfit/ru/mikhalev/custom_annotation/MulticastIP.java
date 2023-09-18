@@ -5,7 +5,7 @@ package nsu.ccfit.ru.mikhalev.custom_annotation;
 //import nsu.ccfit.ru.mikhalev.util.ValidatorIMulticastIP;
 //
 //import java.lang.annotation.*;
-
+//
 //@Documented
 //@Constraint(validatedBy = ValidatorIMulticastIP.class)
 //@Target(value= ElementType.FIELD)

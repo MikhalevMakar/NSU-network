@@ -10,8 +10,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.MAX_AFK_TIME;
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.TIMEOUT_MILLISECONDS;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
 
 @Slf4j
 public class MulticastUDP implements AutoCloseable {
@@ -35,6 +34,7 @@ public class MulticastUDP implements AutoCloseable {
         log.info ("init constructor by ip {} and port {}", ip, port);
         this.multicastSocket = new MulticastSocket(port);
         this.multicastGroup = InetAddress.getByName(ip);
+
         this.ip = ip;
         this.portMulticast = port;
         this.buffer = new byte[MAX_SIZE_BUFFER];
@@ -44,7 +44,8 @@ public class MulticastUDP implements AutoCloseable {
 
     public void addToGroup() {
         try {
-            this.multicastSocket.joinGroup(InetAddress.getByName(ip));
+            this.multicastSocket.joinGroup(new InetSocketAddress(this.ip, this.portMulticast), null);
+
             log.info("create multicast group by port: " + portMulticast);
         } catch(IOException ex) {
             log.error("could not be added to the group by port " + portMulticast);
@@ -68,17 +69,16 @@ public class MulticastUDP implements AutoCloseable {
             packet = new DatagramPacket(buffer, buffer.length);
             this.multicastSocket.receive(packet);
 
-            String receivedMessage = new String(buffer, StandardCharsets.UTF_8);
+            String receivedMessage = new String(buffer, StandardCharsets.UTF_8).trim();
             log.info("receive new message " + receivedMessage);
 
             DatagramPacket finalPacket = packet;
-            Optional.ofNullable(liveHostMap.get(packet.getData())).ifPresent(date -> {
-                                                liveHostMap.put(new NetworkEndpoint(Long.parseLong(Arrays.toString(finalPacket.getData())),
-                                                                                    finalPacket.getAddress().getHostAddress()
-                                                                ),
-                                                                new Date(System.currentTimeMillis())
-                                                );
-                                            });
+            Optional.ofNullable(liveHostMap.get(packet.getData())).ifPresent(packetData ->
+                liveHostMap.put(new NetworkEndpoint(Long.parseLong(Arrays.toString(finalPacket.getData())),
+                                                    finalPacket.getAddress().getHostAddress()),
+                                new Date(System.currentTimeMillis()))
+            );
+
         } catch(IOException ex) {
             log.error("failed to receive message");
         }
@@ -108,8 +108,8 @@ public class MulticastUDP implements AutoCloseable {
         }
     }
 
-    public boolean containsHost(Long pid) {
-        return liveHostMap.containsKey(pid);
+    public boolean containsHost(NetworkEndpoint key) {
+        return liveHostMap.containsKey(key);
     }
 
     public void addNewHost(Long pid, String ip) {
@@ -122,7 +122,7 @@ public class MulticastUDP implements AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         log.info("close resources");
         this.multicastSocket.close();
     }
