@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static java.lang.Thread.sleep;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.SCHEDULE_TIMER;
+
 @Slf4j
 public class SpeedScheduler implements AutoCloseable {
     private final long scheduleTimer;
@@ -53,7 +56,13 @@ public class SpeedScheduler implements AutoCloseable {
 
     @Override
     public void close() {
-        log.info("close timer");
-        timer.cancel();
+        try {
+            log.info ("close timer");
+            sleep (SCHEDULE_TIMER);
+            timer.cancel();
+        } catch (InterruptedException ex) {
+            log.warn("InterruptedException sleep()" + ex);
+            Thread.currentThread().interrupt();
+        }
     }
 }

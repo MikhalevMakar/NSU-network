@@ -5,9 +5,7 @@ import nsu.ccfit.ru.mikhalev.model.*;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Arrays;
 
-import static java.lang.Thread.sleep;
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
 
 @Slf4j
@@ -31,59 +29,80 @@ public class ReceiverService implements Runnable {
         speedScheduler = new SpeedScheduler(SCHEDULE_TIMER);
     }
 
-    private void createFile() throws IOException, ClassNotFoundException {
+    private FileMetaInfo createFile() throws IOException, ClassNotFoundException {
         FileMetaInfo fileMetaInfo = (FileMetaInfo) this.objectInputStream.readObject();
-
         file = new File(fileMetaInfo.filePath());
+        log.info("size file " + fileMetaInfo.length());
 
         if(file.createNewFile())
-            log.info("create new file");
+            log.info("create new file by name " + fileMetaInfo.filePath());
         else
             log.warn("failed to create a file");
+
+        log.info("size file " + file.length());
+        return fileMetaInfo;
     }
 
-    private void fileReceipt() throws IOException {
+    private void sendStatusResult(long bytesReceived, long totalSize) throws IOException {
+        log.info("check result and send to client");
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())) {
+
+            if (totalSize == bytesReceived)
+                outputStream.writeObject(SUCCESSFUL_TRANSMISSION);
+            else
+                outputStream.writeObject(UNSUCCESSFUL_TRANSMISSION);
+
+            outputStream.flush();
+        } catch (IOException e) {
+            log.warn("error while sending status result to client " + e.getMessage());
+        }
+    }
+
+    private long fileReceipt() throws IOException {
         log.info("call fileReceipt()");
+        int bytesReceived = 0;
         try(FileOutputStream outputStream = new FileOutputStream(file)) {
-            log.info("size file " + file.length());
-
             int len;
+            log.info("write to file");
             long deltaTime = System.nanoTime();
-
             while ((len = inputStream.read (buffer)) >= EMPTY) {
-                speedScheduler.updateDataTransferRate(len / ((System.nanoTime () - deltaTime) / CONVERT_MILISEC_TO_SEC));
+                speedScheduler.updateDataTransferRate((len / (System.nanoTime () - deltaTime)) * CONVERT_MILISEC_TO_SEC);
                 outputStream.write(buffer, EMPTY, len);
+                bytesReceived += len;
                 deltaTime = System.nanoTime();
             }
-        } catch(InterruptedIOException ex) {
-            close();
-            log.warn("file output stream ex: " + Arrays.toString(ex.getStackTrace()));
+            log.info("finish wrote to file");
+        } catch(InterruptedIOException e) {
+            log.warn("file output stream e: " + e.getMessage());
         }
+        return bytesReceived;
     }
 
     @Override
     public void run() {
         try {
             inputStream = socket.getInputStream();
-            createFile();
-            fileReceipt();
+
+            FileMetaInfo fileMetaInfo = createFile();
+            long bytesReceived = fileReceipt();
+            log.info("byte received " + bytesReceived);
+
+            this.sendStatusResult(bytesReceived, fileMetaInfo.length());
         } catch (IOException | ClassNotFoundException e) {
             log.warn("exception " + e.getMessage());
         } finally {
-            close();
+            this.close();
         }
     }
 
     public void close() {
         try {
             log.info("close resources");
-            sleep(SCHEDULE_TIMER);
-            speedScheduler.close();
+
+            this.speedScheduler.close();
+            this.objectInputStream.close();
             this.socket.close();
-        } catch (InterruptedException ex) {
-            log.warn("InterruptedException sleep()" + ex);
-            Thread.currentThread().interrupt();
-        } catch (Exception ex) {
+        }  catch (Exception ex) {
            log.warn("failed to close the socket" + ex);
         }
     }

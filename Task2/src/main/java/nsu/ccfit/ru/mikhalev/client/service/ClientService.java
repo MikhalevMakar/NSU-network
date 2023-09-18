@@ -30,22 +30,40 @@ public class ClientService implements AutoCloseable {
         this.objectOutputStream = new ObjectOutputStream(client.getOutputStream());
     }
 
+    private void handlerResponseReceipt() {
+        log.info("handler response receipt from server");
+
+        try (ObjectInputStream inputStream = new ObjectInputStream(client.getInputStream())) {
+            log.info("server response  " + inputStream.readObject());
+        } catch (IOException | ClassNotFoundException e) {
+            log.warn("error while sending status result to client " + e.getMessage());
+        }
+    }
+
     public void send() throws IOException {
         log.info("call method send()");
 
         OutputStream output = client.getOutputStream();
 
+        log.info("send object metaInf file: path {} size {}", file.getName(), file.length());
         this.objectOutputStream.writeObject(new FileMetaInfo(file.getName(), file.length()));
         this.objectOutputStream.flush();
-        while(this.fileStream.available() != EMPTY) {
+
+        log.info("send file data");
+        while (this.fileStream.available () != EMPTY) {
             output.write(this.fileStream.readNBytes(DEFAULT_SIZE_BUFFER_TRANSFER));
             output.flush();
         }
+
+        log.info("all data from the file has been sent");
+        //handlerResponseReceipt();
     }
 
     @Override
     public void close() throws Exception {
         log.info("close resources");
-        client.close();
+        this.objectOutputStream.close();
+        this.fileStream.close();
+        this.client.close();
     }
 }

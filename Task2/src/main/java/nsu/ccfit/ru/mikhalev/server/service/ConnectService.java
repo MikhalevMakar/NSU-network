@@ -22,6 +22,7 @@ public class ConnectService implements AutoCloseable {
         try(ExecutorService executorService = Executors.newCachedThreadPool()) {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
+                log.info("add new task to thread pool");
                 executorService.submit(new ReceiverService(clientSocket));
             }
         } catch (Exception ex) {
