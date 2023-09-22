@@ -1,7 +1,7 @@
 package nsu.ccfit.ru.mikhalev.server;
 
 
-import nsu.ccfit.ru.mikhalev.exception.ConnectException;
+import nsu.ccfit.ru.mikhalev.core.exception.ConnectException;
 import nsu.ccfit.ru.mikhalev.server.service.ConnectService;
 
 public class ApplicationServer {

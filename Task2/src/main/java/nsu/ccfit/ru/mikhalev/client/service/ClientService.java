@@ -1,14 +1,14 @@
 package nsu.ccfit.ru.mikhalev.client.service;
 
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.client.model.MetaInfTransferProtocol;
-import nsu.ccfit.ru.mikhalev.exception.ConnectException;
-import nsu.ccfit.ru.mikhalev.model.FileMetaInfo;
+import nsu.ccfit.ru.mikhalev.client.model.ClientArgs;
+import nsu.ccfit.ru.mikhalev.core.exception.ConnectException;
+import nsu.ccfit.ru.mikhalev.core.model.FileMetaInfo;
 
 import java.io.*;
 import java.net.*;
 
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
+import static nsu.ccfit.ru.mikhalev.core.context.ContextValue.*;
 
 @Slf4j
 public class ClientService implements AutoCloseable {
@@ -21,12 +21,12 @@ public class ClientService implements AutoCloseable {
 
     private final File file;
 
-    public ClientService(MetaInfTransferProtocol metaInfProtocol) throws ConnectException, IOException {
-        log.info("create Service client by serverIp {} and serverPort {}", metaInfProtocol.ip(), metaInfProtocol.port());
+    public ClientService(ClientArgs clientArgs) throws ConnectException, IOException {
+        log.info("create Service client by serverIp {} and serverPort {}", clientArgs.getHost(), clientArgs.getPort());
 
-        this.client = new Socket(InetAddress.getByName(metaInfProtocol.ip()), metaInfProtocol.port());
-        this.fileStream = new FileInputStream(metaInfProtocol.pathToFile());
-        this.file = new File(metaInfProtocol.pathToFile());
+        this.client = new Socket(InetAddress.getByName(clientArgs.getHost()), clientArgs.getPort());
+        this.fileStream = new FileInputStream(clientArgs.getPathToFile());
+        this.file = new File(clientArgs.getPathToFile());
         this.objectOutputStream = new ObjectOutputStream(client.getOutputStream());
     }
 
@@ -56,7 +56,6 @@ public class ClientService implements AutoCloseable {
         }
 
         log.info("all data from the file has been sent");
-        //handlerResponseReceipt();
     }
 
     @Override

@@ -1,12 +1,13 @@
 package nsu.ccfit.ru.mikhalev.server.service;
 
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.model.*;
+import nsu.ccfit.ru.mikhalev.core.exception.SessionException;
+import nsu.ccfit.ru.mikhalev.core.model.*;
 
 import java.io.*;
 import java.net.Socket;
 
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
+import static nsu.ccfit.ru.mikhalev.core.context.ContextValue.*;
 
 @Slf4j
 public class ReceiverService implements Runnable {
@@ -43,18 +44,13 @@ public class ReceiverService implements Runnable {
         return fileMetaInfo;
     }
 
-    private void sendStatusResult(long bytesReceived, long totalSize) throws IOException {
+    private void checkStatusResult(long bytesReceived, long totalSize) throws IOException {
         log.info("check result and send to client");
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())) {
-
-            if (totalSize == bytesReceived)
-                outputStream.writeObject(SUCCESSFUL_TRANSMISSION);
-            else
-                outputStream.writeObject(UNSUCCESSFUL_TRANSMISSION);
-
-            outputStream.flush();
-        } catch (IOException e) {
-            log.warn("error while sending status result to client " + e.getMessage());
+        if (totalSize == bytesReceived)
+            log.info("{} by client {}", SUCCESSFUL_TRANSMISSION, socket.getInetAddress());
+        else {
+            log.warn("error while sending status result to client " + socket.getInetAddress());
+            throw new SessionException(UNSUCCESSFUL_TRANSMISSION);
         }
     }
 
@@ -65,8 +61,9 @@ public class ReceiverService implements Runnable {
             int len;
             log.info("write to file");
             long deltaTime = System.nanoTime();
-            while ((len = inputStream.read (buffer)) >= EMPTY) {
-                speedScheduler.updateDataTransferRate((len / (System.nanoTime () - deltaTime)) * CONVERT_MILISEC_TO_SEC);
+            while ((len = inputStream.read(buffer)) >= EMPTY) {
+                log.info("receive size data: {} from userIP: {},  {} ", len, socket.getInetAddress(), (System.nanoTime() - deltaTime));
+                speedScheduler.updateDataTransferRate((len / ((System.nanoTime() - deltaTime) / CONVERT_MILISEC_TO_SEC)));
                 outputStream.write(buffer, EMPTY, len);
                 bytesReceived += len;
                 deltaTime = System.nanoTime();
@@ -86,8 +83,7 @@ public class ReceiverService implements Runnable {
             FileMetaInfo fileMetaInfo = createFile();
             long bytesReceived = fileReceipt();
             log.info("byte received " + bytesReceived);
-
-            this.sendStatusResult(bytesReceived, fileMetaInfo.length());
+            this.checkStatusResult(bytesReceived, fileMetaInfo.length());
         } catch (IOException | ClassNotFoundException e) {
             log.warn("exception " + e.getMessage());
         } finally {
