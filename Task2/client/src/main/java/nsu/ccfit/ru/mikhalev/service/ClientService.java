@@ -2,13 +2,11 @@ package nsu.ccfit.ru.mikhalev.client.service;
 
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.client.model.ClientArgs;
-import nsu.ccfit.ru.mikhalev.core.exception.ConnectException;
-import nsu.ccfit.ru.mikhalev.core.model.FileMetaInfo;
+
 
 import java.io.*;
 import java.net.*;
 
-import static nsu.ccfit.ru.mikhalev.core.context.ContextValue.*;
 
 @Slf4j
 public class ClientService implements AutoCloseable {

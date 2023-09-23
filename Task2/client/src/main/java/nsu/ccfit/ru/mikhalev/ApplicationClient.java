@@ -2,10 +2,10 @@ package nsu.ccfit.ru.mikhalev.client;
 
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.client.console.RunnerParser;
-import nsu.ccfit.ru.mikhalev.core.exception.ConnectException;
 import nsu.ccfit.ru.mikhalev.client.service.ClientService;
 
 import java.io.IOException;
+import java.net.ConnectException;
 
 @Slf4j
 public class ApplicationClient {
