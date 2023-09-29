@@ -2,15 +2,14 @@ package nsu.ccfit.ru.mikhalev.game.model;
 
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.netserver.model.*;
-import nsu.ccfit.ru.mikhalev.game.observer.Observable;
+import nsu.ccfit.ru.mikhalev.observer.Observable;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
-import nsu.ccfit.ru.mikhalev.game.observer.context.ContextGame;
+import nsu.ccfit.ru.mikhalev.observer.context.ContextGame;
 
 import java.util.*;
 
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
-import static nsu.ccfit.ru.mikhalev.game.model.Snake.MIN_SNAKE_ID;
-import static nsu.ccfit.ru.mikhalev.game.model.Snake.ONE_SNAKE;
+import static nsu.ccfit.ru.mikhalev.game.model.Snake.*;
 
 @Slf4j
 public class Game extends Observable {
@@ -46,7 +45,8 @@ public class Game extends Observable {
         playersID.put(new HostNetworkKey(MASTER_IP, MASTER_PORT), currentPlayerID);
 
         SnakesProto.GameState.Coord head = this.field.findPlaceHeadSnake();
-        log.info("coord head master snake x = {}, y = {}", head.getX(), head.getY());
+
+        log.info("create snake MASTER");
         Snake snake = new Snake(head,  this.field.findPlaceTailSnake(head.getX() + head.getY() * field.getWidth()), this.currentPlayerID);
         this.setStartPositionSnake(head, snake.getTail(), this.currentPlayerID);
         snakes.put(currentPlayerID++, snake);
@@ -62,10 +62,12 @@ public class Game extends Observable {
     public void addNewUserByIP(String ip, int port, SnakesProto.GamePlayer player) {
         log.info("add new user by ip {} and port {}", ip, port);
         playersID.put(new HostNetworkKey(ip, port), player.getId());
+
         players.put(currentPlayerID, player);
         SnakesProto.GameState.Coord head = this.field.findPlaceHeadSnake();
+
         Snake snake = new Snake(head, this.field.findPlaceTailSnake(head.getX() + head.getY() * field.getWidth()), this.currentPlayerID);
-        addSnakeByUserID(currentPlayerID, snake);
+        this.addSnakeByUserID(currentPlayerID, snake);
         this.setStartPositionSnake(snake.getHead(), snake.getTail(), currentPlayerID++);
     }
 
@@ -104,7 +106,6 @@ public class Game extends Observable {
             this.removeSnake(snake);
 
         snakesOnCell.forEach(currSnakeID -> {
-//            log.info("size list on cell {}", );
             log.info("snake id {} and currSnakeID {} ", snake.getId(), currSnakeID);
 
             if(!headSnake.equals(snakes.get(currSnakeID).getHead()))

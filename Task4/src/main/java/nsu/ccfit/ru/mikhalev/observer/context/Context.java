@@ -1,3 +1,3 @@
-package nsu.ccfit.ru.mikhalev.game.observer.context;
+package nsu.ccfit.ru.mikhalev.observer.context;
 
 public interface Context {}

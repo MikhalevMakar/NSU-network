@@ -1,8 +1,9 @@
 package nsu.ccfit.ru.mikhalev.game.controller;
 
-import nsu.ccfit.ru.mikhalev.game.observer.Observer;
+import javafx.stage.Stage;
+
 
 public interface Controller {
-    void addModelObserver(Observer observer);
-    void run();
+
+    void startGame(Stage stage);
 }

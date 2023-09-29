@@ -1,6 +1,6 @@
 package nsu.ccfit.ru.mikhalev.netserver;
 
-import nsu.ccfit.ru.mikhalev.netserver.model.MulticastSend;
+import nsu.ccfit.ru.mikhalev.netserver.model.multicast.MulticastSend;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

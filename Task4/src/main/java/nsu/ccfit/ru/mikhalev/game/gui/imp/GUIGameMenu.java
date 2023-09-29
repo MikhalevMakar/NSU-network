@@ -1,4 +1,4 @@
-package nsu.ccfit.ru.mikhalev.game.gui;
+package nsu.ccfit.ru.mikhalev.game.gui.imp;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameMenuController;
+import nsu.ccfit.ru.mikhalev.game.gui.View;
+import nsu.ccfit.ru.mikhalev.observer.context.Context;
 
 import java.io.*;
 
@@ -39,5 +41,10 @@ public class GUIGameMenu implements View {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void update(Context context) {
+        log.info("update context");
     }
 }

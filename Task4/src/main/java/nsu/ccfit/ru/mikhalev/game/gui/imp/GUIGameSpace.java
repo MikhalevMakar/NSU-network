@@ -1,4 +1,4 @@
-package nsu.ccfit.ru.mikhalev.game.gui;
+package nsu.ccfit.ru.mikhalev.game.gui.imp;
 
 import javafx.scene.*;
 import javafx.scene.canvas.*;
@@ -11,8 +11,9 @@ import static nsu.ccfit.ru.mikhalev.context.ContextField.*;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
+import nsu.ccfit.ru.mikhalev.game.gui.GameView;
 import nsu.ccfit.ru.mikhalev.game.model.Snake;
-import nsu.ccfit.ru.mikhalev.game.observer.context.*;
+import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.util.*;
@@ -20,7 +21,6 @@ import java.util.*;
 @Slf4j
 @NoArgsConstructor
 public class GUIGameSpace implements GameView {
-
     private GameController gameController;
 
     private static final String FOODS_PHOTO = "/image/watermelon.png";
@@ -31,7 +31,6 @@ public class GUIGameSpace implements GameView {
 
     private final Image foodImage = new Image(FOODS_PHOTO);
 
-
     public GUIGameSpace(GameController gameController) {
         this.gameController = gameController;
     }
@@ -40,8 +39,6 @@ public class GUIGameSpace implements GameView {
 
     @Override
     public void start(Stage stage) {
-        this.gameController.addModelObserver(this);
-
         stage.setResizable(false);
         stage.setTitle("Snake");
 
@@ -60,7 +57,7 @@ public class GUIGameSpace implements GameView {
             if (code == KeyCode.RIGHT || code == KeyCode.D) {
                 gameController.getGame ().addMoveByKey (2, SnakesProto.Direction.RIGHT);
             } else if (code == KeyCode.LEFT || code == KeyCode.A) {
-                gameController.getGame ().addMoveByKey (2, SnakesProto.Direction.LEFT);
+                gameController.getGame().addMoveByKey (2, SnakesProto.Direction.LEFT);
             } else if (code == KeyCode.UP || code == KeyCode.W) {
                 gameController.getGame ().addMoveByKey (2, SnakesProto.Direction.UP);
             } else if (code == KeyCode.DOWN || code == KeyCode.S) {

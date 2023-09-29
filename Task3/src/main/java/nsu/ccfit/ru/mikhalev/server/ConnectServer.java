@@ -10,12 +10,12 @@ import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
 
 @Slf4j
-public class Server {
+public class ConnectServer {
     private final MulticastSocket multicastSocket;
 
     private final DatagramSocket datagramSocket;
 
-    public Server(String multicastIp, int multicastPost) throws IOException {
+    public ConnectServer(String multicastIp, int multicastPost) throws IOException {
         log.info("create socket udp and multicast");
         this.multicastSocket = new MulticastSocket(multicastPost);
 
@@ -34,4 +34,6 @@ public class Server {
             throw new JoinGroupException(ip, port);
         }
     }
+
+
 }

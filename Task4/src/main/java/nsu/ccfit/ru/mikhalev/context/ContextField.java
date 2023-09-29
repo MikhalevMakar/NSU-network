@@ -1,9 +1,6 @@
 package nsu.ccfit.ru.mikhalev.context;
 
 public class ContextField {
-    public static final int WIDTH = 800;
-
-    public static final int HEIGHT = WIDTH;
 
     public static final int ROWS = 20;
 

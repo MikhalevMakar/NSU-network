@@ -8,8 +8,6 @@ public class ContextValue {
 
     public static final int SIZE_BUFFER = 1024;
 
-    public static int NUMBER_CUR_GAME = 0;
-
     public static final int TIMEOUT_MILLISECONDS = 5000;
 
     public static final int MAX_AFK_TIME = 30000;
@@ -41,6 +39,4 @@ public class ContextValue {
     public static final int MASTER_ID = 1;
 
     public static final int  FOOD = 1;
-
-    public static final int EMPTY = 0;
 }

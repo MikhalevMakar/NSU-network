@@ -1,4 +1,4 @@
-package nsu.ccfit.ru.mikhalev.game.observer.context;
+package nsu.ccfit.ru.mikhalev.observer.context;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
