@@ -1,8 +1,8 @@
-package nsu.ccfit.ru.mikhalev.client.model;
+package nsu.ccfit.ru.mikhalev.model;
 
 import com.beust.jcommander.Parameter;
 import lombok.Data;
-import nsu.ccfit.ru.mikhalev.client.console.*;
+import nsu.ccfit.ru.mikhalev.console.*;
 
 @Data
 public class ClientArgs {

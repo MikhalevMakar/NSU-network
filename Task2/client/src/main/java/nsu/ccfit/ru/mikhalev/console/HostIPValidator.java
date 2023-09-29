@@ -1,9 +1,11 @@
-package nsu.ccfit.ru.mikhalev.client.console;
+package nsu.ccfit.ru.mikhalev.console;
 
-import com.beust.jcommander.*;
-import nsu.ccfit.ru.mikhalev.core.exception.InetAddressException;
+import com.beust.jcommander.IParameterValidator;
+import com.beust.jcommander.ParameterException;
+import nsu.ccfit.ru.mikhalev.exception.InetAddressException;
 
-import java.net.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class HostIPValidator implements IParameterValidator {
 
@@ -15,7 +17,7 @@ public class HostIPValidator implements IParameterValidator {
                 throw new ParameterException("invalid host value: " + value);
             }
         } catch (UnknownHostException e) {
-            throw new InetAddressException(e);
+            throw new InetAddressException (e);
         }
     }
 }

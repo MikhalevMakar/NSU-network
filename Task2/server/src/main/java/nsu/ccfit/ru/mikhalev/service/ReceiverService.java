@@ -1,12 +1,14 @@
 package nsu.ccfit.ru.mikhalev.service;
 
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.core.exception.SessionException;
+import nsu.ccfit.ru.mikhalev.exception.SessionException;
+import nsu.ccfit.ru.mikhalev.model.FileMetaInfo;
+import nsu.ccfit.ru.mikhalev.model.SpeedScheduler;
 
 import java.io.*;
 import java.net.Socket;
 
-import static nsu.ccfit.ru.mikhalev.core.context.ContextValue.*;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
 
 @Slf4j
 public class ReceiverService implements Runnable {

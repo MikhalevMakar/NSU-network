@@ -1,5 +1,4 @@
 rootProject.name = 'Task2'
 include 'core', 'client', 'server'
-include 'server'
-include 'core'
 
+// ./gradlew server:shadowJar

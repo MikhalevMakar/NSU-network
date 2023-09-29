@@ -1,11 +1,13 @@
-package nsu.ccfit.ru.mikhalev.client.console;
+package nsu.ccfit.ru.mikhalev.console;
 
-import com.beust.jcommander.*;
+import com.beust.jcommander.IParameterValidator;
+import com.beust.jcommander.ParameterException;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 
-import static nsu.ccfit.ru.mikhalev.core.context.ContextValue.*;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.MAX_FILENAME_LENGTH;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.MAX_SIZE_FILE;
 
 public class FilePathValidator implements IParameterValidator {
     @Override

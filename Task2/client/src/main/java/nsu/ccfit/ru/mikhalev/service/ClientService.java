@@ -1,11 +1,13 @@
-package nsu.ccfit.ru.mikhalev.client.service;
+package nsu.ccfit.ru.mikhalev.service;
 
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.client.model.ClientArgs;
-
+import nsu.ccfit.ru.mikhalev.model.ClientArgs;
+import nsu.ccfit.ru.mikhalev.model.FileMetaInfo;
 
 import java.io.*;
 import java.net.*;
+
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
 
 
 @Slf4j
@@ -19,13 +21,16 @@ public class ClientService implements AutoCloseable {
 
     private final File file;
 
-    public ClientService(ClientArgs clientArgs) throws ConnectException, IOException {
+    public ClientService(ClientArgs clientArgs) throws IOException {
         log.info("create Service client by serverIp {} and serverPort {}", clientArgs.getHost(), clientArgs.getPort());
-
+        log.info("path to file {}", clientArgs.getPathToFile());
+        log.info("file");
         this.client = new Socket(InetAddress.getByName(clientArgs.getHost()), clientArgs.getPort());
         this.fileStream = new FileInputStream(clientArgs.getPathToFile());
         this.file = new File(clientArgs.getPathToFile());
+        log.info("file");
         this.objectOutputStream = new ObjectOutputStream(client.getOutputStream());
+        log.info("objectOutputStream");
     }
 
     private void handlerResponseReceipt() {
@@ -48,7 +53,7 @@ public class ClientService implements AutoCloseable {
         this.objectOutputStream.flush();
 
         log.info("send file data");
-        while (this.fileStream.available () != EMPTY) {
+        while (this.fileStream.available() != EMPTY) {
             output.write(this.fileStream.readNBytes(DEFAULT_SIZE_BUFFER_TRANSFER));
             output.flush();
         }

@@ -1,0 +1,117 @@
+package nsu.ccfit.ru.mikhalev.game.gui;
+
+import javafx.scene.*;
+import javafx.scene.canvas.*;
+import javafx.scene.image.Image;
+import javafx.scene.input.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import static nsu.ccfit.ru.mikhalev.context.ContextField.*;
+
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import nsu.ccfit.ru.mikhalev.game.controller.GameController;
+import nsu.ccfit.ru.mikhalev.game.model.Snake;
+import nsu.ccfit.ru.mikhalev.game.observer.context.*;
+import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
+
+import java.util.*;
+
+@Slf4j
+@NoArgsConstructor
+public class GUIGameSpace implements GameView {
+
+    private GameController gameController;
+
+    private static final String FOODS_PHOTO = "/image/watermelon.png";
+
+    private static final int HEIGHT_CANVAS = 600;
+
+    private static final int WIDTH_CANVAS = 600;
+
+    private final Image foodImage = new Image(FOODS_PHOTO);
+
+
+    public GUIGameSpace(GameController gameController) {
+        this.gameController = gameController;
+    }
+
+    private GraphicsContext graphicsContext;
+
+    @Override
+    public void start(Stage stage) {
+        this.gameController.addModelObserver(this);
+
+        stage.setResizable(false);
+        stage.setTitle("Snake");
+
+        Group root = new Group();
+        Canvas canvas = new Canvas(WIDTH_CANVAS, HEIGHT_CANVAS);
+        root.getChildren().add(canvas);
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+        graphicsContext = canvas.getGraphicsContext2D();
+
+        scene.setOnKeyPressed(event -> {
+            KeyCode code = event.getCode ();
+            if (code == KeyCode.RIGHT || code == KeyCode.D) {
+                gameController.getGame ().addMoveByKey (2, SnakesProto.Direction.RIGHT);
+            } else if (code == KeyCode.LEFT || code == KeyCode.A) {
+                gameController.getGame ().addMoveByKey (2, SnakesProto.Direction.LEFT);
+            } else if (code == KeyCode.UP || code == KeyCode.W) {
+                gameController.getGame ().addMoveByKey (2, SnakesProto.Direction.UP);
+            } else if (code == KeyCode.DOWN || code == KeyCode.S) {
+                gameController.getGame ().addMoveByKey (2, SnakesProto.Direction.DOWN);
+            }
+        });
+    }
+
+    @Override
+    public void drawBackground() {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                if ((i + j) % 2 == 0)
+                    graphicsContext.setFill(Color.web("AAD751"));
+                else
+                    graphicsContext.setFill(Color.web("A2D149"));
+                graphicsContext.fillRect(i * 30.0, j * 30.0, 30.0, 30.0);
+            }
+        }
+    }
+
+    @Override
+    public void drawSnake(Snake snake) {
+        log.info("draw snake");
+        graphicsContext.setFill(Color.web("4674E9"));
+        graphicsContext.fillRoundRect((snake.getHead().getX() * SQUARE_SIZE), (snake.getHead().getY() * SQUARE_SIZE - 1), (SQUARE_SIZE - 1),
+                                      (SQUARE_SIZE - 1), 35, 35);
+
+        for (int i = 1; i < snake.getPlacement().size(); ++i) {
+            graphicsContext.fillRoundRect((snake.getPlacement().get(i).getX() * SQUARE_SIZE),  (snake.getPlacement().get(i).getY() * SQUARE_SIZE),
+                                          (SQUARE_SIZE - 1), (SQUARE_SIZE - 1), 20, 20);
+        }
+    }
+
+    private void generateFood(List<SnakesProto.GameState.Coord> foods) {
+        log.info("generate food by size {}", foods.size());
+        for(var food : foods) {
+            drawFood(food.getX(), food.getY());
+        }
+    }
+
+    private void drawFood(int x, int y) {
+        graphicsContext.drawImage(foodImage, (x * SQUARE_SIZE), (y * SQUARE_SIZE), SQUARE_SIZE, SQUARE_SIZE);
+    }
+
+    @Override
+    public void update(Context context) {
+        ContextGame contextGame = (ContextGame) context;
+        this.drawBackground();
+        this.generateFood(contextGame.getFoods());
+        for(var snake : contextGame.getSnakes())
+            this.drawSnake(snake);
+    }
+}

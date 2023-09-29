@@ -1,13 +1,9 @@
-FROM gradle:8.3-jdk19 AS build
-
-COPY . .
-
-RUN gradle build
+FROM gradle:8.2-jdk19 AS build
 
 FROM openjdk:19-slim
 
 WORKDIR /app
 
-ADD ./build/libs/Task1-1.0-SNAPSHOT-all.jar ./app.jar
+ADD ./build/libs/client-1.0-SNAPSHOT-all.jar ./client-app.jar
 
-ENTRYPOINT java -jar app.jar
+CMD ["java", "-jar", "client-app.jar", "-h", "172.16.0.3", "-f", "/app/src/main/resources/data.txt", "-p", "1234"]

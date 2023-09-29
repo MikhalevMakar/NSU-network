@@ -1,0 +1,33 @@
+version: '3'
+
+networks:
+  mynetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.0.0/24
+
+services:
+
+  client:
+    build: ./client/.
+    image: client_image
+    container_name: client
+    depends_on:
+      - server
+    networks:
+      mynetwork:
+        ipv4_address: 172.16.0.2
+    volumes:
+      - ./client/src/main/resources/data.txt:/app/src/main/resources/data.txt
+
+  server:
+    build: ./server/.
+    image: server_image
+    container_name: server
+    networks:
+      mynetwork:
+        ipv4_address: 172.16.0.3
+    volumes:
+      - ./server/src/main/resources/update:/app/src/main/resources/update

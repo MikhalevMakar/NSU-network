@@ -1,10 +1,18 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.0.0'
 }
+
+group = "nsu.ccfit.ru.mikhalev"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+}
+
+application {
+    mainClassName = 'nsu.ccfit.ru.mikhalev.ApplicationServer'
 }
 
 dependencies {
@@ -13,7 +21,6 @@ dependencies {
     implementation 'org.slf4j:slf4j-api:2.0.0'
     implementation 'org.slf4j:slf4j-simple:2.0.0'
     implementation 'org.projectlombok:lombok:1.18.22'
-    implementation project(path: ':')
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
     implementation 'com.beust:jcommander:1.78'
@@ -26,6 +33,6 @@ shadowJar {
     archiveBaseName = 'server-app'
     version = '1.0-SNAPSHOT'
     manifest {
-        attributes 'Main-Class': 'nsu.ccfit.ru.mikhalev.server.ApplicationServer'
+        attributes 'Main-Class': 'nsu.ccfit.ru.mikhalev.ApplicationServer'
     }
 }

@@ -1,12 +1,15 @@
-package nsu.ccfit.ru.mikhalev.client.console;
+package nsu.ccfit.ru.mikhalev.console;
 
-import com.beust.jcommander.*;
+import com.beust.jcommander.IParameterValidator;
+import com.beust.jcommander.ParameterException;
 
-import static nsu.ccfit.ru.mikhalev.core.context.ContextValue.*;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.MAX_SIZE_PORT;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.MIN_SIZE_PORT;
+
 
 public class HostPortValidator implements IParameterValidator {
     @Override
-    public void validate(String name, String value) throws ParameterException {
+    public void validate(String name, String value) throws ParameterException{
         try {
             int port = Integer.parseInt(value);
             if (port < MIN_SIZE_PORT || port > MAX_SIZE_PORT) {
