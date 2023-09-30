@@ -8,7 +8,7 @@ import java.net.DatagramPacket;
 
 public class MessageHandler implements Runnable {
 
-    private DatagramPacket packet;
+    private final DatagramPacket packet;
 
     public MessageHandler(DatagramPacket packet) {
         this.packet = packet;

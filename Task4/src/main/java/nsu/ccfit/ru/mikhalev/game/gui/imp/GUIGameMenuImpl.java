@@ -6,22 +6,23 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.game.controller.GameMenuController;
-import nsu.ccfit.ru.mikhalev.game.gui.View;
+import nsu.ccfit.ru.mikhalev.game.controller.GUIMenuController;
+import nsu.ccfit.ru.mikhalev.game.controller.GameController;
+import nsu.ccfit.ru.mikhalev.game.gui.GUIGameMenu;
 import nsu.ccfit.ru.mikhalev.observer.context.Context;
 
 import java.io.*;
 
 @Slf4j
-public class GUIGameMenu implements View {
+public class GUIGameMenuImpl implements GUIGameMenu {
 
     public static final String GAME_VIEW_FXML_PATH = "src/main/resources/client_input/login.fxml";
 
     private final Pane root;
 
-    private final GameMenuController gameMenuController;
+    private final GUIMenuController gameMenuController;
 
-    public GUIGameMenu() throws IOException {
+    public GUIGameMenuImpl(GameController gameController) throws IOException {
         log.info("constructor GUIGameMenu: init var");
 
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -30,7 +31,7 @@ public class GUIGameMenu implements View {
 
         root = fxmlLoader.load();
         gameMenuController = fxmlLoader.getController();
-        gameMenuController.registrationView(this);
+        gameMenuController.registrationGameController(gameController);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class GUIGameMenu implements View {
     }
 
     @Override
-    public void update(Context context) {
+    public void updateGUI(Context context) {
         log.info("update context");
     }
 }

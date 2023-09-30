@@ -85,7 +85,7 @@ public class Field {
         return false;
     }
 
-    public SnakesProto.GameState.Coord findPlaceHeadSnake() throws FindSuitableSquare {
+    public SnakesProto.GameState.Coord findPlaceHeadSnake() throws FindSuitableSquareException{
         for(int y = 0; y < this.height - BOUNDARY_Y; ++y) {
             for(int x = 0; x < this.width - BOUNDARY_X; ++x) {
                 if(isSuitableSquare(x, y))
@@ -95,11 +95,10 @@ public class Field {
                                                         .build();
             }
         }
-        throw new FindSuitableSquare();
+        throw new FindSuitableSquareException ();
     }
 
     public SnakesProto.GameState.Coord getCoord(int x, int y) {
-        log.info("get coord by x {}, y {}", x, y);
         return SnakesProto.GameState.Coord.newBuilder()
             .setX(x).setY(y).build();
     }

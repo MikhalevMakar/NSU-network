@@ -33,12 +33,8 @@ i
 gradlew,5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9
 i
 9src/main/java/nsu/ccfit/ru/mikhalev/protobuf/snakes.proto,2/0/2077b530a5dd9c0a647bdf094445c413a2b0bcfc
-n
->src/main/java/nsu/ccfit/ru/mikhalev/netserver/ReceiverUDP.java,d/5/d58684b7ec6f99d2699104489d29bc93c7c5cc33
 p
 @src/main/java/nsu/ccfit/ru/mikhalev/utils/SwitchTypeMessage.java,b/a/ba028b7423024b02707c43b29dbb551b1f69a548
-p
-@src/main/java/nsu/ccfit/ru/mikhalev/netserver/ConnectServer.java,3/c/3c3571e9a7e9bb08152fb70ae3056b98045809df
 t
 Dsrc/main/java/nsu/ccfit/ru/mikhalev/netserver/NetworkController.java,f/e/fec143b4525548381ee8a56343d4be5cba063298
 †
@@ -81,3 +77,9 @@ q
 Asrc/main/java/nsu/ccfit/ru/mikhalev/game/gui/imp/GUIGameMenu.java,7/a/7a11316e4bdf48aabcd385a32447915b3484cc3a
 r
 Bsrc/main/java/nsu/ccfit/ru/mikhalev/game/gui/imp/GUIGameSpace.java,d/b/dbaa5675f73a7e28d94f4dac1532c5b41e33ee05
+z
+Jsrc/main/java/nsu/ccfit/ru/mikhalev/game/controller/GUIMenuController.java,d/8/d8046144009d6de56c6bb579142c1a938dd10d0b
+m
+=src/main/java/nsu/ccfit/ru/mikhalev/observer/ObserverGUI.java,a/0/a09dd9fdf5d5832502b636b3fda1c61e1774d2cc
+q
+Asrc/main/java/nsu/ccfit/ru/mikhalev/observer/ObserverNetwork.java,9/4/946e44f52038a9014d951a96a760710ce078ec42

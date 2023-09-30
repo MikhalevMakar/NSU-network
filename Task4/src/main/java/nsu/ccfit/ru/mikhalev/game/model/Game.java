@@ -32,7 +32,14 @@ public class Game extends Observable {
 
     private int currentPlayerID = MIN_SNAKE_ID;
 
-    public Game(SnakesProto.GameConfig gameConfig) {
+    private final SnakesProto.GameConfig gameConfig;
+
+    private final String nameGame;
+
+    public Game(String nameGame, SnakesProto.GameConfig gameConfig) {
+        this.gameConfig = gameConfig;
+        this.nameGame = nameGame;
+
         log.info("create field");
         this.field = new Field(gameConfig.getWidth(), gameConfig.getHeight());
         this.delayMs = gameConfig.getStateDelayMs();
@@ -71,6 +78,14 @@ public class Game extends Observable {
         this.setStartPositionSnake(snake.getHead(), snake.getTail(), currentPlayerID++);
     }
 
+    public SnakesProto.GameAnnouncement createGameAnnouncement() {
+        return SnakesProto.GameAnnouncement.newBuilder().setGameName(this.nameGame)
+                                                        .setConfig(this.gameConfig)
+                                                        .setCanJoin(true)
+                                                        .setPlayers(SnakesProto.GamePlayers.newBuilder().addAllPlayers(players.values().stream().toList()))
+                                                        .build();
+    }
+
     public void addMoveByKey(Integer key, SnakesProto.Direction direction) {
         log.info("add new move for player by userId: {}", key);
         moves.put(key, direction);
@@ -81,9 +96,9 @@ public class Game extends Observable {
         snakes.put(key, snake);
     }
 
-    public void updateField(){
-        log.info ("update field");
-        for (var snake : snakes.entrySet ()) {
+    public void updateField() {
+        log.info("update field");
+        for (var snake : snakes.entrySet()) {
             SnakesProto.Direction direction = moves.get (snake.getValue ().getId ());
             direction = (direction == null) ? snake.getValue ().getDirection () : direction;
             Snake.move(snake.getValue(), direction, field);
@@ -127,7 +142,7 @@ public class Game extends Observable {
                 updateField();
                 checkCorrectMovesSnakes();
                 contextGame.update(field, snakes.values().parallelStream().toList(), field.getFoods());
-                Game.super.notifyObservers(contextGame);
+                Game.super.notifyObserversGUI(contextGame);
                 if(snakes.isEmpty()) timer.cancel();
             }
         };

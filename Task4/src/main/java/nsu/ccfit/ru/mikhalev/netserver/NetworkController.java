@@ -1,33 +1,38 @@
 package nsu.ccfit.ru.mikhalev.netserver;
 
-import nsu.ccfit.ru.mikhalev.netserver.model.multicast.MulticastSend;
+
+import lombok.extern.slf4j.Slf4j;
+import nsu.ccfit.ru.mikhalev.game.controller.GameController;
+import nsu.ccfit.ru.mikhalev.game.controller.impl.GameControllerImpl;
+import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
 
-public class NetworkController implements  Runnable {
+@Slf4j
+public class NetworkController {
 
-    public static int MAX_SIZE_BUFFER = 1024;
-    private MulticastSend multicastReceiver;
+    private final MulticastService multicastService;
 
-    private final DatagramSocket datagramSocket;
+    private final GameController gameController;
 
-    NetworkController() throws SocketException{
-        this.datagramSocket = new DatagramSocket();
+    public NetworkController(String ip, int port, GameController gameController) throws IOException {
+        this.multicastService = new MulticastService(ip, port, gameController);
+        this.gameController = gameController;
+        gameController.registrationNetworkController(this);
     }
 
-        @Override
-    public void run(){
-        byte[] buffer = new byte[MAX_SIZE_BUFFER];
-        DatagramPacket packet = new DatagramPacket (buffer, buffer.length);
-        try {
-            while (!Thread.currentThread().isInterrupted ()) {
-                datagramSocket.receive (packet);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void startMulticastSender() {
+        log.info("start multicast sender");
+        multicastService.sender();
+    }
+
+    public void startMulticastReceiver() {
+        log.info("start multicast receiver");
+        this.multicastService.receiver();
+    }
+
+    public void updateAnnouncementMsg(SnakesProto.GameMessage.AnnouncementMsg message) {
+        log.info("update announcement msg");
+        this.multicastService.updateAnnouncementMsg(message);
     }
 }

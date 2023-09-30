@@ -11,16 +11,17 @@ public class MulticastSend extends MulticastUDP implements AutoCloseable  {
 
     private final DatagramSocket socket;
 
-    public MulticastSend(String ip, int port) throws UnknownHostException, SocketException {
+    public MulticastSend(String ip, int port) throws SocketException {
         super(ip, port);
-        this.socket = new DatagramSocket(port, InetAddress.getByName(ip));
+        this.socket = new DatagramSocket();
     }
 
     public void send(SnakesProto.GameMessage.AnnouncementMsg message) {
-        log.info("receive message");
+        log.info("send message, length {} byte", message.toByteArray().length);
         DatagramPacket packet;
         try {
-            packet = new DatagramPacket(message.toByteArray(), buffer.length);
+            packet = new DatagramPacket(message.toByteArray(), message.toByteArray().length,
+                                        InetAddress.getByName(this.ip), this.port);
             this.socket.send(packet);
         } catch(IOException ex) {
             log.error("failed to receive message");

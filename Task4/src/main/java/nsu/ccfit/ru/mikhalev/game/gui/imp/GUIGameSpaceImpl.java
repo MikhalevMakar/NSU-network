@@ -11,7 +11,7 @@ import static nsu.ccfit.ru.mikhalev.context.ContextField.*;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
-import nsu.ccfit.ru.mikhalev.game.gui.GameView;
+import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
 import nsu.ccfit.ru.mikhalev.game.model.Snake;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
@@ -20,7 +20,7 @@ import java.util.*;
 
 @Slf4j
 @NoArgsConstructor
-public class GUIGameSpace implements GameView {
+public class GUIGameSpaceImpl implements GUIGameSpace {
     private GameController gameController;
 
     private static final String FOODS_PHOTO = "/image/watermelon.png";
@@ -31,7 +31,7 @@ public class GUIGameSpace implements GameView {
 
     private final Image foodImage = new Image(FOODS_PHOTO);
 
-    public GUIGameSpace(GameController gameController) {
+    public GUIGameSpaceImpl(GameController gameController) {
         this.gameController = gameController;
     }
 
@@ -55,13 +55,13 @@ public class GUIGameSpace implements GameView {
         scene.setOnKeyPressed(event -> {
             KeyCode code = event.getCode ();
             if (code == KeyCode.RIGHT || code == KeyCode.D) {
-                gameController.getGame ().addMoveByKey (2, SnakesProto.Direction.RIGHT);
+                gameController.moveHandler(2, SnakesProto.Direction.RIGHT);
             } else if (code == KeyCode.LEFT || code == KeyCode.A) {
-                gameController.getGame().addMoveByKey (2, SnakesProto.Direction.LEFT);
+                gameController.moveHandler(2, SnakesProto.Direction.LEFT);
             } else if (code == KeyCode.UP || code == KeyCode.W) {
-                gameController.getGame ().addMoveByKey (2, SnakesProto.Direction.UP);
+                gameController.moveHandler(2, SnakesProto.Direction.UP);
             } else if (code == KeyCode.DOWN || code == KeyCode.S) {
-                gameController.getGame ().addMoveByKey (2, SnakesProto.Direction.DOWN);
+                gameController.moveHandler(2, SnakesProto.Direction.DOWN);
             }
         });
     }
@@ -104,7 +104,7 @@ public class GUIGameSpace implements GameView {
     }
 
     @Override
-    public void update(Context context) {
+    public void updateGUI(Context context) {
         ContextGame contextGame = (ContextGame) context;
         this.drawBackground();
         this.generateFood(contextGame.getFoods());

@@ -1,8 +1,8 @@
 package nsu.ccfit.ru.mikhalev.netserver.model.multicast;
 
-import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.JoinGroupException;
+import nsu.ccfit.ru.mikhalev.ecxeption.ReceiveDatagramException;
 import nsu.ccfit.ru.mikhalev.netserver.model.message.CustomAnnouncementMsg;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
@@ -32,8 +32,9 @@ public class MulticastReceiver extends MulticastUDP {
         this.socket.setSoTimeout(TIMEOUT_MILLISECONDS);
     }
 
-    public boolean containsHost(String key) {
-        return games.containsKey(key);
+    public List<CustomAnnouncementMsg> getListGames() {
+        log.info("get lists games");
+        return games.values().stream().toList();
     }
 
     public void addToGroup() {
@@ -60,17 +61,18 @@ public class MulticastReceiver extends MulticastUDP {
         }
     }
 
-    public void receiver() throws IOException{
-        log.info ("receiver host");
-        DatagramPacket packet = new DatagramPacket (buffer, buffer.length);
-        this.socket.receive(packet);
+    public DatagramPacket receiver() throws ReceiveDatagramException {
+        log.info("receiver host");
+        DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
         try {
-            games.put (packet.getAddress().getHostName(),
-                       new CustomAnnouncementMsg(SnakesProto.GameMessage.AnnouncementMsg.parseFrom(packet.getData()),
-                                                 new Date (System.currentTimeMillis())));
-        } catch (InvalidProtocolBufferException e) {
-            throw new RuntimeException (e);
+            this.socket.receive(packet);
+            games.put(packet.getAddress().getHostName(),
+                      new CustomAnnouncementMsg(SnakesProto.GameMessage.AnnouncementMsg.parseFrom(packet.getData()),
+                                                new Date(System.currentTimeMillis())));
+        } catch (IOException e) {
+            log.error("socket by port {} : {}", socket.getLocalPort(), e.getMessage());
         }
+        return packet;
     }
 
     public void leaveGroup() {
@@ -78,8 +80,7 @@ public class MulticastReceiver extends MulticastUDP {
             this.socket.leaveGroup(new InetSocketAddress(this.multicastGroup, this.port), null);
             this.socket.close();
         } catch(IOException ex) {
-            log.error("failed to exit from multicast group");
+            log.error("failed to exit from multicast group, ex {}", ex.getMessage());
         }
     }
-
 }
