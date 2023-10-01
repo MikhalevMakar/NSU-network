@@ -79,36 +79,48 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
         }
     }
 
+//    @Override
+//    public void drawSnake(Snake snake) {
+//        log.info("draw snake");
+//        graphicsContext.setFill(Color.web("4674E9"));
+//        graphicsContext.fillRoundRect((snake.getHead().getX() * SQUARE_SIZE), (snake.getHead().getY() * SQUARE_SIZE - 1), (SQUARE_SIZE - 1),
+//                                      (SQUARE_SIZE - 1), 35, 35);
+//
+//        for (int i = 1; i < snake.getPlacement().size(); ++i) {
+//            graphicsContext.fillRoundRect((snake.getPlacement().get(i).getX() * SQUARE_SIZE),  (snake.getPlacement().get(i).getY() * SQUARE_SIZE),
+//                                          (SQUARE_SIZE - 1), (SQUARE_SIZE - 1), 20, 20);
+//        }
+//    }
+
     @Override
     public void drawSnake(Snake snake) {
         log.info("draw snake");
-        graphicsContext.setFill(Color.web("4674E9"));
+        graphicsContext.setFill(Color.web("4674E9")); // Замените на желаемый цвет
         graphicsContext.fillRoundRect((snake.getHead().getX() * SQUARE_SIZE), (snake.getHead().getY() * SQUARE_SIZE - 1), (SQUARE_SIZE - 1),
-                                      (SQUARE_SIZE - 1), 35, 35);
+            (SQUARE_SIZE - 1), 35, 35);
 
         for (int i = 1; i < snake.getPlacement().size(); ++i) {
-            graphicsContext.fillRoundRect((snake.getPlacement().get(i).getX() * SQUARE_SIZE),  (snake.getPlacement().get(i).getY() * SQUARE_SIZE),
-                                          (SQUARE_SIZE - 1), (SQUARE_SIZE - 1), 20, 20);
+            graphicsContext.fillRect((snake.getPlacement().get(i).getX() * SQUARE_SIZE),  (snake.getPlacement().get(i).getY() * SQUARE_SIZE),
+                (SQUARE_SIZE - 1), (SQUARE_SIZE - 1));
         }
     }
 
-    private void generateFood(List<SnakesProto.GameState.Coord> foods) {
+    public void generateFood(List<SnakesProto.GameState.Coord> foods) {
         log.info("generate food by size {}", foods.size());
         for(var food : foods) {
             drawFood(food.getX(), food.getY());
         }
     }
 
-    private void drawFood(int x, int y) {
+    public void drawFood(int x, int y) {
         graphicsContext.drawImage(foodImage, (x * SQUARE_SIZE), (y * SQUARE_SIZE), SQUARE_SIZE, SQUARE_SIZE);
     }
 
     @Override
-    public void updateGUI(Context context) {
-        ContextGame contextGame = (ContextGame) context;
+    public void update(ContextGame context) {
         this.drawBackground();
-        this.generateFood(contextGame.getFoods());
-        for(var snake : contextGame.getSnakes())
+        this.generateFood(context.getFoods());
+        for(var snake : context.getSnakes())
             this.drawSnake(snake);
     }
 }

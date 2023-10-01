@@ -3,8 +3,9 @@ package nsu.ccfit.ru.mikhalev.netserver;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.ReceiveDatagramException;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
-import nsu.ccfit.ru.mikhalev.game.controller.impl.GameControllerImpl;
+
 import nsu.ccfit.ru.mikhalev.netserver.model.multicast.*;
+import nsu.ccfit.ru.mikhalev.observer.Observable;
 import nsu.ccfit.ru.mikhalev.observer.context.ContextListGames;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
@@ -15,7 +16,7 @@ import java.util.*;
 import static nsu.ccfit.ru.mikhalev.netserver.model.multicast.MulticastUDP.TIMER_DELAY;
 
 @Slf4j
-public class MulticastService {
+public class MulticastService extends Observable {
 
     private final MulticastSend multicastSend;
 
@@ -44,9 +45,9 @@ public class MulticastService {
             @Override
             public void run() {
                 try {
-                    DatagramPacket packet = multicastReceiver.receiver();
+                    multicastReceiver.receiver();
                     context.update(multicastReceiver.getListGames());
-                    //controller.updateGUI(context);
+                    notifyObserversNetwork(context);
                 } catch (ReceiveDatagramException e) {
                     throw new ReceiveDatagramException(e.getMessage());
                 }
@@ -55,7 +56,9 @@ public class MulticastService {
         timer.scheduleAtFixedRate(task, 0, TIMER_DELAY);
     }
 
-    public void sender() {
+    public void sender(SnakesProto.GameMessage.AnnouncementMsg message) {
+        Objects.requireNonNull(message, "announcementMsg message cannot be null");
+        this.message = message;
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -76,7 +79,9 @@ public class MulticastService {
         };
         timer.scheduleAtFixedRate(task, 0, TIMER_DELAY);    }
 
-    public void updateAnnouncementMsg(SnakesProto.GameMessage.AnnouncementMsg message) {
+    public void updateAnnouncementMsg(String ip, SnakesProto.GameMessage.AnnouncementMsg message){
         this.message = message;
+        multicastReceiver.putAnnouncementMsgByIp (ip, message);
+        multicastSend.updateAnnouncementMsg(message);
     }
 }

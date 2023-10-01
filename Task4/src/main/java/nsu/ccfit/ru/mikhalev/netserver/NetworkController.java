@@ -3,13 +3,15 @@ package nsu.ccfit.ru.mikhalev.netserver;
 
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
-import nsu.ccfit.ru.mikhalev.game.controller.impl.GameControllerImpl;
+import nsu.ccfit.ru.mikhalev.observer.ObserverNetwork;
+import nsu.ccfit.ru.mikhalev.observer.context.Context;
+import nsu.ccfit.ru.mikhalev.observer.context.ContextAnnouncMsg;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.io.IOException;
 
 @Slf4j
-public class NetworkController {
+public class NetworkController implements ObserverNetwork  {
 
     private final MulticastService multicastService;
 
@@ -21,9 +23,10 @@ public class NetworkController {
         gameController.registrationNetworkController(this);
     }
 
-    public void startMulticastSender() {
+    public void startMulticastSender(SnakesProto.GameMessage.AnnouncementMsg message) {
         log.info("start multicast sender");
-        multicastService.sender();
+        gameController.subscriptionOnPlayerManager(this);
+        multicastService.sender(message);
     }
 
     public void startMulticastReceiver() {
@@ -31,8 +34,20 @@ public class NetworkController {
         this.multicastService.receiver();
     }
 
-    public void updateAnnouncementMsg(SnakesProto.GameMessage.AnnouncementMsg message) {
+    public void startCheckerPlayer() {
+        log.info("start checker player");
+        this.multicastService.checkerPlayers();
+    }
+
+    @Override
+    public void updateNetworkMsg(Context context){
         log.info("update announcement msg");
-        this.multicastService.updateAnnouncementMsg(message);
+        ContextAnnouncMsg contextAnnouncMsg = (ContextAnnouncMsg)context;
+        this.multicastService.updateAnnouncementMsg(contextAnnouncMsg.getIp(),
+                                                    contextAnnouncMsg.getMessage());
+    }
+
+    public void subscriptionOnMulticastService(ObserverNetwork observerNetwork) {
+        this.multicastService.addObserverNetwork(observerNetwork);
     }
 }

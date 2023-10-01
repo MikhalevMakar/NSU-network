@@ -14,23 +14,33 @@ import java.io.*;
 
 @Slf4j
 public class ApplicationMain extends javafx.application.Application {
+    private static int port = 0;
+
+    private static String ip;
 
     private static final GameController gameController = new GameControllerImpl();
-    @Override
-    public void start(Stage stage) throws IOException {
-        log.info("start application, load fxml");
 
-        GUIGameMenuImpl guiGameMenu = new GUIGameMenuImpl(gameController);
-        guiGameMenu.start(stage);
+    public static void main(String[] args) {
+        try {
+            ip = args[0];
+            port = Integer.parseInt(args[1]);
+        } catch (NumberFormatException e) {
+            log.error("usage arg1<port>, arg2<ip>, cannot parse {}, {}", args[0], args[1], e);
+            return;
+        }
+        launch();
     }
 
-    public static void main(String[] args) throws IOException {
+    @Override
+    public void start(Stage stage) throws IOException {
+        log.info("start application");
+        NetworkController networkController = new NetworkController(ip, port, gameController);
 
-        NetworkController networkController = new NetworkController(args[0],
-                                                                    Integer.parseInt(args[1]),
-                                                                    gameController);
+        log.info("create view conf menu");
+        GUIGameMenuImpl guiGameMenu = new GUIGameMenuImpl(gameController);
 
         networkController.startMulticastReceiver();
-        launch();
+        networkController.startCheckerPlayer();
+        guiGameMenu.start(stage);
     }
 }

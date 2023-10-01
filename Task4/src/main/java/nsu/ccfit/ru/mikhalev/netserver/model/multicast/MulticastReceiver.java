@@ -28,13 +28,10 @@ public class MulticastReceiver extends MulticastUDP {
 
         this.socket = new MulticastSocket(port);
         this.multicastGroup = InetAddress.getByName(ip);
-
-        this.socket.setSoTimeout(TIMEOUT_MILLISECONDS);
     }
 
-    public List<CustomAnnouncementMsg> getListGames() {
-        log.info("get lists games");
-        return games.values().stream().toList();
+    public List<SnakesProto.GameMessage.AnnouncementMsg> getListGames() {
+        return games.values().stream().map(CustomAnnouncementMsg::getAnnouncementMsg).toList();
     }
 
     public void addToGroup() {
@@ -52,7 +49,6 @@ public class MulticastReceiver extends MulticastUDP {
     }
 
     public void checkAlive() {
-        log.info("check alive host");
         for(Map.Entry<String, CustomAnnouncementMsg> liveHost : games.entrySet()) {
             if(isHostAFK(liveHost.getValue().getDate())) {
                 log.info("remove host ip " + liveHost.getKey());
@@ -61,18 +57,21 @@ public class MulticastReceiver extends MulticastUDP {
         }
     }
 
-    public DatagramPacket receiver() throws ReceiveDatagramException {
-        log.info("receiver host");
+    public void receiver() throws ReceiveDatagramException {
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
         try {
             this.socket.receive(packet);
-            games.put(packet.getAddress().getHostName(),
-                      new CustomAnnouncementMsg(SnakesProto.GameMessage.AnnouncementMsg.parseFrom(packet.getData()),
-                                                new Date(System.currentTimeMillis())));
+            log.info("receive ip {}", packet.getAddress().getHostName());
+            byte[] data = Arrays.copyOfRange(packet.getData(), 0,packet.getLength());
+            this.putAnnouncementMsgByIp(packet.getAddress().getHostName(),
+                                        SnakesProto.GameMessage.AnnouncementMsg.parseFrom(data));
         } catch (IOException e) {
             log.error("socket by port {} : {}", socket.getLocalPort(), e.getMessage());
         }
-        return packet;
+    }
+
+    public void putAnnouncementMsgByIp(String ip, SnakesProto.GameMessage.AnnouncementMsg announcementMsg){
+        games.put(ip, new CustomAnnouncementMsg(announcementMsg, new Date(System.currentTimeMillis())));
     }
 
     public void leaveGroup() {

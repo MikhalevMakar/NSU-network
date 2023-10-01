@@ -6,10 +6,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.game.controller.GUIMenuController;
-import nsu.ccfit.ru.mikhalev.game.controller.GameController;
+import nsu.ccfit.ru.mikhalev.game.controller.*;
 import nsu.ccfit.ru.mikhalev.game.gui.GUIGameMenu;
-import nsu.ccfit.ru.mikhalev.observer.context.Context;
 
 import java.io.*;
 
@@ -20,7 +18,7 @@ public class GUIGameMenuImpl implements GUIGameMenu {
 
     private final Pane root;
 
-    private final GUIMenuController gameMenuController;
+    private final GUIMenuController guiMenuController;
 
     public GUIGameMenuImpl(GameController gameController) throws IOException {
         log.info("constructor GUIGameMenu: init var");
@@ -30,22 +28,19 @@ public class GUIGameMenuImpl implements GUIGameMenu {
         fxmlLoader.setLocation(file.toURI().toURL());
 
         root = fxmlLoader.load();
-        gameMenuController = fxmlLoader.getController();
-        gameMenuController.registrationGameController(gameController);
+        guiMenuController = fxmlLoader.getController();
+
+        guiMenuController.dependencyInjection(gameController);
+        gameController.registrationMenuController(guiMenuController);
     }
 
     @Override
     public void start(Stage stage) {
         log.info("start view menu");
 
-        gameMenuController.setStage(stage);
+        guiMenuController.setStage(stage);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    @Override
-    public void updateGUI(Context context) {
-        log.info("update context");
     }
 }

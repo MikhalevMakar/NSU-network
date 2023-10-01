@@ -1,0 +1,7 @@
+
+‚
+java:S1450#"`Remove the "guiMenuController" field and declare it as a local variable in the relevant methods.(ÀÅÍƒûÿÿÿÿ8Ğê‰Ì®1
+W
+java:S1068#"5Remove this unused "guiMenuController" private field.(ÀÅÍƒûÿÿÿÿ8ë‰Ì®1
+W
+java:S1068'"5Remove this unused "contextAnnouncMsg" private field.(óŸÆáúÿÿÿÿ8ë‰Ì®1
