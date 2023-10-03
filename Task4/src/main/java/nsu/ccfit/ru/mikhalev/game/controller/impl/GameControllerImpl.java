@@ -1,28 +1,27 @@
 package nsu.ccfit.ru.mikhalev.game.controller.impl;
 
-import javafx.stage.Stage;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.game.controller.GUIMenuController;
-import nsu.ccfit.ru.mikhalev.game.controller.GameController;
+import nsu.ccfit.ru.mikhalev.game.controller.*;
 
-import nsu.ccfit.ru.mikhalev.game.gui.imp.GUIGameSpaceImpl;
+import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
 
-import nsu.ccfit.ru.mikhalev.game.model.Game;
-import nsu.ccfit.ru.mikhalev.game.model.PlayerManager;
-import nsu.ccfit.ru.mikhalev.netserver.NetworkController;
+import nsu.ccfit.ru.mikhalev.game.model.*;
+import nsu.ccfit.ru.mikhalev.network.NetworkController;
 
+import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.observer.ObserverNetwork;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
+import java.net.*;
 import java.util.Objects;
 
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.MASTER_IP;
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.MASTER_PORT;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
 import static nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto.NodeRole.MASTER;
 
-
+@NoArgsConstructor
 @Slf4j
 public class GameControllerImpl implements GameController {
 
@@ -30,22 +29,13 @@ public class GameControllerImpl implements GameController {
 
     private PlayerManager playerManager;
 
-    private final GUIGameSpaceImpl guiGameSpaceImpl;
-
-    private GUIMenuController guiMenuController;
+    private GUIGameSpace guiGameSpace;
 
     private NetworkController networkController;
 
-    private final ContextAnnouncMsg contextAnnouncMsg = new ContextAnnouncMsg();
-
-    public GameControllerImpl() {
-        this.guiGameSpaceImpl = new GUIGameSpaceImpl(this);
-    }
-
-    public void registrationMenuController(GUIMenuController guiMenuController) {
-        log.info("registration menu controller");
-        Objects.requireNonNull(guiMenuController, "guiMenuController cannot be null");
-        this.guiMenuController = guiMenuController;
+    @Override
+    public void registrationGUIGameSpace(GUIGameSpace guiGameSpace) {
+        this.guiGameSpace = guiGameSpace;
     }
 
     public void registrationNetworkController(NetworkController networkController) {
@@ -65,29 +55,51 @@ public class GameControllerImpl implements GameController {
     @Override
     public void createConfigGame(String nameGame, String namePlayer, SnakesProto.GameConfig gameConfig) {
         log.info("create game for user {}", nameGame);
-        this.playerManager = new PlayerManager(nameGame, namePlayer, gameConfig);
-        this.game = new Game(playerManager, gameConfig);
+        this.game = new Game(gameConfig);
+        this.playerManager = new PlayerManager(nameGame, namePlayer, game);
+
         this.game.addObserverGUI(this);
 
         networkController.startMulticastSender(playerManager.getAnnouncementMsg());
-        playerManager.createPlayer(game.getCurrentPlayerID(), playerManager.getNameGame(), MASTER_PORT, MASTER, MASTER_IP);
+        networkController.startSenderUDP();
+        try {
+            playerManager.createPlayer(game.getCurrentPlayerID(), InetAddress.getByName(MASTER_IP),
+                                       MASTER_PORT, playerManager.getNamePlayer (), MASTER);
+        } catch(UnknownHostException ex) {
+            log.error("failed to create a player");
+        }
     }
 
     @Override
     public void moveHandler(int key, SnakesProto.Direction direction) {
-        this.game.getPlayerManager().addMoveByKey(key, direction);
+        this.game.addMoveByKey(key, direction);
     }
 
     @Override
-    public void startGame(Stage stage) {
+    public void sendMessageNetwork(String nameGame, SnakesProto.GameMessage gameMessage) {
+        networkController.addMessageToSend(nameGame, gameMessage);
+        networkController.startSenderUDP();
+    }
+
+    @Override
+    public void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message) {
+        log.info("join to game");
+        int playerId = this.game.getCurrentPlayerID();
+        this.playerManager.createPlayer(playerId, hostNetworkKey.getIp(), hostNetworkKey.getPort(),
+                                        message.getPlayerName(), message.getRequestedRole());
+        this.game.createSnake();
+        this.guiGameSpace.view();
+    }
+
+    @Override
+    public void startGame() {
         log.info("game controller start work");
-        this.guiGameSpaceImpl.start(stage);
+        this.guiGameSpace.view();
         this.game.run();
     }
 
     @Override
     public void updateGUI(Context context) {
-        log.info("update List<String> games");
-        guiGameSpaceImpl.update((ContextGame) context);
+        guiGameSpace.update((ContextGame) context);
     }
 }

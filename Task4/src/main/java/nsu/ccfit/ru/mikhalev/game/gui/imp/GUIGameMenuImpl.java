@@ -1,46 +1,77 @@
 package nsu.ccfit.ru.mikhalev.game.gui.imp;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import lombok.extern.slf4j.Slf4j;
+import nsu.ccfit.ru.mikhalev.ecxeption.ClassLoaderException;
 import nsu.ccfit.ru.mikhalev.game.controller.*;
-import nsu.ccfit.ru.mikhalev.game.gui.GUIGameMenu;
+import nsu.ccfit.ru.mikhalev.game.controller.impl.GUIJoinMenuControllerImpl;
 
 import java.io.*;
+import java.util.Objects;
 
 @Slf4j
-public class GUIGameMenuImpl implements GUIGameMenu {
+public class GUIGameMenuImpl extends DisplayViewFXML {
 
-    public static final String GAME_VIEW_FXML_PATH = "src/main/resources/client_input/login.fxml";
+    public static final String VIEW_MENU_FXML_PATH = "src/main/resources/configGameUI/gameMenu.fxml";
 
-    private final Pane root;
+    public static final String VIEW_JOIN_FXML_PATH = "src/main/resources/configGameUI/gameJoinMenu.fxml";
 
-    private final GUIMenuController guiMenuController;
+    private final GameController gameController;
 
-    public GUIGameMenuImpl(GameController gameController) throws IOException {
-        log.info("constructor GUIGameMenu: init var");
+    private final Stage stageMenu;
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        File file = new File(GAME_VIEW_FXML_PATH);
-        fxmlLoader.setLocation(file.toURI().toURL());
+    private final Pane rootMenu;
 
-        root = fxmlLoader.load();
-        guiMenuController = fxmlLoader.getController();
+    private Stage stageJoinWindow;
 
-        guiMenuController.dependencyInjection(gameController);
-        gameController.registrationMenuController(guiMenuController);
+    public GUIGameMenuImpl(GameController gameController, Stage stage) throws IOException{
+        log.info ("constructor GUIGameMenu: init var");
+
+        this.stageMenu = stage;
+
+        this.gameController = gameController;
+
+        File file = new File(VIEW_MENU_FXML_PATH);
+        FXMLLoader menuLoader = new FXMLLoader();
+        menuLoader.setLocation(file.toURI().toURL());
+        rootMenu = menuLoader.load();
+
+        GUIMenuController guiMenuController = menuLoader.getController();
+        guiMenuController.dependencyInjection(gameController, this);
     }
 
     @Override
-    public void start(Stage stage) {
-        log.info("start view menu");
+    public void view() {
+        super.view(this.stageMenu, rootMenu);
+    }
 
-        guiMenuController.setStage(stage);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    @Override
+    public void openJoinWindow(String nameGame) {
+        log.info("open join window");
+        File file = new File(VIEW_JOIN_FXML_PATH);
+        try {
+            FXMLLoader joinLoader = new FXMLLoader();
+            joinLoader.setLocation(file.toURI().toURL());
+            Pane rootJoin = joinLoader.load();
+            this.stageJoinWindow = new Stage();
+
+            GUIJoinMenuControllerImpl guiJoinMenuController = joinLoader.getController();
+            guiJoinMenuController.setNameGame(nameGame);
+            guiJoinMenuController.dependencyInjection(gameController, this);
+
+            super.view(this.stageJoinWindow, rootJoin);
+        } catch(IOException ex) {
+            throw new ClassLoaderException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void cancelJoinWindow() {
+        log.info("CLOSE cancelJoinWindow ");
+        Objects.requireNonNull(stageJoinWindow, "stageJoinWindow");
+        stageJoinWindow.close();
     }
 }

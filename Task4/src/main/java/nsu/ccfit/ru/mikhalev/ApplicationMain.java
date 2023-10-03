@@ -7,16 +7,20 @@ import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 import nsu.ccfit.ru.mikhalev.game.controller.impl.*;
 
+import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
 import nsu.ccfit.ru.mikhalev.game.gui.imp.GUIGameMenuImpl;
-import nsu.ccfit.ru.mikhalev.netserver.NetworkController;
+import nsu.ccfit.ru.mikhalev.game.gui.imp.GUIGameSpaceImpl;
+import nsu.ccfit.ru.mikhalev.network.NetworkController;
 
 import java.io.*;
+import java.net.InetAddress;
 
 @Slf4j
 public class ApplicationMain extends javafx.application.Application {
     private static int port = 0;
 
     private static String ip;
+
 
     private static final GameController gameController = new GameControllerImpl();
 
@@ -34,13 +38,15 @@ public class ApplicationMain extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
         log.info("start application");
-        NetworkController networkController = new NetworkController(ip, port, gameController);
+        NetworkController networkController = new NetworkController(InetAddress.getByName(ip), port, gameController);
+        GUIGameSpace guiGameSpace = new GUIGameSpaceImpl(gameController, stage);
 
         log.info("create view conf menu");
-        GUIGameMenuImpl guiGameMenu = new GUIGameMenuImpl(gameController);
+        GUIGameMenuImpl guiGameMenu = new GUIGameMenuImpl(gameController, stage);
 
+        networkController.startReceiverUDP();
         networkController.startMulticastReceiver();
         networkController.startCheckerPlayer();
-        guiGameMenu.start(stage);
+        guiGameMenu.view();
     }
 }

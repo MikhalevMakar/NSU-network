@@ -2,25 +2,22 @@ package nsu.ccfit.ru.mikhalev.game.model;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.netserver.model.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.observer.Observable;
-import nsu.ccfit.ru.mikhalev.observer.context.ContextAnnouncMsg;
+import nsu.ccfit.ru.mikhalev.observer.context.ContextMainNodeInfo;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.net.*;
+import java.util.*;
 
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.MASTER_IP;
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.MASTER_PORT;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
 
 @Slf4j
 public class PlayerManager extends Observable {
     private final Map<HostNetworkKey, Integer> playersID = new HashMap<>();
     private final Map<Integer, SnakesProto.GamePlayer> players = new HashMap<>();
-    private final Map<Integer, SnakesProto.Direction> moves = new HashMap<>();
 
-    private final ContextAnnouncMsg contextAnnouncMsg = new ContextAnnouncMsg();
+    private final ContextMainNodeInfo contextMainNodeInfo = new ContextMainNodeInfo();
 
     private static final int BEGIN_POINT = 0;
 
@@ -30,12 +27,12 @@ public class PlayerManager extends Observable {
     @Getter
     private final String namePlayer;
 
-    private final SnakesProto.GameConfig config;
+    private final Game game;
 
-    public PlayerManager(String nameGame, String namePlayer,  SnakesProto.GameConfig config) {
+    public PlayerManager(String nameGame, String namePlayer, Game game) {
         this.nameGame = nameGame;
         this.namePlayer = namePlayer;
-        this.config = config;
+        this.game = game;
     }
 
     public List<SnakesProto.GamePlayer> listPlayers() {
@@ -43,36 +40,30 @@ public class PlayerManager extends Observable {
     }
 
     private void addNewUserByIP(String ip, int port, SnakesProto.GamePlayer player) {
-        log.info("add new user by ip {} and port {}", ip, port);
-        playersID.put(new HostNetworkKey(ip, port), player.getId());
-        players.put(player.getId(), player);
+        try {
+            log.info ("add new user by ip {} and port {}", ip, port);
+            playersID.put(new HostNetworkKey(InetAddress.getByName(ip), port), player.getId());
+            players.put(player.getId(), player);
+        } catch(UnknownHostException ex) {
+            log.error("unknown host exception", ex);
+        }
     }
 
-    public void addMoveByKey(Integer key, SnakesProto.Direction direction) {
-        log.info("add new move for player by userId: {}", key);
-        moves.put(key, direction);
-    }
-
-    public void createPlayer(int id, String nameUser, int port,
-                                            SnakesProto.NodeRole role, String ip) {
+    public void createPlayer(int id, InetAddress ip, int port, String nameUser, SnakesProto.NodeRole role) {
         log.info("create player {}", nameUser);
         SnakesProto.GamePlayer player = SnakesProto.GamePlayer.newBuilder().setName(nameUser).setId(id).setPort(port)
-                                            .setRole(role).setIpAddress(ip).setScore(BEGIN_POINT).build();
+                                            .setRole(role).setIpAddress(ip.getHostAddress()).setScore(BEGIN_POINT).build();
         this.addNewUserByIP(MASTER_IP, MASTER_PORT, player);
 
-        this.contextAnnouncMsg.update(ip, this.getAnnouncementMsg());
-        this.notifyObserversNetwork(contextAnnouncMsg);
-    }
+        this.contextMainNodeInfo.update(ip, port, this.getAnnouncementMsg());
 
-    public SnakesProto.Direction getMoveByKey(Integer key) {
-        return moves.get(key);
+        this.notifyObserversNetwork(contextMainNodeInfo);
     }
-
 
     public SnakesProto.GameAnnouncement createGameAnnouncement() {
         return SnakesProto.GameAnnouncement.newBuilder()
             .setGameName(this.nameGame)
-            .setConfig(this.config)
+            .setConfig(this.game.getGameConfig())
             .setCanJoin(true)
             .setPlayers(SnakesProto.GamePlayers.newBuilder()
                 .addAllPlayers(this.listPlayers()))

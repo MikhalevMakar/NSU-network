@@ -24,9 +24,10 @@ module nsu.ccfit.ru.mikhalev {
     exports nsu.ccfit.ru.mikhalev.game.gui;
     exports nsu.ccfit.ru.mikhalev.game.model;
     exports nsu.ccfit.ru.mikhalev.game.gui.imp;
-    exports nsu.ccfit.ru.mikhalev.netserver.model.message;
-    exports nsu.ccfit.ru.mikhalev.netserver;
+    exports nsu.ccfit.ru.mikhalev.network.model.message;
+    exports nsu.ccfit.ru.mikhalev.network;
     exports nsu.ccfit.ru.mikhalev.ecxeption;
     exports nsu.ccfit.ru.mikhalev.game.controller.impl;
+    exports  nsu.ccfit.ru.mikhalev.network.model;
     opens nsu.ccfit.ru.mikhalev.game.controller.impl to javafx.fxml;
 }

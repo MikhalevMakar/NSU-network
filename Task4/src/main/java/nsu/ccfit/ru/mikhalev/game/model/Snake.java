@@ -23,6 +23,14 @@ public class Snake {
 
     public static final int ONE_SNAKE = 1;
 
+    private static final int LEFT_MOVE = -1;
+
+    private static final int RIGHT_MOVE = 1;
+
+    private static final int UP_MOVE = -1;
+
+    private static final int DOWN_MOVE = 1;
+
     @NotNull
     private SnakesProto.GameState.Coord head;
 
@@ -40,7 +48,9 @@ public class Snake {
     private final Random random = new Random();
 
     private final int id;
-    public Snake(@NotNull SnakesProto.GameState.Coord head, @NotNull SnakesProto.GameState.Coord tail, Integer id) {
+    public Snake(@NotNull SnakesProto.GameState.Coord head,
+                 @NotNull SnakesProto.GameState.Coord tail,
+                 @NotNull Integer id) {
         log.info("init new snake");
         this.id = id;
         this.tail = tail;
@@ -58,15 +68,20 @@ public class Snake {
         this.setTail(this.getPlacement().get(this.getPlacement().size()-1));
     }
 
-    public SnakesProto.Direction chooseDirection() {
-        return switch (random.nextInt(1, NUMBER_DIRECTION)) {
-            case SnakesProto.Direction.UP_VALUE -> SnakesProto.Direction.UP;
-            case SnakesProto.Direction.DOWN_VALUE -> SnakesProto.Direction.DOWN;
-            case SnakesProto.Direction.LEFT_VALUE -> SnakesProto.Direction.LEFT;
-            case SnakesProto.Direction.RIGHT_VALUE -> SnakesProto.Direction.RIGHT;
-            default -> throw new ChooseDirectionException();
-        };
+    private SnakesProto.Direction chooseDirection() {
+        log.info("head {} {} tail {} {} ", head.getX(), head.getY(), tail.getY (), tail.getX());
+        if (head.getX() - tail.getX() == RIGHT_MOVE)
+            return SnakesProto.Direction.RIGHT;
+        else if (head.getX() - tail.getX() == LEFT_MOVE)
+            return SnakesProto.Direction.LEFT;
+        else if (head.getY() - tail.getY() == DOWN_MOVE)
+            return SnakesProto.Direction.DOWN;
+        else if(head.getY() - tail.getY() == UP_MOVE)
+            return SnakesProto.Direction.UP;
+
+        throw new ChooseDirectionException();
     }
+
 
     private static SnakesProto.GameState.Coord getNextCoord(int direction, SnakesProto.GameState.Coord center, Field field) {
         log.info("get next coord for snake");
@@ -104,7 +119,7 @@ public class Snake {
         } else {
             log.info("came across a fruit");
             headCell.remove(Integer.valueOf(FOOD));
-            field.foods.remove(snake.getHead());
+            field.getFoods().remove(snake.getHead());
         }
         log.info("list cell {} x {} ,y {}", headCell, snake.getHead().getX(), snake.getHead().getY());
     }

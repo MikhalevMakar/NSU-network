@@ -5,11 +5,6 @@ public class ContextValue {
     private ContextValue() {
         throw new IllegalStateException("utility class");
     }
-
-    public static final int SIZE_BUFFER = 1024;
-
-    public static final int TIMEOUT_MILLISECONDS = 5000;
-
     public static final int MAX_AFK_TIME = 30000;
 
     public static final int SNAKE_PIT = 5;
@@ -36,7 +31,7 @@ public class ContextValue {
 
     public static final String MASTER_IP = "localhost";
 
-    public static final int MASTER_ID = 1;
-
     public static final int  FOOD = 1;
+
+    public static final int SIZE_BUFFER =  65536;
 }

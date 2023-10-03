@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="345.0" prefWidth="580.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsu.ccfit.ru.mikhalev.game.controller.impl.GUIJoinMenuControllerImpl">
+    <children>
+        <Accordion />
+        <Button layoutX="166.0" layoutY="255.0" mnemonicParsing="false" onAction="#joinGame" prefHeight="41.0" prefWidth="260.0" style="-fx-background-color: #29cd72;" stylesheets="@../login.css" text="Вступить в игру" textFill="#fcf9f9">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Button>
+      <TextField fx:id="namePlayer" layoutX="155.0" layoutY="67.0" prefHeight="41.0" prefWidth="282.0" promptText="Имя игрока" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css" />
+      <ChoiceBox fx:id="choiceRole" layoutX="155.0" layoutY="165.0" prefHeight="41.0" prefWidth="282.0" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" />
+    </children>
+</AnchorPane>

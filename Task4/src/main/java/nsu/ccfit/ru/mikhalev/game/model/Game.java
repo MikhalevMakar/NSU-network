@@ -15,21 +15,22 @@ import static nsu.ccfit.ru.mikhalev.game.model.Snake.*;
 public class Game extends Observable {
     private final Field field;
 
-    @Getter
-    private final PlayerManager playerManager;
-
     private final Map<Integer, Snake> snakes = new HashMap<>();
+
+    private final Map<Integer, SnakesProto.Direction> moves = new HashMap<>();
+
     private final ContextGame contextGame = new ContextGame();
     private final Timer timer = new Timer();
 
     private int currentPlayerID = MIN_SNAKE_ID;
+
+    @Getter
     private final SnakesProto.GameConfig gameConfig;
 
 
-    public Game(PlayerManager playerManager, SnakesProto.GameConfig gameConfig) {
+    public Game(SnakesProto.GameConfig gameConfig) {
         this.gameConfig = gameConfig;
         this.field = new Field(gameConfig.getWidth(), gameConfig.getHeight());
-        this.playerManager = playerManager;
 
         this.createSnake();
         field.foodPlacement(gameConfig.getFoodStatic());
@@ -60,7 +61,7 @@ public class Game extends Observable {
     public void updateField() {
         log.info("update field");
         for (var snake : snakes.entrySet()) {
-            SnakesProto.Direction direction = playerManager.getMoveByKey(snake.getValue().getId());
+            SnakesProto.Direction direction = this.getMoveByKey(snake.getValue().getId());
             direction = (direction == null) ? snake.getValue().getDirection() : direction;
             Snake.move(snake.getValue(), direction, field);
         }
@@ -71,6 +72,15 @@ public class Game extends Observable {
         log.info("remove snake by id {}", snakeID);
         field.removeSnake(snakes.get(snakeID));
         snakes.remove(snakeID);
+    }
+
+    public SnakesProto.Direction getMoveByKey(Integer key) {
+        return moves.get(key);
+    }
+
+    public void addMoveByKey(Integer key, SnakesProto.Direction direction) {
+        log.info("add new move for player by userId: {}", key);
+        moves.put(key, direction);
     }
 
     private void checkSnakesOnCell(List<Integer> snakesOnCell, Snake snake) {
