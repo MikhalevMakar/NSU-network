@@ -9,9 +9,16 @@ public abstract class Observable {
 
     private List<ObserverNetwork> observerNetworks = null;
 
+    private List<ObserverState> observerState = null;
+
     public void addObserverGUI(ObserverGUI observer) {
         if (observersGUI == null) observersGUI = new ArrayList<>();
         observersGUI.add(observer);
+    }
+
+    public void addObserverState(ObserverState observer) {
+        if (observerState == null) observerState = new ArrayList<>();
+        observerState.add(observer);
     }
 
     public void addObserverNetwork(ObserverNetwork observer) {
@@ -23,6 +30,13 @@ public abstract class Observable {
         Objects.requireNonNull(observersGUI, "observers can't be null");
         for (ObserverGUI observer : observersGUI) {
             observer.updateGUI(context);
+        }
+    }
+
+    public void notifyObserversGameState() {
+        Objects.requireNonNull(observerState, "observers can't be null");
+        for (ObserverState observer : observerState) {
+            observer.updateState();
         }
     }
 

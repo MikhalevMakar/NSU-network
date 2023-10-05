@@ -7,13 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import nsu.ccfit.ru.mikhalev.game.controller.*;
 import nsu.ccfit.ru.mikhalev.game.gui.GUIGameMenu;
-import nsu.ccfit.ru.mikhalev.network.model.message.JoinMessage;
+import nsu.ccfit.ru.mikhalev.network.model.message.GameMessage;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
-
+import java.util.*;
 
 @Slf4j
 public class GUIJoinMenuControllerImpl implements GUIJoinController {
@@ -45,11 +43,7 @@ public class GUIJoinMenuControllerImpl implements GUIJoinController {
     @Override
     public void joinGame() {
         log.info("join to game");
-        gameController.sendMessageNetwork(nameGame, SnakesProto.GameMessage.newBuilder()
-                                                                    .setJoin(JoinMessage.createJoinMessage(nameGame,
-                                                                                                           namePlayer.getText(),
-                                                                                                           this.getRole(choiceRole.getValue())))
-                                                                    .setMsgSeq(1).build());
+        gameController.sendMessageNetwork(nameGame, GameMessage.createGameMessage(nameGame, namePlayer.getText(), this.getRole(choiceRole.getValue())));
         Objects.requireNonNull(guiGameMenu, "guiGameMenu require non null");
         guiGameMenu.cancelJoinWindow();
     }

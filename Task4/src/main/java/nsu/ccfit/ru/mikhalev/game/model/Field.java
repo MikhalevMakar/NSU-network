@@ -20,7 +20,7 @@ public class Field {
     private final Random random = new Random();
 
     @Getter
-    private List<SnakesProto.GameState.Coord> foods = new LinkedList<>();
+    private final List<SnakesProto.GameState.Coord> foods = new LinkedList<>();
 
     public static final int BEGIN_INDEX_COORD = 0;
 

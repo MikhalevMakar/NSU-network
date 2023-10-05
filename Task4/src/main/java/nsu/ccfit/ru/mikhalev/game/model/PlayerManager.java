@@ -11,10 +11,13 @@ import java.net.*;
 import java.util.*;
 
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
+import static nsu.ccfit.ru.mikhalev.game.model.Snake.MIN_SNAKE_ID;
 
 @Slf4j
 public class PlayerManager extends Observable {
+    @Getter
     private final Map<HostNetworkKey, Integer> playersID = new HashMap<>();
+
     private final Map<Integer, SnakesProto.GamePlayer> players = new HashMap<>();
 
     private final ContextMainNodeInfo contextMainNodeInfo = new ContextMainNodeInfo();
@@ -22,17 +25,20 @@ public class PlayerManager extends Observable {
     private static final int BEGIN_POINT = 0;
 
     @Getter
-    private final String nameGame;
-
-    @Getter
-    private final String namePlayer;
+    private int currentPlayerID = MIN_SNAKE_ID;
 
     private final Game game;
 
-    public PlayerManager(String nameGame, String namePlayer, Game game) {
-        this.nameGame = nameGame;
-        this.namePlayer = namePlayer;
+    @Getter
+    private final String nameGame;
+
+    public PlayerManager(String nameGame, Game game) {
         this.game = game;
+        this.nameGame = nameGame;
+    }
+
+    public Integer getPlayerIDByHostNetwork(HostNetworkKey key) {
+        return playersID.get(key);
     }
 
     public List<SnakesProto.GamePlayer> listPlayers() {
@@ -49,25 +55,26 @@ public class PlayerManager extends Observable {
         }
     }
 
-    public void createPlayer(int id, InetAddress ip, int port, String nameUser, SnakesProto.NodeRole role) {
+    public void createPlayer(InetAddress ip, int port, String nameUser, SnakesProto.NodeRole role) {
         log.info("create player {}", nameUser);
-        SnakesProto.GamePlayer player = SnakesProto.GamePlayer.newBuilder().setName(nameUser).setId(id).setPort(port)
+        SnakesProto.GamePlayer player = SnakesProto.GamePlayer.newBuilder().setName(nameUser).setId(this.currentPlayerID).setPort(port)
                                             .setRole(role).setIpAddress(ip.getHostAddress()).setScore(BEGIN_POINT).build();
         this.addNewUserByIP(MASTER_IP, MASTER_PORT, player);
 
         this.contextMainNodeInfo.update(ip, port, this.getAnnouncementMsg());
-
+        this.game.createSnake(this.currentPlayerID);
+        this.playersID.put(new HostNetworkKey(ip, port), this.currentPlayerID++);
         this.notifyObserversNetwork(contextMainNodeInfo);
     }
 
     public SnakesProto.GameAnnouncement createGameAnnouncement() {
         return SnakesProto.GameAnnouncement.newBuilder()
-            .setGameName(this.nameGame)
-            .setConfig(this.game.getGameConfig())
-            .setCanJoin(true)
-            .setPlayers(SnakesProto.GamePlayers.newBuilder()
-                .addAllPlayers(this.listPlayers()))
-            .build();
+                                    .setGameName(this.nameGame)
+                                    .setConfig(this.game.getGameConfig())
+                                    .setCanJoin(true)
+                                    .setPlayers(SnakesProto.GamePlayers.newBuilder()
+                                        .addAllPlayers(this.listPlayers()))
+                                    .build();
     }
 
     public SnakesProto.GameMessage.AnnouncementMsg getAnnouncementMsg() {

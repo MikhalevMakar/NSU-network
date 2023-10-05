@@ -95,8 +95,6 @@ Fsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/udp/ReceiverUDP.java,3/d/3de
 Ksrc/main/java/nsu/ccfit/ru/mikhalev/network/model/message/MainNodeInfo.java,5/3/53e6a0927141ffa24e5995c5cead646228da09b0
 z
 Jsrc/main/java/nsu/ccfit/ru/mikhalev/game/controller/GUIJoinController.java,b/7/b770c39279f1a9322efe879d883ec777a70033b9
-z
-Jsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/message/JoinMessage.java,e/a/ea525402138cb0e9ad8b7f55193f064469c0d7bc
 ‡
 Wsrc/main/java/nsu/ccfit/ru/mikhalev/game/controller/impl/GUIJoinMenuControllerImpl.java,f/d/fdef51e02c68f662df069ec7c5f6edb7a493d94c
 r
@@ -109,3 +107,11 @@ Esrc/main/java/nsu/ccfit/ru/mikhalev/ecxeption/JoinGroupException.java,1/0/1015
 Msrc/main/java/nsu/ccfit/ru/mikhalev/network/model/multicast/MulticastUDP.java,b/6/b68b56d7f765c6638e0a50ccc4c84d25169c8bf4
 u
 Esrc/main/java/nsu/ccfit/ru/mikhalev/game/gui/imp/DisplayViewFXML.java,5/b/5b365a2bdfef86160adfadfa00af8f52659f46b9
+z
+Jsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/message/GameMessage.java,8/0/8063c3da9f6230fb7d6aef98c0b2084e16940e39
+o
+?src/main/java/nsu/ccfit/ru/mikhalev/game/model/PlayerState.java,1/9/19f794b25479614d28496d968aa24078604fe8b9
+n
+>src/main/java/nsu/ccfit/ru/mikhalev/game/model/StateOrder.java,5/a/5a430772ff826a4a823bd825f7d61e9c142489cf
+o
+?src/main/java/nsu/ccfit/ru/mikhalev/observer/ObserverState.java,9/5/9513554400340a6922d6c5174f5e770b434f5501

@@ -3,20 +3,13 @@ package nsu.ccfit.ru.mikhalev.network;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
-import nsu.ccfit.ru.mikhalev.network.model.message.Message;
-import nsu.ccfit.ru.mikhalev.network.model.message.NetworkStorage;
+import nsu.ccfit.ru.mikhalev.network.model.message.*;
 import nsu.ccfit.ru.mikhalev.observer.ObserverNetwork;
-import nsu.ccfit.ru.mikhalev.observer.context.Context;
-import nsu.ccfit.ru.mikhalev.observer.context.ContextMainNodeInfo;
+import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import static nsu.ccfit.ru.mikhalev.network.model.multicast.MulticastUDP.TIMER_DELAY;
 
 @Slf4j
 public class NetworkController implements ObserverNetwork  {
@@ -64,7 +57,7 @@ public class NetworkController implements ObserverNetwork  {
     }
 
     @Override
-    public void updateNetworkMsg(Context context){
+    public void updateNetworkMsg(Context context) {
         ContextMainNodeInfo contextMainNodeInfo = (ContextMainNodeInfo)context;
         this.multicastService.updateAnnouncementMsg(contextMainNodeInfo.getIp(),
                                                     contextMainNodeInfo.getPort(),
@@ -76,9 +69,10 @@ public class NetworkController implements ObserverNetwork  {
     }
 
     public void addMessageToSend(String nameGame, SnakesProto.GameMessage gameMessage) {
-        for(var value : networkStorage.getMainNodesInfo().entrySet()) {
-            log.info ("name game {}, list games: {}", nameGame, value.getValue().getHostNetworkKey ());
-        }
-        this.networkStorage.getMessagesToSend().add(new Message(networkStorage.getMasterNetworkByNameGame(nameGame), gameMessage));
+        this.networkStorage.getMessagesToSend()
+            .add(new Message (networkStorage.getMasterNetworkByNameGame(nameGame), gameMessage));
+    }
+    public void addMessageToSend(HostNetworkKey key,SnakesProto.GameMessage gameMessage) {
+        this.networkStorage.getMessagesToSend().add(new Message (key, gameMessage));
     }
 }

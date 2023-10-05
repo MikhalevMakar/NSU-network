@@ -120,27 +120,27 @@ public final class SnakesProto {
     }
 
     public static com.google.protobuf.Internal.EnumLiteMap<NodeRole>
-        internalGetValueMap() {
+    internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
         NodeRole> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<NodeRole>() {
-            public NodeRole findValueByNumber(int number) {
-              return NodeRole.forNumber(number);
-            }
-          };
+        new com.google.protobuf.Internal.EnumLiteMap<NodeRole>() {
+          public NodeRole findValueByNumber(int number) {
+            return NodeRole.forNumber(number);
+          }
+        };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
+    getValueDescriptor() {
       return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
+    getDescriptorForType() {
       return getDescriptor();
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
+    getDescriptor() {
       return SnakesProto.getDescriptor().getEnumTypes().get(0);
     }
 
@@ -150,7 +150,7 @@ public final class SnakesProto {
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this type.");
       }
       return VALUES[desc.getIndex()];
     }
@@ -236,27 +236,27 @@ public final class SnakesProto {
     }
 
     public static com.google.protobuf.Internal.EnumLiteMap<PlayerType>
-        internalGetValueMap() {
+    internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
         PlayerType> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<PlayerType>() {
-            public PlayerType findValueByNumber(int number) {
-              return PlayerType.forNumber(number);
-            }
-          };
+        new com.google.protobuf.Internal.EnumLiteMap<PlayerType>() {
+          public PlayerType findValueByNumber(int number) {
+            return PlayerType.forNumber(number);
+          }
+        };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
+    getValueDescriptor() {
       return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
+    getDescriptorForType() {
       return getDescriptor();
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
+    getDescriptor() {
       return SnakesProto.getDescriptor().getEnumTypes().get(1);
     }
 
@@ -266,7 +266,7 @@ public final class SnakesProto {
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this type.");
       }
       return VALUES[desc.getIndex()];
     }
@@ -382,27 +382,27 @@ public final class SnakesProto {
     }
 
     public static com.google.protobuf.Internal.EnumLiteMap<Direction>
-        internalGetValueMap() {
+    internalGetValueMap() {
       return internalValueMap;
     }
     private static final com.google.protobuf.Internal.EnumLiteMap<
         Direction> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<Direction>() {
-            public Direction findValueByNumber(int number) {
-              return Direction.forNumber(number);
-            }
-          };
+        new com.google.protobuf.Internal.EnumLiteMap<Direction>() {
+          public Direction findValueByNumber(int number) {
+            return Direction.forNumber(number);
+          }
+        };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
+    getValueDescriptor() {
       return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
+    getDescriptorForType() {
       return getDescriptor();
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
+    getDescriptor() {
       return SnakesProto.getDescriptor().getEnumTypes().get(2);
     }
 
@@ -412,7 +412,7 @@ public final class SnakesProto {
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
+            "EnumValueDescriptor is not for this type.");
       }
       return VALUES[desc.getIndex()];
     }
@@ -457,7 +457,7 @@ public final class SnakesProto {
      * @return The bytes for name.
      */
     com.google.protobuf.ByteString
-        getNameBytes();
+    getNameBytes();
 
     /**
      * <pre>
@@ -505,7 +505,7 @@ public final class SnakesProto {
      * @return The bytes for ipAddress.
      */
     com.google.protobuf.ByteString
-        getIpAddressBytes();
+    getIpAddressBytes();
 
     /**
      * <pre>
@@ -594,7 +594,7 @@ public final class SnakesProto {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:GamePlayer)
       GamePlayerOrBuilder {
-  private static final long serialVersionUID = 0L;
+    private static final long serialVersionUID = 0L;
     // Use GamePlayer.newBuilder() to construct.
     private GamePlayer(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -614,13 +614,13 @@ public final class SnakesProto {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return SnakesProto.internal_static_snakes_GamePlayer_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return SnakesProto.internal_static_snakes_GamePlayer_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               SnakesProto.GamePlayer.class, SnakesProto.GamePlayer.Builder.class);
@@ -656,7 +656,7 @@ public final class SnakesProto {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
@@ -675,10 +675,10 @@ public final class SnakesProto {
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getNameBytes() {
+    getNameBytes() {
       java.lang.Object ref = name_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         name_ = b;
@@ -744,7 +744,7 @@ public final class SnakesProto {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
@@ -763,10 +763,10 @@ public final class SnakesProto {
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getIpAddressBytes() {
+    getIpAddressBytes() {
       java.lang.Object ref = ipAddress_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         ipAddress_ = b;
@@ -911,7 +911,7 @@ public final class SnakesProto {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
       }
@@ -947,26 +947,26 @@ public final class SnakesProto {
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, id_);
+            .computeInt32Size(2, id_);
       }
       if (((bitField0_ & 0x00000004) != 0)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, ipAddress_);
       }
       if (((bitField0_ & 0x00000008) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, port_);
+            .computeInt32Size(4, port_);
       }
       if (((bitField0_ & 0x00000010) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(5, role_);
+            .computeEnumSize(5, role_);
       }
       if (((bitField0_ & 0x00000020) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(6, type_);
+            .computeEnumSize(6, type_);
       }
       if (((bitField0_ & 0x00000040) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, score_);
+            .computeInt32Size(7, score_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -976,7 +976,7 @@ public final class SnakesProto {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof SnakesProto.GamePlayer)) {
         return super.equals(obj);
@@ -1164,13 +1164,13 @@ public final class SnakesProto {
         // @@protoc_insertion_point(builder_implements:GamePlayer)
         SnakesProto.GamePlayerOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GamePlayer_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GamePlayer_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GamePlayer.class, SnakesProto.GamePlayer.Builder.class);
@@ -1202,7 +1202,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return SnakesProto.internal_static_snakes_GamePlayer_descriptor;
       }
 
@@ -1478,10 +1478,10 @@ public final class SnakesProto {
        * @return The bytes for name.
        */
       public com.google.protobuf.ByteString
-          getNameBytes() {
+      getNameBytes() {
         java.lang.Object ref = name_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           name_ = b;
@@ -1638,10 +1638,10 @@ public final class SnakesProto {
        * @return The bytes for ipAddress.
        */
       public com.google.protobuf.ByteString
-          getIpAddressBytes() {
+      getIpAddressBytes() {
         java.lang.Object ref = ipAddress_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           ipAddress_ = b;
@@ -2072,7 +2072,7 @@ public final class SnakesProto {
   }
   /**
    * <pre>
-   * Параметры идущей игры (не должны меняться в процессе игры) 
+   * Параметры идущей игры (не должны меняться в процессе игры)
    * </pre>
    *
    * Protobuf type {@code GameConfig}
@@ -2081,7 +2081,7 @@ public final class SnakesProto {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:GameConfig)
       GameConfigOrBuilder {
-  private static final long serialVersionUID = 0L;
+    private static final long serialVersionUID = 0L;
     // Use GameConfig.newBuilder() to construct.
     private GameConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2101,13 +2101,13 @@ public final class SnakesProto {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return SnakesProto.internal_static_snakes_GameConfig_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return SnakesProto.internal_static_snakes_GameConfig_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               SnakesProto.GameConfig.class, SnakesProto.GameConfig.Builder.class);
@@ -2235,7 +2235,7 @@ public final class SnakesProto {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
         output.writeInt32(1, width_);
       }
@@ -2259,19 +2259,19 @@ public final class SnakesProto {
       size = 0;
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, width_);
+            .computeInt32Size(1, width_);
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, height_);
+            .computeInt32Size(2, height_);
       }
       if (((bitField0_ & 0x00000004) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, foodStatic_);
+            .computeInt32Size(3, foodStatic_);
       }
       if (((bitField0_ & 0x00000008) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, stateDelayMs_);
+            .computeInt32Size(5, stateDelayMs_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -2281,7 +2281,7 @@ public final class SnakesProto {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof SnakesProto.GameConfig)) {
         return super.equals(obj);
@@ -2434,7 +2434,7 @@ public final class SnakesProto {
     }
     /**
      * <pre>
-     * Параметры идущей игры (не должны меняться в процессе игры) 
+     * Параметры идущей игры (не должны меняться в процессе игры)
      * </pre>
      *
      * Protobuf type {@code GameConfig}
@@ -2444,13 +2444,13 @@ public final class SnakesProto {
         // @@protoc_insertion_point(builder_implements:GameConfig)
         SnakesProto.GameConfigOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameConfig_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameConfig_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameConfig.class, SnakesProto.GameConfig.Builder.class);
@@ -2479,7 +2479,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return SnakesProto.internal_static_snakes_GameConfig_descriptor;
       }
 
@@ -2944,8 +2944,8 @@ public final class SnakesProto {
      *
      * <code>repeated .GamePlayer players = 1;</code>
      */
-    java.util.List<SnakesProto.GamePlayer> 
-        getPlayersList();
+    java.util.List<SnakesProto.GamePlayer>
+    getPlayersList();
     /**
      * <pre>
      * Список всех игроков
@@ -2969,8 +2969,8 @@ public final class SnakesProto {
      *
      * <code>repeated .GamePlayer players = 1;</code>
      */
-    java.util.List<? extends SnakesProto.GamePlayerOrBuilder> 
-        getPlayersOrBuilderList();
+    java.util.List<? extends SnakesProto.GamePlayerOrBuilder>
+    getPlayersOrBuilderList();
     /**
      * <pre>
      * Список всех игроков
@@ -2983,7 +2983,7 @@ public final class SnakesProto {
   }
   /**
    * <pre>
-   * Игроки конкретной игры 
+   * Игроки конкретной игры
    * </pre>
    *
    * Protobuf type {@code GamePlayers}
@@ -2992,7 +2992,7 @@ public final class SnakesProto {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:GamePlayers)
       GamePlayersOrBuilder {
-  private static final long serialVersionUID = 0L;
+    private static final long serialVersionUID = 0L;
     // Use GamePlayers.newBuilder() to construct.
     private GamePlayers(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3009,13 +3009,13 @@ public final class SnakesProto {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return SnakesProto.internal_static_snakes_GamePlayers_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return SnakesProto.internal_static_snakes_GamePlayers_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               SnakesProto.GamePlayers.class, SnakesProto.GamePlayers.Builder.class);
@@ -3043,8 +3043,8 @@ public final class SnakesProto {
      * <code>repeated .GamePlayer players = 1;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends SnakesProto.GamePlayerOrBuilder> 
-        getPlayersOrBuilderList() {
+    public java.util.List<? extends SnakesProto.GamePlayerOrBuilder>
+    getPlayersOrBuilderList() {
       return players_;
     }
     /**
@@ -3101,7 +3101,7 @@ public final class SnakesProto {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       for (int i = 0; i < players_.size(); i++) {
         output.writeMessage(1, players_.get(i));
       }
@@ -3116,7 +3116,7 @@ public final class SnakesProto {
       size = 0;
       for (int i = 0; i < players_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, players_.get(i));
+            .computeMessageSize(1, players_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -3126,7 +3126,7 @@ public final class SnakesProto {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof SnakesProto.GamePlayers)) {
         return super.equals(obj);
@@ -3249,7 +3249,7 @@ public final class SnakesProto {
     }
     /**
      * <pre>
-     * Игроки конкретной игры 
+     * Игроки конкретной игры
      * </pre>
      *
      * Protobuf type {@code GamePlayers}
@@ -3259,13 +3259,13 @@ public final class SnakesProto {
         // @@protoc_insertion_point(builder_implements:GamePlayers)
         SnakesProto.GamePlayersOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GamePlayers_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GamePlayers_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GamePlayers.class, SnakesProto.GamePlayers.Builder.class);
@@ -3297,7 +3297,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return SnakesProto.internal_static_snakes_GamePlayers_descriptor;
       }
 
@@ -3402,9 +3402,9 @@ public final class SnakesProto {
               playersBuilder_ = null;
               players_ = other.players_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              playersBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getPlayersFieldBuilder() : null;
+              playersBuilder_ =
+                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                      getPlayersFieldBuilder() : null;
             } else {
               playersBuilder_.addAllMessages(other.players_);
             }
@@ -3472,12 +3472,12 @@ public final class SnakesProto {
       private int bitField0_;
 
       private java.util.List<SnakesProto.GamePlayer> players_ =
-        java.util.Collections.emptyList();
+          java.util.Collections.emptyList();
       private void ensurePlayersIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
           players_ = new java.util.ArrayList<SnakesProto.GamePlayer>(players_);
           bitField0_ |= 0x00000001;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
@@ -3726,8 +3726,8 @@ public final class SnakesProto {
        *
        * <code>repeated .GamePlayer players = 1;</code>
        */
-      public java.util.List<? extends SnakesProto.GamePlayerOrBuilder> 
-           getPlayersOrBuilderList() {
+      public java.util.List<? extends SnakesProto.GamePlayerOrBuilder>
+      getPlayersOrBuilderList() {
         if (playersBuilder_ != null) {
           return playersBuilder_.getMessageOrBuilderList();
         } else {
@@ -3764,20 +3764,20 @@ public final class SnakesProto {
        *
        * <code>repeated .GamePlayer players = 1;</code>
        */
-      public java.util.List<SnakesProto.GamePlayer.Builder> 
-           getPlayersBuilderList() {
+      public java.util.List<SnakesProto.GamePlayer.Builder>
+      getPlayersBuilderList() {
         return getPlayersFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          SnakesProto.GamePlayer, SnakesProto.GamePlayer.Builder, SnakesProto.GamePlayerOrBuilder> 
-          getPlayersFieldBuilder() {
+          SnakesProto.GamePlayer, SnakesProto.GamePlayer.Builder, SnakesProto.GamePlayerOrBuilder>
+      getPlayersFieldBuilder() {
         if (playersBuilder_ == null) {
           playersBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               SnakesProto.GamePlayer, SnakesProto.GamePlayer.Builder, SnakesProto.GamePlayerOrBuilder>(
-                  players_,
-                  ((bitField0_ & 0x00000001) != 0),
-                  getParentForChildren(),
-                  isClean());
+              players_,
+              ((bitField0_ & 0x00000001) != 0),
+              getParentForChildren(),
+              isClean());
           players_ = null;
         }
         return playersBuilder_;
@@ -3876,8 +3876,8 @@ public final class SnakesProto {
      *
      * <code>repeated .GameState.Snake snakes = 2;</code>
      */
-    java.util.List<SnakesProto.GameState.Snake> 
-        getSnakesList();
+    java.util.List<SnakesProto.GameState.Snake>
+    getSnakesList();
     /**
      * <pre>
      * Список змей
@@ -3901,8 +3901,8 @@ public final class SnakesProto {
      *
      * <code>repeated .GameState.Snake snakes = 2;</code>
      */
-    java.util.List<? extends SnakesProto.GameState.SnakeOrBuilder> 
-        getSnakesOrBuilderList();
+    java.util.List<? extends SnakesProto.GameState.SnakeOrBuilder>
+    getSnakesOrBuilderList();
     /**
      * <pre>
      * Список змей
@@ -3920,8 +3920,8 @@ public final class SnakesProto {
      *
      * <code>repeated .GameState.Coord foods = 3;</code>
      */
-    java.util.List<SnakesProto.GameState.Coord> 
-        getFoodsList();
+    java.util.List<SnakesProto.GameState.Coord>
+    getFoodsList();
     /**
      * <pre>
      * Список клеток с едой
@@ -3945,8 +3945,8 @@ public final class SnakesProto {
      *
      * <code>repeated .GameState.Coord foods = 3;</code>
      */
-    java.util.List<? extends SnakesProto.GameState.CoordOrBuilder> 
-        getFoodsOrBuilderList();
+    java.util.List<? extends SnakesProto.GameState.CoordOrBuilder>
+    getFoodsOrBuilderList();
     /**
      * <pre>
      * Список клеток с едой
@@ -3986,7 +3986,7 @@ public final class SnakesProto {
   }
   /**
    * <pre>
-   * Текущее состояние игрового поля 
+   * Текущее состояние игрового поля
    * </pre>
    *
    * Protobuf type {@code GameState}
@@ -3995,7 +3995,7 @@ public final class SnakesProto {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:GameState)
       GameStateOrBuilder {
-  private static final long serialVersionUID = 0L;
+    private static final long serialVersionUID = 0L;
     // Use GameState.newBuilder() to construct.
     private GameState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -4013,13 +4013,13 @@ public final class SnakesProto {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return SnakesProto.internal_static_snakes_GameState_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return SnakesProto.internal_static_snakes_GameState_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               SnakesProto.GameState.class, SnakesProto.GameState.Builder.class);
@@ -4071,7 +4071,7 @@ public final class SnakesProto {
      * <pre>
      * Координаты в пределах игрового поля, либо относительное смещение координат.
      * Левая верхняя клетка поля имеет координаты (x=0, y=0).
-     * Направление смещения задаётся знаком чисел. 
+     * Направление смещения задаётся знаком чисел.
      * </pre>
      *
      * Protobuf type {@code GameState.Coord}
@@ -4080,7 +4080,7 @@ public final class SnakesProto {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:GameState.Coord)
         CoordOrBuilder {
-    private static final long serialVersionUID = 0L;
+      private static final long serialVersionUID = 0L;
       // Use Coord.newBuilder() to construct.
       private Coord(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -4096,13 +4096,13 @@ public final class SnakesProto {
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameState_Coord_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameState_Coord_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameState.Coord.class, SnakesProto.GameState.Coord.Builder.class);
@@ -4176,7 +4176,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         if (((bitField0_ & 0x00000001) != 0)) {
           output.writeSInt32(1, x_);
         }
@@ -4194,11 +4194,11 @@ public final class SnakesProto {
         size = 0;
         if (((bitField0_ & 0x00000001) != 0)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeSInt32Size(1, x_);
+              .computeSInt32Size(1, x_);
         }
         if (((bitField0_ & 0x00000002) != 0)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeSInt32Size(2, y_);
+              .computeSInt32Size(2, y_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
@@ -4208,7 +4208,7 @@ public final class SnakesProto {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof SnakesProto.GameState.Coord)) {
           return super.equals(obj);
@@ -4345,7 +4345,7 @@ public final class SnakesProto {
        * <pre>
        * Координаты в пределах игрового поля, либо относительное смещение координат.
        * Левая верхняя клетка поля имеет координаты (x=0, y=0).
-       * Направление смещения задаётся знаком чисел. 
+       * Направление смещения задаётся знаком чисел.
        * </pre>
        *
        * Protobuf type {@code GameState.Coord}
@@ -4355,13 +4355,13 @@ public final class SnakesProto {
           // @@protoc_insertion_point(builder_implements:GameState.Coord)
           SnakesProto.GameState.CoordOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.internal_static_snakes_GameState_Coord_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
+        internalGetFieldAccessorTable() {
           return SnakesProto.internal_static_snakes_GameState_Coord_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   SnakesProto.GameState.Coord.class, SnakesProto.GameState.Coord.Builder.class);
@@ -4388,7 +4388,7 @@ public final class SnakesProto {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return SnakesProto.internal_static_snakes_GameState_Coord_descriptor;
         }
 
@@ -4733,18 +4733,18 @@ public final class SnakesProto {
        * <pre>
        * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
        * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
        * </pre>
        *
        * <code>repeated .GameState.Coord points = 2;</code>
        */
-      java.util.List<SnakesProto.GameState.Coord> 
-          getPointsList();
+      java.util.List<SnakesProto.GameState.Coord>
+      getPointsList();
       /**
        * <pre>
        * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
        * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
        * </pre>
        *
        * <code>repeated .GameState.Coord points = 2;</code>
@@ -4754,7 +4754,7 @@ public final class SnakesProto {
        * <pre>
        * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
        * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
        * </pre>
        *
        * <code>repeated .GameState.Coord points = 2;</code>
@@ -4764,18 +4764,18 @@ public final class SnakesProto {
        * <pre>
        * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
        * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
        * </pre>
        *
        * <code>repeated .GameState.Coord points = 2;</code>
        */
-      java.util.List<? extends SnakesProto.GameState.CoordOrBuilder> 
-          getPointsOrBuilderList();
+      java.util.List<? extends SnakesProto.GameState.CoordOrBuilder>
+      getPointsOrBuilderList();
       /**
        * <pre>
        * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
        * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
        * </pre>
        *
        * <code>repeated .GameState.Coord points = 2;</code>
@@ -4832,7 +4832,7 @@ public final class SnakesProto {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:GameState.Snake)
         SnakeOrBuilder {
-    private static final long serialVersionUID = 0L;
+      private static final long serialVersionUID = 0L;
       // Use Snake.newBuilder() to construct.
       private Snake(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -4851,13 +4851,13 @@ public final class SnakesProto {
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameState_Snake_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameState_Snake_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameState.Snake.class, SnakesProto.GameState.Snake.Builder.class);
@@ -4935,27 +4935,27 @@ public final class SnakesProto {
         }
 
         public static com.google.protobuf.Internal.EnumLiteMap<SnakeState>
-            internalGetValueMap() {
+        internalGetValueMap() {
           return internalValueMap;
         }
         private static final com.google.protobuf.Internal.EnumLiteMap<
             SnakeState> internalValueMap =
-              new com.google.protobuf.Internal.EnumLiteMap<SnakeState>() {
-                public SnakeState findValueByNumber(int number) {
-                  return SnakeState.forNumber(number);
-                }
-              };
+            new com.google.protobuf.Internal.EnumLiteMap<SnakeState>() {
+              public SnakeState findValueByNumber(int number) {
+                return SnakeState.forNumber(number);
+              }
+            };
 
         public final com.google.protobuf.Descriptors.EnumValueDescriptor
-            getValueDescriptor() {
+        getValueDescriptor() {
           return getDescriptor().getValues().get(ordinal());
         }
         public final com.google.protobuf.Descriptors.EnumDescriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return getDescriptor();
         }
         public static final com.google.protobuf.Descriptors.EnumDescriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.GameState.Snake.getDescriptor().getEnumTypes().get(0);
         }
 
@@ -4965,7 +4965,7 @@ public final class SnakesProto {
             com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
           if (desc.getType() != getDescriptor()) {
             throw new java.lang.IllegalArgumentException(
-              "EnumValueDescriptor is not for this type.");
+                "EnumValueDescriptor is not for this type.");
           }
           return VALUES[desc.getIndex()];
         }
@@ -5014,7 +5014,7 @@ public final class SnakesProto {
        * <pre>
        * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
        * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
        * </pre>
        *
        * <code>repeated .GameState.Coord points = 2;</code>
@@ -5027,21 +5027,21 @@ public final class SnakesProto {
        * <pre>
        * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
        * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
        * </pre>
        *
        * <code>repeated .GameState.Coord points = 2;</code>
        */
       @java.lang.Override
-      public java.util.List<? extends SnakesProto.GameState.CoordOrBuilder> 
-          getPointsOrBuilderList() {
+      public java.util.List<? extends SnakesProto.GameState.CoordOrBuilder>
+      getPointsOrBuilderList() {
         return points_;
       }
       /**
        * <pre>
        * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
        * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
        * </pre>
        *
        * <code>repeated .GameState.Coord points = 2;</code>
@@ -5054,7 +5054,7 @@ public final class SnakesProto {
        * <pre>
        * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
        * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
        * </pre>
        *
        * <code>repeated .GameState.Coord points = 2;</code>
@@ -5067,7 +5067,7 @@ public final class SnakesProto {
        * <pre>
        * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
        * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+       * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
        * </pre>
        *
        * <code>repeated .GameState.Coord points = 2;</code>
@@ -5155,7 +5155,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         if (((bitField0_ & 0x00000001) != 0)) {
           output.writeInt32(1, playerId_);
         }
@@ -5179,19 +5179,19 @@ public final class SnakesProto {
         size = 0;
         if (((bitField0_ & 0x00000001) != 0)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(1, playerId_);
+              .computeInt32Size(1, playerId_);
         }
         for (int i = 0; i < points_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(2, points_.get(i));
+              .computeMessageSize(2, points_.get(i));
         }
         if (((bitField0_ & 0x00000002) != 0)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeEnumSize(3, state_);
+              .computeEnumSize(3, state_);
         }
         if (((bitField0_ & 0x00000004) != 0)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeEnumSize(4, headDirection_);
+              .computeEnumSize(4, headDirection_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
@@ -5201,7 +5201,7 @@ public final class SnakesProto {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof SnakesProto.GameState.Snake)) {
           return super.equals(obj);
@@ -5359,13 +5359,13 @@ public final class SnakesProto {
           // @@protoc_insertion_point(builder_implements:GameState.Snake)
           SnakesProto.GameState.SnakeOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.internal_static_snakes_GameState_Snake_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
+        internalGetFieldAccessorTable() {
           return SnakesProto.internal_static_snakes_GameState_Snake_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   SnakesProto.GameState.Snake.class, SnakesProto.GameState.Snake.Builder.class);
@@ -5400,7 +5400,7 @@ public final class SnakesProto {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return SnakesProto.internal_static_snakes_GameState_Snake_descriptor;
         }
 
@@ -5522,9 +5522,9 @@ public final class SnakesProto {
                 pointsBuilder_ = null;
                 points_ = other.points_;
                 bitField0_ = (bitField0_ & ~0x00000002);
-                pointsBuilder_ = 
-                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                     getPointsFieldBuilder() : null;
+                pointsBuilder_ =
+                    com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                        getPointsFieldBuilder() : null;
               } else {
                 pointsBuilder_.addAllMessages(other.points_);
               }
@@ -5687,12 +5687,12 @@ public final class SnakesProto {
         }
 
         private java.util.List<SnakesProto.GameState.Coord> points_ =
-          java.util.Collections.emptyList();
+            java.util.Collections.emptyList();
         private void ensurePointsIsMutable() {
           if (!((bitField0_ & 0x00000002) != 0)) {
             points_ = new java.util.ArrayList<SnakesProto.GameState.Coord>(points_);
             bitField0_ |= 0x00000002;
-           }
+          }
         }
 
         private com.google.protobuf.RepeatedFieldBuilderV3<
@@ -5702,7 +5702,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5718,7 +5718,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5734,7 +5734,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5750,7 +5750,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5773,7 +5773,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5793,7 +5793,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5815,7 +5815,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5838,7 +5838,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5858,7 +5858,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5878,7 +5878,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5899,7 +5899,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5918,7 +5918,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5937,7 +5937,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5950,7 +5950,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5966,13 +5966,13 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
          */
-        public java.util.List<? extends SnakesProto.GameState.CoordOrBuilder> 
-             getPointsOrBuilderList() {
+        public java.util.List<? extends SnakesProto.GameState.CoordOrBuilder>
+        getPointsOrBuilderList() {
           if (pointsBuilder_ != null) {
             return pointsBuilder_.getMessageOrBuilderList();
           } else {
@@ -5983,7 +5983,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -5996,7 +5996,7 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
@@ -6010,25 +6010,25 @@ public final class SnakesProto {
          * <pre>
          * Список "ключевых" точек змеи. Первая точка хранит координаты головы змеи.
          * Каждая следующая - смещение следующей "ключевой" точки относительно предыдущей,
-         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки. 
+         * в частности последняя точка хранит смещение хвоста змеи относительно предыдущей "ключевой" точки.
          * </pre>
          *
          * <code>repeated .GameState.Coord points = 2;</code>
          */
-        public java.util.List<SnakesProto.GameState.Coord.Builder> 
-             getPointsBuilderList() {
+        public java.util.List<SnakesProto.GameState.Coord.Builder>
+        getPointsBuilderList() {
           return getPointsFieldBuilder().getBuilderList();
         }
         private com.google.protobuf.RepeatedFieldBuilderV3<
-            SnakesProto.GameState.Coord, SnakesProto.GameState.Coord.Builder, SnakesProto.GameState.CoordOrBuilder> 
-            getPointsFieldBuilder() {
+            SnakesProto.GameState.Coord, SnakesProto.GameState.Coord.Builder, SnakesProto.GameState.CoordOrBuilder>
+        getPointsFieldBuilder() {
           if (pointsBuilder_ == null) {
             pointsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
                 SnakesProto.GameState.Coord, SnakesProto.GameState.Coord.Builder, SnakesProto.GameState.CoordOrBuilder>(
-                    points_,
-                    ((bitField0_ & 0x00000002) != 0),
-                    getParentForChildren(),
-                    isClean());
+                points_,
+                ((bitField0_ & 0x00000002) != 0),
+                getParentForChildren(),
+                isClean());
             points_ = null;
           }
           return pointsBuilder_;
@@ -6263,8 +6263,8 @@ public final class SnakesProto {
      * <code>repeated .GameState.Snake snakes = 2;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends SnakesProto.GameState.SnakeOrBuilder> 
-        getSnakesOrBuilderList() {
+    public java.util.List<? extends SnakesProto.GameState.SnakeOrBuilder>
+    getSnakesOrBuilderList() {
       return snakes_;
     }
     /**
@@ -6324,8 +6324,8 @@ public final class SnakesProto {
      * <code>repeated .GameState.Coord foods = 3;</code>
      */
     @java.lang.Override
-    public java.util.List<? extends SnakesProto.GameState.CoordOrBuilder> 
-        getFoodsOrBuilderList() {
+    public java.util.List<? extends SnakesProto.GameState.CoordOrBuilder>
+    getFoodsOrBuilderList() {
       return foods_;
     }
     /**
@@ -6432,7 +6432,7 @@ public final class SnakesProto {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
         output.writeInt32(1, stateOrder_);
       }
@@ -6456,19 +6456,19 @@ public final class SnakesProto {
       size = 0;
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, stateOrder_);
+            .computeInt32Size(1, stateOrder_);
       }
       for (int i = 0; i < snakes_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, snakes_.get(i));
+            .computeMessageSize(2, snakes_.get(i));
       }
       for (int i = 0; i < foods_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, foods_.get(i));
+            .computeMessageSize(3, foods_.get(i));
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getPlayers());
+            .computeMessageSize(4, getPlayers());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -6478,7 +6478,7 @@ public final class SnakesProto {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof SnakesProto.GameState)) {
         return super.equals(obj);
@@ -6625,7 +6625,7 @@ public final class SnakesProto {
     }
     /**
      * <pre>
-     * Текущее состояние игрового поля 
+     * Текущее состояние игрового поля
      * </pre>
      *
      * Protobuf type {@code GameState}
@@ -6635,13 +6635,13 @@ public final class SnakesProto {
         // @@protoc_insertion_point(builder_implements:GameState)
         SnakesProto.GameStateOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameState_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameState_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameState.class, SnakesProto.GameState.Builder.class);
@@ -6659,7 +6659,7 @@ public final class SnakesProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+            .alwaysUseFieldBuilders) {
           getSnakesFieldBuilder();
           getFoodsFieldBuilder();
           getPlayersFieldBuilder();
@@ -6694,7 +6694,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return SnakesProto.internal_static_snakes_GameState_descriptor;
       }
 
@@ -6823,9 +6823,9 @@ public final class SnakesProto {
               snakesBuilder_ = null;
               snakes_ = other.snakes_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              snakesBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getSnakesFieldBuilder() : null;
+              snakesBuilder_ =
+                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                      getSnakesFieldBuilder() : null;
             } else {
               snakesBuilder_.addAllMessages(other.snakes_);
             }
@@ -6849,9 +6849,9 @@ public final class SnakesProto {
               foodsBuilder_ = null;
               foods_ = other.foods_;
               bitField0_ = (bitField0_ & ~0x00000004);
-              foodsBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getFoodsFieldBuilder() : null;
+              foodsBuilder_ =
+                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                      getFoodsFieldBuilder() : null;
             } else {
               foodsBuilder_.addAllMessages(other.foods_);
             }
@@ -7012,12 +7012,12 @@ public final class SnakesProto {
       }
 
       private java.util.List<SnakesProto.GameState.Snake> snakes_ =
-        java.util.Collections.emptyList();
+          java.util.Collections.emptyList();
       private void ensureSnakesIsMutable() {
         if (!((bitField0_ & 0x00000002) != 0)) {
           snakes_ = new java.util.ArrayList<SnakesProto.GameState.Snake>(snakes_);
           bitField0_ |= 0x00000002;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
@@ -7266,8 +7266,8 @@ public final class SnakesProto {
        *
        * <code>repeated .GameState.Snake snakes = 2;</code>
        */
-      public java.util.List<? extends SnakesProto.GameState.SnakeOrBuilder> 
-           getSnakesOrBuilderList() {
+      public java.util.List<? extends SnakesProto.GameState.SnakeOrBuilder>
+      getSnakesOrBuilderList() {
         if (snakesBuilder_ != null) {
           return snakesBuilder_.getMessageOrBuilderList();
         } else {
@@ -7304,32 +7304,32 @@ public final class SnakesProto {
        *
        * <code>repeated .GameState.Snake snakes = 2;</code>
        */
-      public java.util.List<SnakesProto.GameState.Snake.Builder> 
-           getSnakesBuilderList() {
+      public java.util.List<SnakesProto.GameState.Snake.Builder>
+      getSnakesBuilderList() {
         return getSnakesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          SnakesProto.GameState.Snake, SnakesProto.GameState.Snake.Builder, SnakesProto.GameState.SnakeOrBuilder> 
-          getSnakesFieldBuilder() {
+          SnakesProto.GameState.Snake, SnakesProto.GameState.Snake.Builder, SnakesProto.GameState.SnakeOrBuilder>
+      getSnakesFieldBuilder() {
         if (snakesBuilder_ == null) {
           snakesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               SnakesProto.GameState.Snake, SnakesProto.GameState.Snake.Builder, SnakesProto.GameState.SnakeOrBuilder>(
-                  snakes_,
-                  ((bitField0_ & 0x00000002) != 0),
-                  getParentForChildren(),
-                  isClean());
+              snakes_,
+              ((bitField0_ & 0x00000002) != 0),
+              getParentForChildren(),
+              isClean());
           snakes_ = null;
         }
         return snakesBuilder_;
       }
 
       private java.util.List<SnakesProto.GameState.Coord> foods_ =
-        java.util.Collections.emptyList();
+          java.util.Collections.emptyList();
       private void ensureFoodsIsMutable() {
         if (!((bitField0_ & 0x00000004) != 0)) {
           foods_ = new java.util.ArrayList<SnakesProto.GameState.Coord>(foods_);
           bitField0_ |= 0x00000004;
-         }
+        }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
@@ -7578,8 +7578,8 @@ public final class SnakesProto {
        *
        * <code>repeated .GameState.Coord foods = 3;</code>
        */
-      public java.util.List<? extends SnakesProto.GameState.CoordOrBuilder> 
-           getFoodsOrBuilderList() {
+      public java.util.List<? extends SnakesProto.GameState.CoordOrBuilder>
+      getFoodsOrBuilderList() {
         if (foodsBuilder_ != null) {
           return foodsBuilder_.getMessageOrBuilderList();
         } else {
@@ -7616,20 +7616,20 @@ public final class SnakesProto {
        *
        * <code>repeated .GameState.Coord foods = 3;</code>
        */
-      public java.util.List<SnakesProto.GameState.Coord.Builder> 
-           getFoodsBuilderList() {
+      public java.util.List<SnakesProto.GameState.Coord.Builder>
+      getFoodsBuilderList() {
         return getFoodsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          SnakesProto.GameState.Coord, SnakesProto.GameState.Coord.Builder, SnakesProto.GameState.CoordOrBuilder> 
-          getFoodsFieldBuilder() {
+          SnakesProto.GameState.Coord, SnakesProto.GameState.Coord.Builder, SnakesProto.GameState.CoordOrBuilder>
+      getFoodsFieldBuilder() {
         if (foodsBuilder_ == null) {
           foodsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               SnakesProto.GameState.Coord, SnakesProto.GameState.Coord.Builder, SnakesProto.GameState.CoordOrBuilder>(
-                  foods_,
-                  ((bitField0_ & 0x00000004) != 0),
-                  getParentForChildren(),
-                  isClean());
+              foods_,
+              ((bitField0_ & 0x00000004) != 0),
+              getParentForChildren(),
+              isClean());
           foods_ = null;
         }
         return foodsBuilder_;
@@ -7712,8 +7712,8 @@ public final class SnakesProto {
       public Builder mergePlayers(SnakesProto.GamePlayers value) {
         if (playersBuilder_ == null) {
           if (((bitField0_ & 0x00000008) != 0) &&
-            players_ != null &&
-            players_ != SnakesProto.GamePlayers.getDefaultInstance()) {
+              players_ != null &&
+              players_ != SnakesProto.GamePlayers.getDefaultInstance()) {
             getPlayersBuilder().mergeFrom(value);
           } else {
             players_ = value;
@@ -7777,14 +7777,14 @@ public final class SnakesProto {
        * <code>required .GamePlayers players = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GamePlayers, SnakesProto.GamePlayers.Builder, SnakesProto.GamePlayersOrBuilder> 
-          getPlayersFieldBuilder() {
+          SnakesProto.GamePlayers, SnakesProto.GamePlayers.Builder, SnakesProto.GamePlayersOrBuilder>
+      getPlayersFieldBuilder() {
         if (playersBuilder_ == null) {
           playersBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GamePlayers, SnakesProto.GamePlayers.Builder, SnakesProto.GamePlayersOrBuilder>(
-                  getPlayers(),
-                  getParentForChildren(),
-                  isClean());
+              getPlayers(),
+              getParentForChildren(),
+              isClean());
           players_ = null;
         }
         return playersBuilder_;
@@ -7957,7 +7957,7 @@ public final class SnakesProto {
      * @return The bytes for gameName.
      */
     com.google.protobuf.ByteString
-        getGameNameBytes();
+    getGameNameBytes();
   }
   /**
    * Protobuf type {@code GameAnnouncement}
@@ -7966,7 +7966,7 @@ public final class SnakesProto {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:GameAnnouncement)
       GameAnnouncementOrBuilder {
-  private static final long serialVersionUID = 0L;
+    private static final long serialVersionUID = 0L;
     // Use GameAnnouncement.newBuilder() to construct.
     private GameAnnouncement(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -7984,13 +7984,13 @@ public final class SnakesProto {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return SnakesProto.internal_static_snakes_GameAnnouncement_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return SnakesProto.internal_static_snakes_GameAnnouncement_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               SnakesProto.GameAnnouncement.class, SnakesProto.GameAnnouncement.Builder.class);
@@ -8129,7 +8129,7 @@ public final class SnakesProto {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
@@ -8148,10 +8148,10 @@ public final class SnakesProto {
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getGameNameBytes() {
+    getGameNameBytes() {
       java.lang.Object ref = gameName_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
         gameName_ = b;
@@ -8190,7 +8190,7 @@ public final class SnakesProto {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
         output.writeMessage(1, getPlayers());
       }
@@ -8214,15 +8214,15 @@ public final class SnakesProto {
       size = 0;
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getPlayers());
+            .computeMessageSize(1, getPlayers());
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getConfig());
+            .computeMessageSize(2, getConfig());
       }
       if (((bitField0_ & 0x00000004) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, canJoin_);
+            .computeBoolSize(3, canJoin_);
       }
       if (((bitField0_ & 0x00000008) != 0)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, gameName_);
@@ -8235,7 +8235,7 @@ public final class SnakesProto {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof SnakesProto.GameAnnouncement)) {
         return super.equals(obj);
@@ -8395,13 +8395,13 @@ public final class SnakesProto {
         // @@protoc_insertion_point(builder_implements:GameAnnouncement)
         SnakesProto.GameAnnouncementOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameAnnouncement_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameAnnouncement_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameAnnouncement.class, SnakesProto.GameAnnouncement.Builder.class);
@@ -8419,7 +8419,7 @@ public final class SnakesProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+            .alwaysUseFieldBuilders) {
           getPlayersFieldBuilder();
           getConfigFieldBuilder();
         }
@@ -8445,7 +8445,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return SnakesProto.internal_static_snakes_GameAnnouncement_descriptor;
       }
 
@@ -8711,8 +8711,8 @@ public final class SnakesProto {
       public Builder mergePlayers(SnakesProto.GamePlayers value) {
         if (playersBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0) &&
-            players_ != null &&
-            players_ != SnakesProto.GamePlayers.getDefaultInstance()) {
+              players_ != null &&
+              players_ != SnakesProto.GamePlayers.getDefaultInstance()) {
             getPlayersBuilder().mergeFrom(value);
           } else {
             players_ = value;
@@ -8776,14 +8776,14 @@ public final class SnakesProto {
        * <code>required .GamePlayers players = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GamePlayers, SnakesProto.GamePlayers.Builder, SnakesProto.GamePlayersOrBuilder> 
-          getPlayersFieldBuilder() {
+          SnakesProto.GamePlayers, SnakesProto.GamePlayers.Builder, SnakesProto.GamePlayersOrBuilder>
+      getPlayersFieldBuilder() {
         if (playersBuilder_ == null) {
           playersBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GamePlayers, SnakesProto.GamePlayers.Builder, SnakesProto.GamePlayersOrBuilder>(
-                  getPlayers(),
-                  getParentForChildren(),
-                  isClean());
+              getPlayers(),
+              getParentForChildren(),
+              isClean());
           players_ = null;
         }
         return playersBuilder_;
@@ -8866,8 +8866,8 @@ public final class SnakesProto {
       public Builder mergeConfig(SnakesProto.GameConfig value) {
         if (configBuilder_ == null) {
           if (((bitField0_ & 0x00000002) != 0) &&
-            config_ != null &&
-            config_ != SnakesProto.GameConfig.getDefaultInstance()) {
+              config_ != null &&
+              config_ != SnakesProto.GameConfig.getDefaultInstance()) {
             getConfigBuilder().mergeFrom(value);
           } else {
             config_ = value;
@@ -8931,14 +8931,14 @@ public final class SnakesProto {
        * <code>required .GameConfig config = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GameConfig, SnakesProto.GameConfig.Builder, SnakesProto.GameConfigOrBuilder> 
-          getConfigFieldBuilder() {
+          SnakesProto.GameConfig, SnakesProto.GameConfig.Builder, SnakesProto.GameConfigOrBuilder>
+      getConfigFieldBuilder() {
         if (configBuilder_ == null) {
           configBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GameConfig, SnakesProto.GameConfig.Builder, SnakesProto.GameConfigOrBuilder>(
-                  getConfig(),
-                  getParentForChildren(),
-                  isClean());
+              getConfig(),
+              getParentForChildren(),
+              isClean());
           config_ = null;
         }
         return configBuilder_;
@@ -9043,10 +9043,10 @@ public final class SnakesProto {
        * @return The bytes for gameName.
        */
       public com.google.protobuf.ByteString
-          getGameNameBytes() {
+      getGameNameBytes() {
         java.lang.Object ref = gameName_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           gameName_ = b;
@@ -9376,7 +9376,7 @@ public final class SnakesProto {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:GameMessage)
       GameMessageOrBuilder {
-  private static final long serialVersionUID = 0L;
+    private static final long serialVersionUID = 0L;
     // Use GameMessage.newBuilder() to construct.
     private GameMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -9392,13 +9392,13 @@ public final class SnakesProto {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return SnakesProto.internal_static_snakes_GameMessage_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return SnakesProto.internal_static_snakes_GameMessage_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               SnakesProto.GameMessage.class, SnakesProto.GameMessage.Builder.class);
@@ -9419,7 +9419,7 @@ public final class SnakesProto {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:GameMessage.PingMsg)
         PingMsgOrBuilder {
-    private static final long serialVersionUID = 0L;
+      private static final long serialVersionUID = 0L;
       // Use PingMsg.newBuilder() to construct.
       private PingMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -9435,13 +9435,13 @@ public final class SnakesProto {
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameMessage_PingMsg_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameMessage_PingMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameMessage.PingMsg.class, SnakesProto.GameMessage.PingMsg.Builder.class);
@@ -9460,7 +9460,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         getUnknownFields().writeTo(output);
       }
 
@@ -9478,7 +9478,7 @@ public final class SnakesProto {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof SnakesProto.GameMessage.PingMsg)) {
           return super.equals(obj);
@@ -9605,13 +9605,13 @@ public final class SnakesProto {
           // @@protoc_insertion_point(builder_implements:GameMessage.PingMsg)
           SnakesProto.GameMessage.PingMsgOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.internal_static_snakes_GameMessage_PingMsg_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
+        internalGetFieldAccessorTable() {
           return SnakesProto.internal_static_snakes_GameMessage_PingMsg_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   SnakesProto.GameMessage.PingMsg.class, SnakesProto.GameMessage.PingMsg.Builder.class);
@@ -9635,7 +9635,7 @@ public final class SnakesProto {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return SnakesProto.internal_static_snakes_GameMessage_PingMsg_descriptor;
         }
 
@@ -9843,7 +9843,7 @@ public final class SnakesProto {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:GameMessage.SteerMsg)
         SteerMsgOrBuilder {
-    private static final long serialVersionUID = 0L;
+      private static final long serialVersionUID = 0L;
       // Use SteerMsg.newBuilder() to construct.
       private SteerMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -9860,13 +9860,13 @@ public final class SnakesProto {
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameMessage_SteerMsg_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameMessage_SteerMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameMessage.SteerMsg.class, SnakesProto.GameMessage.SteerMsg.Builder.class);
@@ -9916,7 +9916,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         if (((bitField0_ & 0x00000001) != 0)) {
           output.writeEnum(1, direction_);
         }
@@ -9931,7 +9931,7 @@ public final class SnakesProto {
         size = 0;
         if (((bitField0_ & 0x00000001) != 0)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeEnumSize(1, direction_);
+              .computeEnumSize(1, direction_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
@@ -9941,7 +9941,7 @@ public final class SnakesProto {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof SnakesProto.GameMessage.SteerMsg)) {
           return super.equals(obj);
@@ -10076,13 +10076,13 @@ public final class SnakesProto {
           // @@protoc_insertion_point(builder_implements:GameMessage.SteerMsg)
           SnakesProto.GameMessage.SteerMsgOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.internal_static_snakes_GameMessage_SteerMsg_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
+        internalGetFieldAccessorTable() {
           return SnakesProto.internal_static_snakes_GameMessage_SteerMsg_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   SnakesProto.GameMessage.SteerMsg.class, SnakesProto.GameMessage.SteerMsg.Builder.class);
@@ -10108,7 +10108,7 @@ public final class SnakesProto {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return SnakesProto.internal_static_snakes_GameMessage_SteerMsg_descriptor;
         }
 
@@ -10385,7 +10385,7 @@ public final class SnakesProto {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:GameMessage.AckMsg)
         AckMsgOrBuilder {
-    private static final long serialVersionUID = 0L;
+      private static final long serialVersionUID = 0L;
       // Use AckMsg.newBuilder() to construct.
       private AckMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -10401,13 +10401,13 @@ public final class SnakesProto {
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameMessage_AckMsg_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameMessage_AckMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameMessage.AckMsg.class, SnakesProto.GameMessage.AckMsg.Builder.class);
@@ -10426,7 +10426,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         getUnknownFields().writeTo(output);
       }
 
@@ -10444,7 +10444,7 @@ public final class SnakesProto {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof SnakesProto.GameMessage.AckMsg)) {
           return super.equals(obj);
@@ -10571,13 +10571,13 @@ public final class SnakesProto {
           // @@protoc_insertion_point(builder_implements:GameMessage.AckMsg)
           SnakesProto.GameMessage.AckMsgOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.internal_static_snakes_GameMessage_AckMsg_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
+        internalGetFieldAccessorTable() {
           return SnakesProto.internal_static_snakes_GameMessage_AckMsg_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   SnakesProto.GameMessage.AckMsg.class, SnakesProto.GameMessage.AckMsg.Builder.class);
@@ -10601,7 +10601,7 @@ public final class SnakesProto {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return SnakesProto.internal_static_snakes_GameMessage_AckMsg_descriptor;
         }
 
@@ -10817,7 +10817,7 @@ public final class SnakesProto {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:GameMessage.StateMsg)
         StateMsgOrBuilder {
-    private static final long serialVersionUID = 0L;
+      private static final long serialVersionUID = 0L;
       // Use StateMsg.newBuilder() to construct.
       private StateMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -10833,13 +10833,13 @@ public final class SnakesProto {
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameMessage_StateMsg_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameMessage_StateMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameMessage.StateMsg.class, SnakesProto.GameMessage.StateMsg.Builder.class);
@@ -10905,7 +10905,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         if (((bitField0_ & 0x00000001) != 0)) {
           output.writeMessage(1, getState());
         }
@@ -10920,7 +10920,7 @@ public final class SnakesProto {
         size = 0;
         if (((bitField0_ & 0x00000001) != 0)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(1, getState());
+              .computeMessageSize(1, getState());
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
@@ -10930,7 +10930,7 @@ public final class SnakesProto {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof SnakesProto.GameMessage.StateMsg)) {
           return super.equals(obj);
@@ -11066,13 +11066,13 @@ public final class SnakesProto {
           // @@protoc_insertion_point(builder_implements:GameMessage.StateMsg)
           SnakesProto.GameMessage.StateMsgOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.internal_static_snakes_GameMessage_StateMsg_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
+        internalGetFieldAccessorTable() {
           return SnakesProto.internal_static_snakes_GameMessage_StateMsg_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   SnakesProto.GameMessage.StateMsg.class, SnakesProto.GameMessage.StateMsg.Builder.class);
@@ -11090,7 +11090,7 @@ public final class SnakesProto {
         }
         private void maybeForceBuilderInitialization() {
           if (com.google.protobuf.GeneratedMessageV3
-                  .alwaysUseFieldBuilders) {
+              .alwaysUseFieldBuilders) {
             getStateFieldBuilder();
           }
         }
@@ -11108,7 +11108,7 @@ public final class SnakesProto {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return SnakesProto.internal_static_snakes_GameMessage_StateMsg_descriptor;
         }
 
@@ -11326,8 +11326,8 @@ public final class SnakesProto {
         public Builder mergeState(SnakesProto.GameState value) {
           if (stateBuilder_ == null) {
             if (((bitField0_ & 0x00000001) != 0) &&
-              state_ != null &&
-              state_ != SnakesProto.GameState.getDefaultInstance()) {
+                state_ != null &&
+                state_ != SnakesProto.GameState.getDefaultInstance()) {
               getStateBuilder().mergeFrom(value);
             } else {
               state_ = value;
@@ -11391,14 +11391,14 @@ public final class SnakesProto {
          * <code>required .GameState state = 1;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
-            SnakesProto.GameState, SnakesProto.GameState.Builder, SnakesProto.GameStateOrBuilder> 
-            getStateFieldBuilder() {
+            SnakesProto.GameState, SnakesProto.GameState.Builder, SnakesProto.GameStateOrBuilder>
+        getStateFieldBuilder() {
           if (stateBuilder_ == null) {
             stateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
                 SnakesProto.GameState, SnakesProto.GameState.Builder, SnakesProto.GameStateOrBuilder>(
-                    getState(),
-                    getParentForChildren(),
-                    isClean());
+                getState(),
+                getParentForChildren(),
+                isClean());
             state_ = null;
           }
           return stateBuilder_;
@@ -11478,8 +11478,8 @@ public final class SnakesProto {
        *
        * <code>repeated .GameAnnouncement games = 1;</code>
        */
-      java.util.List<SnakesProto.GameAnnouncement> 
-          getGamesList();
+      java.util.List<SnakesProto.GameAnnouncement>
+      getGamesList();
       /**
        * <pre>
        * Идущие игры (не менее одной, а на сервере их может быть несколько)
@@ -11503,8 +11503,8 @@ public final class SnakesProto {
        *
        * <code>repeated .GameAnnouncement games = 1;</code>
        */
-      java.util.List<? extends SnakesProto.GameAnnouncementOrBuilder> 
-          getGamesOrBuilderList();
+      java.util.List<? extends SnakesProto.GameAnnouncementOrBuilder>
+      getGamesOrBuilderList();
       /**
        * <pre>
        * Идущие игры (не менее одной, а на сервере их может быть несколько)
@@ -11526,7 +11526,7 @@ public final class SnakesProto {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:GameMessage.AnnouncementMsg)
         AnnouncementMsgOrBuilder {
-    private static final long serialVersionUID = 0L;
+      private static final long serialVersionUID = 0L;
       // Use AnnouncementMsg.newBuilder() to construct.
       private AnnouncementMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -11543,13 +11543,13 @@ public final class SnakesProto {
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameMessage_AnnouncementMsg_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameMessage_AnnouncementMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameMessage.AnnouncementMsg.class, SnakesProto.GameMessage.AnnouncementMsg.Builder.class);
@@ -11577,8 +11577,8 @@ public final class SnakesProto {
        * <code>repeated .GameAnnouncement games = 1;</code>
        */
       @java.lang.Override
-      public java.util.List<? extends SnakesProto.GameAnnouncementOrBuilder> 
-          getGamesOrBuilderList() {
+      public java.util.List<? extends SnakesProto.GameAnnouncementOrBuilder>
+      getGamesOrBuilderList() {
         return games_;
       }
       /**
@@ -11635,7 +11635,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         for (int i = 0; i < games_.size(); i++) {
           output.writeMessage(1, games_.get(i));
         }
@@ -11650,7 +11650,7 @@ public final class SnakesProto {
         size = 0;
         for (int i = 0; i < games_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(1, games_.get(i));
+              .computeMessageSize(1, games_.get(i));
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
@@ -11660,7 +11660,7 @@ public final class SnakesProto {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof SnakesProto.GameMessage.AnnouncementMsg)) {
           return super.equals(obj);
@@ -11793,13 +11793,13 @@ public final class SnakesProto {
           // @@protoc_insertion_point(builder_implements:GameMessage.AnnouncementMsg)
           SnakesProto.GameMessage.AnnouncementMsgOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.internal_static_snakes_GameMessage_AnnouncementMsg_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
+        internalGetFieldAccessorTable() {
           return SnakesProto.internal_static_snakes_GameMessage_AnnouncementMsg_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   SnakesProto.GameMessage.AnnouncementMsg.class, SnakesProto.GameMessage.AnnouncementMsg.Builder.class);
@@ -11831,7 +11831,7 @@ public final class SnakesProto {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return SnakesProto.internal_static_snakes_GameMessage_AnnouncementMsg_descriptor;
         }
 
@@ -11936,9 +11936,9 @@ public final class SnakesProto {
                 gamesBuilder_ = null;
                 games_ = other.games_;
                 bitField0_ = (bitField0_ & ~0x00000001);
-                gamesBuilder_ = 
-                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                     getGamesFieldBuilder() : null;
+                gamesBuilder_ =
+                    com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                        getGamesFieldBuilder() : null;
               } else {
                 gamesBuilder_.addAllMessages(other.games_);
               }
@@ -12006,12 +12006,12 @@ public final class SnakesProto {
         private int bitField0_;
 
         private java.util.List<SnakesProto.GameAnnouncement> games_ =
-          java.util.Collections.emptyList();
+            java.util.Collections.emptyList();
         private void ensureGamesIsMutable() {
           if (!((bitField0_ & 0x00000001) != 0)) {
             games_ = new java.util.ArrayList<SnakesProto.GameAnnouncement>(games_);
             bitField0_ |= 0x00000001;
-           }
+          }
         }
 
         private com.google.protobuf.RepeatedFieldBuilderV3<
@@ -12260,8 +12260,8 @@ public final class SnakesProto {
          *
          * <code>repeated .GameAnnouncement games = 1;</code>
          */
-        public java.util.List<? extends SnakesProto.GameAnnouncementOrBuilder> 
-             getGamesOrBuilderList() {
+        public java.util.List<? extends SnakesProto.GameAnnouncementOrBuilder>
+        getGamesOrBuilderList() {
           if (gamesBuilder_ != null) {
             return gamesBuilder_.getMessageOrBuilderList();
           } else {
@@ -12298,20 +12298,20 @@ public final class SnakesProto {
          *
          * <code>repeated .GameAnnouncement games = 1;</code>
          */
-        public java.util.List<SnakesProto.GameAnnouncement.Builder> 
-             getGamesBuilderList() {
+        public java.util.List<SnakesProto.GameAnnouncement.Builder>
+        getGamesBuilderList() {
           return getGamesFieldBuilder().getBuilderList();
         }
         private com.google.protobuf.RepeatedFieldBuilderV3<
-            SnakesProto.GameAnnouncement, SnakesProto.GameAnnouncement.Builder, SnakesProto.GameAnnouncementOrBuilder> 
-            getGamesFieldBuilder() {
+            SnakesProto.GameAnnouncement, SnakesProto.GameAnnouncement.Builder, SnakesProto.GameAnnouncementOrBuilder>
+        getGamesFieldBuilder() {
           if (gamesBuilder_ == null) {
             gamesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
                 SnakesProto.GameAnnouncement, SnakesProto.GameAnnouncement.Builder, SnakesProto.GameAnnouncementOrBuilder>(
-                    games_,
-                    ((bitField0_ & 0x00000001) != 0),
-                    getParentForChildren(),
-                    isClean());
+                games_,
+                ((bitField0_ & 0x00000001) != 0),
+                getParentForChildren(),
+                isClean());
             games_ = null;
           }
           return gamesBuilder_;
@@ -12395,7 +12395,7 @@ public final class SnakesProto {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:GameMessage.DiscoverMsg)
         DiscoverMsgOrBuilder {
-    private static final long serialVersionUID = 0L;
+      private static final long serialVersionUID = 0L;
       // Use DiscoverMsg.newBuilder() to construct.
       private DiscoverMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -12411,13 +12411,13 @@ public final class SnakesProto {
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameMessage_DiscoverMsg_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameMessage_DiscoverMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameMessage.DiscoverMsg.class, SnakesProto.GameMessage.DiscoverMsg.Builder.class);
@@ -12436,7 +12436,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         getUnknownFields().writeTo(output);
       }
 
@@ -12454,7 +12454,7 @@ public final class SnakesProto {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof SnakesProto.GameMessage.DiscoverMsg)) {
           return super.equals(obj);
@@ -12581,13 +12581,13 @@ public final class SnakesProto {
           // @@protoc_insertion_point(builder_implements:GameMessage.DiscoverMsg)
           SnakesProto.GameMessage.DiscoverMsgOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.internal_static_snakes_GameMessage_DiscoverMsg_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
+        internalGetFieldAccessorTable() {
           return SnakesProto.internal_static_snakes_GameMessage_DiscoverMsg_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   SnakesProto.GameMessage.DiscoverMsg.class, SnakesProto.GameMessage.DiscoverMsg.Builder.class);
@@ -12611,7 +12611,7 @@ public final class SnakesProto {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return SnakesProto.internal_static_snakes_GameMessage_DiscoverMsg_descriptor;
         }
 
@@ -12835,7 +12835,7 @@ public final class SnakesProto {
        * @return The bytes for playerName.
        */
       com.google.protobuf.ByteString
-          getPlayerNameBytes();
+      getPlayerNameBytes();
 
       /**
        * <pre>
@@ -12864,7 +12864,7 @@ public final class SnakesProto {
        * @return The bytes for gameName.
        */
       com.google.protobuf.ByteString
-          getGameNameBytes();
+      getGameNameBytes();
 
       /**
        * <pre>
@@ -12896,7 +12896,7 @@ public final class SnakesProto {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:GameMessage.JoinMsg)
         JoinMsgOrBuilder {
-    private static final long serialVersionUID = 0L;
+      private static final long serialVersionUID = 0L;
       // Use JoinMsg.newBuilder() to construct.
       private JoinMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -12916,13 +12916,13 @@ public final class SnakesProto {
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameMessage_JoinMsg_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameMessage_JoinMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameMessage.JoinMsg.class, SnakesProto.GameMessage.JoinMsg.Builder.class);
@@ -12984,7 +12984,7 @@ public final class SnakesProto {
         if (ref instanceof java.lang.String) {
           return (java.lang.String) ref;
         } else {
-          com.google.protobuf.ByteString bs = 
+          com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
@@ -13003,10 +13003,10 @@ public final class SnakesProto {
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
-          getPlayerNameBytes() {
+      getPlayerNameBytes() {
         java.lang.Object ref = playerName_;
         if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           playerName_ = b;
@@ -13045,7 +13045,7 @@ public final class SnakesProto {
         if (ref instanceof java.lang.String) {
           return (java.lang.String) ref;
         } else {
-          com.google.protobuf.ByteString bs = 
+          com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
@@ -13064,10 +13064,10 @@ public final class SnakesProto {
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
-          getGameNameBytes() {
+      getGameNameBytes() {
         java.lang.Object ref = gameName_;
         if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           gameName_ = b;
@@ -13128,7 +13128,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         if (((bitField0_ & 0x00000001) != 0)) {
           output.writeEnum(1, playerType_);
         }
@@ -13152,7 +13152,7 @@ public final class SnakesProto {
         size = 0;
         if (((bitField0_ & 0x00000001) != 0)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeEnumSize(1, playerType_);
+              .computeEnumSize(1, playerType_);
         }
         if (((bitField0_ & 0x00000002) != 0)) {
           size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, playerName_);
@@ -13162,7 +13162,7 @@ public final class SnakesProto {
         }
         if (((bitField0_ & 0x00000008) != 0)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeEnumSize(5, requestedRole_);
+              .computeEnumSize(5, requestedRole_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
@@ -13172,7 +13172,7 @@ public final class SnakesProto {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof SnakesProto.GameMessage.JoinMsg)) {
           return super.equals(obj);
@@ -13333,13 +13333,13 @@ public final class SnakesProto {
           // @@protoc_insertion_point(builder_implements:GameMessage.JoinMsg)
           SnakesProto.GameMessage.JoinMsgOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.internal_static_snakes_GameMessage_JoinMsg_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
+        internalGetFieldAccessorTable() {
           return SnakesProto.internal_static_snakes_GameMessage_JoinMsg_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   SnakesProto.GameMessage.JoinMsg.class, SnakesProto.GameMessage.JoinMsg.Builder.class);
@@ -13368,7 +13368,7 @@ public final class SnakesProto {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return SnakesProto.internal_static_snakes_GameMessage_JoinMsg_descriptor;
         }
 
@@ -13663,10 +13663,10 @@ public final class SnakesProto {
          * @return The bytes for playerName.
          */
         public com.google.protobuf.ByteString
-            getPlayerNameBytes() {
+        getPlayerNameBytes() {
           java.lang.Object ref = playerName_;
           if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString b =
                 com.google.protobuf.ByteString.copyFromUtf8(
                     (java.lang.String) ref);
             playerName_ = b;
@@ -13767,10 +13767,10 @@ public final class SnakesProto {
          * @return The bytes for gameName.
          */
         public com.google.protobuf.ByteString
-            getGameNameBytes() {
+        getGameNameBytes() {
           java.lang.Object ref = gameName_;
           if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString b =
                 com.google.protobuf.ByteString.copyFromUtf8(
                     (java.lang.String) ref);
             gameName_ = b;
@@ -13980,7 +13980,7 @@ public final class SnakesProto {
        * @return The bytes for errorMessage.
        */
       com.google.protobuf.ByteString
-          getErrorMessageBytes();
+      getErrorMessageBytes();
     }
     /**
      * <pre>
@@ -13993,7 +13993,7 @@ public final class SnakesProto {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:GameMessage.ErrorMsg)
         ErrorMsgOrBuilder {
-    private static final long serialVersionUID = 0L;
+      private static final long serialVersionUID = 0L;
       // Use ErrorMsg.newBuilder() to construct.
       private ErrorMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -14010,13 +14010,13 @@ public final class SnakesProto {
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameMessage_ErrorMsg_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameMessage_ErrorMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameMessage.ErrorMsg.class, SnakesProto.GameMessage.ErrorMsg.Builder.class);
@@ -14052,7 +14052,7 @@ public final class SnakesProto {
         if (ref instanceof java.lang.String) {
           return (java.lang.String) ref;
         } else {
-          com.google.protobuf.ByteString bs = 
+          com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
@@ -14071,10 +14071,10 @@ public final class SnakesProto {
        */
       @java.lang.Override
       public com.google.protobuf.ByteString
-          getErrorMessageBytes() {
+      getErrorMessageBytes() {
         java.lang.Object ref = errorMessage_;
         if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           errorMessage_ = b;
@@ -14101,7 +14101,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         if (((bitField0_ & 0x00000001) != 0)) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 1, errorMessage_);
         }
@@ -14125,7 +14125,7 @@ public final class SnakesProto {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof SnakesProto.GameMessage.ErrorMsg)) {
           return super.equals(obj);
@@ -14261,13 +14261,13 @@ public final class SnakesProto {
           // @@protoc_insertion_point(builder_implements:GameMessage.ErrorMsg)
           SnakesProto.GameMessage.ErrorMsgOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.internal_static_snakes_GameMessage_ErrorMsg_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
+        internalGetFieldAccessorTable() {
           return SnakesProto.internal_static_snakes_GameMessage_ErrorMsg_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   SnakesProto.GameMessage.ErrorMsg.class, SnakesProto.GameMessage.ErrorMsg.Builder.class);
@@ -14293,7 +14293,7 @@ public final class SnakesProto {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return SnakesProto.internal_static_snakes_GameMessage_ErrorMsg_descriptor;
         }
 
@@ -14472,10 +14472,10 @@ public final class SnakesProto {
          * @return The bytes for errorMessage.
          */
         public com.google.protobuf.ByteString
-            getErrorMessageBytes() {
+        getErrorMessageBytes() {
           java.lang.Object ref = errorMessage_;
           if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString b =
                 com.google.protobuf.ByteString.copyFromUtf8(
                     (java.lang.String) ref);
             errorMessage_ = b;
@@ -14638,7 +14638,7 @@ public final class SnakesProto {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:GameMessage.RoleChangeMsg)
         RoleChangeMsgOrBuilder {
-    private static final long serialVersionUID = 0L;
+      private static final long serialVersionUID = 0L;
       // Use RoleChangeMsg.newBuilder() to construct.
       private RoleChangeMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -14656,13 +14656,13 @@ public final class SnakesProto {
       }
 
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameMessage_RoleChangeMsg_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameMessage_RoleChangeMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameMessage.RoleChangeMsg.class, SnakesProto.GameMessage.RoleChangeMsg.Builder.class);
@@ -14718,7 +14718,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
+          throws java.io.IOException {
         if (((bitField0_ & 0x00000001) != 0)) {
           output.writeEnum(1, senderRole_);
         }
@@ -14736,11 +14736,11 @@ public final class SnakesProto {
         size = 0;
         if (((bitField0_ & 0x00000001) != 0)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeEnumSize(1, senderRole_);
+              .computeEnumSize(1, senderRole_);
         }
         if (((bitField0_ & 0x00000002) != 0)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeEnumSize(2, receiverRole_);
+              .computeEnumSize(2, receiverRole_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSize = size;
@@ -14750,7 +14750,7 @@ public final class SnakesProto {
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
-         return true;
+          return true;
         }
         if (!(obj instanceof SnakesProto.GameMessage.RoleChangeMsg)) {
           return super.equals(obj);
@@ -14898,13 +14898,13 @@ public final class SnakesProto {
           // @@protoc_insertion_point(builder_implements:GameMessage.RoleChangeMsg)
           SnakesProto.GameMessage.RoleChangeMsgOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
+        getDescriptor() {
           return SnakesProto.internal_static_snakes_GameMessage_RoleChangeMsg_descriptor;
         }
 
         @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
+        internalGetFieldAccessorTable() {
           return SnakesProto.internal_static_snakes_GameMessage_RoleChangeMsg_fieldAccessorTable
               .ensureFieldAccessorsInitialized(
                   SnakesProto.GameMessage.RoleChangeMsg.class, SnakesProto.GameMessage.RoleChangeMsg.Builder.class);
@@ -14931,7 +14931,7 @@ public final class SnakesProto {
 
         @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
+        getDescriptorForType() {
           return SnakesProto.internal_static_snakes_GameMessage_RoleChangeMsg_descriptor;
         }
 
@@ -15241,7 +15241,7 @@ public final class SnakesProto {
     private java.lang.Object type_;
     public enum TypeCase
         implements com.google.protobuf.Internal.EnumLite,
-            com.google.protobuf.AbstractMessage.InternalOneOfEnum {
+        com.google.protobuf.AbstractMessage.InternalOneOfEnum {
       PING(2),
       STEER(3),
       ACK(4),
@@ -15389,7 +15389,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.PingMsg getPing() {
       if (typeCase_ == 2) {
-         return (SnakesProto.GameMessage.PingMsg) type_;
+        return (SnakesProto.GameMessage.PingMsg) type_;
       }
       return SnakesProto.GameMessage.PingMsg.getDefaultInstance();
     }
@@ -15399,7 +15399,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.PingMsgOrBuilder getPingOrBuilder() {
       if (typeCase_ == 2) {
-         return (SnakesProto.GameMessage.PingMsg) type_;
+        return (SnakesProto.GameMessage.PingMsg) type_;
       }
       return SnakesProto.GameMessage.PingMsg.getDefaultInstance();
     }
@@ -15420,7 +15420,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.SteerMsg getSteer() {
       if (typeCase_ == 3) {
-         return (SnakesProto.GameMessage.SteerMsg) type_;
+        return (SnakesProto.GameMessage.SteerMsg) type_;
       }
       return SnakesProto.GameMessage.SteerMsg.getDefaultInstance();
     }
@@ -15430,7 +15430,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.SteerMsgOrBuilder getSteerOrBuilder() {
       if (typeCase_ == 3) {
-         return (SnakesProto.GameMessage.SteerMsg) type_;
+        return (SnakesProto.GameMessage.SteerMsg) type_;
       }
       return SnakesProto.GameMessage.SteerMsg.getDefaultInstance();
     }
@@ -15451,7 +15451,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.AckMsg getAck() {
       if (typeCase_ == 4) {
-         return (SnakesProto.GameMessage.AckMsg) type_;
+        return (SnakesProto.GameMessage.AckMsg) type_;
       }
       return SnakesProto.GameMessage.AckMsg.getDefaultInstance();
     }
@@ -15461,7 +15461,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.AckMsgOrBuilder getAckOrBuilder() {
       if (typeCase_ == 4) {
-         return (SnakesProto.GameMessage.AckMsg) type_;
+        return (SnakesProto.GameMessage.AckMsg) type_;
       }
       return SnakesProto.GameMessage.AckMsg.getDefaultInstance();
     }
@@ -15482,7 +15482,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.StateMsg getState() {
       if (typeCase_ == 5) {
-         return (SnakesProto.GameMessage.StateMsg) type_;
+        return (SnakesProto.GameMessage.StateMsg) type_;
       }
       return SnakesProto.GameMessage.StateMsg.getDefaultInstance();
     }
@@ -15492,7 +15492,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.StateMsgOrBuilder getStateOrBuilder() {
       if (typeCase_ == 5) {
-         return (SnakesProto.GameMessage.StateMsg) type_;
+        return (SnakesProto.GameMessage.StateMsg) type_;
       }
       return SnakesProto.GameMessage.StateMsg.getDefaultInstance();
     }
@@ -15513,7 +15513,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.AnnouncementMsg getAnnouncement() {
       if (typeCase_ == 6) {
-         return (SnakesProto.GameMessage.AnnouncementMsg) type_;
+        return (SnakesProto.GameMessage.AnnouncementMsg) type_;
       }
       return SnakesProto.GameMessage.AnnouncementMsg.getDefaultInstance();
     }
@@ -15523,7 +15523,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.AnnouncementMsgOrBuilder getAnnouncementOrBuilder() {
       if (typeCase_ == 6) {
-         return (SnakesProto.GameMessage.AnnouncementMsg) type_;
+        return (SnakesProto.GameMessage.AnnouncementMsg) type_;
       }
       return SnakesProto.GameMessage.AnnouncementMsg.getDefaultInstance();
     }
@@ -15544,7 +15544,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.JoinMsg getJoin() {
       if (typeCase_ == 7) {
-         return (SnakesProto.GameMessage.JoinMsg) type_;
+        return (SnakesProto.GameMessage.JoinMsg) type_;
       }
       return SnakesProto.GameMessage.JoinMsg.getDefaultInstance();
     }
@@ -15554,7 +15554,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.JoinMsgOrBuilder getJoinOrBuilder() {
       if (typeCase_ == 7) {
-         return (SnakesProto.GameMessage.JoinMsg) type_;
+        return (SnakesProto.GameMessage.JoinMsg) type_;
       }
       return SnakesProto.GameMessage.JoinMsg.getDefaultInstance();
     }
@@ -15575,7 +15575,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.ErrorMsg getError() {
       if (typeCase_ == 8) {
-         return (SnakesProto.GameMessage.ErrorMsg) type_;
+        return (SnakesProto.GameMessage.ErrorMsg) type_;
       }
       return SnakesProto.GameMessage.ErrorMsg.getDefaultInstance();
     }
@@ -15585,7 +15585,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.ErrorMsgOrBuilder getErrorOrBuilder() {
       if (typeCase_ == 8) {
-         return (SnakesProto.GameMessage.ErrorMsg) type_;
+        return (SnakesProto.GameMessage.ErrorMsg) type_;
       }
       return SnakesProto.GameMessage.ErrorMsg.getDefaultInstance();
     }
@@ -15606,7 +15606,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.RoleChangeMsg getRoleChange() {
       if (typeCase_ == 9) {
-         return (SnakesProto.GameMessage.RoleChangeMsg) type_;
+        return (SnakesProto.GameMessage.RoleChangeMsg) type_;
       }
       return SnakesProto.GameMessage.RoleChangeMsg.getDefaultInstance();
     }
@@ -15616,7 +15616,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.RoleChangeMsgOrBuilder getRoleChangeOrBuilder() {
       if (typeCase_ == 9) {
-         return (SnakesProto.GameMessage.RoleChangeMsg) type_;
+        return (SnakesProto.GameMessage.RoleChangeMsg) type_;
       }
       return SnakesProto.GameMessage.RoleChangeMsg.getDefaultInstance();
     }
@@ -15637,7 +15637,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.DiscoverMsg getDiscover() {
       if (typeCase_ == 12) {
-         return (SnakesProto.GameMessage.DiscoverMsg) type_;
+        return (SnakesProto.GameMessage.DiscoverMsg) type_;
       }
       return SnakesProto.GameMessage.DiscoverMsg.getDefaultInstance();
     }
@@ -15647,7 +15647,7 @@ public final class SnakesProto {
     @java.lang.Override
     public SnakesProto.GameMessage.DiscoverMsgOrBuilder getDiscoverOrBuilder() {
       if (typeCase_ == 12) {
-         return (SnakesProto.GameMessage.DiscoverMsg) type_;
+        return (SnakesProto.GameMessage.DiscoverMsg) type_;
       }
       return SnakesProto.GameMessage.DiscoverMsg.getDefaultInstance();
     }
@@ -15699,7 +15699,7 @@ public final class SnakesProto {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+        throws java.io.IOException {
       if (((bitField0_ & 0x00000001) != 0)) {
         output.writeInt64(1, msgSeq_);
       }
@@ -15747,51 +15747,51 @@ public final class SnakesProto {
       size = 0;
       if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, msgSeq_);
+            .computeInt64Size(1, msgSeq_);
       }
       if (typeCase_ == 2) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, (SnakesProto.GameMessage.PingMsg) type_);
+            .computeMessageSize(2, (SnakesProto.GameMessage.PingMsg) type_);
       }
       if (typeCase_ == 3) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, (SnakesProto.GameMessage.SteerMsg) type_);
+            .computeMessageSize(3, (SnakesProto.GameMessage.SteerMsg) type_);
       }
       if (typeCase_ == 4) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, (SnakesProto.GameMessage.AckMsg) type_);
+            .computeMessageSize(4, (SnakesProto.GameMessage.AckMsg) type_);
       }
       if (typeCase_ == 5) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, (SnakesProto.GameMessage.StateMsg) type_);
+            .computeMessageSize(5, (SnakesProto.GameMessage.StateMsg) type_);
       }
       if (typeCase_ == 6) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, (SnakesProto.GameMessage.AnnouncementMsg) type_);
+            .computeMessageSize(6, (SnakesProto.GameMessage.AnnouncementMsg) type_);
       }
       if (typeCase_ == 7) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, (SnakesProto.GameMessage.JoinMsg) type_);
+            .computeMessageSize(7, (SnakesProto.GameMessage.JoinMsg) type_);
       }
       if (typeCase_ == 8) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, (SnakesProto.GameMessage.ErrorMsg) type_);
+            .computeMessageSize(8, (SnakesProto.GameMessage.ErrorMsg) type_);
       }
       if (typeCase_ == 9) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, (SnakesProto.GameMessage.RoleChangeMsg) type_);
+            .computeMessageSize(9, (SnakesProto.GameMessage.RoleChangeMsg) type_);
       }
       if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, senderId_);
+            .computeInt32Size(10, senderId_);
       }
       if (((bitField0_ & 0x00000004) != 0)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, receiverId_);
+            .computeInt32Size(11, receiverId_);
       }
       if (typeCase_ == 12) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(12, (SnakesProto.GameMessage.DiscoverMsg) type_);
+            .computeMessageSize(12, (SnakesProto.GameMessage.DiscoverMsg) type_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -15801,7 +15801,7 @@ public final class SnakesProto {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof SnakesProto.GameMessage)) {
         return super.equals(obj);
@@ -16037,13 +16037,13 @@ public final class SnakesProto {
         // @@protoc_insertion_point(builder_implements:GameMessage)
         SnakesProto.GameMessageOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return SnakesProto.internal_static_snakes_GameMessage_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return SnakesProto.internal_static_snakes_GameMessage_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 SnakesProto.GameMessage.class, SnakesProto.GameMessage.Builder.class);
@@ -16100,7 +16100,7 @@ public final class SnakesProto {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return SnakesProto.internal_static_snakes_GameMessage_descriptor;
       }
 
@@ -16430,7 +16430,7 @@ public final class SnakesProto {
       private int typeCase_ = 0;
       private java.lang.Object type_;
       public TypeCase
-          getTypeCase() {
+      getTypeCase() {
         return TypeCase.forNumber(
             typeCase_);
       }
@@ -16736,17 +16736,17 @@ public final class SnakesProto {
        * <code>.GameMessage.PingMsg ping = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GameMessage.PingMsg, SnakesProto.GameMessage.PingMsg.Builder, SnakesProto.GameMessage.PingMsgOrBuilder> 
-          getPingFieldBuilder() {
+          SnakesProto.GameMessage.PingMsg, SnakesProto.GameMessage.PingMsg.Builder, SnakesProto.GameMessage.PingMsgOrBuilder>
+      getPingFieldBuilder() {
         if (pingBuilder_ == null) {
           if (!(typeCase_ == 2)) {
             type_ = SnakesProto.GameMessage.PingMsg.getDefaultInstance();
           }
           pingBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GameMessage.PingMsg, SnakesProto.GameMessage.PingMsg.Builder, SnakesProto.GameMessage.PingMsgOrBuilder>(
-                  (SnakesProto.GameMessage.PingMsg) type_,
-                  getParentForChildren(),
-                  isClean());
+              (SnakesProto.GameMessage.PingMsg) type_,
+              getParentForChildren(),
+              isClean());
           type_ = null;
         }
         typeCase_ = 2;
@@ -16878,17 +16878,17 @@ public final class SnakesProto {
        * <code>.GameMessage.SteerMsg steer = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GameMessage.SteerMsg, SnakesProto.GameMessage.SteerMsg.Builder, SnakesProto.GameMessage.SteerMsgOrBuilder> 
-          getSteerFieldBuilder() {
+          SnakesProto.GameMessage.SteerMsg, SnakesProto.GameMessage.SteerMsg.Builder, SnakesProto.GameMessage.SteerMsgOrBuilder>
+      getSteerFieldBuilder() {
         if (steerBuilder_ == null) {
           if (!(typeCase_ == 3)) {
             type_ = SnakesProto.GameMessage.SteerMsg.getDefaultInstance();
           }
           steerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GameMessage.SteerMsg, SnakesProto.GameMessage.SteerMsg.Builder, SnakesProto.GameMessage.SteerMsgOrBuilder>(
-                  (SnakesProto.GameMessage.SteerMsg) type_,
-                  getParentForChildren(),
-                  isClean());
+              (SnakesProto.GameMessage.SteerMsg) type_,
+              getParentForChildren(),
+              isClean());
           type_ = null;
         }
         typeCase_ = 3;
@@ -17020,17 +17020,17 @@ public final class SnakesProto {
        * <code>.GameMessage.AckMsg ack = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GameMessage.AckMsg, SnakesProto.GameMessage.AckMsg.Builder, SnakesProto.GameMessage.AckMsgOrBuilder> 
-          getAckFieldBuilder() {
+          SnakesProto.GameMessage.AckMsg, SnakesProto.GameMessage.AckMsg.Builder, SnakesProto.GameMessage.AckMsgOrBuilder>
+      getAckFieldBuilder() {
         if (ackBuilder_ == null) {
           if (!(typeCase_ == 4)) {
             type_ = SnakesProto.GameMessage.AckMsg.getDefaultInstance();
           }
           ackBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GameMessage.AckMsg, SnakesProto.GameMessage.AckMsg.Builder, SnakesProto.GameMessage.AckMsgOrBuilder>(
-                  (SnakesProto.GameMessage.AckMsg) type_,
-                  getParentForChildren(),
-                  isClean());
+              (SnakesProto.GameMessage.AckMsg) type_,
+              getParentForChildren(),
+              isClean());
           type_ = null;
         }
         typeCase_ = 4;
@@ -17162,17 +17162,17 @@ public final class SnakesProto {
        * <code>.GameMessage.StateMsg state = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GameMessage.StateMsg, SnakesProto.GameMessage.StateMsg.Builder, SnakesProto.GameMessage.StateMsgOrBuilder> 
-          getStateFieldBuilder() {
+          SnakesProto.GameMessage.StateMsg, SnakesProto.GameMessage.StateMsg.Builder, SnakesProto.GameMessage.StateMsgOrBuilder>
+      getStateFieldBuilder() {
         if (stateBuilder_ == null) {
           if (!(typeCase_ == 5)) {
             type_ = SnakesProto.GameMessage.StateMsg.getDefaultInstance();
           }
           stateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GameMessage.StateMsg, SnakesProto.GameMessage.StateMsg.Builder, SnakesProto.GameMessage.StateMsgOrBuilder>(
-                  (SnakesProto.GameMessage.StateMsg) type_,
-                  getParentForChildren(),
-                  isClean());
+              (SnakesProto.GameMessage.StateMsg) type_,
+              getParentForChildren(),
+              isClean());
           type_ = null;
         }
         typeCase_ = 5;
@@ -17304,17 +17304,17 @@ public final class SnakesProto {
        * <code>.GameMessage.AnnouncementMsg announcement = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GameMessage.AnnouncementMsg, SnakesProto.GameMessage.AnnouncementMsg.Builder, SnakesProto.GameMessage.AnnouncementMsgOrBuilder> 
-          getAnnouncementFieldBuilder() {
+          SnakesProto.GameMessage.AnnouncementMsg, SnakesProto.GameMessage.AnnouncementMsg.Builder, SnakesProto.GameMessage.AnnouncementMsgOrBuilder>
+      getAnnouncementFieldBuilder() {
         if (announcementBuilder_ == null) {
           if (!(typeCase_ == 6)) {
             type_ = SnakesProto.GameMessage.AnnouncementMsg.getDefaultInstance();
           }
           announcementBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GameMessage.AnnouncementMsg, SnakesProto.GameMessage.AnnouncementMsg.Builder, SnakesProto.GameMessage.AnnouncementMsgOrBuilder>(
-                  (SnakesProto.GameMessage.AnnouncementMsg) type_,
-                  getParentForChildren(),
-                  isClean());
+              (SnakesProto.GameMessage.AnnouncementMsg) type_,
+              getParentForChildren(),
+              isClean());
           type_ = null;
         }
         typeCase_ = 6;
@@ -17446,17 +17446,17 @@ public final class SnakesProto {
        * <code>.GameMessage.JoinMsg join = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GameMessage.JoinMsg, SnakesProto.GameMessage.JoinMsg.Builder, SnakesProto.GameMessage.JoinMsgOrBuilder> 
-          getJoinFieldBuilder() {
+          SnakesProto.GameMessage.JoinMsg, SnakesProto.GameMessage.JoinMsg.Builder, SnakesProto.GameMessage.JoinMsgOrBuilder>
+      getJoinFieldBuilder() {
         if (joinBuilder_ == null) {
           if (!(typeCase_ == 7)) {
             type_ = SnakesProto.GameMessage.JoinMsg.getDefaultInstance();
           }
           joinBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GameMessage.JoinMsg, SnakesProto.GameMessage.JoinMsg.Builder, SnakesProto.GameMessage.JoinMsgOrBuilder>(
-                  (SnakesProto.GameMessage.JoinMsg) type_,
-                  getParentForChildren(),
-                  isClean());
+              (SnakesProto.GameMessage.JoinMsg) type_,
+              getParentForChildren(),
+              isClean());
           type_ = null;
         }
         typeCase_ = 7;
@@ -17588,17 +17588,17 @@ public final class SnakesProto {
        * <code>.GameMessage.ErrorMsg error = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GameMessage.ErrorMsg, SnakesProto.GameMessage.ErrorMsg.Builder, SnakesProto.GameMessage.ErrorMsgOrBuilder> 
-          getErrorFieldBuilder() {
+          SnakesProto.GameMessage.ErrorMsg, SnakesProto.GameMessage.ErrorMsg.Builder, SnakesProto.GameMessage.ErrorMsgOrBuilder>
+      getErrorFieldBuilder() {
         if (errorBuilder_ == null) {
           if (!(typeCase_ == 8)) {
             type_ = SnakesProto.GameMessage.ErrorMsg.getDefaultInstance();
           }
           errorBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GameMessage.ErrorMsg, SnakesProto.GameMessage.ErrorMsg.Builder, SnakesProto.GameMessage.ErrorMsgOrBuilder>(
-                  (SnakesProto.GameMessage.ErrorMsg) type_,
-                  getParentForChildren(),
-                  isClean());
+              (SnakesProto.GameMessage.ErrorMsg) type_,
+              getParentForChildren(),
+              isClean());
           type_ = null;
         }
         typeCase_ = 8;
@@ -17730,17 +17730,17 @@ public final class SnakesProto {
        * <code>.GameMessage.RoleChangeMsg role_change = 9;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GameMessage.RoleChangeMsg, SnakesProto.GameMessage.RoleChangeMsg.Builder, SnakesProto.GameMessage.RoleChangeMsgOrBuilder> 
-          getRoleChangeFieldBuilder() {
+          SnakesProto.GameMessage.RoleChangeMsg, SnakesProto.GameMessage.RoleChangeMsg.Builder, SnakesProto.GameMessage.RoleChangeMsgOrBuilder>
+      getRoleChangeFieldBuilder() {
         if (roleChangeBuilder_ == null) {
           if (!(typeCase_ == 9)) {
             type_ = SnakesProto.GameMessage.RoleChangeMsg.getDefaultInstance();
           }
           roleChangeBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GameMessage.RoleChangeMsg, SnakesProto.GameMessage.RoleChangeMsg.Builder, SnakesProto.GameMessage.RoleChangeMsgOrBuilder>(
-                  (SnakesProto.GameMessage.RoleChangeMsg) type_,
-                  getParentForChildren(),
-                  isClean());
+              (SnakesProto.GameMessage.RoleChangeMsg) type_,
+              getParentForChildren(),
+              isClean());
           type_ = null;
         }
         typeCase_ = 9;
@@ -17872,17 +17872,17 @@ public final class SnakesProto {
        * <code>.GameMessage.DiscoverMsg discover = 12;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          SnakesProto.GameMessage.DiscoverMsg, SnakesProto.GameMessage.DiscoverMsg.Builder, SnakesProto.GameMessage.DiscoverMsgOrBuilder> 
-          getDiscoverFieldBuilder() {
+          SnakesProto.GameMessage.DiscoverMsg, SnakesProto.GameMessage.DiscoverMsg.Builder, SnakesProto.GameMessage.DiscoverMsgOrBuilder>
+      getDiscoverFieldBuilder() {
         if (discoverBuilder_ == null) {
           if (!(typeCase_ == 12)) {
             type_ = SnakesProto.GameMessage.DiscoverMsg.getDefaultInstance();
           }
           discoverBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               SnakesProto.GameMessage.DiscoverMsg, SnakesProto.GameMessage.DiscoverMsg.Builder, SnakesProto.GameMessage.DiscoverMsgOrBuilder>(
-                  (SnakesProto.GameMessage.DiscoverMsg) type_,
-                  getParentForChildren(),
-                  isClean());
+              (SnakesProto.GameMessage.DiscoverMsg) type_,
+              getParentForChildren(),
+              isClean());
           type_ = null;
         }
         typeCase_ = 12;
@@ -17954,255 +17954,255 @@ public final class SnakesProto {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GamePlayer_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GamePlayer_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GamePlayer_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameConfig_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameConfig_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameConfig_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GamePlayers_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GamePlayers_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GamePlayers_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameState_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameState_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameState_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameState_Coord_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameState_Coord_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameState_Coord_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameState_Snake_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameState_Snake_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameState_Snake_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameAnnouncement_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameAnnouncement_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameAnnouncement_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameMessage_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameMessage_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameMessage_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameMessage_PingMsg_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameMessage_PingMsg_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameMessage_PingMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameMessage_SteerMsg_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameMessage_SteerMsg_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameMessage_SteerMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameMessage_AckMsg_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameMessage_AckMsg_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameMessage_AckMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameMessage_StateMsg_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameMessage_StateMsg_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameMessage_StateMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameMessage_AnnouncementMsg_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameMessage_AnnouncementMsg_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameMessage_AnnouncementMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameMessage_DiscoverMsg_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameMessage_DiscoverMsg_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameMessage_DiscoverMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameMessage_JoinMsg_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameMessage_JoinMsg_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameMessage_JoinMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameMessage_ErrorMsg_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameMessage_ErrorMsg_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameMessage_ErrorMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_snakes_GameMessage_RoleChangeMsg_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_snakes_GameMessage_RoleChangeMsg_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_snakes_GameMessage_RoleChangeMsg_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
+  getDescriptor() {
     return descriptor;
   }
   private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014snakes.proto\022\006snakes\"\240\001\n\nGamePlayer\022\014\n" +
-      "\004name\030\001 \002(\t\022\n\n\002id\030\002 \002(\005\022\022\n\nip_address\030\003 " +
-      "\001(\t\022\014\n\004port\030\004 \001(\005\022\036\n\004role\030\005 \002(\0162\020.snakes" +
-      ".NodeRole\022\'\n\004type\030\006 \001(\0162\022.PlayerT" +
-      "ype:\005HUMAN\022\r\n\005score\030\007 \002(\005\"i\n\nGameConfig\022" +
-      "\021\n\005width\030\001 \001(\005:\00240\022\022\n\006height\030\002 \001(\005:\00230\022\026" +
-      "\n\013food_static\030\003 \001(\005:\0011\022\034\n\016state_delay_ms" +
-      "\030\005 \001(\005:\0041000\"2\n\013GamePlayers\022#\n\007players\030\001" +
-      " \003(\0132\022.GamePlayer\"\214\003\n\tGameState\022\023" +
-      "\n\013state_order\030\001 \002(\005\022\'\n\006snakes\030\002 \003(\0132\027.sn" +
-      "akes.GameState.Snake\022&\n\005foods\030\003 \003(\0132\027.sn" +
-      "akes.GameState.Coord\022$\n\007players\030\004 \002(\0132\023." +
-      "GamePlayers\032#\n\005Coord\022\014\n\001x\030\001 \001(\021:\001" +
-      "0\022\014\n\001y\030\002 \001(\021:\0010\032\315\001\n\005Snake\022\021\n\tplayer_id\030\001" +
-      " \002(\005\022\'\n\006points\030\002 \003(\0132\027.GameState." +
-      "Coord\0228\n\005state\030\003 \002(\0162\".GameState." +
-      "Snake.SnakeState:\005ALIVE\022)\n\016head_directio" +
-      "n\030\004 \002(\0162\021.Direction\"#\n\nSnakeState" +
-      "\022\t\n\005ALIVE\020\000\022\n\n\006ZOMBIE\020\001\"\207\001\n\020GameAnnounce" +
-      "ment\022$\n\007players\030\001 \002(\0132\023.GamePlaye" +
-      "rs\022\"\n\006config\030\002 \002(\0132\022.GameConfig\022\026" +
-      "\n\010can_join\030\003 \001(\010:\004true\022\021\n\tgame_name\030\004 \002(" +
-      "\t\"\336\007\n\013GameMessage\022\017\n\007msg_seq\030\001 \002(\003\022\021\n\tse" +
-      "nder_id\030\n \001(\005\022\023\n\013receiver_id\030\013 \001(\005\022+\n\004pi" +
-      "ng\030\002 \001(\0132\033.GameMessage.PingMsgH\000\022" +
-      "-\n\005steer\030\003 \001(\0132\034.GameMessage.Stee" +
-      "rMsgH\000\022)\n\003ack\030\004 \001(\0132\032.GameMessage" +
-      ".AckMsgH\000\022-\n\005state\030\005 \001(\0132\034.GameMe" +
-      "ssage.StateMsgH\000\022;\n\014announcement\030\006 \001(\0132#" +
-      ".GameMessage.AnnouncementMsgH\000\022+\n" +
-      "\004join\030\007 \001(\0132\033.GameMessage.JoinMsg" +
-      "H\000\022-\n\005error\030\010 \001(\0132\034.GameMessage.E" +
-      "rrorMsgH\000\0228\n\013role_change\030\t \001(\0132!." +
-      "GameMessage.RoleChangeMsgH\000\0223\n\010discover\030" +
-      "\014 \001(\0132\037.GameMessage.DiscoverMsgH\000" +
-      "\032\t\n\007PingMsg\0320\n\010SteerMsg\022$\n\tdirection\030\001 \002" +
-      "(\0162\021.Direction\032\010\n\006AckMsg\032,\n\010State" +
-      "Msg\022 \n\005state\030\001 \002(\0132\021.GameState\032:\n" +
-      "\017AnnouncementMsg\022\'\n\005games\030\001 \003(\0132\030.snakes" +
-      ".GameAnnouncement\032\r\n\013DiscoverMsg\032\213\001\n\007Joi" +
-      "nMsg\022.\n\013player_type\030\001 \001(\0162\022.Playe" +
-      "rType:\005HUMAN\022\023\n\013player_name\030\003 \002(\t\022\021\n\tgam" +
-      "e_name\030\004 \002(\t\022(\n\016requested_role\030\005 \002(\0162\020.s" +
-      "nakes.NodeRole\032!\n\010ErrorMsg\022\025\n\rerror_mess" +
-      "age\030\001 \002(\t\032_\n\rRoleChangeMsg\022%\n\013sender_rol" +
-      "e\030\001 \001(\0162\020.NodeRole\022\'\n\rreceiver_ro" +
-      "le\030\002 \001(\0162\020.NodeRoleB\006\n\004Type*:\n\010No" +
-      "deRole\022\n\n\006NORMAL\020\000\022\n\n\006MASTER\020\001\022\n\n\006DEPUTY" +
-      "\020\002\022\n\n\006VIEWER\020\003*\"\n\nPlayerType\022\t\n\005HUMAN\020\000\022" +
-      "\t\n\005ROBOT\020\001*2\n\tDirection\022\006\n\002UP\020\001\022\010\n\004DOWN\020" +
-      "\002\022\010\n\004LEFT\020\003\022\t\n\005RIGHT\020\004B\rB\013SnakesProto"
+        "\n\014snakes.proto\022\006snakes\"\240\001\n\nGamePlayer\022\014\n" +
+            "\004name\030\001 \002(\t\022\n\n\002id\030\002 \002(\005\022\022\n\nip_address\030\003 " +
+            "\001(\t\022\014\n\004port\030\004 \001(\005\022\036\n\004role\030\005 \002(\0162\020.snakes" +
+            ".NodeRole\022\'\n\004type\030\006 \001(\0162\022.PlayerT" +
+            "ype:\005HUMAN\022\r\n\005score\030\007 \002(\005\"i\n\nGameConfig\022" +
+            "\021\n\005width\030\001 \001(\005:\00240\022\022\n\006height\030\002 \001(\005:\00230\022\026" +
+            "\n\013food_static\030\003 \001(\005:\0011\022\034\n\016state_delay_ms" +
+            "\030\005 \001(\005:\0041000\"2\n\013GamePlayers\022#\n\007players\030\001" +
+            " \003(\0132\022.GamePlayer\"\214\003\n\tGameState\022\023" +
+            "\n\013state_order\030\001 \002(\005\022\'\n\006snakes\030\002 \003(\0132\027.sn" +
+            "akes.GameState.Snake\022&\n\005foods\030\003 \003(\0132\027.sn" +
+            "akes.GameState.Coord\022$\n\007players\030\004 \002(\0132\023." +
+            "GamePlayers\032#\n\005Coord\022\014\n\001x\030\001 \001(\021:\001" +
+            "0\022\014\n\001y\030\002 \001(\021:\0010\032\315\001\n\005Snake\022\021\n\tplayer_id\030\001" +
+            " \002(\005\022\'\n\006points\030\002 \003(\0132\027.GameState." +
+            "Coord\0228\n\005state\030\003 \002(\0162\".GameState." +
+            "Snake.SnakeState:\005ALIVE\022)\n\016head_directio" +
+            "n\030\004 \002(\0162\021.Direction\"#\n\nSnakeState" +
+            "\022\t\n\005ALIVE\020\000\022\n\n\006ZOMBIE\020\001\"\207\001\n\020GameAnnounce" +
+            "ment\022$\n\007players\030\001 \002(\0132\023.GamePlaye" +
+            "rs\022\"\n\006config\030\002 \002(\0132\022.GameConfig\022\026" +
+            "\n\010can_join\030\003 \001(\010:\004true\022\021\n\tgame_name\030\004 \002(" +
+            "\t\"\336\007\n\013GameMessage\022\017\n\007msg_seq\030\001 \002(\003\022\021\n\tse" +
+            "nder_id\030\n \001(\005\022\023\n\013receiver_id\030\013 \001(\005\022+\n\004pi" +
+            "ng\030\002 \001(\0132\033.GameMessage.PingMsgH\000\022" +
+            "-\n\005steer\030\003 \001(\0132\034.GameMessage.Stee" +
+            "rMsgH\000\022)\n\003ack\030\004 \001(\0132\032.GameMessage" +
+            ".AckMsgH\000\022-\n\005state\030\005 \001(\0132\034.GameMe" +
+            "ssage.StateMsgH\000\022;\n\014announcement\030\006 \001(\0132#" +
+            ".GameMessage.AnnouncementMsgH\000\022+\n" +
+            "\004join\030\007 \001(\0132\033.GameMessage.JoinMsg" +
+            "H\000\022-\n\005error\030\010 \001(\0132\034.GameMessage.E" +
+            "rrorMsgH\000\0228\n\013role_change\030\t \001(\0132!." +
+            "GameMessage.RoleChangeMsgH\000\0223\n\010discover\030" +
+            "\014 \001(\0132\037.GameMessage.DiscoverMsgH\000" +
+            "\032\t\n\007PingMsg\0320\n\010SteerMsg\022$\n\tdirection\030\001 \002" +
+            "(\0162\021.Direction\032\010\n\006AckMsg\032,\n\010State" +
+            "Msg\022 \n\005state\030\001 \002(\0132\021.GameState\032:\n" +
+            "\017AnnouncementMsg\022\'\n\005games\030\001 \003(\0132\030.snakes" +
+            ".GameAnnouncement\032\r\n\013DiscoverMsg\032\213\001\n\007Joi" +
+            "nMsg\022.\n\013player_type\030\001 \001(\0162\022.Playe" +
+            "rType:\005HUMAN\022\023\n\013player_name\030\003 \002(\t\022\021\n\tgam" +
+            "e_name\030\004 \002(\t\022(\n\016requested_role\030\005 \002(\0162\020.s" +
+            "nakes.NodeRole\032!\n\010ErrorMsg\022\025\n\rerror_mess" +
+            "age\030\001 \002(\t\032_\n\rRoleChangeMsg\022%\n\013sender_rol" +
+            "e\030\001 \001(\0162\020.NodeRole\022\'\n\rreceiver_ro" +
+            "le\030\002 \001(\0162\020.NodeRoleB\006\n\004Type*:\n\010No" +
+            "deRole\022\n\n\006NORMAL\020\000\022\n\n\006MASTER\020\001\022\n\n\006DEPUTY" +
+            "\020\002\022\n\n\006VIEWER\020\003*\"\n\nPlayerType\022\t\n\005HUMAN\020\000\022" +
+            "\t\n\005ROBOT\020\001*2\n\tDirection\022\006\n\002UP\020\001\022\010\n\004DOWN\020" +
+            "\002\022\010\n\004LEFT\020\003\022\t\n\005RIGHT\020\004B\rB\013SnakesProto"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        });
+        .internalBuildGeneratedFileFrom(descriptorData,
+            new com.google.protobuf.Descriptors.FileDescriptor[] {
+            });
     internal_static_snakes_GamePlayer_descriptor =
-      getDescriptor().getMessageTypes().get(0);
+        getDescriptor().getMessageTypes().get(0);
     internal_static_snakes_GamePlayer_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GamePlayer_descriptor,
         new java.lang.String[] { "Name", "Id", "IpAddress", "Port", "Role", "Type", "Score", });
     internal_static_snakes_GameConfig_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+        getDescriptor().getMessageTypes().get(1);
     internal_static_snakes_GameConfig_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameConfig_descriptor,
         new java.lang.String[] { "Width", "Height", "FoodStatic", "StateDelayMs", });
     internal_static_snakes_GamePlayers_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+        getDescriptor().getMessageTypes().get(2);
     internal_static_snakes_GamePlayers_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GamePlayers_descriptor,
         new java.lang.String[] { "Players", });
     internal_static_snakes_GameState_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+        getDescriptor().getMessageTypes().get(3);
     internal_static_snakes_GameState_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameState_descriptor,
         new java.lang.String[] { "StateOrder", "Snakes", "Foods", "Players", });
     internal_static_snakes_GameState_Coord_descriptor =
-      internal_static_snakes_GameState_descriptor.getNestedTypes().get(0);
+        internal_static_snakes_GameState_descriptor.getNestedTypes().get(0);
     internal_static_snakes_GameState_Coord_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameState_Coord_descriptor,
         new java.lang.String[] { "X", "Y", });
     internal_static_snakes_GameState_Snake_descriptor =
-      internal_static_snakes_GameState_descriptor.getNestedTypes().get(1);
+        internal_static_snakes_GameState_descriptor.getNestedTypes().get(1);
     internal_static_snakes_GameState_Snake_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameState_Snake_descriptor,
         new java.lang.String[] { "PlayerId", "Points", "State", "HeadDirection", });
     internal_static_snakes_GameAnnouncement_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+        getDescriptor().getMessageTypes().get(4);
     internal_static_snakes_GameAnnouncement_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameAnnouncement_descriptor,
         new java.lang.String[] { "Players", "Config", "CanJoin", "GameName", });
     internal_static_snakes_GameMessage_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+        getDescriptor().getMessageTypes().get(5);
     internal_static_snakes_GameMessage_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameMessage_descriptor,
         new java.lang.String[] { "MsgSeq", "SenderId", "ReceiverId", "Ping", "Steer", "Ack", "State", "Announcement", "Join", "Error", "RoleChange", "Discover", "Type", });
     internal_static_snakes_GameMessage_PingMsg_descriptor =
-      internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(0);
+        internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(0);
     internal_static_snakes_GameMessage_PingMsg_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameMessage_PingMsg_descriptor,
         new java.lang.String[] { });
     internal_static_snakes_GameMessage_SteerMsg_descriptor =
-      internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(1);
+        internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(1);
     internal_static_snakes_GameMessage_SteerMsg_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameMessage_SteerMsg_descriptor,
         new java.lang.String[] { "Direction", });
     internal_static_snakes_GameMessage_AckMsg_descriptor =
-      internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(2);
+        internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(2);
     internal_static_snakes_GameMessage_AckMsg_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameMessage_AckMsg_descriptor,
         new java.lang.String[] { });
     internal_static_snakes_GameMessage_StateMsg_descriptor =
-      internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(3);
+        internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(3);
     internal_static_snakes_GameMessage_StateMsg_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameMessage_StateMsg_descriptor,
         new java.lang.String[] { "State", });
     internal_static_snakes_GameMessage_AnnouncementMsg_descriptor =
-      internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(4);
+        internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(4);
     internal_static_snakes_GameMessage_AnnouncementMsg_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameMessage_AnnouncementMsg_descriptor,
         new java.lang.String[] { "Games", });
     internal_static_snakes_GameMessage_DiscoverMsg_descriptor =
-      internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(5);
+        internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(5);
     internal_static_snakes_GameMessage_DiscoverMsg_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameMessage_DiscoverMsg_descriptor,
         new java.lang.String[] { });
     internal_static_snakes_GameMessage_JoinMsg_descriptor =
-      internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(6);
+        internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(6);
     internal_static_snakes_GameMessage_JoinMsg_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameMessage_JoinMsg_descriptor,
         new java.lang.String[] { "PlayerType", "PlayerName", "GameName", "RequestedRole", });
     internal_static_snakes_GameMessage_ErrorMsg_descriptor =
-      internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(7);
+        internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(7);
     internal_static_snakes_GameMessage_ErrorMsg_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameMessage_ErrorMsg_descriptor,
         new java.lang.String[] { "ErrorMessage", });
     internal_static_snakes_GameMessage_RoleChangeMsg_descriptor =
-      internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(8);
+        internal_static_snakes_GameMessage_descriptor.getNestedTypes().get(8);
     internal_static_snakes_GameMessage_RoleChangeMsg_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_snakes_GameMessage_RoleChangeMsg_descriptor,
         new java.lang.String[] { "SenderRole", "ReceiverRole", });
   }

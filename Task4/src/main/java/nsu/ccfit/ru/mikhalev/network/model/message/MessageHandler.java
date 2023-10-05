@@ -4,9 +4,11 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.TypeCaseException;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
+import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.net.DatagramPacket;
+import java.util.Arrays;
 
 @Slf4j
 public class MessageHandler implements Runnable {
@@ -17,10 +19,13 @@ public class MessageHandler implements Runnable {
 
     private final NetworkStorage networkStorage;
 
-    public MessageHandler(byte[] data, NetworkStorage networkStorage, GameController gameController) {
-        this.data = data;
+    private final DatagramPacket packet;
+
+    public MessageHandler(DatagramPacket packet, NetworkStorage networkStorage, GameController gameController) {
+        this.data = Arrays.copyOfRange(packet.getData(), 0, packet.getLength());;
         this.networkStorage = networkStorage;
         this.gameController = gameController;
+        this.packet = packet;
     }
 
     @Override
@@ -30,11 +35,13 @@ public class MessageHandler implements Runnable {
             SnakesProto.GameMessage gameMessage = SnakesProto.GameMessage.parseFrom(data);
             switch (gameMessage.getTypeCase()) {
                 case PING -> log.info("message PING");
-                case STEER -> log.info("message STEER");
+                case STEER -> this.gameController.moveSnakeByHostKey(new HostNetworkKey(packet.getAddress(), packet.getPort()),
+                                                                     gameMessage.getSteer().getDirection());
                 case ACK -> log.info("message ACK");
-                case STATE -> log.info("message STATE");
+                case STATE -> gameController.updateStateGUI(gameMessage);
                 case ANNOUNCEMENT -> log.info("message STEER");
-                case JOIN -> this.gameController.joinToGame(networkStorage.getMasterNetworkByNameGame(gameMessage.getJoin ().getGameName ()), gameMessage.getJoin ());
+                case JOIN -> this.gameController.joinToGame(networkStorage.getMasterNetworkByNameGame(gameMessage.getJoin().getGameName()),
+                                                            gameMessage.getJoin());
                 case ERROR -> log.info("message ERROR");
                 case ROLE_CHANGE -> log.info("message ROLE_CHANGE");
                 case DISCOVER -> log.info("message DISCOVER");

@@ -14,7 +14,8 @@ import static nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto.GameState.Snake.
 @Getter
 @Setter
 @Slf4j
-public class Snake {
+public class Snake implements Iterable<SnakesProto.GameState.Coord> {
+
     public static final int SNAKE_HEAD = 0;
 
     public static final int SNAKE_AFTER_HEAD = 1;
@@ -60,6 +61,14 @@ public class Snake {
         log.info("choose direction {}", this.direction);
         this.placement.add(tail);
         this.placement.add(head);
+    }
+
+    public static SnakesProto.GameState.Snake createSnakeProto(Snake snake) {
+        return SnakesProto.GameState.Snake.newBuilder().setHeadDirection(snake.getDirection())
+                                                       .addAllPoints(snake.getPlacement())
+                                                       .setPlayerId(snake.getId())
+                                                       .setState(snake.getState())
+                                                       .build();
     }
 
     public void addNewCoord(int index, SnakesProto.GameState.Coord coord) {
@@ -122,5 +131,11 @@ public class Snake {
             field.getFoods().remove(snake.getHead());
         }
         log.info("list cell {} x {} ,y {}", headCell, snake.getHead().getX(), snake.getHead().getY());
+    }
+
+    @NotNull
+    @Override
+    public Iterator<SnakesProto.GameState.Coord> iterator() {
+        return placement.iterator();
     }
 }

@@ -6,8 +6,7 @@ import nsu.ccfit.ru.mikhalev.ecxeption.ReceiveDatagramException;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 
 import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
-import nsu.ccfit.ru.mikhalev.network.model.message.Message;
-import nsu.ccfit.ru.mikhalev.network.model.message.NetworkStorage;
+import nsu.ccfit.ru.mikhalev.network.model.message.*;
 import nsu.ccfit.ru.mikhalev.network.model.multicast.*;
 import nsu.ccfit.ru.mikhalev.observer.Observable;
 import nsu.ccfit.ru.mikhalev.observer.context.ContextListGames;
@@ -69,7 +68,7 @@ public class MulticastService extends Observable {
             @Override
             public void run() {
                 networkStorage.getMessagesToSend()
-                              .add(new Message(hostNetworkKey, SnakesProto.GameMessage.newBuilder().setAnnouncement(MulticastService.this.message)
+                              .add(new Message (hostNetworkKey, SnakesProto.GameMessage.newBuilder().setAnnouncement(MulticastService.this.message)
                                                                                     .setMsgSeq(1).build()));
             }
         };

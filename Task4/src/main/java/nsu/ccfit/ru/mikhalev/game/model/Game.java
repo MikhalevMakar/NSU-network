@@ -2,6 +2,7 @@ package nsu.ccfit.ru.mikhalev.game.model;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import nsu.ccfit.ru.mikhalev.network.model.message.GameMessage;
 import nsu.ccfit.ru.mikhalev.observer.Observable;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 import nsu.ccfit.ru.mikhalev.observer.context.ContextGame;
@@ -19,10 +20,7 @@ public class Game extends Observable {
 
     private final Map<Integer, SnakesProto.Direction> moves = new HashMap<>();
 
-    private final ContextGame contextGame = new ContextGame();
     private final Timer timer = new Timer();
-
-    private int currentPlayerID = MIN_SNAKE_ID;
 
     @Getter
     private final SnakesProto.GameConfig gameConfig;
@@ -32,11 +30,16 @@ public class Game extends Observable {
         this.gameConfig = gameConfig;
         this.field = new Field(gameConfig.getWidth(), gameConfig.getHeight());
 
-        this.createSnake();
         field.foodPlacement(gameConfig.getFoodStatic());
     }
 
-    public int getCurrentPlayerID() {return this.currentPlayerID++;}
+    public SnakesProto.GameState getGameState(PlayerManager playerManager) {
+        return SnakesProto.GameState.newBuilder()
+                    .setStateOrder(StateOrder.getStateOrder())
+                    .addAllSnakes(snakes.values().stream().map(Snake::createSnakeProto).toList())
+                    .setPlayers(SnakesProto.GamePlayers.newBuilder().addAllPlayers(playerManager.listPlayers().stream().toList()))
+                    .addAllFoods(field.getFoods()).build();
+    }
 
     private void setStartPositionSnake(SnakesProto.GameState.Coord head,
                                        SnakesProto.GameState.Coord tail,
@@ -45,12 +48,12 @@ public class Game extends Observable {
         field.setValue(tail.getX(), tail.getY(), snakeID);
     }
 
-    public void createSnake() {
+    public void createSnake(Integer key) {
         log.info("create snake");
         SnakesProto.GameState.Coord head = this.field.findPlaceHeadSnake();
-        Snake snake = new Snake(head, this.field.findPlaceTailSnake(head.getX() + head.getY() * field.getWidth()), this.currentPlayerID);
-        this.setStartPositionSnake(head, snake.getTail(), this.currentPlayerID);
-        this.addSnakeByUserID(currentPlayerID, snake);
+        Snake snake = new Snake(head, this.field.findPlaceTailSnake(head.getX() + head.getY() * field.getWidth()), key);
+        this.setStartPositionSnake(head, snake.getTail(), key);
+        this.addSnakeByUserID(key, snake);
     }
 
     public void addSnakeByUserID(Integer key, Snake snake) {
@@ -111,8 +114,7 @@ public class Game extends Observable {
             public void run() {
                 updateField();
                 checkCorrectMovesSnakes();
-                contextGame.update(field, snakes.values().parallelStream().toList(), field.getFoods());
-                Game.super.notifyObserversGUI(contextGame);
+                Game.super.notifyObserversGameState();
                 if (snakes.isEmpty()) timer.cancel();
             }
         };

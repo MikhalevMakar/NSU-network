@@ -7,7 +7,6 @@ import nsu.ccfit.ru.mikhalev.network.model.message.*;
 import java.io.IOException;
 import java.net.*;
 
-import java.util.Arrays;
 import java.util.concurrent.*;
 
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.SIZE_BUFFER;
@@ -35,8 +34,8 @@ public class ReceiverUDP {
     public void receive() {
         try {
             datagramSocket.receive(packet);
-            byte[] data = Arrays.copyOfRange(packet.getData(), 0, packet.getLength());
-            executorService.submit(new MessageHandler(data, networkStorage, gameController));
+            log.info("RECEIVE MESSAGE");
+            executorService.submit(new MessageHandler(packet, networkStorage, gameController));
         } catch (IOException ignored) {}
     }
 }

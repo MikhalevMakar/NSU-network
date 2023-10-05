@@ -8,11 +8,11 @@ import javafx.scene.paint.Color;
 
 import javafx.stage.Stage;
 import static nsu.ccfit.ru.mikhalev.context.ContextField.*;
+import static nsu.ccfit.ru.mikhalev.game.model.Snake.SNAKE_HEAD;
 
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
-import nsu.ccfit.ru.mikhalev.game.model.Snake;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
@@ -61,13 +61,13 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
         scene.setOnKeyPressed(event -> {
             KeyCode code = event.getCode ();
             if (code == KeyCode.RIGHT || code == KeyCode.D) {
-                gameController.moveHandler(2, SnakesProto.Direction.RIGHT);
+                gameController.moveHandler(SnakesProto.Direction.RIGHT);
             } else if (code == KeyCode.LEFT || code == KeyCode.A) {
-                gameController.moveHandler(2, SnakesProto.Direction.LEFT);
+                gameController.moveHandler(SnakesProto.Direction.LEFT);
             } else if (code == KeyCode.UP || code == KeyCode.W) {
-                gameController.moveHandler(2, SnakesProto.Direction.UP);
+                gameController.moveHandler( SnakesProto.Direction.UP);
             } else if (code == KeyCode.DOWN || code == KeyCode.S) {
-                gameController.moveHandler(2, SnakesProto.Direction.DOWN);
+                gameController.moveHandler( SnakesProto.Direction.DOWN);
             }
         });
     }
@@ -86,14 +86,14 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
     }
 
     @Override
-    public void drawSnake(Snake snake) {
+    public void drawSnake(SnakesProto.GameState.Snake snake) {
         log.info("draw snake");
         graphicsContext.setFill(Color.web(COLOR_SNAKE));
-        graphicsContext.fillRoundRect((snake.getHead().getX() * SQUARE_SIZE), (snake.getHead().getY() * SQUARE_SIZE - 1), (SQUARE_SIZE - 1),
+        graphicsContext.fillRoundRect((snake.getPoints(SNAKE_HEAD).getX() * SQUARE_SIZE), (snake.getPoints(SNAKE_HEAD).getY() * SQUARE_SIZE - 1), (SQUARE_SIZE - 1),
                                       (SQUARE_SIZE - 1), 35, 35);
 
-        for (int i = 1; i < snake.getPlacement().size(); ++i) {
-            graphicsContext.fillRoundRect((snake.getPlacement().get(i).getX() * SQUARE_SIZE),  (snake.getPlacement().get(i).getY() * SQUARE_SIZE),
+        for (int i = 1; i < snake.getPointsList().size(); ++i) {
+            graphicsContext.fillRoundRect((snake.getPointsList().get(i).getX() * SQUARE_SIZE),  (snake.getPointsList().get(i).getY() * SQUARE_SIZE),
                                           (SQUARE_SIZE - 1), (SQUARE_SIZE - 1), 20, 20);
         }
     }
@@ -112,7 +112,7 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
     @Override
     public void update(ContextGame context) {
         this.drawBackground();
-        this.generateFood(context.getFoods());
+        this.generateFood(context.getCoords());
         for(var snake : context.getSnakes())
             this.drawSnake(snake);
     }
