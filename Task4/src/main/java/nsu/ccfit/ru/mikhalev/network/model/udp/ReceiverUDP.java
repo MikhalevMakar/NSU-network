@@ -34,7 +34,6 @@ public class ReceiverUDP {
     public void receive() {
         try {
             datagramSocket.receive(packet);
-            log.info("RECEIVE MESSAGE");
             executorService.submit(new MessageHandler(packet, networkStorage, gameController));
         } catch (IOException ignored) {}
     }

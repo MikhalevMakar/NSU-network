@@ -21,15 +21,10 @@ public class ContextValue {
 
     public static final int NUMBER_OPTION_TAIL = 4;
 
-    public static final int NUMBER_DIRECTION = 4;
 
     public static final int LEFT_VALUE = 1;
 
     public static final int RIGHT_VALUE = 1;
-
-    public static final int MASTER_PORT = 0;
-
-    public static final String MASTER_IP = "localhost";
 
     public static final int  FOOD = 1;
 

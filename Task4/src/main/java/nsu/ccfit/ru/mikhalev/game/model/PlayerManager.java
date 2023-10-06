@@ -11,6 +11,8 @@ import java.net.*;
 import java.util.*;
 
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
+import static nsu.ccfit.ru.mikhalev.game.controller.impl.GameControllerImpl.MASTER_IP;
+import static nsu.ccfit.ru.mikhalev.game.controller.impl.GameControllerImpl.MASTER_PORT;
 import static nsu.ccfit.ru.mikhalev.game.model.Snake.MIN_SNAKE_ID;
 
 @Slf4j

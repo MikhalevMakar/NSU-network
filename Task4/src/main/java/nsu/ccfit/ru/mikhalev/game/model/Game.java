@@ -2,10 +2,8 @@ package nsu.ccfit.ru.mikhalev.game.model;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.network.model.message.GameMessage;
 import nsu.ccfit.ru.mikhalev.observer.Observable;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
-import nsu.ccfit.ru.mikhalev.observer.context.ContextGame;
 
 import java.util.*;
 

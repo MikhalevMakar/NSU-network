@@ -74,6 +74,7 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     @Override
     public void drawBackground() {
+        log.info("draw back ground");
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
                 if ((i + j) % 2 == 0)
@@ -89,12 +90,12 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
     public void drawSnake(SnakesProto.GameState.Snake snake) {
         log.info("draw snake");
         graphicsContext.setFill(Color.web(COLOR_SNAKE));
-        graphicsContext.fillRoundRect((snake.getPoints(SNAKE_HEAD).getX() * SQUARE_SIZE), (snake.getPoints(SNAKE_HEAD).getY() * SQUARE_SIZE - 1), (SQUARE_SIZE - 1),
-                                      (SQUARE_SIZE - 1), 35, 35);
+        graphicsContext.fillRoundRect((snake.getPoints(SNAKE_HEAD).getX() * SQUARE_SIZE), snake.getPoints(SNAKE_HEAD).getY() * SQUARE_SIZE - 1, SQUARE_SIZE - 1,
+                                      SQUARE_SIZE - 1, 35, 35);
 
         for (int i = 1; i < snake.getPointsList().size(); ++i) {
-            graphicsContext.fillRoundRect((snake.getPointsList().get(i).getX() * SQUARE_SIZE),  (snake.getPointsList().get(i).getY() * SQUARE_SIZE),
-                                          (SQUARE_SIZE - 1), (SQUARE_SIZE - 1), 20, 20);
+            graphicsContext.fillRoundRect((snake.getPointsList().get(i).getX() * SQUARE_SIZE),  snake.getPointsList().get(i).getY() * SQUARE_SIZE,
+                                          SQUARE_SIZE - 1, SQUARE_SIZE - 1, 20, 20);
         }
     }
 
@@ -106,7 +107,7 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
     }
 
     public void drawFood(int x, int y) {
-        graphicsContext.drawImage(foodImage, (x * SQUARE_SIZE), (y * SQUARE_SIZE), SQUARE_SIZE, SQUARE_SIZE);
+        graphicsContext.drawImage(foodImage, x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
     }
 
     @Override
