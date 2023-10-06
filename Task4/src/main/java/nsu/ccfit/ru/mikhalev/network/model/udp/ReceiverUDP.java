@@ -23,18 +23,15 @@ public class ReceiverUDP {
 
     private final GameController gameController;
 
-    private final NetworkStorage networkStorage;
-
-    public ReceiverUDP(DatagramSocket datagramSocket, NetworkStorage networkStorage, GameController gameController) {
+    public ReceiverUDP(DatagramSocket datagramSocket, GameController gameController) {
         this.datagramSocket = datagramSocket;
         this.gameController = gameController;
-        this.networkStorage = networkStorage;
     }
 
     public void receive() {
         try {
             datagramSocket.receive(packet);
-            executorService.submit(new MessageHandler(packet, networkStorage, gameController));
+            executorService.submit(new MessageHandler(packet, gameController));
         } catch (IOException ignored) {}
     }
 }

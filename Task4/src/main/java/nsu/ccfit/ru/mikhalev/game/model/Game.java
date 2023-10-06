@@ -23,6 +23,7 @@ public class Game extends Observable {
     @Getter
     private final SnakesProto.GameConfig gameConfig;
 
+    private int foodFromSnake;
 
     public Game(SnakesProto.GameConfig gameConfig) {
         this.gameConfig = gameConfig;
@@ -84,25 +85,29 @@ public class Game extends Observable {
         moves.put(key, direction);
     }
 
-    private void checkSnakesOnCell(List<Integer> snakesOnCell, Snake snake) {
-        log.info("check snake on cell by id {}", snake.getId());
-
-        SnakesProto.GameState.Coord headSnake = snake.getHead();
-        log.info("size list on cell {} x {}, y {}", field.getListValue(headSnake), snake.getHead().getX(), snake.getHead().getY());
-        if (field.getListValue(headSnake).size() > ONE_SNAKE)
-            this.removeSnake(snake);
-
-        snakesOnCell.forEach(currSnakeID -> {
-            log.info("snake id {} and currSnakeID {} ", snake.getId(), currSnakeID);
-
-            if (!headSnake.equals(snakes.get(currSnakeID).getHead()))
-                this.removeSnake(snakes.get(currSnakeID));
-        });
-    }
-
     public void checkCorrectMovesSnakes() {
-        for (var snake : snakes.entrySet()) {
-            checkSnakesOnCell(field.getListValue(snake.getValue().getHead()), snake.getValue());
+        Set<Snake> snakesToRemove = new HashSet<>();
+
+        for (var snake : snakes.values()) {
+            List<Integer> snakesOnCell = field.getListValue(snake.getHead());
+            if(snakesOnCell.size() == ONE_SNAKE) continue;
+
+            log.info("check snake on cell by id {}", snake.getId());
+            SnakesProto.GameState.Coord headSnake = snake.getHead();
+
+            int countEqualsIdOnCell = 0;
+            for (Integer currSnakeID : snakesOnCell) {
+                log.info("snake id {} and currSnakeID {}", snake.getId(), currSnakeID);
+                if(currSnakeID == snake.getId()) ++countEqualsIdOnCell;
+                else if (!headSnake.equals(snakes.get(currSnakeID).getHead()))
+                    snakesToRemove.add(snake);
+            }
+            if(countEqualsIdOnCell > ONE_SNAKE) snakesToRemove.add(snake);
+        }
+
+        for (Snake snakeToRemove : snakesToRemove) {
+            foodFromSnake += snakeToRemove.getPlacement().size() / 2;
+            this.removeSnake(snakeToRemove);
         }
     }
 
@@ -112,6 +117,8 @@ public class Game extends Observable {
             public void run() {
                 updateField();
                 checkCorrectMovesSnakes();
+                field.foodPlacement(gameConfig.getFoodStatic() + foodFromSnake + snakes.size() - field.getCountPlacementFood());
+                foodFromSnake = 0;
                 Game.super.notifyObserversGameState();
                 if (snakes.isEmpty()) timer.cancel();
             }

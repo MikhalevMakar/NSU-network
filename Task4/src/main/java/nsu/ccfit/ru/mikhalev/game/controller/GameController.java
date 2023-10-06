@@ -24,13 +24,10 @@ public interface GameController extends ObserverState {
 
     void moveSnakeByHostKey(HostNetworkKey key, SnakesProto.Direction direction);
 
-    void viewGame();
-
     void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message);
 
     void moveHandler(SnakesProto.Direction direction);
 
-    SnakesProto.GameState getGameState();
-
+    void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role);
     void sendMessageNetwork(String nameGame, SnakesProto.GameMessage gameMessage);
 }

@@ -88,11 +88,6 @@ public class MulticastService extends Observable {
 
     public void updateAnnouncementMsg(InetAddress ip, int port, SnakesProto.GameMessage.AnnouncementMsg message) {
         this.message = message;
-        multicastReceiver.putAnnouncementMsgByIp(message.getGames(INDEX_ANNOUNCEMENT_MSG).getGameName(),
-                                                 ip, port, message);
-    }
-
-    public HostNetworkKey getHostNetworkKeyByGameName(String nameGame) {
-        return multicastReceiver.getMainNodeInfoByNameGame(nameGame).getHostNetworkKey();
+        multicastReceiver.putAnnouncementMsgByIp(message.getGames(INDEX_ANNOUNCEMENT_MSG).getGameName(), ip, port, message);
     }
 }

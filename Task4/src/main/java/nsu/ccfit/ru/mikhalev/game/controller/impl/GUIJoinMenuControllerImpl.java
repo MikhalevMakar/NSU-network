@@ -43,10 +43,11 @@ public class GUIJoinMenuControllerImpl implements GUIJoinController {
     @Override
     public void joinGame() {
         log.info("join to game");
-        gameController.sendMessageNetwork(nameGame, GameMessage.createGameMessage(nameGame, namePlayer.getText(), this.getRole(choiceRole.getValue())));
+        SnakesProto.NodeRole role = this.getRole(choiceRole.getValue());
+        gameController.sendMessageNetwork(nameGame, GameMessage.createGameMessage(nameGame, namePlayer.getText(), role));
         Objects.requireNonNull(guiGameMenu, "guiGameMenu require non null");
         guiGameMenu.cancelJoinWindow();
-        gameController.viewGame();
+        gameController.initJoinGame(namePlayer.getText(), nameGame, role);
     }
 
     private SnakesProto.NodeRole getRole(String role) {

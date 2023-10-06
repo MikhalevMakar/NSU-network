@@ -77,7 +77,6 @@ public class GUIMenuControllerImpl implements GUIMenuController {
                     SnakesProto.GameAnnouncement game = announcementMsg.getGames(0);
                     return game.getGameName() + " " + game.getCanJoin();
         }).toList();
-        log.info("update network msg {}", games);
         gamesInfo.getItems().setAll(games);
     }
 

@@ -80,7 +80,7 @@ public class GameControllerImpl implements GameController {
 
         networkController.startMulticastSender(playerManager.getAnnouncementMsg());
         networkController.startSenderUDP();
-        this.playerState = new PlayerState(playerManager.getCurrentPlayerID(), namePlayer, MASTER);
+        this.playerState = new PlayerState(playerManager.getCurrentPlayerID(), namePlayer, nameGame, MASTER);
         try {
             playerManager.createPlayer(InetAddress.getByName(MASTER_IP), MASTER_PORT, namePlayer, MASTER);
         } catch (UnknownHostException ex) {
@@ -88,21 +88,16 @@ public class GameControllerImpl implements GameController {
         }
     }
 
-    public SnakesProto.GameState getGameState(){
-        return game.getGameState(playerManager);
-    }
-
     @Override
     public void moveHandler(SnakesProto.Direction direction) {
         if (this.playerState.role() == MASTER)
             this.game.addMoveByKey(playerState.playerID(), direction);
         else
-            networkController.addMessageToSend(this.playerManager.getNameGame(),
-                                               GameMessage.createGameMessage(direction));
+            networkController.addMessageToSend(this.playerState.nameGame(), GameMessage.createGameMessage(direction));
     }
 
     public void moveSnakeByHostKey(HostNetworkKey key, SnakesProto.Direction direction) {
-        this.game.addMoveByKey(playerManager.getPlayerIDByHostNetwork (key), direction);
+        this.game.addMoveByKey(playerManager.getPlayerIDByHostNetwork(key), direction);
     }
 
     @Override
@@ -114,24 +109,20 @@ public class GameControllerImpl implements GameController {
     @Override
     public void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message) {
         log.info("join to game ip {}, port {}", hostNetworkKey.getIp(), hostNetworkKey.getPort());
-//        this.playerState = new PlayerState(playerManager.getCurrentPlayerID(),
-//                                           message.getPlayerName(),
-//                                           message.getRequestedRole());
 
         this.playerManager.createPlayer(hostNetworkKey.getIp(), hostNetworkKey.getPort(),
                                         message.getPlayerName(), message.getRequestedRole());
-       // this.guiGameSpace.view();
     }
-
     @Override
-    public void viewGame() {
+    public void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role) {
+        this.playerState = new PlayerState(null, playerName, nameGame, role);
         this.guiGameSpace.view();
     }
 
     @Override
     public void startGame() {
         log.info("game controller start work");
-        this.viewGame();
+        this.guiGameSpace.view();
         this.game.run();
     }
 

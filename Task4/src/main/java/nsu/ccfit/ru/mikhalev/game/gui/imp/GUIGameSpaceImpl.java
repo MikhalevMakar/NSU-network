@@ -28,6 +28,15 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     private static final int WIDTH_CANVAS = 600;
 
+    private final Color colorSnake = Color.web(COLOR_SNAKE);
+
+    private static final String LIGHT_GREEN = "AAD751";
+
+    private final Color backGroundLightGreen = Color.web(LIGHT_GREEN);
+
+    private static final String GREEN = "A2D149";
+    private final Color backGroundGreen = Color.web(GREEN);
+
     private static final String COLOR_SNAKE = "4674E9";
 
     private final Image foodImage = new Image(FOODS_PHOTO);
@@ -59,7 +68,7 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
         graphicsContext = canvas.getGraphicsContext2D();
 
         scene.setOnKeyPressed(event -> {
-            KeyCode code = event.getCode ();
+            KeyCode code = event.getCode();
             if (code == KeyCode.RIGHT || code == KeyCode.D) {
                 gameController.moveHandler(SnakesProto.Direction.RIGHT);
             } else if (code == KeyCode.LEFT || code == KeyCode.A) {
@@ -67,7 +76,7 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
             } else if (code == KeyCode.UP || code == KeyCode.W) {
                 gameController.moveHandler( SnakesProto.Direction.UP);
             } else if (code == KeyCode.DOWN || code == KeyCode.S) {
-                gameController.moveHandler( SnakesProto.Direction.DOWN);
+                gameController.moveHandler(SnakesProto.Direction.DOWN);
             }
         });
     }
@@ -78,9 +87,9 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
                 if ((i + j) % 2 == 0)
-                    graphicsContext.setFill(Color.web("AAD751"));
+                    graphicsContext.setFill(backGroundLightGreen);
                 else
-                    graphicsContext.setFill(Color.web("A2D149"));
+                    graphicsContext.setFill(backGroundGreen);
                 graphicsContext.fillRect(i * 30.0, j * 30.0, 30.0, 30.0);
             }
         }
@@ -88,20 +97,28 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     @Override
     public void drawSnake(SnakesProto.GameState.Snake snake) {
+        Objects.requireNonNull(snake, "snake require non null");
         log.info("draw snake");
-        graphicsContext.setFill(Color.web(COLOR_SNAKE));
-        graphicsContext.fillRoundRect((snake.getPoints(SNAKE_HEAD).getX() * SQUARE_SIZE), snake.getPoints(SNAKE_HEAD).getY() * SQUARE_SIZE - 1, SQUARE_SIZE - 1,
-                                      SQUARE_SIZE - 1, 35, 35);
+        graphicsContext.setFill(colorSnake);
+        Objects.requireNonNull(snake.getPoints(SNAKE_HEAD), "coordsSnake.get(i) require non null");
+        graphicsContext.fillRoundRect(snake.getPoints(SNAKE_HEAD).getX() * SQUARE_SIZE, snake.getPoints(SNAKE_HEAD).getY() * SQUARE_SIZE - 1,
+                                   SQUARE_SIZE - 1, SQUARE_SIZE - 1, 35, 35);
 
-        for (int i = 1; i < snake.getPointsList().size(); ++i) {
-            graphicsContext.fillRoundRect((snake.getPointsList().get(i).getX() * SQUARE_SIZE),  snake.getPointsList().get(i).getY() * SQUARE_SIZE,
-                                          SQUARE_SIZE - 1, SQUARE_SIZE - 1, 20, 20);
+        List<SnakesProto.GameState.Coord> coordsSnake = snake.getPointsList();
+        for (int i = 1; i < coordsSnake.size(); ++i) {
+            graphicsContext.setFill(colorSnake);
+            Objects.requireNonNull(coordsSnake.get(i), "coordsSnake.get(i) require non null");
+            graphicsContext.fillRoundRect(coordsSnake.get(i).getX() * SQUARE_SIZE, coordsSnake.get(i).getY() * SQUARE_SIZE,
+                                       SQUARE_SIZE - 1, SQUARE_SIZE - 1, 20, 20);
         }
+        log.info("finish draw snake snake");
     }
 
     public void generateFood(List<SnakesProto.GameState.Coord> foods) {
+        Objects.requireNonNull(foods, "foods require non null");
         log.info("generate food by size {}", foods.size());
         for(var food : foods) {
+            Objects.requireNonNull(food, "food require non null");
             drawFood(food.getX(), food.getY());
         }
     }
@@ -116,5 +133,6 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
         this.generateFood(context.getCoords());
         for(var snake : context.getSnakes())
             this.drawSnake(snake);
+        log.info("finish update");
     }
 }

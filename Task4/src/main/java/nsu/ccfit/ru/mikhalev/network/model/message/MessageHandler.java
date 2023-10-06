@@ -17,18 +17,12 @@ public final class MessageHandler implements Runnable {
 
     private final GameController gameController;
 
-//    private final NetworkStorage networkStorage;
-//
-//    private final DatagramPacket packet;
-
     private final HostNetworkKey hostNetworkKey;
 
-    public MessageHandler(DatagramPacket packet, NetworkStorage networkStorage, GameController gameController) {
+    public MessageHandler(DatagramPacket packet, GameController gameController) {
         this.data = Arrays.copyOfRange(packet.getData(), 0, packet.getLength());
-        //this.networkStorage = networkStorage;
         this.gameController = gameController;
         this.hostNetworkKey = new HostNetworkKey(packet.getAddress(), packet.getPort());
-        //this.packet = packet;
     }
 
     @Override
@@ -38,13 +32,11 @@ public final class MessageHandler implements Runnable {
             SnakesProto.GameMessage gameMessage = SnakesProto.GameMessage.parseFrom(data);
             switch (gameMessage.getTypeCase()) {
                 case PING -> log.info("message PING");
-                case STEER -> this.gameController.moveSnakeByHostKey(hostNetworkKey,
-                                                                     gameMessage.getSteer().getDirection());
+                case STEER -> this.gameController.moveSnakeByHostKey(hostNetworkKey, gameMessage.getSteer().getDirection());
                 case ACK -> log.info("message ACK");
                 case STATE -> gameController.updateStateGUI(gameMessage);
                 case ANNOUNCEMENT -> log.info("message STEER");
-                case JOIN -> this.gameController.joinToGame(hostNetworkKey,
-                                                            gameMessage.getJoin());
+                case JOIN -> this.gameController.joinToGame(hostNetworkKey, gameMessage.getJoin());
                 case ERROR -> log.info("message ERROR");
                 case ROLE_CHANGE -> log.info("message ROLE_CHANGE");
                 case DISCOVER -> log.info("message DISCOVER");

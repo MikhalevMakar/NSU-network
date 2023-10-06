@@ -26,6 +26,7 @@ public class Field {
 
     @Getter
     private final int width;
+
     @Getter
     private final int height;
 
@@ -37,6 +38,10 @@ public class Field {
         log.info("size coords: {}", coords.size());
         this.width = width;
         this.height = height;
+    }
+
+    public int getCountPlacementFood() {
+        return foods.size();
     }
 
     public List<Integer> getListValue(int x, int y) {
@@ -73,10 +78,9 @@ public class Field {
         if(!listSnake.isEmpty() && listSnake.get(SNAKE_HEAD) > FOOD)
             return false;
 
-        int x;
         for(int y = 0, emptyRows = 0; y < SIZE_SQUARE; ++y) {
             int emptyLine = 0;
-            for(x = 0; x < SIZE_SQUARE && emptyLine < SNAKE_PIT; ++x) {
+            for(int x = 0; x < SIZE_SQUARE && emptyLine < SNAKE_PIT; ++x) {
                 emptyLine = (this.getListValue(x + beginX, y + beginY).isEmpty()) ? ++emptyLine : EMPTY_SQUARE_SIZE;
                 if(emptyLine == SNAKE_PIT) ++emptyRows;
             }

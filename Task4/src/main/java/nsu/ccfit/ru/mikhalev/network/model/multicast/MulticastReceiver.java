@@ -83,10 +83,6 @@ public class MulticastReceiver extends MulticastUDP {
                                                      new Date(System.currentTimeMillis())));
     }
 
-    public MainNodeInfo getMainNodeInfoByNameGame(String nameGame) {
-        return mainNodesInfo.get(nameGame);
-    }
-
     public void leaveGroup() {
         try {
             this.socket.leaveGroup(new InetSocketAddress(this.multicastGroup, this.port), null);

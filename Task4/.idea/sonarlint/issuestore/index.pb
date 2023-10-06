@@ -115,3 +115,7 @@ n
 >src/main/java/nsu/ccfit/ru/mikhalev/game/model/StateOrder.java,5/a/5a430772ff826a4a823bd825f7d61e9c142489cf
 o
 ?src/main/java/nsu/ccfit/ru/mikhalev/observer/ObserverState.java,9/5/9513554400340a6922d6c5174f5e770b434f5501
+w
+Gsrc/main/java/nsu/ccfit/ru/mikhalev/ecxeption/ThreadInterException.java,a/3/a3b43835e5805c0c1db87fb50b9e83c197717200
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d

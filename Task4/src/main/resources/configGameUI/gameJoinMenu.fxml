@@ -16,6 +16,6 @@
             </font>
         </Button>
       <TextField fx:id="namePlayer" layoutX="155.0" layoutY="67.0" prefHeight="41.0" prefWidth="282.0" promptText="Имя игрока" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css" />
-      <ChoiceBox fx:id="choiceRole" layoutX="155.0" layoutY="165.0" prefHeight="41.0" prefWidth="282.0" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" />
+      <ChoiceBox fx:id="choiceRole" layoutX="155.0" layoutY="165.0" prefHeight="41.0" prefWidth="282.0" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../gamesInfo.css" />
     </children>
 </AnchorPane>
