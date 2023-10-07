@@ -12,7 +12,6 @@ public class ContextListGames implements Context {
     private List<SnakesProto.GameMessage.AnnouncementMsg> games;
 
     public void update(List<SnakesProto.GameMessage.AnnouncementMsg> games) {
-        log.info("update context game controller");
         this.games = games;
     }
 }

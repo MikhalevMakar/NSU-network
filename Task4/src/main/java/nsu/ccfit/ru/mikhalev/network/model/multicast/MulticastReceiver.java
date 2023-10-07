@@ -1,8 +1,7 @@
 package nsu.ccfit.ru.mikhalev.network.model.multicast;
 
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.ecxeption.JoinGroupException;
-import nsu.ccfit.ru.mikhalev.ecxeption.ReceiveDatagramException;
+import nsu.ccfit.ru.mikhalev.ecxeption.*;
 import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.MainNodeInfo;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
@@ -64,7 +63,6 @@ public class MulticastReceiver extends MulticastUDP {
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
         try {
             this.socket.receive(packet);
-            log.info("receive ip {}", packet.getAddress().getHostName());
             byte[] data = Arrays.copyOfRange(packet.getData(), 0, packet.getLength());
             SnakesProto.GameMessage message = SnakesProto.GameMessage.parseFrom(data);
             this.putAnnouncementMsgByIp(message.getAnnouncement().getGames(INDEX_ANNOUNCEMENT_MSG).getGameName(),

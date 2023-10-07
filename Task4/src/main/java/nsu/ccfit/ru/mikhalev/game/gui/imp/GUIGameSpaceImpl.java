@@ -45,26 +45,30 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     private final Stage stage;
 
+    private final Group root;
+
+    private final Canvas canvas;
+
+    private final Scene scene;
 
     public GUIGameSpaceImpl(GameController gameController, Stage stage) {
         this.gameController = gameController;
         this.gameController.registrationGUIGameSpace(this);
         this.stage = stage;
+
+        this.stage.setResizable(false);
+        this.stage.setTitle("Snake");
+
+        this.canvas = new Canvas(WIDTH_CANVAS, HEIGHT_CANVAS);
+        this.root = new Group();
+        this.scene = new Scene(root);
     }
 
     @Override
     public void view() {
-        this.stage.setResizable(false);
-        this.stage.setTitle("Snake");
-
-        Group root = new Group();
-        Canvas canvas = new Canvas(WIDTH_CANVAS, HEIGHT_CANVAS);
         root.getChildren().add(canvas);
-
-        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
         graphicsContext = canvas.getGraphicsContext2D();
 
         scene.setOnKeyPressed(event -> {
@@ -83,6 +87,7 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     @Override
     public void drawBackground() {
+        Objects.requireNonNull(graphicsContext, "graphicsContext require non null");
         log.info("draw back ground");
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
@@ -100,18 +105,16 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
         Objects.requireNonNull(snake, "snake require non null");
         log.info("draw snake");
         graphicsContext.setFill(colorSnake);
-        Objects.requireNonNull(snake.getPoints(SNAKE_HEAD), "coordsSnake.get(i) require non null");
         graphicsContext.fillRoundRect(snake.getPoints(SNAKE_HEAD).getX() * SQUARE_SIZE, snake.getPoints(SNAKE_HEAD).getY() * SQUARE_SIZE - 1,
                                    SQUARE_SIZE - 1, SQUARE_SIZE - 1, 35, 35);
 
         List<SnakesProto.GameState.Coord> coordsSnake = snake.getPointsList();
+        Objects.requireNonNull(coordsSnake, "coordsSnake require non null");
         for (int i = 1; i < coordsSnake.size(); ++i) {
             graphicsContext.setFill(colorSnake);
-            Objects.requireNonNull(coordsSnake.get(i), "coordsSnake.get(i) require non null");
             graphicsContext.fillRoundRect(coordsSnake.get(i).getX() * SQUARE_SIZE, coordsSnake.get(i).getY() * SQUARE_SIZE,
                                        SQUARE_SIZE - 1, SQUARE_SIZE - 1, 20, 20);
         }
-        log.info("finish draw snake snake");
     }
 
     public void generateFood(List<SnakesProto.GameState.Coord> foods) {
@@ -131,8 +134,8 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
     public void update(ContextGame context) {
         this.drawBackground();
         this.generateFood(context.getCoords());
-        for(var snake : context.getSnakes())
-            this.drawSnake(snake);
-        log.info("finish update");
+        for (var snake : context.getSnakes()) {
+                this.drawSnake(snake);
+        }
     }
 }

@@ -12,7 +12,9 @@ public class NetworkStorage {
 
     private final ConcurrentLinkedDeque<Message> messagesToSend = new ConcurrentLinkedDeque<>();
 
-    private final Map<HostNetworkKey, Date>  players = new ConcurrentHashMap<>();
+    private final Map<HostNetworkKey, Date> players = new ConcurrentHashMap<>();
+
+    private final Map<Long, NodeInfo> sentMessages = new ConcurrentHashMap<>();
 
     public HostNetworkKey getMasterNetworkByNameGame(String nameGame) {
         return this.mainNodesInfo.get(nameGame).getHostNetworkKey();

@@ -92,7 +92,7 @@ public class Snake implements Iterable<SnakesProto.GameState.Coord> {
     }
 
 
-    private static SnakesProto.GameState.Coord getNextCoord(int direction, SnakesProto.GameState.Coord center, Field field) {
+    public static SnakesProto.GameState.Coord getNextCoord(int direction, SnakesProto.GameState.Coord center, Field field) {
         log.info("get next coord for snake");
         int y = center.getY();
         int x = center.getX();
@@ -109,11 +109,6 @@ public class Snake implements Iterable<SnakesProto.GameState.Coord> {
 
     public static void move(Snake snake, SnakesProto.Direction direction, Field field) {
         log.info("move snake");
-
-
-        log.info("current direction {}, new direction {}", snake.getDirection(), direction);
-        log.info("get coord x {}, y{}", snake.getHead().getX(), snake.getHead().getY());
-
         SnakesProto.GameState.Coord newHeadCoord = getNextCoord(direction.getNumber(), snake.getHead(), field);
 
         log.info("get coord x {}, y {}", newHeadCoord.getX(), newHeadCoord.getY());
@@ -130,7 +125,6 @@ public class Snake implements Iterable<SnakesProto.GameState.Coord> {
             headCell.remove(Integer.valueOf(FOOD));
             field.getFoods().remove(snake.getHead());
         }
-        log.info("list cell {} x {} ,y {}", headCell, snake.getHead().getX(), snake.getHead().getY());
     }
 
     @NotNull

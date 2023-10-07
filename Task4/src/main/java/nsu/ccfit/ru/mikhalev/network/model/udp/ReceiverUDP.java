@@ -16,22 +16,25 @@ public class ReceiverUDP {
 
     private final DatagramSocket datagramSocket;
 
-    private final ExecutorService executorService = Executors.newFixedThreadPool(10);
+    private final ExecutorService executorService = Executors.newCachedThreadPool();
 
     private final byte[] buffer = new byte[SIZE_BUFFER];
     private final DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 
     private final GameController gameController;
 
-    public ReceiverUDP(DatagramSocket datagramSocket, GameController gameController) {
+    private final NetworkStorage storage;
+
+    public ReceiverUDP(DatagramSocket datagramSocket, GameController gameController, NetworkStorage storage) {
         this.datagramSocket = datagramSocket;
         this.gameController = gameController;
+        this.storage = storage;
     }
 
     public void receive() {
         try {
             datagramSocket.receive(packet);
-            executorService.submit(new MessageHandler(packet, gameController));
+            executorService.submit(new MessageHandler(packet, gameController, storage));
         } catch (IOException ignored) {}
     }
 }

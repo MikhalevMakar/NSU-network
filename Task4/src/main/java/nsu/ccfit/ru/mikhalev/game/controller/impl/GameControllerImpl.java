@@ -88,6 +88,10 @@ public class GameControllerImpl implements GameController {
         }
     }
 
+    public SnakesProto.GameConfig getGameConfig() {
+        return this.game.getGameConfig();
+    }
+
     @Override
     public void moveHandler(SnakesProto.Direction direction) {
         if (this.playerState.role() == MASTER)
@@ -115,8 +119,8 @@ public class GameControllerImpl implements GameController {
     }
     @Override
     public void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role) {
-        this.playerState = new PlayerState(null, playerName, nameGame, role);
         this.guiGameSpace.view();
+        this.playerState = new PlayerState(null, playerName, nameGame, role);
     }
 
     @Override

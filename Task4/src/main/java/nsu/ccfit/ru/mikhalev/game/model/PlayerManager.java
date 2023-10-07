@@ -10,9 +10,7 @@ import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 import java.net.*;
 import java.util.*;
 
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
-import static nsu.ccfit.ru.mikhalev.game.controller.impl.GameControllerImpl.MASTER_IP;
-import static nsu.ccfit.ru.mikhalev.game.controller.impl.GameControllerImpl.MASTER_PORT;
+import static nsu.ccfit.ru.mikhalev.game.controller.impl.GameControllerImpl.*;
 import static nsu.ccfit.ru.mikhalev.game.model.Snake.MIN_SNAKE_ID;
 
 @Slf4j
@@ -64,7 +62,10 @@ public class PlayerManager extends Observable {
         this.addNewUserByIP(MASTER_IP, MASTER_PORT, player);
 
         this.contextMainNodeInfo.update(ip, port, this.getAnnouncementMsg());
-        this.game.createSnake(this.currentPlayerID);
+
+        if(role != SnakesProto.NodeRole.VIEWER)
+            this.game.createSnake(this.currentPlayerID);
+
         this.playersID.put(new HostNetworkKey(ip, port), this.currentPlayerID++);
         this.notifyObserversNetwork(contextMainNodeInfo);
     }

@@ -44,10 +44,10 @@ public class GUIJoinMenuControllerImpl implements GUIJoinController {
     public void joinGame() {
         log.info("join to game");
         SnakesProto.NodeRole role = this.getRole(choiceRole.getValue());
-        gameController.sendMessageNetwork(nameGame, GameMessage.createGameMessage(nameGame, namePlayer.getText(), role));
         Objects.requireNonNull(guiGameMenu, "guiGameMenu require non null");
         guiGameMenu.cancelJoinWindow();
         gameController.initJoinGame(namePlayer.getText(), nameGame, role);
+        gameController.sendMessageNetwork(nameGame, GameMessage.createGameMessage(nameGame, namePlayer.getText(), role));
     }
 
     private SnakesProto.NodeRole getRole(String role) {

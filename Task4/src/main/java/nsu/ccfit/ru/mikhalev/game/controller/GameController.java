@@ -22,6 +22,8 @@ public interface GameController extends ObserverState {
 
     void registrationGUIGameSpace(GUIGameSpace guiGameSpace);
 
+    SnakesProto.GameConfig getGameConfig();
+
     void moveSnakeByHostKey(HostNetworkKey key, SnakesProto.Direction direction);
 
     void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message);

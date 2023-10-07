@@ -70,7 +70,6 @@ public class GUIGameMenuImpl extends DisplayViewFXML {
 
     @Override
     public void cancelJoinWindow() {
-        log.info("CLOSE cancelJoinWindow ");
         Objects.requireNonNull(stageJoinWindow, "stageJoinWindow");
         stageJoinWindow.close();
     }

@@ -87,22 +87,30 @@ public class Game extends Observable {
 
     public void checkCorrectMovesSnakes() {
         Set<Snake> snakesToRemove = new HashSet<>();
+        Iterator<Snake> iterator = snakes.values().iterator();
 
-        for (var snake : snakes.values()) {
+        while (iterator.hasNext()) {
+            Snake snake = iterator.next();
             List<Integer> snakesOnCell = field.getListValue(snake.getHead());
-            if(snakesOnCell.size() == ONE_SNAKE) continue;
+            if (snakesOnCell.size() == ONE_SNAKE) continue;
 
             log.info("check snake on cell by id {}", snake.getId());
             SnakesProto.GameState.Coord headSnake = snake.getHead();
 
             int countEqualsIdOnCell = 0;
             for (Integer currSnakeID : snakesOnCell) {
+                Snake curSnake = snakes.get(currSnakeID);
                 log.info("snake id {} and currSnakeID {}", snake.getId(), currSnakeID);
-                if(currSnakeID == snake.getId()) ++countEqualsIdOnCell;
-                else if (!headSnake.equals(snakes.get(currSnakeID).getHead()))
+
+                if (currSnakeID == snake.getId()) ++countEqualsIdOnCell;
+                else if (!headSnake.equals(curSnake.getHead())) {
                     snakesToRemove.add(snake);
+                    SnakesProto.GameState.Coord newHeadCoord = getNextCoord(curSnake.getDirection().getNumber(), snake.getHead(), field);
+                    snake.addNewCoord(SNAKE_HEAD, newHeadCoord);
+                    field.setValue(newHeadCoord.getX(), newHeadCoord.getY(), snake.getId());
+                }
             }
-            if(countEqualsIdOnCell > ONE_SNAKE) snakesToRemove.add(snake);
+            if (countEqualsIdOnCell > ONE_SNAKE) snakesToRemove.add(snake);
         }
 
         for (Snake snakeToRemove : snakesToRemove) {
@@ -110,6 +118,7 @@ public class Game extends Observable {
             this.removeSnake(snakeToRemove);
         }
     }
+
 
     public void run() {
         TimerTask task = new TimerTask() {

@@ -20,7 +20,6 @@ module nsu.ccfit.ru.mikhalev {
     exports nsu.ccfit.ru.mikhalev.context;
     exports nsu.ccfit.ru.mikhalev.observer;
     exports nsu.ccfit.ru.mikhalev.observer.context;
-    exports nsu.ccfit.ru.mikhalev.game.controller.event;
     exports nsu.ccfit.ru.mikhalev.game.gui;
     exports nsu.ccfit.ru.mikhalev.game.model;
     exports nsu.ccfit.ru.mikhalev.game.gui.imp;

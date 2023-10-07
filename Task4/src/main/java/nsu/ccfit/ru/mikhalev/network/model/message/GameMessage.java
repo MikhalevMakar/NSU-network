@@ -32,4 +32,11 @@ public class GameMessage {
                                                                 .setMsgSeq(Message.getSeqNumber())
                                                                 .build();
     }
+
+    public static SnakesProto.GameMessage createGameMessage(long seqNumber) {
+        return SnakesProto.GameMessage.newBuilder()
+                                      .setAck(SnakesProto.GameMessage.AckMsg.newBuilder().build())
+                                      .setMsgSeq(seqNumber)
+                                      .build();
+    }
 }

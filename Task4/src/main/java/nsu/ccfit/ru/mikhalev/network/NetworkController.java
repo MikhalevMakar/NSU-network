@@ -56,6 +56,10 @@ public class NetworkController implements ObserverNetwork  {
         this.serviceUDP.startReceiver();
     }
 
+    public void startCheckerMsgACK() {
+        this.serviceUDP.startCheckerMsgACK();
+    }
+
     @Override
     public void updateNetworkMsg(Context context) {
         ContextMainNodeInfo contextMainNodeInfo = (ContextMainNodeInfo)context;
@@ -70,8 +74,9 @@ public class NetworkController implements ObserverNetwork  {
 
     public void addMessageToSend(String nameGame, SnakesProto.GameMessage gameMessage) {
         this.networkStorage.getMessagesToSend()
-            .add(new Message (networkStorage.getMasterNetworkByNameGame(nameGame), gameMessage));
+            .add(new Message(networkStorage.getMasterNetworkByNameGame(nameGame), gameMessage));
     }
+
     public void addMessageToSend(HostNetworkKey key,SnakesProto.GameMessage gameMessage) {
         this.networkStorage.getMessagesToSend().add(new Message (key, gameMessage));
     }

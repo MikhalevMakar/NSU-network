@@ -8,8 +8,7 @@ import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 import nsu.ccfit.ru.mikhalev.game.controller.impl.*;
 
 import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
-import nsu.ccfit.ru.mikhalev.game.gui.imp.GUIGameMenuImpl;
-import nsu.ccfit.ru.mikhalev.game.gui.imp.GUIGameSpaceImpl;
+import nsu.ccfit.ru.mikhalev.game.gui.imp.*;
 import nsu.ccfit.ru.mikhalev.network.NetworkController;
 
 import java.io.*;
@@ -28,6 +27,8 @@ public class ApplicationMain extends javafx.application.Application {
         try {
             ip = args[0];
             port = Integer.parseInt(args[1]);
+
+
         } catch (NumberFormatException e) {
             log.error("usage arg1<port>, arg2<ip>, cannot parse {}, {}", args[0], args[1], e);
             return;
@@ -47,6 +48,7 @@ public class ApplicationMain extends javafx.application.Application {
         networkController.startReceiverUDP();
         networkController.startMulticastReceiver();
         networkController.startCheckerPlayer();
+        networkController.startCheckerMsgACK();
         guiGameMenu.view();
     }
 }
