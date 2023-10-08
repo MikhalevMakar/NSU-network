@@ -7,7 +7,7 @@ import nsu.ccfit.ru.mikhalev.observer.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 
-public interface GameController extends ObserverState {
+public interface GameController extends ObserverState, ObserverError {
     void startGame();
 
     void createConfigGame(String nameGame, String namePlayer, SnakesProto.GameConfig gameConfig);
@@ -22,8 +22,6 @@ public interface GameController extends ObserverState {
 
     void registrationGUIGameSpace(GUIGameSpace guiGameSpace);
 
-    SnakesProto.GameConfig getGameConfig();
-
     void moveSnakeByHostKey(HostNetworkKey key, SnakesProto.Direction direction);
 
     void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message);
@@ -31,5 +29,8 @@ public interface GameController extends ObserverState {
     void moveHandler(SnakesProto.Direction direction);
 
     void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role);
+
     void sendMessageNetwork(String nameGame, SnakesProto.GameMessage gameMessage);
+
+    void reportErrorGUI(String message);
 }

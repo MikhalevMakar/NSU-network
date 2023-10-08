@@ -89,7 +89,7 @@ public class Field {
         return false;
     }
 
-    public SnakesProto.GameState.Coord findPlaceHeadSnake() throws FindSuitableSquareException{
+    public SnakesProto.GameState.Coord findPlaceHeadSnake() throws FindSuitableSquareException {
         for(int y = 0; y < this.height - BOUNDARY_Y; ++y) {
             for(int x = 0; x < this.width - BOUNDARY_X; ++x) {
                 if(isSuitableSquare(x, y))
@@ -99,7 +99,7 @@ public class Field {
                                                         .build();
             }
         }
-        throw new FindSuitableSquareException ();
+        throw new FindSuitableSquareException();
     }
 
     public SnakesProto.GameState.Coord getCoord(int x, int y) {
@@ -127,13 +127,15 @@ public class Field {
         return index >= 0 && index <= this.width * this.height;
     }
 
-    public SnakesProto.GameState.Coord findPlaceTailSnake(int center) {
+    public SnakesProto.GameState.Coord findPlaceTailSnake(int center) throws FindSuitableSquareException {
         log.info("find place tail snake");
         int coord = this.random.nextInt(NUMBER_OPTION_TAIL);
         log.info("random coord = {}", coord);
         int position;
+        int selectOptions  = 0;
         do {
              position = switchCoordsDirection(++coord % NUMBER_OPTION_TAIL + 1, center);
+             if(++selectOptions > NUMBER_OPTION_TAIL) throw new FindSuitableSquareException();
         } while(this.isCorrectIndexCoords(position) && !coords.get(position).isEmpty());
 
         int y = position / width;

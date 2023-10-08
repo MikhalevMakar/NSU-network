@@ -1,8 +1,11 @@
 package nsu.ccfit.ru.mikhalev.network;
 
+import javafx.scene.Node;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.MainRole;
+import nsu.ccfit.ru.mikhalev.network.model.NodeCheck;
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
 import nsu.ccfit.ru.mikhalev.observer.ObserverNetwork;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
@@ -23,7 +26,7 @@ public class NetworkController implements ObserverNetwork  {
     private final GameController gameController;
 
     public NetworkController(InetAddress ip, int port, GameController gameController) throws IOException {
-        this.multicastService = new MulticastService(new HostNetworkKey(ip, port), gameController, networkStorage);
+        this.multicastService = new MulticastService(new HostNetworkKey(ip, port), networkStorage);
         this.gameController = gameController;
         serviceUDP = new ServiceUDP(networkStorage, gameController);
         gameController.registrationNetworkController(this);
@@ -73,11 +76,15 @@ public class NetworkController implements ObserverNetwork  {
     }
 
     public void addMessageToSend(String nameGame, SnakesProto.GameMessage gameMessage) {
-        this.networkStorage.getMessagesToSend()
-            .add(new Message(networkStorage.getMasterNetworkByNameGame(nameGame), gameMessage));
+        this.networkStorage.addMessageToSend(new Message(networkStorage.getMasterNetworkByNameGame(nameGame),
+                                                         gameMessage));
     }
 
     public void addMessageToSend(HostNetworkKey key,SnakesProto.GameMessage gameMessage) {
-        this.networkStorage.getMessagesToSend().add(new Message (key, gameMessage));
+        this.networkStorage.addMessageToSend(new Message(key, gameMessage));
+    }
+
+    public void addRoleSelf(SnakesProto.NodeRole role) {
+        this.networkStorage.getMainRole().setRoleSelf(role);
     }
 }

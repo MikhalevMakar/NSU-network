@@ -2,6 +2,7 @@ package nsu.ccfit.ru.mikhalev.game.model;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import nsu.ccfit.ru.mikhalev.ecxeption.FindSuitableSquareException;
 import nsu.ccfit.ru.mikhalev.observer.Observable;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
@@ -36,7 +37,8 @@ public class Game extends Observable {
         return SnakesProto.GameState.newBuilder()
                     .setStateOrder(StateOrder.getStateOrder())
                     .addAllSnakes(snakes.values().stream().map(Snake::createSnakeProto).toList())
-                    .setPlayers(SnakesProto.GamePlayers.newBuilder().addAllPlayers(playerManager.listPlayers().stream().toList()))
+                    .setPlayers(SnakesProto.GamePlayers.newBuilder()
+                                                        .addAllPlayers(playerManager.listPlayers().stream().toList()))
                     .addAllFoods(field.getFoods()).build();
     }
 
@@ -47,10 +49,10 @@ public class Game extends Observable {
         field.setValue(tail.getX(), tail.getY(), snakeID);
     }
 
-    public void createSnake(Integer key) {
+    public void createSnake(Integer key) throws  FindSuitableSquareException {
         log.info("create snake");
         SnakesProto.GameState.Coord head = this.field.findPlaceHeadSnake();
-        Snake snake = new Snake(head, this.field.findPlaceTailSnake(head.getX() + head.getY() * field.getWidth()), key);
+        Snake snake = new Snake(head, this.field.findPlaceTailSnake(head.getX () + head.getY () * field.getWidth ()), key);
         this.setStartPositionSnake(head, snake.getTail(), key);
         this.addSnakeByUserID(key, snake);
     }
@@ -81,7 +83,6 @@ public class Game extends Observable {
     }
 
     public void addMoveByKey(Integer key, SnakesProto.Direction direction) {
-        log.info("add new move for player by userId: {}", key);
         moves.put(key, direction);
     }
 
@@ -94,13 +95,11 @@ public class Game extends Observable {
             List<Integer> snakesOnCell = field.getListValue(snake.getHead());
             if (snakesOnCell.size() == ONE_SNAKE) continue;
 
-            log.info("check snake on cell by id {}", snake.getId());
             SnakesProto.GameState.Coord headSnake = snake.getHead();
 
             int countEqualsIdOnCell = 0;
             for (Integer currSnakeID : snakesOnCell) {
                 Snake curSnake = snakes.get(currSnakeID);
-                log.info("snake id {} and currSnakeID {}", snake.getId(), currSnakeID);
 
                 if (currSnakeID == snake.getId()) ++countEqualsIdOnCell;
                 else if (!headSnake.equals(curSnake.getHead())) {

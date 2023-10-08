@@ -117,3 +117,9 @@ w
 Gsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/message/NodeInfo.java,2/e/2e714e3271ac3a437d7b135991ea93a42230701e
 z
 Jsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/message/MessageType.java,d/3/d3f610826682a000c58d53859c8ef7db4233ed8e
+w
+Gsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/message/NodeRole.java,7/f/7fdf368d78cacb7dd476da5895878f91b0f75d15
+v
+Fsrc/main/java/nsu/ccfit/ru/mikhalev/observer/context/ContextError.java,8/5/850018d02fa531a236cf8bf88b58f8b220dea787
+o
+?src/main/java/nsu/ccfit/ru/mikhalev/observer/ObserverError.java,4/8/48596de7b2aa2b1c1320c53e55ac9b5757114f70

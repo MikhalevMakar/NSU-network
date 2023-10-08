@@ -9,7 +9,6 @@ import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.net.DatagramPacket;
 import java.util.Arrays;
-import java.util.Date;
 
 @Slf4j
 public final class MessageHandler implements Runnable {
@@ -38,8 +37,8 @@ public final class MessageHandler implements Runnable {
     public void sendNeedConfirmation(int typeCase) {
         log.info("SEND NeedConfirmation");
         if(MessageType.isNeedConfirmation(typeCase))
-            storage.getMessagesToSend().addFirst(new Message(hostNetworkKey,
-                                                 GameMessage.createGameMessage(gameMessage.getMsgSeq())));
+            storage.addMessageToSendFirst(new Message(hostNetworkKey,
+                                                      GameMessage.createGameMessage(gameMessage.getMsgSeq())));
     }
 
     @Override
@@ -48,18 +47,39 @@ public final class MessageHandler implements Runnable {
         switch (gameMessage.getTypeCase()) {
             case PING -> log.info("message PING");
             case STEER -> this.gameController.moveSnakeByHostKey(hostNetworkKey, gameMessage.getSteer().getDirection());
-            case ACK -> this.storage.getSentMessages().remove(gameMessage.getMsgSeq());
+            case ACK -> this.storage.removeSentMessage(gameMessage.getMsgSeq());
             case STATE -> gameController.updateStateGUI(gameMessage);
-            case ERROR -> log.info("message ERROR");
-            case ROLE_CHANGE -> log.info("message ROLE_CHANGE");
+            case ERROR -> gameController.reportErrorGUI(gameMessage.getError().getErrorMessage());
+            case ROLE_CHANGE -> this.handlerChangeRole();
             case DISCOVER -> log.info("message DISCOVER");
             case TYPE_NOT_SET -> log.info("message TYPE_NOT_SET");
-            case JOIN -> {
-                this.storage.addNewUser(hostNetworkKey, new NodeRole(gameMessage.getJoin().getRequestedRole(), new Date()));
-                this.gameController.joinToGame(hostNetworkKey, gameMessage.getJoin());
-            }
-
+            case JOIN -> this.handlerJoin();
             default -> throw new TypeCaseException();
         }
+        this.storage.updateTimePLayer(this.hostNetworkKey);
+    }
+
+
+    private void handlerChangeRole() {
+        if(this.gameMessage.getRoleChange().hasReceiverRole()) {
+            this.storage.getMainRole().setRoleSelf(this.gameMessage.getRoleChange().getSenderRole());
+        }
+    }
+
+    private void handlerJoin() {
+        SnakesProto.GameMessage.JoinMsg joinMsg = gameMessage.getJoin();
+        this.gameController.joinToGame(hostNetworkKey, gameMessage.getJoin());
+        this.requestRole(this.requestRole(joinMsg.getRequestedRole()));
+        this.storage.addNewUser(hostNetworkKey, new NodeRole(joinMsg.getRequestedRole()));
+    }
+
+    private SnakesProto.NodeRole requestRole(SnakesProto.NodeRole nodeRole) {
+        if(nodeRole != SnakesProto.NodeRole.VIEWER &&  storage.getMainRole().getKeyDeputy() == null) {
+            this.storage.addMessageToSend(new Message(hostNetworkKey,
+                                                      GameMessage.createGameMessage(SnakesProto.NodeRole.DEPUTY,
+                                                                                    null)));
+            return SnakesProto.NodeRole.DEPUTY;
+        }
+        return nodeRole;
     }
 }

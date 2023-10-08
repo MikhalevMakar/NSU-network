@@ -1,6 +1,22 @@
 package nsu.ccfit.ru.mikhalev.network.model.message;
 
-import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
-import java.util.Date;
 
-public record NodeRole(SnakesProto.NodeRole role, Date date) {}
+import lombok.Getter;
+import lombok.Setter;
+import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
+
+@Getter
+public class NodeRole {
+    @Setter
+    private SnakesProto.NodeRole role;
+
+    private long currTime;
+
+    public  NodeRole(SnakesProto.NodeRole role) {
+        this.role = role;
+    }
+
+    public void updateTime() {
+        this.currTime = System.currentTimeMillis();
+    }
+}

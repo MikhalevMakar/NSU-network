@@ -8,4 +8,5 @@ public interface GUIGameSpace extends View {
     void drawSnake(SnakesProto.GameState.Snake snake);
     void update(ContextGame context);
 
+    void printErrorMessage(String message);
 }

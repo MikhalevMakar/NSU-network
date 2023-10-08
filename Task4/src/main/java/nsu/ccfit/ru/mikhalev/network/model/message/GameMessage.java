@@ -39,4 +39,36 @@ public class GameMessage {
                                       .setMsgSeq(seqNumber)
                                       .build();
     }
+
+    public static SnakesProto.GameMessage createGameMessage(SnakesProto.GameMessage.AnnouncementMsg message) {
+        return SnakesProto.GameMessage.newBuilder()
+                                      .setAnnouncement(message)
+                                      .setMsgSeq(Message.getSeqNumber())
+                                      .build();
+    }
+
+    public static SnakesProto.GameMessage createGameMessage(String message) {
+        return SnakesProto.GameMessage.newBuilder()
+                                      .setError(SnakesProto.GameMessage.ErrorMsg.newBuilder()
+                                                .setErrorMessage(message).build())
+                                      .setMsgSeq(Message.getSeqNumber())
+                                      .build();
+    }
+
+    public static SnakesProto.GameMessage createGameMessage() {
+        return SnakesProto.GameMessage.newBuilder()
+                                                .setPing(SnakesProto.GameMessage.PingMsg
+                                                         .newBuilder().build())
+                                                .setMsgSeq(Message.getSeqNumber())
+                                                .build();
+    }
+
+    public static SnakesProto.GameMessage createGameMessage(SnakesProto.NodeRole receiverRole, SnakesProto.NodeRole senderRole) {
+        return SnakesProto.GameMessage.newBuilder().setRoleChange(SnakesProto.GameMessage.RoleChangeMsg.newBuilder()
+                                                                .setReceiverRole(receiverRole)
+                                                                .setSenderRole(senderRole))
+                                                                .setMsgSeq(Message.getSeqNumber())
+                                                                .build();
+
+    }
 }

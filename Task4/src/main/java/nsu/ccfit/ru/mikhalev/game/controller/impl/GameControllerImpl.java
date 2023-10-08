@@ -77,15 +77,11 @@ public class GameControllerImpl implements GameController {
         this.playerManager = new PlayerManager(nameGame, game);
 
         this.game.addObserverState(this);
-
+        this.playerManager.addObserverError(this);
         networkController.startMulticastSender(playerManager.getAnnouncementMsg());
         networkController.startSenderUDP();
         this.playerState = new PlayerState(playerManager.getCurrentPlayerID(), namePlayer, nameGame, MASTER);
         playerManager.createPlayer(inetAddressMASTER, MASTER_PORT, namePlayer, MASTER);
-    }
-
-    public SnakesProto.GameConfig getGameConfig() {
-        return this.game.getGameConfig();
     }
 
     @Override
@@ -109,7 +105,7 @@ public class GameControllerImpl implements GameController {
     @Override
     public void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message) {
         log.info("join to game ip {}, port {}", hostNetworkKey.getIp(), hostNetworkKey.getPort());
-
+        this.networkController.addRoleSelf(message.getRequestedRole());
         this.playerManager.createPlayer(hostNetworkKey.getIp(), hostNetworkKey.getPort(),
                                         message.getPlayerName(), message.getRequestedRole());
     }
@@ -121,7 +117,9 @@ public class GameControllerImpl implements GameController {
 
     @Override
     public void startGame() {
+        this.networkController.addRoleSelf(MASTER);
         log.info("game controller start work");
+
         this.guiGameSpace.view();
         this.game.run();
     }
@@ -139,8 +137,19 @@ public class GameControllerImpl implements GameController {
         this.updateStateGUI(gameMessage);
     }
 
-    public void updateStateGUI(SnakesProto.GameMessage gameMessage){
+    public void updateStateGUI(SnakesProto.GameMessage gameMessage) {
         gameContext.update(gameMessage);
         guiGameSpace.update(gameContext);
+    }
+
+    @Override
+    public void updateError(ContextError context) {
+        networkController.addMessageToSend(context.getHostNetworkKey(),
+                                           GameMessage.createGameMessage(context.getMessage()));
+    }
+
+    @Override
+    public void reportErrorGUI(String message) {
+        guiGameSpace.printErrorMessage(message);
     }
 }

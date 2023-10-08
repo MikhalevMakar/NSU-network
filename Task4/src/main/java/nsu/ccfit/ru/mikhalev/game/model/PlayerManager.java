@@ -2,8 +2,10 @@ package nsu.ccfit.ru.mikhalev.game.model;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import nsu.ccfit.ru.mikhalev.ecxeption.FindSuitableSquareException;
 import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.observer.Observable;
+import nsu.ccfit.ru.mikhalev.observer.context.ContextError;
 import nsu.ccfit.ru.mikhalev.observer.context.ContextMainNodeInfo;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
@@ -20,6 +22,8 @@ public class PlayerManager extends Observable {
     private final Map<Integer, SnakesProto.GamePlayer> players = new HashMap<>();
 
     private final ContextMainNodeInfo contextMainNodeInfo = new ContextMainNodeInfo();
+
+    private final ContextError contextError = new ContextError();
 
     private static final int BEGIN_POINT = 0;
 
@@ -53,15 +57,21 @@ public class PlayerManager extends Observable {
     public void createPlayer(InetAddress ip, int port, String nameUser, SnakesProto.NodeRole role) {
         log.info("create player {}", nameUser);
         SnakesProto.GamePlayer player = SnakesProto.GamePlayer.newBuilder().setName(nameUser).setId(this.currentPlayerID).setPort(port)
-                                            .setRole(role).setIpAddress(ip.getHostAddress()).setScore(BEGIN_POINT).build();
+                                                                            .setRole(role).setIpAddress(ip.getHostAddress()).setScore(BEGIN_POINT).build();
+        HostNetworkKey hostNetworkKey = new HostNetworkKey(ip, port);
+        try {
+            if (role != SnakesProto.NodeRole.VIEWER)
+                this.game.createSnake(this.currentPlayerID);
+        } catch(FindSuitableSquareException ex) {
+            contextError.update(hostNetworkKey, "refusal to join the game because there is no room on the pitch");
+            super.notifyObserversError(contextError);
+        }
+
         this.addNewUserByIP(ip, port, player);
 
         this.contextMainNodeInfo.update(ip, port, this.getAnnouncementMsg());
 
-        if(role != SnakesProto.NodeRole.VIEWER)
-            this.game.createSnake(this.currentPlayerID);
-
-        this.playersID.put(new HostNetworkKey(ip, port), this.currentPlayerID++);
+        this.playersID.put(hostNetworkKey, this.currentPlayerID++);
         this.notifyObserversNetwork(contextMainNodeInfo);
     }
 

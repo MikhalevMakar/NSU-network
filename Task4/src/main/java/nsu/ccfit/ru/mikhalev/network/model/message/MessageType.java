@@ -1,13 +1,13 @@
 package nsu.ccfit.ru.mikhalev.network.model.message;
 
 public enum MessageType {
-    PING(2, false),
+    PING(2, true),
     STEER(3, true),
     ACK(4, false),
     STATE(5, true),
     ANNOUNCEMENT(6, false),
     JOIN(7, true),
-    ERROR(8, false),
+    ERROR(8, true),
     ROLE_CHANGE(9, true);
 
     final boolean needConfirmation;

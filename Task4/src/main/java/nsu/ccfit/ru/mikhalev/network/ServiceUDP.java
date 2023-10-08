@@ -9,7 +9,6 @@ import nsu.ccfit.ru.mikhalev.network.model.message.*;
 import nsu.ccfit.ru.mikhalev.network.model.udp.*;
 
 import java.net.*;
-import java.util.*;
 
 @Slf4j
 public class ServiceUDP {
@@ -17,7 +16,7 @@ public class ServiceUDP {
 
     private static final int SEND_DELAY = 1;
 
-    private static final int RECEIVE_DELAY = 2;
+    private static final int RECEIVE_DELAY = 1;
 
     private final DatagramSocket datagramSocket = new DatagramSocket();
 
@@ -59,11 +58,12 @@ public class ServiceUDP {
                 synchronized (datagramSocket) {
                     for(var message : networkStorage.getMessagesToSend()) {
                         senderUDP.send(message);
+                        networkStorage.updateLastSendTime();
                         if(MessageType.isNeedConfirmation(message.getGameMessage().getTypeCase().getNumber()))
-                            networkStorage.getSentMessages().put(message.getGameMessage().getMsgSeq(),
-                                                                 new NodeInfo(message.getHostNetworkKey(), message, new Date()));
+                            networkStorage.addSentMessage(message.getGameMessage().getMsgSeq(),
+                                                          new NodeInfo(message.getHostNetworkKey(), message, networkStorage.getLastSendTime()));
 
-                        networkStorage.getMessagesToSend().remove(message);
+                        networkStorage.removeMessageToSend(message);
                     }
                 }
                 try {
@@ -78,12 +78,11 @@ public class ServiceUDP {
 
     public void startCheckerMsgACK() {
         Runnable r = ()-> {
-            Map<Long, NodeInfo> sentMessages = networkStorage.getSentMessages();
             while(!Thread.currentThread().isInterrupted()) {
-                for(var sentMessage : sentMessages.entrySet()) {
-                     if(System.currentTimeMillis() - sentMessage.getValue().date().getTime() > timeoutDelay / 10) {
-                         networkStorage.getMessagesToSend().add(sentMessage.getValue().message());
-                         sentMessages.remove(sentMessage.getValue().message().getGameMessage().getMsgSeq());
+                for(var sentMessage : networkStorage.getEntrySetSentMessage()) {
+                     if(System.currentTimeMillis() - sentMessage.getValue().sentTime() > timeoutDelay / 10) {
+                         networkStorage.addMessageToSend(sentMessage.getValue().message());
+                         networkStorage.removeSentMessage(sentMessage.getValue().message().getGameMessage().getMsgSeq());
                      }
                 }
                 try {

@@ -3,7 +3,6 @@ package nsu.ccfit.ru.mikhalev.network;
 import lombok.extern.slf4j.Slf4j;
 
 import nsu.ccfit.ru.mikhalev.ecxeption.ReceiveDatagramException;
-import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 
 import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
@@ -26,21 +25,19 @@ public class MulticastService extends Observable {
 
     private SnakesProto.GameMessage.AnnouncementMsg message;
 
-    private final GameController controller;
-
     private final ContextListGames context = new ContextListGames();
 
     private final NetworkStorage networkStorage;
 
     private final HostNetworkKey hostNetworkKey;
 
-    public MulticastService(HostNetworkKey hostNetworkKey,
-                            GameController controller, NetworkStorage networkStorage) throws IOException {
+    public MulticastService(HostNetworkKey hostNetworkKey, NetworkStorage networkStorage) throws IOException {
         this.hostNetworkKey = hostNetworkKey;
-        this.multicastReceiver = new MulticastReceiver(hostNetworkKey.getIp(), hostNetworkKey.getPort(), networkStorage.getMainNodesInfo());
+        this.multicastReceiver = new MulticastReceiver(hostNetworkKey.getIp(),
+                                                       hostNetworkKey.getPort(),
+                                                       networkStorage.getMainNodesInfo());
         this.multicastReceiver.addToGroup();
         this.networkStorage = networkStorage;
-        this.controller = controller;
     }
 
     public void receiver() {
@@ -67,9 +64,8 @@ public class MulticastService extends Observable {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                networkStorage.getMessagesToSend()
-                              .add(new Message (hostNetworkKey, SnakesProto.GameMessage.newBuilder().setAnnouncement(MulticastService.this.message)
-                                                                                    .setMsgSeq(1).build()));
+                networkStorage.addMessageToSend(new Message(hostNetworkKey,
+                                                GameMessage.createGameMessage(MulticastService.this.message)));
             }
         };
         timer.scheduleAtFixedRate(task, 0, TIMER_DELAY);

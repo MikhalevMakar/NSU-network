@@ -1,5 +1,6 @@
 package nsu.ccfit.ru.mikhalev.game.gui.imp;
 
+import javafx.application.Platform;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.image.Image;
@@ -132,10 +133,15 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     @Override
     public void update(ContextGame context) {
-        this.drawBackground();
-        this.generateFood(context.getCoords());
-        for (var snake : context.getSnakes()) {
-                this.drawSnake(snake);
-        }
+        Platform.runLater(() -> {
+            this.drawBackground();
+            this.generateFood (context.getCoords());
+            context.getSnakes().forEach(this::drawSnake);
+        });
+    }
+
+    @Override
+    public void printErrorMessage(String message) {
+
     }
 }
