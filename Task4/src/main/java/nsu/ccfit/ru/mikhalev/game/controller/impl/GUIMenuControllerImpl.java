@@ -40,6 +40,8 @@ public class GUIMenuControllerImpl implements GUIMenuController {
 
     public static final int OPEN_JOIN_WINDOW = 2;
 
+    public static final int SPACE_BETWEEN_WORDS = 55;
+
     private GUIGameMenu guiGameMenu;
 
     @Override
@@ -75,7 +77,7 @@ public class GUIMenuControllerImpl implements GUIMenuController {
 
         List<String> games = contextGamesInfo.getGames().stream().map(announcementMsg -> {
                     SnakesProto.GameAnnouncement game = announcementMsg.getGames(0);
-                    return game.getGameName() + " " + game.getCanJoin();
+                    return game.getGameName() + " ".repeat(SPACE_BETWEEN_WORDS - game.getGameName().length()) + game.getCanJoin();
         }).toList();
         gamesInfo.getItems().setAll(games);
     }
@@ -91,7 +93,7 @@ public class GUIMenuControllerImpl implements GUIMenuController {
         gamesInfo.setOnMouseClicked(event -> {
             String selectedItem = gamesInfo.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
-                log.info("join toGame {}", selectedItem);
+                log.info("join to game {}", selectedItem);
                 this.openJoinWindow(selectedItem.substring(0, selectedItem.indexOf(' ')));
             }
         });

@@ -81,11 +81,7 @@ public class GameControllerImpl implements GameController {
         networkController.startMulticastSender(playerManager.getAnnouncementMsg());
         networkController.startSenderUDP();
         this.playerState = new PlayerState(playerManager.getCurrentPlayerID(), namePlayer, nameGame, MASTER);
-        try {
-            playerManager.createPlayer(InetAddress.getByName(MASTER_IP), MASTER_PORT, namePlayer, MASTER);
-        } catch (UnknownHostException ex) {
-            log.error("failed to create a player");
-        }
+        playerManager.createPlayer(inetAddressMASTER, MASTER_PORT, namePlayer, MASTER);
     }
 
     public SnakesProto.GameConfig getGameConfig() {
@@ -134,11 +130,8 @@ public class GameControllerImpl implements GameController {
     public void updateState() {
         SnakesProto.GameMessage gameMessage = GameMessage.createGameMessage(game.getGameState(playerManager));
 
-        log.info("UPDATE STATE SIZE {}, ROLE {}", playerManager.getPlayersID().entrySet().size(), this.playerState.role() == MASTER);
         if (this.playerState.role() == MASTER) {
-            log.info("UPDATE STATE SIZE {}", playerManager.getPlayersID().entrySet().size());
             for (var playerID : playerManager.getPlayersID().entrySet()) {
-                log.info("PLAYER GET KEY key {} port {}", playerID.getKey().getIp(), playerID.getKey().getPort());
                 if(playerID.getKey().getIp() != inetAddressMASTER)
                     networkController.addMessageToSend(playerID.getKey(), gameMessage);
             }

@@ -9,6 +9,7 @@ import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.net.DatagramPacket;
 import java.util.Arrays;
+import java.util.Date;
 
 @Slf4j
 public final class MessageHandler implements Runnable {
@@ -31,7 +32,6 @@ public final class MessageHandler implements Runnable {
         } catch (InvalidProtocolBufferException e) {
             throw new TypeCaseException(e);
         }
-
         this.gameController = gameController;
     }
 
@@ -43,22 +43,22 @@ public final class MessageHandler implements Runnable {
     }
 
     @Override
-    public void run(){
+    public void run() {
         log.info ("start new thread MessageHandler");
         switch (gameMessage.getTypeCase()) {
             case PING -> log.info("message PING");
             case STEER -> this.gameController.moveSnakeByHostKey(hostNetworkKey, gameMessage.getSteer().getDirection());
-            case ACK -> {
-                log.info("ACK RECEIVE MSG");
-                this.storage.getSentMessages().remove(gameMessage.getMsgSeq());
-            }
+            case ACK -> this.storage.getSentMessages().remove(gameMessage.getMsgSeq());
             case STATE -> gameController.updateStateGUI(gameMessage);
-            case ANNOUNCEMENT -> log.info ("message STEER");
-            case JOIN -> this.gameController.joinToGame(hostNetworkKey, gameMessage.getJoin());
-            case ERROR -> log.info ("message ERROR");
-            case ROLE_CHANGE -> log.info ("message ROLE_CHANGE");
-            case DISCOVER -> log.info ("message DISCOVER");
-            case TYPE_NOT_SET -> log.info ("message TYPE_NOT_SET");
+            case ERROR -> log.info("message ERROR");
+            case ROLE_CHANGE -> log.info("message ROLE_CHANGE");
+            case DISCOVER -> log.info("message DISCOVER");
+            case TYPE_NOT_SET -> log.info("message TYPE_NOT_SET");
+            case JOIN -> {
+                this.storage.addNewUser(hostNetworkKey, new NodeRole(gameMessage.getJoin().getRequestedRole(), new Date()));
+                this.gameController.joinToGame(hostNetworkKey, gameMessage.getJoin());
+            }
+
             default -> throw new TypeCaseException();
         }
     }

@@ -11,12 +11,6 @@ v
 Fsrc/main/java/nsu/ccfit/ru/mikhalev/ecxeption/SwitchTailException.java,8/5/850a5dabc28a42c70d371bbe59d5b24b02668a8d
 {
 Ksrc/main/java/nsu/ccfit/ru/mikhalev/ecxeption/ChooseDirectionException.java,a/3/a320a98e57e66dcae846570e00d6d75a2ba711e2
-z
-Jsrc/main/java/nsu/ccfit/ru/mikhalev/game/controller/event/PlayerEvent.java,f/6/f623f6762fc40860506a059c0e39b5e202a3648e
-x
-Hsrc/main/java/nsu/ccfit/ru/mikhalev/game/controller/event/TypeEvent.java,9/2/9217d03fa0cb02115790ae5d445d004a9e95999b
-z
-Jsrc/main/java/nsu/ccfit/ru/mikhalev/game/controller/event/MoveHandler.java,9/7/973942c9b124802caca03c80dfbfb33ff474c833
 t
 Dsrc/main/java/nsu/ccfit/ru/mikhalev/protobuf/snakes/SnakesProto.java,a/7/a72b7b0aa6a2445a0c700bebadf1f81ce9cca4e1
 w
@@ -119,3 +113,7 @@ w
 Gsrc/main/java/nsu/ccfit/ru/mikhalev/ecxeption/ThreadInterException.java,a/3/a3b43835e5805c0c1db87fb50b9e83c197717200
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+w
+Gsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/message/NodeInfo.java,2/e/2e714e3271ac3a437d7b135991ea93a42230701e
+z
+Jsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/message/MessageType.java,d/3/d3f610826682a000c58d53859c8ef7db4233ed8e

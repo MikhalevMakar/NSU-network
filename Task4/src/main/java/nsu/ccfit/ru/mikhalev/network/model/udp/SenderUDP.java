@@ -24,5 +24,4 @@ public class SenderUDP {
             log.error("error send message");
         }
     }
-
 }

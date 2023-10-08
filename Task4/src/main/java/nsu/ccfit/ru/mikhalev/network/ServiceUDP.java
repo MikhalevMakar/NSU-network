@@ -11,11 +11,14 @@ import nsu.ccfit.ru.mikhalev.network.model.udp.*;
 import java.net.*;
 import java.util.*;
 
-import static java.lang.Thread.sleep;
-
 @Slf4j
 public class ServiceUDP {
     private static final int timeoutDelay = 200;
+
+    private static final int SEND_DELAY = 1;
+
+    private static final int RECEIVE_DELAY = 2;
+
     private final DatagramSocket datagramSocket = new DatagramSocket();
 
     private final ReceiverUDP receiverUDP;
@@ -41,7 +44,7 @@ public class ServiceUDP {
                     }
                 }
               try {
-                  sleep(3);
+                  Thread.sleep(RECEIVE_DELAY);
               } catch (InterruptedException e) {
                     throw new ThreadInterException(e.getMessage());
               }
@@ -64,7 +67,7 @@ public class ServiceUDP {
                     }
                 }
                 try {
-                    sleep(3);
+                    Thread.sleep(SEND_DELAY);
                 } catch (InterruptedException e) {
                     throw new ThreadInterException(e.getMessage());
                 }

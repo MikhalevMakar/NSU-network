@@ -10,7 +10,6 @@ import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 import java.net.*;
 import java.util.*;
 
-import static nsu.ccfit.ru.mikhalev.game.controller.impl.GameControllerImpl.*;
 import static nsu.ccfit.ru.mikhalev.game.model.Snake.MIN_SNAKE_ID;
 
 @Slf4j
@@ -45,21 +44,17 @@ public class PlayerManager extends Observable {
         return this.players.values().stream().toList();
     }
 
-    private void addNewUserByIP(String ip, int port, SnakesProto.GamePlayer player) {
-        try {
-            log.info ("add new user by ip {} and port {}", ip, port);
-            playersID.put(new HostNetworkKey(InetAddress.getByName(ip), port), player.getId());
-            players.put(player.getId(), player);
-        } catch(UnknownHostException ex) {
-            log.error("unknown host exception", ex);
-        }
+    private void addNewUserByIP(InetAddress ip, int port, SnakesProto.GamePlayer player) {
+        log.info ("add new user by ip {} and port {}", ip, port);
+        playersID.put(new HostNetworkKey(ip, port), player.getId());
+        players.put(player.getId(), player);
     }
 
     public void createPlayer(InetAddress ip, int port, String nameUser, SnakesProto.NodeRole role) {
         log.info("create player {}", nameUser);
         SnakesProto.GamePlayer player = SnakesProto.GamePlayer.newBuilder().setName(nameUser).setId(this.currentPlayerID).setPort(port)
                                             .setRole(role).setIpAddress(ip.getHostAddress()).setScore(BEGIN_POINT).build();
-        this.addNewUserByIP(MASTER_IP, MASTER_PORT, player);
+        this.addNewUserByIP(ip, port, player);
 
         this.contextMainNodeInfo.update(ip, port, this.getAnnouncementMsg());
 
