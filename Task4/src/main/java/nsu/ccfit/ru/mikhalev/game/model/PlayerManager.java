@@ -3,7 +3,7 @@ package nsu.ccfit.ru.mikhalev.game.model;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.FindSuitableSquareException;
-import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.observer.Observable;
 import nsu.ccfit.ru.mikhalev.observer.context.ContextError;
 import nsu.ccfit.ru.mikhalev.observer.context.ContextMainNodeInfo;

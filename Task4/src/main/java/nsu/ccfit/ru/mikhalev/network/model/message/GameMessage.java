@@ -63,12 +63,9 @@ public class GameMessage {
                                                 .build();
     }
 
-    public static SnakesProto.GameMessage createGameMessage(SnakesProto.NodeRole receiverRole, SnakesProto.NodeRole senderRole) {
-        return SnakesProto.GameMessage.newBuilder().setRoleChange(SnakesProto.GameMessage.RoleChangeMsg.newBuilder()
-                                                                .setReceiverRole(receiverRole)
-                                                                .setSenderRole(senderRole))
+    public static SnakesProto.GameMessage createGameMessage(SnakesProto.GameMessage.RoleChangeMsg roleChangeMsg) {
+        return SnakesProto.GameMessage.newBuilder().setRoleChange(roleChangeMsg)
                                                                 .setMsgSeq(Message.getSeqNumber())
                                                                 .build();
-
     }
 }

@@ -2,7 +2,8 @@ package nsu.ccfit.ru.mikhalev.game.controller;
 
 import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
 import nsu.ccfit.ru.mikhalev.network.NetworkController;
-import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.message.NodeRole;
 import nsu.ccfit.ru.mikhalev.observer.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
@@ -24,7 +25,7 @@ public interface GameController extends ObserverState, ObserverError {
 
     void moveSnakeByHostKey(HostNetworkKey key, SnakesProto.Direction direction);
 
-    void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message);
+    void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message, SnakesProto.NodeRole role);
 
     void moveHandler(SnakesProto.Direction direction);
 

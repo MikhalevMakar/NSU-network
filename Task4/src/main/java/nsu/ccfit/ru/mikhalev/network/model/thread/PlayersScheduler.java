@@ -1,10 +1,10 @@
-package nsu.ccfit.ru.mikhalev.network.model;
+package nsu.ccfit.ru.mikhalev.network.model.thread;
 
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
 
 import static nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto.NodeRole.MASTER;
 
-public class NodeCheck implements Runnable {
+public class PlayersScheduler implements Runnable {
 
     private final NetworkStorage storage;
 
@@ -12,7 +12,7 @@ public class NodeCheck implements Runnable {
 
     private final double kickDelay;
 
-    public NodeCheck(NetworkStorage storage, int delay) {
+    public PlayersScheduler(NetworkStorage storage, int delay) {
         this.storage= storage;
         this.pingDelay = delay / 10;
         this.kickDelay = delay * 0.8;

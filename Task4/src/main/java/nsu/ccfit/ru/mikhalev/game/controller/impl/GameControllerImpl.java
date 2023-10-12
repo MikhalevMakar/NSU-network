@@ -10,7 +10,7 @@ import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
 import nsu.ccfit.ru.mikhalev.game.model.*;
 import nsu.ccfit.ru.mikhalev.network.NetworkController;
 
-import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.GameMessage;
 import nsu.ccfit.ru.mikhalev.observer.ObserverNetwork;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
@@ -103,12 +103,13 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    public void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message) {
+    public void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message, SnakesProto.NodeRole role) {
         log.info("join to game ip {}, port {}", hostNetworkKey.getIp(), hostNetworkKey.getPort());
-        this.networkController.addRoleSelf(message.getRequestedRole());
+        this.networkController.addRoleSelf(role);
         this.playerManager.createPlayer(hostNetworkKey.getIp(), hostNetworkKey.getPort(),
-                                        message.getPlayerName(), message.getRequestedRole());
+                                        message.getPlayerName(), role);
     }
+
     @Override
     public void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role) {
         this.guiGameSpace.view();

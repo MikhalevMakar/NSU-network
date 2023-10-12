@@ -27,6 +27,7 @@ module nsu.ccfit.ru.mikhalev {
     exports nsu.ccfit.ru.mikhalev.network;
     exports nsu.ccfit.ru.mikhalev.ecxeption;
     exports nsu.ccfit.ru.mikhalev.game.controller.impl;
-    exports  nsu.ccfit.ru.mikhalev.network.model;
+    exports  nsu.ccfit.ru.mikhalev.network.model.keynode;
+    exports nsu.ccfit.ru.mikhalev.network.model.thread;
     opens nsu.ccfit.ru.mikhalev.game.controller.impl to javafx.fxml;
 }

@@ -1,8 +1,8 @@
 package nsu.ccfit.ru.mikhalev.network.model.message;
 
 import lombok.Getter;
-import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
-import nsu.ccfit.ru.mikhalev.network.model.MainRole;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.MainRole;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -20,8 +20,19 @@ public class NetworkStorage {
     @Getter
     private final MainRole mainRole = new MainRole();
 
+    public void updateMainRole(HostNetworkKey keyMaster, HostNetworkKey keyDeputy) {
+        this.mainRole.updateKeys(keyMaster, keyDeputy);
+    }
+
     @Getter
     private long lastSendTime;
+
+    @Getter
+    private long lastStateMsgNum;
+
+    public void updateLastStateMsgNum(long seqNum) {
+        this.lastStateMsgNum = seqNum;
+    }
 
     public void updateLastSendTime() {
         this.lastSendTime = System.currentTimeMillis();

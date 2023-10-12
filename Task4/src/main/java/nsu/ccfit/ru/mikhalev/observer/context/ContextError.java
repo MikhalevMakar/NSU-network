@@ -1,7 +1,7 @@
 package nsu.ccfit.ru.mikhalev.observer.context;
 
 import lombok.Data;
-import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 
 @Data
 public class ContextError implements Context {

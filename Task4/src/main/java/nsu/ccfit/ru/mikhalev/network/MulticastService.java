@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import nsu.ccfit.ru.mikhalev.ecxeption.ReceiveDatagramException;
 
-import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
 import nsu.ccfit.ru.mikhalev.network.model.multicast.*;
 import nsu.ccfit.ru.mikhalev.observer.Observable;

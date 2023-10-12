@@ -1,7 +1,7 @@
 package nsu.ccfit.ru.mikhalev.network.model.message;
 
 import lombok.Getter;
-import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.net.DatagramPacket;
@@ -13,6 +13,13 @@ public final class Message {
     private final HostNetworkKey hostNetworkKey;
 
     private final SnakesProto.GameMessage gameMessage;
+
+    @Getter
+    private boolean isSent = false;
+
+    public void statusChangeSent() {
+        this.isSent = true;
+    }
 
     public Message(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage gameMessage) {
         this.packet = new DatagramPacket(gameMessage.toByteArray(),

@@ -8,6 +8,7 @@ import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.util.*;
 
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.FOOD;
 import static nsu.ccfit.ru.mikhalev.game.model.Snake.*;
 
 
@@ -18,6 +19,8 @@ public class Game extends Observable {
     private final Map<Integer, Snake> snakes = new HashMap<>();
 
     private final Map<Integer, SnakesProto.Direction> moves = new HashMap<>();
+
+    private static final double SUCCESS_RATE_FIFTY = 0.5;
 
     private final Timer timer = new Timer();
 
@@ -88,10 +91,8 @@ public class Game extends Observable {
 
     public void checkCorrectMovesSnakes() {
         Set<Snake> snakesToRemove = new HashSet<>();
-        Iterator<Snake> iterator = snakes.values().iterator();
 
-        while (iterator.hasNext()) {
-            Snake snake = iterator.next();
+        for (Snake snake : snakes.values()) {
             List<Integer> snakesOnCell = field.getListValue(snake.getHead());
             if (snakesOnCell.size() == ONE_SNAKE) continue;
 
@@ -104,20 +105,30 @@ public class Game extends Observable {
                 if (currSnakeID == snake.getId()) ++countEqualsIdOnCell;
                 else if (!headSnake.equals(curSnake.getHead())) {
                     snakesToRemove.add(snake);
-                    SnakesProto.GameState.Coord newHeadCoord = getNextCoord(curSnake.getDirection().getNumber(), snake.getHead(), field);
+                    SnakesProto.GameState.Coord newHeadCoord = getNextCoord(curSnake.getDirection().getNumber(),
+                                                                            snake.getHead(), field);
                     snake.addNewCoord(SNAKE_HEAD, newHeadCoord);
                     field.setValue(newHeadCoord.getX(), newHeadCoord.getY(), snake.getId());
-                }
+                } else snakesToRemove.add(curSnake);
             }
             if (countEqualsIdOnCell > ONE_SNAKE) snakesToRemove.add(snake);
         }
 
         for (Snake snakeToRemove : snakesToRemove) {
-            foodFromSnake += snakeToRemove.getPlacement().size() / 2;
+            this.placementFoodBySnake(snakeToRemove);
             this.removeSnake(snakeToRemove);
         }
     }
 
+    private void placementFoodBySnake(Snake snake) {
+        log.info("PLACEMENT FOOD BY SNAKE {}", snake.getPlacement().size());
+        for(var coord : snake.getPlacement()) {
+            if (!field.containsFood(coord) && Math.random() < SUCCESS_RATE_FIFTY) {
+                field.setValue(coord.getX(), coord.getY(), FOOD);
+                field.setFoodByCoord(coord);
+            }
+        }
+    }
 
     public void run() {
         TimerTask task = new TimerTask() {

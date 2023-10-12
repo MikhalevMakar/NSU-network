@@ -6,17 +6,18 @@ import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.ThreadInterException;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
+import nsu.ccfit.ru.mikhalev.network.model.thread.SenderScheduler;
 import nsu.ccfit.ru.mikhalev.network.model.udp.*;
 
 import java.net.*;
 
 @Slf4j
 public class ServiceUDP {
-    private static final int timeoutDelay = 200;
+    private static final int TIMEOUT_DELAY = 200;
 
-    private static final int SEND_DELAY = 1;
+    public static final int SEND_DELAY = 1;
 
-    private static final int RECEIVE_DELAY = 1;
+    public static final int RECEIVE_DELAY = 1;
 
     private final DatagramSocket datagramSocket = new DatagramSocket();
 
@@ -30,7 +31,7 @@ public class ServiceUDP {
         receiverUDP = new ReceiverUDP(datagramSocket, gameController, networkStorage);
 
         this.networkStorage = networkStorage;
-        datagramSocket.setSoTimeout(timeoutDelay);
+        datagramSocket.setSoTimeout(TIMEOUT_DELAY);
     }
 
     public void startReceiver() {
@@ -38,7 +39,7 @@ public class ServiceUDP {
             while (!Thread.currentThread().isInterrupted()) {
                 long currentTime = System.currentTimeMillis();
                 synchronized (datagramSocket) {
-                    while (System.currentTimeMillis () - currentTime < timeoutDelay / 10) {
+                    while (System.currentTimeMillis () - currentTime < TIMEOUT_DELAY / 10) {
                         receiverUDP.receive();
                     }
                 }
@@ -53,17 +54,15 @@ public class ServiceUDP {
     }
 
     public void startSender() {
+        SenderScheduler senderScheduler = new SenderScheduler(networkStorage);
+        senderScheduler.start();
         Thread thread = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 synchronized (datagramSocket) {
                     for(var message : networkStorage.getMessagesToSend()) {
                         senderUDP.send(message);
+                        message.statusChangeSent();
                         networkStorage.updateLastSendTime();
-                        if(MessageType.isNeedConfirmation(message.getGameMessage().getTypeCase().getNumber()))
-                            networkStorage.addSentMessage(message.getGameMessage().getMsgSeq(),
-                                                          new NodeInfo(message.getHostNetworkKey(), message, networkStorage.getLastSendTime()));
-
-                        networkStorage.removeMessageToSend(message);
                     }
                 }
                 try {
@@ -80,13 +79,13 @@ public class ServiceUDP {
         Runnable r = ()-> {
             while(!Thread.currentThread().isInterrupted()) {
                 for(var sentMessage : networkStorage.getEntrySetSentMessage()) {
-                     if(System.currentTimeMillis() - sentMessage.getValue().sentTime() > timeoutDelay / 10) {
+                     if(System.currentTimeMillis() - sentMessage.getValue().sentTime() > TIMEOUT_DELAY / 10) {
                          networkStorage.addMessageToSend(sentMessage.getValue().message());
                          networkStorage.removeSentMessage(sentMessage.getValue().message().getGameMessage().getMsgSeq());
                      }
                 }
                 try {
-                    Thread.sleep(timeoutDelay / 10);
+                    Thread.sleep(TIMEOUT_DELAY / 10);
                 } catch (InterruptedException e) {
                     throw new ThreadInterException(e.getMessage());
                 }

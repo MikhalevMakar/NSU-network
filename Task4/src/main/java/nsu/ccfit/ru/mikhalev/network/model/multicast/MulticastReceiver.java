@@ -2,7 +2,7 @@ package nsu.ccfit.ru.mikhalev.network.model.multicast;
 
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.*;
-import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.MainNodeInfo;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 

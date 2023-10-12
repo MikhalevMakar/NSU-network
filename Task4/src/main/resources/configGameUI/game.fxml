@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsu.ccfit.ru.mikhalev.game.controller.impl.GUIMenuControllerImpl">
+    <children>
+        <Line endX="191.5059356689453" endY="18.705249786376953" layoutX="637.0" layoutY="270.0" rotate="90.0" startX="-174.32888793945312" startY="18.4591007232666" stroke="#465058" strokeWidth="2.0" />
+        <ListView fx:id="gamesInfo" layoutX="695.0" layoutY="43.0" onMouseClicked="#joinToGame" prefHeight="202.0" prefWidth="284.0" style="-fx-background-color: transparent; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../gamesInfo.css" />
+        <Accordion />
+        <Pane layoutX="694.0" layoutY="18.0" prefHeight="26.0" prefWidth="285.0" style="-fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css">
+            <children>
+                <Text fill="#9a9999" layoutX="142.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-color: #465058;" text="Набраные очки" wrappingWidth="110.75780267118398" />
+                <Line endX="176.56463623046875" endY="-0.40000152587890625" layoutX="-41.0" layoutY="25.0" startX="176.56463623046875" startY="-23.138681411743164" stroke="#465058" strokeWidth="2.0" />
+                <Text fill="#9a9999" layoutX="31.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-color: #465058;" text="Имя игрока" wrappingWidth="103.78923416137695" />
+            </children></Pane>
+      <ListView fx:id="gamesInfo1" layoutX="697.0" layoutY="284.0" onMouseClicked="#joinToGame" prefHeight="242.0" prefWidth="283.0" style="-fx-background-color: transparent; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../gamesInfo.css" />
+      <Pane layoutX="696.0" layoutY="259.0" prefHeight="26.0" prefWidth="284.0" style="-fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css">
+         <children>
+            <Line endX="176.56463623046875" endY="-1.10546875" layoutX="-52.0" layoutY="25.0" startX="176.56463623046875" startY="-23.138681411743164" stroke="#465058" strokeWidth="2.0" />
+            <Text fill="#9a9999" layoutX="20.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-color: #465058;" text="Название игры" wrappingWidth="103.78923416137695" />
+            <Text fill="#9a9999" layoutX="129.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-color: #465058;" text="Статус  вступления в игру" wrappingWidth="154.4317512512207" />
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

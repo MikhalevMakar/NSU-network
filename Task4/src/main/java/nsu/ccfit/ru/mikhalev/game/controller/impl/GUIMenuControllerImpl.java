@@ -13,6 +13,8 @@ import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.util.*;
 
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.DEFAULT_NUMBER_GAME_MSG;
+
 @Slf4j
 public class GUIMenuControllerImpl implements GUIMenuController {
     @FXML
@@ -44,6 +46,8 @@ public class GUIMenuControllerImpl implements GUIMenuController {
 
     private GUIGameMenu guiGameMenu;
 
+    private ContextListGames contextGames;
+
     @Override
     public void dependencyInjection(GameController gameController, GUIGameMenu guiGameMenu) {
         log.info("registration game controller");
@@ -64,18 +68,16 @@ public class GUIMenuControllerImpl implements GUIMenuController {
                                                             .setWidth(Integer.parseInt(width.getText()))
                                                             .setStateDelayMs(Integer.parseInt(delay.getText()))
                                                             .setFoodStatic(Integer.parseInt(countFood.getText()))
-                                                            .build()
-                                        );
-
+                                                            .build());
         gameController.startGame();
     }
 
     @Override
     public void updateNetworkMsg(Context context) {
 
-        ContextListGames contextGamesInfo = (ContextListGames) context;
+         this.contextGames = (ContextListGames) context;
 
-        List<String> games = contextGamesInfo.getGames().stream().map(announcementMsg -> {
+        List<String> games = contextGames.getGames().stream().map(announcementMsg -> {
                     SnakesProto.GameAnnouncement game = announcementMsg.getGames(0);
                     return game.getGameName() + " ".repeat(SPACE_BETWEEN_WORDS - game.getGameName().length()) + game.getCanJoin();
         }).toList();
@@ -84,7 +86,13 @@ public class GUIMenuControllerImpl implements GUIMenuController {
 
     private void openJoinWindow(String nameGame) {
         Objects.requireNonNull(this.guiGameMenu, "guiGameMenu required not null");
-        this.guiGameMenu.openJoinWindow(nameGame);
+        Objects.requireNonNull(this.contextGames, "contextGames required not null");
+        this.contextGames.getGames()
+            .stream()
+            .filter(announcementMsg -> announcementMsg.getGames(DEFAULT_NUMBER_GAME_MSG).getGameName().equals(nameGame))
+            .findFirst()
+            .map(announcementMsg -> announcementMsg.getGames(DEFAULT_NUMBER_GAME_MSG))
+            .ifPresent(this.guiGameMenu::openJoinWindow);
     }
 
     public void joinToGame(MouseEvent mouseEvent) {

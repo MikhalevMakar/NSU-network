@@ -9,6 +9,8 @@ public class ContextValue {
 
     public static final int SNAKE_PIT = 5;
 
+    public static final int DEFAULT_NUMBER_GAME_MSG = 0;
+
     public static final int EMPTY_SQUARE_SIZE = 0;
 
     public static final int SIZE_SQUARE = 5;

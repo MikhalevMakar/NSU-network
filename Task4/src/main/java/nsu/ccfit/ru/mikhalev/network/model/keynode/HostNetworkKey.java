@@ -1,4 +1,4 @@
-package nsu.ccfit.ru.mikhalev.network.model;
+package nsu.ccfit.ru.mikhalev.network.model.keynode;
 
 import lombok.*;
 

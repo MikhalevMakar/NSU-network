@@ -1,12 +1,10 @@
 package nsu.ccfit.ru.mikhalev.network;
 
-import javafx.scene.Node;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
-import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
-import nsu.ccfit.ru.mikhalev.network.model.MainRole;
-import nsu.ccfit.ru.mikhalev.network.model.NodeCheck;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
+import nsu.ccfit.ru.mikhalev.network.model.thread.PlayersScheduler;
 import nsu.ccfit.ru.mikhalev.observer.ObserverNetwork;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
@@ -80,11 +78,16 @@ public class NetworkController implements ObserverNetwork  {
                                                          gameMessage));
     }
 
-    public void addMessageToSend(HostNetworkKey key,SnakesProto.GameMessage gameMessage) {
-        this.networkStorage.addMessageToSend(new Message(key, gameMessage));
+    public void addMessageToSend(HostNetworkKey key,SnakesProto.GameMessage gameMessage){
+        this.networkStorage.addMessageToSend (new Message (key, gameMessage));
     }
 
     public void addRoleSelf(SnakesProto.NodeRole role) {
         this.networkStorage.getMainRole().setRoleSelf(role);
+    }
+
+    public void startPlayersScheduler(int delay) {
+        Thread thread = new Thread(new PlayersScheduler(this.networkStorage, delay));
+        thread.start();
     }
 }

@@ -1,14 +1,18 @@
 package nsu.ccfit.ru.mikhalev.network.model.message;
 
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.Option;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.TypeCaseException;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
-import nsu.ccfit.ru.mikhalev.network.model.HostNetworkKey;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Arrays;
+import java.util.Optional;
 
 @Slf4j
 public final class MessageHandler implements Runnable {
@@ -34,21 +38,14 @@ public final class MessageHandler implements Runnable {
         this.gameController = gameController;
     }
 
-    public void sendNeedConfirmation(int typeCase) {
-        log.info("SEND NeedConfirmation");
-        if(MessageType.isNeedConfirmation(typeCase))
-            storage.addMessageToSendFirst(new Message(hostNetworkKey,
-                                                      GameMessage.createGameMessage(gameMessage.getMsgSeq())));
-    }
-
     @Override
     public void run() {
-        log.info ("start new thread MessageHandler");
+        log.info ("start new thread MessageHandler {}", gameMessage.getTypeCase());
         switch (gameMessage.getTypeCase()) {
             case PING -> log.info("message PING");
             case STEER -> this.gameController.moveSnakeByHostKey(hostNetworkKey, gameMessage.getSteer().getDirection());
             case ACK -> this.storage.removeSentMessage(gameMessage.getMsgSeq());
-            case STATE -> gameController.updateStateGUI(gameMessage);
+            case STATE -> this.handlerState();
             case ERROR -> gameController.reportErrorGUI(gameMessage.getError().getErrorMessage());
             case ROLE_CHANGE -> this.handlerChangeRole();
             case DISCOVER -> log.info("message DISCOVER");
@@ -59,8 +56,38 @@ public final class MessageHandler implements Runnable {
         this.storage.updateTimePLayer(this.hostNetworkKey);
     }
 
+    public void sendNeedConfirmation(int typeCase) {
+        log.info("SEND NeedConfirmation");
+        if(MessageType.isNeedConfirmation(typeCase))
+            storage.addMessageToSendFirst(new Message(hostNetworkKey,
+                GameMessage.createGameMessage(gameMessage.getMsgSeq())));
+    }
+
+
+    private void handlerState() {
+        if(gameMessage.getMsgSeq() < storage.getLastStateMsgNum()) return;
+
+        Optional<SnakesProto.GamePlayer> deputyOptional = gameMessage.getState().getState()
+                                                                 .getPlayers().getPlayersList()
+                                                                 .stream().takeWhile(player -> player.getRole() != SnakesProto.NodeRole.DEPUTY)
+                                                                 .findFirst();
+
+        deputyOptional.ifPresent(deputy -> {
+            try {
+                this.storage.updateMainRole(this.hostNetworkKey,
+                                            new HostNetworkKey(InetAddress.getByName(deputy.getIpAddress()),
+                                                                                     deputy.getPort()));
+            } catch (UnknownHostException e) {
+                log.warn("failed to update main roles");
+            }
+        });
+        this.storage.updateLastStateMsgNum(gameMessage.getMsgSeq());
+        gameController.updateStateGUI(gameMessage);
+    }
+
 
     private void handlerChangeRole() {
+        log.info("HANDLER CHANGE ROLE");
         if(this.gameMessage.getRoleChange().hasReceiverRole()) {
             this.storage.getMainRole().setRoleSelf(this.gameMessage.getRoleChange().getSenderRole());
         }
@@ -68,16 +95,16 @@ public final class MessageHandler implements Runnable {
 
     private void handlerJoin() {
         SnakesProto.GameMessage.JoinMsg joinMsg = gameMessage.getJoin();
-        this.gameController.joinToGame(hostNetworkKey, gameMessage.getJoin());
-        this.requestRole(this.requestRole(joinMsg.getRequestedRole()));
+        this.gameController.joinToGame(hostNetworkKey, gameMessage.getJoin(), this.requestRole(this.requestRole(joinMsg.getRequestedRole())));
         this.storage.addNewUser(hostNetworkKey, new NodeRole(joinMsg.getRequestedRole()));
     }
 
     private SnakesProto.NodeRole requestRole(SnakesProto.NodeRole nodeRole) {
-        if(nodeRole != SnakesProto.NodeRole.VIEWER &&  storage.getMainRole().getKeyDeputy() == null) {
-            this.storage.addMessageToSend(new Message(hostNetworkKey,
-                                                      GameMessage.createGameMessage(SnakesProto.NodeRole.DEPUTY,
-                                                                                    null)));
+        log.info("REQUEST ROLE");
+        log.info("boolean: {} {}", nodeRole != SnakesProto.NodeRole.VIEWER, storage.getMainRole().getKeyDeputy() == null);
+        if(nodeRole != SnakesProto.NodeRole.VIEWER && storage.getMainRole().getKeyDeputy() == null) {
+            this.storage.addMessageToSendFirst(new Message(hostNetworkKey, GameMessage.createGameMessage(SnakesProto.GameMessage.RoleChangeMsg.newBuilder()
+                                                                                                         .setReceiverRole(SnakesProto.NodeRole.DEPUTY).build())));
             return SnakesProto.NodeRole.DEPUTY;
         }
         return nodeRole;

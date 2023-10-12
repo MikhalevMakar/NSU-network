@@ -51,7 +51,7 @@ public class GUIJoinMenuControllerImpl implements GUIJoinController {
     }
 
     private SnakesProto.NodeRole getRole(String role) {
-        return (role.equals(VIEWER)) ? SnakesProto.NodeRole.VIEWER : SnakesProto.NodeRole.DEPUTY;
+        return role.equals(VIEWER) ? SnakesProto.NodeRole.VIEWER : SnakesProto.NodeRole.DEPUTY;
     }
 
     @Override

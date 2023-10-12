@@ -213,10 +213,10 @@ java:S1488©o"_Immediately return this expression instead of assigning it to the
 java:S1488¡t"_Immediately return this expression instead of assigning it to the temporary variable "builder".(«‰Ÿ~8¶ò–²¯1
 |
 java:S1488™}"_Immediately return this expression instead of assigning it to the temporary variable "builder".(«‰Ÿ~8¶ò–²¯1
-h
-java:S2259Ò{"JA "NullPointerException" could be thrown; "getTypeCase()" can return null.(ÊÊÏ8àß›²¯1
 g
 java:S2259ò~"IA "NullPointerException" could be thrown; "getTypeCase" is nullable here.(×·ôü8ëß›²¯1
+h
+java:S2259Ò{"JA "NullPointerException" could be thrown; "getTypeCase()" can return null.(ÊÊÏ8àß›²¯1
 £
 java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ƒ°‡ıÿÿÿÿ8Ó€—²¯1
 Q

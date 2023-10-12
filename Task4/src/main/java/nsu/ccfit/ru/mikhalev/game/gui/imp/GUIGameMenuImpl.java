@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.ClassLoaderException;
 import nsu.ccfit.ru.mikhalev.game.controller.*;
 import nsu.ccfit.ru.mikhalev.game.controller.impl.GUIJoinMenuControllerImpl;
+import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.io.*;
 import java.util.Objects;
@@ -27,11 +28,10 @@ public class GUIGameMenuImpl extends DisplayViewFXML {
 
     private Stage stageJoinWindow;
 
-    public GUIGameMenuImpl(GameController gameController, Stage stage) throws IOException{
-        log.info ("constructor GUIGameMenu: init var");
+    public GUIGameMenuImpl(GameController gameController, Stage stage) throws IOException {
+        log.info("constructor GUI game menu: init var");
 
         this.stageMenu = stage;
-
         this.gameController = gameController;
 
         File file = new File(VIEW_MENU_FXML_PATH);
@@ -49,7 +49,7 @@ public class GUIGameMenuImpl extends DisplayViewFXML {
     }
 
     @Override
-    public void openJoinWindow(String nameGame) {
+    public void openJoinWindow(SnakesProto.GameAnnouncement gameState) {
         log.info("open join window");
         File file = new File(VIEW_JOIN_FXML_PATH);
         try {
@@ -59,7 +59,7 @@ public class GUIGameMenuImpl extends DisplayViewFXML {
             this.stageJoinWindow = new Stage();
 
             GUIJoinMenuControllerImpl guiJoinMenuController = joinLoader.getController();
-            guiJoinMenuController.setNameGame(nameGame);
+            guiJoinMenuController.setNameGame(gameState.getGameName());
             guiJoinMenuController.dependencyInjection(gameController, this);
 
             super.view(this.stageJoinWindow, rootJoin);

@@ -56,6 +56,10 @@ public class Field {
         this.coords.get(x + y * this.width).add(id);
     }
 
+    public void setFoodByCoord(SnakesProto.GameState.Coord coord) {
+        this.foods.add(coord);
+    }
+
     public void foodPlacement(int count) {
         log.info("food placement by count {}", count);
         for(int i = 0, value; i < count; ++i) {
@@ -68,9 +72,8 @@ public class Field {
     public void removeSnake(Snake snake) {
         log.info("remove snake by id " + snake.getId());
         List<SnakesProto.GameState.Coord> placementSnake = snake.getPlacement();
-        for(var coord : placementSnake) {
+        for(var coord : placementSnake)
             this.getListValue(coord).remove(Integer.valueOf(snake.getId()));
-        }
     }
 
     private boolean isSuitableSquare(int beginX, int beginY) {
@@ -105,6 +108,10 @@ public class Field {
     public SnakesProto.GameState.Coord getCoord(int x, int y) {
         return SnakesProto.GameState.Coord.newBuilder()
             .setX(x).setY(y).build();
+    }
+
+    public boolean containsFood(SnakesProto.GameState.Coord coord) {
+        return foods.contains(coord);
     }
 
     public SnakesProto.GameState.Coord getCoordByIndex(int index) {

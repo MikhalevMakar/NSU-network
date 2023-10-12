@@ -1,10 +1,12 @@
 package nsu.ccfit.ru.mikhalev.game.gui.imp;
 
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import javafx.stage.Stage;
@@ -17,10 +19,15 @@ import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @Slf4j
 public class GUIGameSpaceImpl implements GUIGameSpace {
+
+    public static final String VIEW_GAME_FXML_PATH = "src/main/resources/configGameUI/game.fxml";
+
     private final GameController gameController;
 
     private static final String FOODS_PHOTO = "/image/watermelon.png";
@@ -46,13 +53,13 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     private final Stage stage;
 
-    private final Group root;
+    private final Pane root;
 
     private final Canvas canvas;
 
     private final Scene scene;
 
-    public GUIGameSpaceImpl(GameController gameController, Stage stage) {
+    public GUIGameSpaceImpl(GameController gameController, Stage stage) throws IOException{
         this.gameController = gameController;
         this.gameController.registrationGUIGameSpace(this);
         this.stage = stage;
@@ -61,7 +68,11 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
         this.stage.setTitle("Snake");
 
         this.canvas = new Canvas(WIDTH_CANVAS, HEIGHT_CANVAS);
-        this.root = new Group();
+
+        File file = new File(VIEW_GAME_FXML_PATH);
+        FXMLLoader gameLoader = new FXMLLoader();
+        gameLoader.setLocation(file.toURI().toURL());
+        this.root = gameLoader.load();
         this.scene = new Scene(root);
     }
 
@@ -103,6 +114,7 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     @Override
     public void drawSnake(SnakesProto.GameState.Snake snake) {
+        canvas.requestFocus();
         Objects.requireNonNull(snake, "snake require non null");
         log.info("draw snake");
         graphicsContext.setFill(colorSnake);

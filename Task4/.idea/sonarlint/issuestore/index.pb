@@ -73,8 +73,6 @@ v
 Fsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/message/Message.java,8/d/8d52ccc1d3464848c7e9e2214f879c0a63135627
 ‚
 Rsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/multicast/MulticastReceiver.java,4/8/4839b73eb895ca01ccecf8ed35ec3dcac75ad7ae
-u
-Esrc/main/java/nsu/ccfit/ru/mikhalev/network/model/HostNetworkKey.java,5/a/5ae72a79501c53334667b002115aba119a6056d5
 t
 Dsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/udp/SenderUDP.java,9/8/98b025136a8f86bb5d0e40e029410c0335a43f0c
 }
@@ -123,3 +121,11 @@ v
 Fsrc/main/java/nsu/ccfit/ru/mikhalev/observer/context/ContextError.java,8/5/850018d02fa531a236cf8bf88b58f8b220dea787
 o
 ?src/main/java/nsu/ccfit/ru/mikhalev/observer/ObserverError.java,4/8/48596de7b2aa2b1c1320c53e55ac9b5757114f70
+w
+Gsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/keynode/MainRole.java,2/b/2b58aede864f10c72e0bc17911b8843fbeefcb11
+}
+Msrc/main/java/nsu/ccfit/ru/mikhalev/network/model/keynode/HostNetworkKey.java,5/2/52a5611a51b2192d9c79e93f561741e017c0f1a9
+}
+Msrc/main/java/nsu/ccfit/ru/mikhalev/network/model/thread/SenderScheduler.java,8/f/8f54c8e05a8d055f0f6ce99117f38b58c9e582e6
+~
+Nsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/thread/PlayersScheduler.java,3/0/30a93fb6e6ec9ba3fa4207b72d0b7ba0c2add65a
