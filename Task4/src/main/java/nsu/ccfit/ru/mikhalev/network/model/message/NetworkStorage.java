@@ -1,12 +1,13 @@
 package nsu.ccfit.ru.mikhalev.network.model.message;
 
 import lombok.Getter;
-import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
-import nsu.ccfit.ru.mikhalev.network.model.keynode.MainRole;
+import lombok.extern.slf4j.Slf4j;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.*;
 
 import java.util.*;
 import java.util.concurrent.*;
 
+@Slf4j
 public class NetworkStorage {
     @Getter
     private final ConcurrentMap<String, MainNodeInfo> mainNodesInfo = new ConcurrentHashMap<>();
@@ -29,6 +30,10 @@ public class NetworkStorage {
 
     @Getter
     private long lastStateMsgNum;
+
+    public void updaterDispatchTimePlayer(HostNetworkKey key) {
+        this.players.get(key).updateTime();
+    }
 
     public void updateLastStateMsgNum(long seqNum) {
         this.lastStateMsgNum = seqNum;
@@ -70,7 +75,6 @@ public class NetworkStorage {
     public void removeMessageToSend(Message message) {
         this.messagesToSend.remove(message);
     }
-
 
     public void addSentMessage(Long key, NodeInfo nodeInfo) {
         sentMessages.put(key, nodeInfo);

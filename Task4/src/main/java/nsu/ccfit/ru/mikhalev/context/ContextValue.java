@@ -31,4 +31,10 @@ public class ContextValue {
     public static final int  FOOD = 1;
 
     public static final int SIZE_BUFFER =  65536;
+
+    public static final char SPACE_CHAR = ' ';
+
+    public static final String SPACE_STR = " ";
+
+    public static final int SPACE_BETWEEN_WORDS = 32;
 }

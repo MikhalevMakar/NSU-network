@@ -28,6 +28,8 @@ public class GUIJoinMenuControllerImpl implements GUIJoinController {
 
     private String nameGame;
 
+    private SnakesProto.GameConfig gameConfig;
+
     private static final String VIEWER = "Зритель";
 
     private static final String PLAYER = "Игрок";
@@ -38,7 +40,10 @@ public class GUIJoinMenuControllerImpl implements GUIJoinController {
         this.guiGameMenu = guiGameMenu;
     }
 
-    public void setNameGame(String nameGame) {this.nameGame = nameGame; }
+    public void intiGameState(SnakesProto.GameAnnouncement gameState) {
+        this.nameGame = gameState.getGameName();
+        this.gameConfig = gameState.getConfig();
+    }
 
     @Override
     public void joinGame() {
@@ -46,12 +51,13 @@ public class GUIJoinMenuControllerImpl implements GUIJoinController {
         SnakesProto.NodeRole role = this.getRole(choiceRole.getValue());
         Objects.requireNonNull(guiGameMenu, "guiGameMenu require non null");
         guiGameMenu.cancelJoinWindow();
-        gameController.initJoinGame(namePlayer.getText(), nameGame, role);
+
+        gameController.initJoinGame(namePlayer.getText(), nameGame, role, this.gameConfig.getStateDelayMs());
         gameController.sendMessageNetwork(nameGame, GameMessage.createGameMessage(nameGame, namePlayer.getText(), role));
     }
 
     private SnakesProto.NodeRole getRole(String role) {
-        return role.equals(VIEWER) ? SnakesProto.NodeRole.VIEWER : SnakesProto.NodeRole.DEPUTY;
+        return role.equals(VIEWER) ? SnakesProto.NodeRole.VIEWER : SnakesProto.NodeRole.NORMAL;
     }
 
     @Override

@@ -14,7 +14,9 @@ import static nsu.ccfit.ru.mikhalev.context.ContextField.*;
 import static nsu.ccfit.ru.mikhalev.game.model.Snake.SNAKE_HEAD;
 
 import lombok.extern.slf4j.Slf4j;
+import nsu.ccfit.ru.mikhalev.ecxeption.ClassLoaderException;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
+import nsu.ccfit.ru.mikhalev.game.controller.impl.ControllerGameState;
 import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
@@ -26,9 +28,9 @@ import java.util.*;
 @Slf4j
 public class GUIGameSpaceImpl implements GUIGameSpace {
 
-    public static final String VIEW_GAME_FXML_PATH = "src/main/resources/configGameUI/game.fxml";
-
     private final GameController gameController;
+
+    private static final String VIEW_GAME_FXML_PATH = "src/main/resources/configGameUI/game.fxml";
 
     private static final String FOODS_PHOTO = "/image/watermelon.png";
 
@@ -53,32 +55,40 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     private final Stage stage;
 
-    private final Pane root;
-
-    private final Canvas canvas;
-
     private final Scene scene;
+    private final Pane rootGameSpace;
 
-    public GUIGameSpaceImpl(GameController gameController, Stage stage) throws IOException{
-        this.gameController = gameController;
-        this.gameController.registrationGUIGameSpace(this);
-        this.stage = stage;
+    private final Canvas canvas = new Canvas(WIDTH_CANVAS, HEIGHT_CANVAS);
 
-        this.stage.setResizable(false);
-        this.stage.setTitle("Snake");
-
-        this.canvas = new Canvas(WIDTH_CANVAS, HEIGHT_CANVAS);
-
+    public GUIGameSpaceImpl(String nameGame, Stage stage , GameController gameController) {
         File file = new File(VIEW_GAME_FXML_PATH);
         FXMLLoader gameLoader = new FXMLLoader();
-        gameLoader.setLocation(file.toURI().toURL());
-        this.root = gameLoader.load();
-        this.scene = new Scene(root);
+
+        try {
+            gameLoader.setLocation(file.toURI().toURL());
+
+            this.rootGameSpace = gameLoader.load();
+        } catch(IOException ex) {
+            throw new ClassLoaderException(ex.getMessage());
+        }
+
+        this.gameController = gameController;
+        ControllerGameState gameState = gameLoader.getController();
+        gameState.setGameName(nameGame);
+        this.gameController.subscriptionOnMulticastService(gameState);
+
+        this.stage = stage;
+        this.stage.setTitle(nameGame);
+        this.scene = new Scene(rootGameSpace);
+        this.gameController.registrationGUIGameSpace(this);
     }
 
     @Override
     public void view() {
-        root.getChildren().add(canvas);
+
+        this.stage.setResizable(false);
+
+        rootGameSpace.getChildren().add(canvas);
         stage.setScene(scene);
         stage.show();
         graphicsContext = canvas.getGraphicsContext2D();
@@ -119,14 +129,14 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
         log.info("draw snake");
         graphicsContext.setFill(colorSnake);
         graphicsContext.fillRoundRect(snake.getPoints(SNAKE_HEAD).getX() * SQUARE_SIZE, snake.getPoints(SNAKE_HEAD).getY() * SQUARE_SIZE - 1,
-                                   SQUARE_SIZE - 1, SQUARE_SIZE - 1, 35, 35);
+                                      SQUARE_SIZE - 1, SQUARE_SIZE - 1, 35, 35);
 
         List<SnakesProto.GameState.Coord> coordsSnake = snake.getPointsList();
         Objects.requireNonNull(coordsSnake, "coordsSnake require non null");
         for (int i = 1; i < coordsSnake.size(); ++i) {
             graphicsContext.setFill(colorSnake);
             graphicsContext.fillRoundRect(coordsSnake.get(i).getX() * SQUARE_SIZE, coordsSnake.get(i).getY() * SQUARE_SIZE,
-                                       SQUARE_SIZE - 1, SQUARE_SIZE - 1, 20, 20);
+                                          SQUARE_SIZE - 1, SQUARE_SIZE - 1, 20, 20);
         }
     }
 
@@ -147,13 +157,11 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
     public void update(ContextGame context) {
         Platform.runLater(() -> {
             this.drawBackground();
-            this.generateFood (context.getCoords());
+            this.generateFood(context.getCoords());
             context.getSnakes().forEach(this::drawSnake);
         });
     }
 
     @Override
-    public void printErrorMessage(String message) {
-
-    }
+    public void printErrorMessage(String message) {}
 }

@@ -5,7 +5,7 @@ import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
 import nsu.ccfit.ru.mikhalev.network.model.thread.PlayersScheduler;
-import nsu.ccfit.ru.mikhalev.observer.ObserverNetwork;
+import nsu.ccfit.ru.mikhalev.observer.*;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
@@ -69,8 +69,8 @@ public class NetworkController implements ObserverNetwork  {
                                                     contextMainNodeInfo.getMessage());
     }
 
-    public void subscriptionOnMulticastService(ObserverNetwork observerNetwork) {
-        this.multicastService.addObserverNetwork(observerNetwork);
+    public void subscriptionOnMulticastService(ObserverGameState observerGameState) {
+        this.multicastService.addObserverGameState(observerGameState);
     }
 
     public void addMessageToSend(String nameGame, SnakesProto.GameMessage gameMessage) {
@@ -78,16 +78,24 @@ public class NetworkController implements ObserverNetwork  {
                                                          gameMessage));
     }
 
-    public void addMessageToSend(HostNetworkKey key,SnakesProto.GameMessage gameMessage){
-        this.networkStorage.addMessageToSend (new Message (key, gameMessage));
+    public void addMessageToSend(HostNetworkKey key,SnakesProto.GameMessage gameMessage) {
+        this.networkStorage.addMessageToSend(new Message(key, gameMessage));
     }
 
     public void addRoleSelf(SnakesProto.NodeRole role) {
         this.networkStorage.getMainRole().setRoleSelf(role);
     }
 
+    public void updateKeyMaster(HostNetworkKey keyMaster, HostNetworkKey keyDeputy) {
+        this.networkStorage.getMainRole().updateKeys(keyMaster, keyDeputy);
+    }
+
+    public HostNetworkKey getHostMasterNyGame(String nameGame) {
+        return this.networkStorage.getMasterNetworkByNameGame(nameGame);
+    }
+
     public void startPlayersScheduler(int delay) {
-        Thread thread = new Thread(new PlayersScheduler(this.networkStorage, delay));
+        Thread thread = new Thread(new PlayersScheduler(this.networkStorage, delay, gameController));
         thread.start();
     }
 }

@@ -3,7 +3,6 @@ package nsu.ccfit.ru.mikhalev.game.model;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.FindSuitableSquareException;
-import nsu.ccfit.ru.mikhalev.observer.Observable;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.util.*;
@@ -13,7 +12,7 @@ import static nsu.ccfit.ru.mikhalev.game.model.Snake.*;
 
 
 @Slf4j
-public class Game extends Observable {
+public class Game {
     private final Field field;
 
     private final Map<Integer, Snake> snakes = new HashMap<>();
@@ -21,8 +20,6 @@ public class Game extends Observable {
     private final Map<Integer, SnakesProto.Direction> moves = new HashMap<>();
 
     private static final double SUCCESS_RATE_FIFTY = 0.5;
-
-    private final Timer timer = new Timer();
 
     @Getter
     private final SnakesProto.GameConfig gameConfig;
@@ -34,6 +31,10 @@ public class Game extends Observable {
         this.field = new Field(gameConfig.getWidth(), gameConfig.getHeight());
 
         field.foodPlacement(gameConfig.getFoodStatic());
+    }
+
+    public void changeStatusPlayerSnake(Integer id, SnakesProto.GameState.Snake.SnakeState state) {
+        snakes.get(id).changeState(state);
     }
 
     public SnakesProto.GameState getGameState(PlayerManager playerManager) {
@@ -65,12 +66,12 @@ public class Game extends Observable {
         snakes.put(key, snake);
     }
 
-    public void updateField() {
+    public void updateField(PlayerManager playerManager) {
         log.info("update field");
         for (var snake : snakes.entrySet()) {
             SnakesProto.Direction direction = this.getMoveByKey(snake.getValue().getId());
             direction = (direction == null) ? snake.getValue().getDirection() : direction;
-            Snake.move(snake.getValue(), direction, field);
+            snake.getValue().move(direction, field, playerManager);
         }
     }
 
@@ -79,6 +80,11 @@ public class Game extends Observable {
         log.info("remove snake by id {}", snakeID);
         field.removeSnake(snakes.get(snakeID));
         snakes.remove(snakeID);
+    }
+
+    public void placementFood() {
+        this.field.foodPlacement(gameConfig.getFoodStatic() + foodFromSnake + snakes.size() - field.getCountPlacementFood());
+        this.foodFromSnake = 0;
     }
 
     public SnakesProto.Direction getMoveByKey(Integer key) {
@@ -128,20 +134,5 @@ public class Game extends Observable {
                 field.setFoodByCoord(coord);
             }
         }
-    }
-
-    public void run() {
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                updateField();
-                checkCorrectMovesSnakes();
-                field.foodPlacement(gameConfig.getFoodStatic() + foodFromSnake + snakes.size() - field.getCountPlacementFood());
-                foodFromSnake = 0;
-                Game.super.notifyObserversGameState();
-                if (snakes.isEmpty()) timer.cancel();
-            }
-        };
-        timer.scheduleAtFixedRate(task, gameConfig.getStateDelayMs(), gameConfig.getStateDelayMs());
     }
 }

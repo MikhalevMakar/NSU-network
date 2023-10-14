@@ -1,5 +1,6 @@
 package nsu.ccfit.ru.mikhalev.game.controller.impl;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
@@ -7,13 +8,15 @@ import javafx.scene.input.MouseEvent;
 import lombok.extern.slf4j.Slf4j;
 
 import nsu.ccfit.ru.mikhalev.game.controller.*;
-import nsu.ccfit.ru.mikhalev.game.gui.GUIGameMenu;
+import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
+import nsu.ccfit.ru.mikhalev.game.gui.imp.GUIGameMenuImpl;
+import nsu.ccfit.ru.mikhalev.game.gui.imp.GUIGameSpaceImpl;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.util.*;
 
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.DEFAULT_NUMBER_GAME_MSG;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
 
 @Slf4j
 public class GUIMenuControllerImpl implements GUIMenuController {
@@ -42,14 +45,12 @@ public class GUIMenuControllerImpl implements GUIMenuController {
 
     public static final int OPEN_JOIN_WINDOW = 2;
 
-    public static final int SPACE_BETWEEN_WORDS = 55;
+    private GUIGameMenuImpl guiGameMenu;
 
-    private GUIGameMenu guiGameMenu;
-
-    private ContextListGames contextGames;
+    private ContextGameState contextGames;
 
     @Override
-    public void dependencyInjection(GameController gameController, GUIGameMenu guiGameMenu) {
+    public void dependencyInjection(GameController gameController, GUIGameMenuImpl guiGameMenu) {
         log.info("registration game controller");
         this.gameController = gameController;
         this.guiGameMenu = guiGameMenu;
@@ -69,30 +70,37 @@ public class GUIMenuControllerImpl implements GUIMenuController {
                                                             .setStateDelayMs(Integer.parseInt(delay.getText()))
                                                             .setFoodStatic(Integer.parseInt(countFood.getText()))
                                                             .build());
+        this.launchGUIGameSpace();
         gameController.startGame();
     }
 
-    @Override
-    public void updateNetworkMsg(Context context) {
-
-         this.contextGames = (ContextListGames) context;
-
-        List<String> games = contextGames.getGames().stream().map(announcementMsg -> {
-                    SnakesProto.GameAnnouncement game = announcementMsg.getGames(0);
-                    return game.getGameName() + " ".repeat(SPACE_BETWEEN_WORDS - game.getGameName().length()) + game.getCanJoin();
-        }).toList();
-        gamesInfo.getItems().setAll(games);
+    private void launchGUIGameSpace() {
+        GUIGameSpace guiGameSpace = new GUIGameSpaceImpl(nameGame.getText(), guiGameMenu.getStageMenu(), this.gameController);
+        guiGameSpace.view();
     }
+
+    @Override
+    public void updateGameState(ContextGameState context) {
+        this.contextGames = context;
+        Platform.runLater(() -> gamesInfo.getItems().setAll(context.getGameAnnouncements().stream()
+                                    .map(game->String.format("%s %s %s %s %d", game.getGameName(),
+                                                                               SPACE_STR.repeat(SPACE_BETWEEN_WORDS - game.getGameName().length()),
+                                                                               game.getCanJoin(),
+                                                                               SPACE_STR.repeat(SPACE_BETWEEN_WORDS),
+                                                                               game.getPlayers().getPlayersList().size())).toList()));
+    }
+
 
     private void openJoinWindow(String nameGame) {
         Objects.requireNonNull(this.guiGameMenu, "guiGameMenu required not null");
         Objects.requireNonNull(this.contextGames, "contextGames required not null");
-        this.contextGames.getGames()
-            .stream()
-            .filter(announcementMsg -> announcementMsg.getGames(DEFAULT_NUMBER_GAME_MSG).getGameName().equals(nameGame))
-            .findFirst()
-            .map(announcementMsg -> announcementMsg.getGames(DEFAULT_NUMBER_GAME_MSG))
-            .ifPresent(this.guiGameMenu::openJoinWindow);
+        
+        this.launchGUIGameSpace();
+
+        this.contextGames.getGameAnnouncements().stream()
+                                                .takeWhile(announcementMsg -> announcementMsg.getGameName().equals(nameGame))
+                                                .findFirst()
+                                                .ifPresent(this.guiGameMenu::openJoinWindow);
     }
 
     public void joinToGame(MouseEvent mouseEvent) {
@@ -100,10 +108,8 @@ public class GUIMenuControllerImpl implements GUIMenuController {
 
         gamesInfo.setOnMouseClicked(event -> {
             String selectedItem = gamesInfo.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
-                log.info("join to game {}", selectedItem);
-                this.openJoinWindow(selectedItem.substring(0, selectedItem.indexOf(' ')));
-            }
+            if (selectedItem != null)
+                this.openJoinWindow(selectedItem.substring(0, selectedItem.indexOf(SPACE_CHAR)));
         });
     }
 }

@@ -1,13 +1,14 @@
 package nsu.ccfit.ru.mikhalev.observer;
 
-import nsu.ccfit.ru.mikhalev.observer.context.Context;
-import nsu.ccfit.ru.mikhalev.observer.context.ContextError;
-
+import nsu.ccfit.ru.mikhalev.observer.context.*;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class Observable {
 
     private List<ObserverNetwork> observerNetworks = null;
+
+    private List<ObserverGameState> observerGameStates = null;
 
     private List<ObserverState> observerState = null;
 
@@ -15,17 +16,22 @@ public abstract class Observable {
 
 
     public void addObserverState(ObserverState observer) {
-        if (observerState == null) observerState = new ArrayList<>();
+        if (observerState == null) observerState = new CopyOnWriteArrayList<>();
         observerState.add(observer);
     }
 
+    public void addObserverGameState(ObserverGameState observerGameState) {
+        if (observerGameStates == null) observerGameStates = new CopyOnWriteArrayList<>();
+        observerGameStates.add(observerGameState);
+    }
+
     public void addObserverError(ObserverError observer) {
-        if (observerErrors == null) observerErrors = new ArrayList<>();
+        if (observerErrors == null) observerErrors = new CopyOnWriteArrayList<>();
         observerErrors.add(observer);
     }
 
     public void addObserverNetwork(ObserverNetwork observer) {
-        if (observerNetworks == null) observerNetworks = new ArrayList<>();
+        if (observerNetworks == null) observerNetworks = new CopyOnWriteArrayList<>();
         observerNetworks.add(observer);
     }
 
@@ -47,6 +53,13 @@ public abstract class Observable {
         Objects.requireNonNull(observerNetworks, "observers can't be null");
         for (ObserverNetwork observer : observerNetworks) {
             observer.updateNetworkMsg(context);
+        }
+    }
+
+    public void notifyObserversGameState(ContextGameState context) {
+        Objects.requireNonNull(observerGameStates, "observers can't be null");
+        for (ObserverGameState observer : observerGameStates) {
+            observer.updateGameState(context);
         }
     }
 }

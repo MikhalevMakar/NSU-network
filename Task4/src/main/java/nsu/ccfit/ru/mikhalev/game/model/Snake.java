@@ -71,6 +71,10 @@ public class Snake implements Iterable<SnakesProto.GameState.Coord> {
                                                        .build();
     }
 
+    public void changeState(SnakesProto.GameState.Snake.SnakeState state) {
+        this.state = state;
+    }
+
     public void addNewCoord(int index, SnakesProto.GameState.Coord coord) {
         if(index == SNAKE_HEAD) this.setHead(coord);
         this.getPlacement().add(SNAKE_HEAD, coord);
@@ -107,23 +111,24 @@ public class Snake implements Iterable<SnakesProto.GameState.Coord> {
                               (y + field.getHeight()) % field.getHeight());
     }
 
-    public static void move(Snake snake, SnakesProto.Direction direction, Field field) {
+    public void move(SnakesProto.Direction direction, Field field, PlayerManager playerManager) {
         log.info("move snake");
-        SnakesProto.GameState.Coord newHeadCoord = getNextCoord(direction.getNumber(), snake.getHead(), field);
+        SnakesProto.GameState.Coord newHeadCoord = getNextCoord(direction.getNumber(), this.head, field);
 
         log.info("get coord x {}, y {}", newHeadCoord.getX(), newHeadCoord.getY());
-        snake.addNewCoord(SNAKE_HEAD, newHeadCoord);
-        field.setValue(newHeadCoord.getX(), newHeadCoord.getY(), snake.getId());
+        this.addNewCoord(SNAKE_HEAD, newHeadCoord);
+        field.setValue(newHeadCoord.getX(), newHeadCoord.getY(), this.id);
 
-        List<Integer> headCell = field.getListValue(snake.getHead());
-        log.info("list cell {} x {} ,y {}", headCell, snake.getHead().getX(), snake.getHead().getY());
+        List<Integer> headCell = field.getListValue(this.head);
+        log.info("list cell {} x {} ,y {}", headCell, this.head.getX(), this.head.getY());
         if(!headCell.contains(FOOD)) {
-            field.getListValue(snake.getTail()).remove(Integer.valueOf(snake.getId()));
-            snake.getPlacement().remove(snake.getTail());
+            field.getListValue(this.tail).remove(Integer.valueOf(this.id));
+            placement.remove(this.tail);
         } else {
             log.info("came across a fruit");
+            playerManager.addPointByID(this.id);
             headCell.remove(Integer.valueOf(FOOD));
-            field.getFoods().remove(snake.getHead());
+            field.getFoods().remove(this.head);
         }
     }
 

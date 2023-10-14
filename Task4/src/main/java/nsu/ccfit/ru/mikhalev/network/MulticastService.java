@@ -8,7 +8,7 @@ import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
 import nsu.ccfit.ru.mikhalev.network.model.multicast.*;
 import nsu.ccfit.ru.mikhalev.observer.Observable;
-import nsu.ccfit.ru.mikhalev.observer.context.ContextListGames;
+import nsu.ccfit.ru.mikhalev.observer.context.ContextGameState;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class MulticastService extends Observable {
 
     private SnakesProto.GameMessage.AnnouncementMsg message;
 
-    private final ContextListGames context = new ContextListGames();
+    private final ContextGameState context = new ContextGameState();
 
     private final NetworkStorage networkStorage;
 
@@ -47,8 +47,8 @@ public class MulticastService extends Observable {
             public void run() {
                 try {
                     multicastReceiver.receiver();
-                    context.update(multicastReceiver.getListGames());
-                    notifyObserversNetwork(context);
+                    context.updateGameState(multicastReceiver.getListGames());
+                    MulticastService.super.notifyObserversGameState(context);
                 } catch (ReceiveDatagramException e) {
                     throw new ReceiveDatagramException(e.getMessage());
                 }

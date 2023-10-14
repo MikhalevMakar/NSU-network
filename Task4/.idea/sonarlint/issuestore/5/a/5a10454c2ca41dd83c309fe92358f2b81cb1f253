@@ -1,12 +1,0 @@
-
-~	java:S116"]Rename this field "SUCCESS_RATE_FIFTY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š—®Ğûÿÿÿÿ8ü µœ²1
-C
-java:S1170"!Make this final field static too.(š—®Ğûÿÿÿÿ8š‘´œ²1
-V
-java:S1854}":Remove this useless assignment to local variable "random".(¼İÅf8°œ²1
-:
-java:S2119}"Save and re-use this "Random".(¼İÅf8Şœ²1
-G
-java:S1481}"+Remove this unused "random" local variable.(¼İÅf8÷œ²1
-X
-java:S1068"6Remove this unused "SUCCESS_RATE_FIFTY" private field.(š—®Ğûÿÿÿÿ8ø¡µœ²1

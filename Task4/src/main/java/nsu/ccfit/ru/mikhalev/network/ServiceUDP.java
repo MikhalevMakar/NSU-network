@@ -65,11 +65,11 @@ public class ServiceUDP {
                         networkStorage.updateLastSendTime();
                     }
                 }
-                try {
-                    Thread.sleep(SEND_DELAY);
-                } catch (InterruptedException e) {
-                    throw new ThreadInterException(e.getMessage());
-                }
+//                try {
+//                    Thread.sleep(SEND_DELAY);
+//                } catch (InterruptedException e) {
+//                    throw new ThreadInterException(e.getMessage());
+//                }
             }
         });
         thread.start();

@@ -129,3 +129,11 @@ Msrc/main/java/nsu/ccfit/ru/mikhalev/network/model/keynode/HostNetworkKey.java,
 Msrc/main/java/nsu/ccfit/ru/mikhalev/network/model/thread/SenderScheduler.java,8/f/8f54c8e05a8d055f0f6ce99117f38b58c9e582e6
 ~
 Nsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/thread/PlayersScheduler.java,3/0/30a93fb6e6ec9ba3fa4207b72d0b7ba0c2add65a
+s
+Csrc/main/java/nsu/ccfit/ru/mikhalev/observer/ObserverGameState.java,d/2/d23e0a6b97f5071168d54d2785e00b159871cec6
+z
+Jsrc/main/java/nsu/ccfit/ru/mikhalev/observer/context/ContextGameState.java,1/f/1f4f9593e0be6419e8eb92a5f463a004a4e4c33a
+o
+?src/main/java/nsu/ccfit/ru/mikhalev/game/model/GameManager.java,9/d/9dbea4d150c1ccc08c258d235deeeaa9363aa048
+Å
+Qsrc/main/java/nsu/ccfit/ru/mikhalev/game/controller/impl/ControllerGameState.java,8/8/8894d623637097bbc3819984b242db2a80522bc0

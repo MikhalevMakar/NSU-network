@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.ClassLoaderException;
 import nsu.ccfit.ru.mikhalev.game.controller.*;
@@ -22,6 +23,7 @@ public class GUIGameMenuImpl extends DisplayViewFXML {
 
     private final GameController gameController;
 
+    @Getter
     private final Stage stageMenu;
 
     private final Pane rootMenu;
@@ -59,7 +61,7 @@ public class GUIGameMenuImpl extends DisplayViewFXML {
             this.stageJoinWindow = new Stage();
 
             GUIJoinMenuControllerImpl guiJoinMenuController = joinLoader.getController();
-            guiJoinMenuController.setNameGame(gameState.getGameName());
+            guiJoinMenuController.intiGameState(gameState);
             guiJoinMenuController.dependencyInjection(gameController, this);
 
             super.view(this.stageJoinWindow, rootJoin);

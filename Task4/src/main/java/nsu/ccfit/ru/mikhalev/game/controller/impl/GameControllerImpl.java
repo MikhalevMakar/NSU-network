@@ -12,7 +12,7 @@ import nsu.ccfit.ru.mikhalev.network.NetworkController;
 
 import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.GameMessage;
-import nsu.ccfit.ru.mikhalev.observer.ObserverNetwork;
+import nsu.ccfit.ru.mikhalev.observer.*;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
@@ -51,6 +51,8 @@ public class GameControllerImpl implements GameController {
 
     private final ContextGame gameContext = new ContextGame();
 
+    private GameManager gameManager;
+
     @Override
     public void registrationGUIGameSpace(GUIGameSpace guiGameSpace){
         this.guiGameSpace = guiGameSpace;
@@ -62,11 +64,13 @@ public class GameControllerImpl implements GameController {
         this.networkController = networkController;
     }
 
+    @Override
     public void subscriptionOnPlayerManager(ObserverNetwork observerNetwork) {
         this.playerManager.addObserverNetwork(observerNetwork);
     }
 
-    public void subscriptionOnMulticastService(ObserverNetwork observerNetwork) {
+    @Override
+    public void subscriptionOnMulticastService(ObserverGameState observerNetwork) {
         this.networkController.subscriptionOnMulticastService(observerNetwork);
     }
 
@@ -76,12 +80,29 @@ public class GameControllerImpl implements GameController {
         this.game = new Game(gameConfig);
         this.playerManager = new PlayerManager(nameGame, game);
 
-        this.game.addObserverState(this);
+        this.gameManager = new GameManager(game, playerManager);
+
+        this.gameManager.addObserverState(this);
         this.playerManager.addObserverError(this);
+
         networkController.startMulticastSender(playerManager.getAnnouncementMsg());
         networkController.startSenderUDP();
+        this.initMainNetworkNode(MASTER, gameConfig.getStateDelayMs());
+
         this.playerState = new PlayerState(playerManager.getCurrentPlayerID(), namePlayer, nameGame, MASTER);
         playerManager.createPlayer(inetAddressMASTER, MASTER_PORT, namePlayer, MASTER);
+    }
+
+    private void initMainNetworkNode(SnakesProto.NodeRole roleSelf, int delay) {
+        this.networkController.addRoleSelf(roleSelf);
+        networkController.startPlayersScheduler(delay);
+    }
+
+    @Override
+    public void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role, int delay) {
+        this.networkController.updateKeyMaster(networkController.getHostMasterNyGame(nameGame), null);
+        this.playerState = new PlayerState(null, playerName, nameGame, role);
+        this.initMainNetworkNode(role, delay);
     }
 
     @Override
@@ -89,7 +110,8 @@ public class GameControllerImpl implements GameController {
         if (this.playerState.role() == MASTER)
             this.game.addMoveByKey(playerState.playerID(), direction);
         else
-            networkController.addMessageToSend(this.playerState.nameGame(), GameMessage.createGameMessage(direction));
+            networkController.addMessageToSend(this.playerState.nameGame(),
+                                               GameMessage.createGameMessage(direction));
     }
 
     public void moveSnakeByHostKey(HostNetworkKey key, SnakesProto.Direction direction) {
@@ -105,36 +127,31 @@ public class GameControllerImpl implements GameController {
     @Override
     public void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message, SnakesProto.NodeRole role) {
         log.info("join to game ip {}, port {}", hostNetworkKey.getIp(), hostNetworkKey.getPort());
-        this.networkController.addRoleSelf(role);
         this.playerManager.createPlayer(hostNetworkKey.getIp(), hostNetworkKey.getPort(),
                                         message.getPlayerName(), role);
     }
 
     @Override
-    public void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role) {
-        this.guiGameSpace.view();
-        this.playerState = new PlayerState(null, playerName, nameGame, role);
+    public void deletePlayer(InetAddress ip, int port){
+        playerManager.deletePlayer(ip, port);
     }
 
     @Override
     public void startGame() {
-        this.networkController.addRoleSelf(MASTER);
         log.info("game controller start work");
-
-        this.guiGameSpace.view();
-        this.game.run();
+        this.gameManager.run();
     }
 
     @Override
     public void updateState() {
         SnakesProto.GameMessage gameMessage = GameMessage.createGameMessage(game.getGameState(playerManager));
 
-        if (this.playerState.role() == MASTER) {
+        if (this.playerState.role() == MASTER)
             for (var playerID : playerManager.getPlayersID().entrySet()) {
                 if(playerID.getKey().getIp() != inetAddressMASTER)
                     networkController.addMessageToSend(playerID.getKey(), gameMessage);
             }
-        }
+
         this.updateStateGUI(gameMessage);
     }
 

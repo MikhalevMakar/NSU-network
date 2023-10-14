@@ -36,7 +36,6 @@ public class ApplicationMain extends javafx.application.Application {
     public void start(Stage stage) throws IOException {
         log.info("start application");
         NetworkController networkController = new NetworkController(InetAddress.getByName(ip), port, gameController);
-        new GUIGameSpaceImpl(gameController, stage);
 
         log.info("create view conf menu");
         GUIGameMenuImpl guiGameMenu = new GUIGameMenuImpl(gameController, stage);
