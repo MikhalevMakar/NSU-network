@@ -10,7 +10,7 @@ public class NodeRole {
     @Setter
     private SnakesProto.NodeRole role;
 
-    private long currTime;
+    private long currTime = System.currentTimeMillis();
 
     public  NodeRole(SnakesProto.NodeRole role) {
         this.role = role;

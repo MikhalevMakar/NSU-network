@@ -4,6 +4,8 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.TypeCaseException;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
+import nsu.ccfit.ru.mikhalev.network.model.gamemessage.ChangeMsg;
+import nsu.ccfit.ru.mikhalev.network.model.gamemessage.GameMessage;
 import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
@@ -12,6 +14,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Optional;
+
+import static nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto.NodeRole.MASTER;
 
 @Slf4j
 public final class MessageHandler implements Runnable {
@@ -30,6 +34,10 @@ public final class MessageHandler implements Runnable {
             this.gameMessage = SnakesProto.GameMessage.parseFrom(
                 Arrays.copyOfRange(packet.getData(), 0, packet.getLength())
             );
+            storage.updateLastSendTime();
+            if(storage.isContainsPlayer(hostNetworkKey))
+                this.storage.updaterDispatchTimePlayer(hostNetworkKey);
+
             this.sendNeedConfirmation(gameMessage.getTypeCase().getNumber());
         } catch (InvalidProtocolBufferException e) {
             throw new TypeCaseException(e);
@@ -51,7 +59,6 @@ public final class MessageHandler implements Runnable {
             case JOIN -> this.handlerJoin();
             default -> throw new TypeCaseException();
         }
-        this.storage.updateTimePLayer(this.hostNetworkKey);
         this.storage.updaterDispatchTimePlayer(hostNetworkKey);
     }
 
@@ -80,6 +87,7 @@ public final class MessageHandler implements Runnable {
         });
         this.storage.updateLastStateMsgNum(gameMessage.getMsgSeq());
         gameController.updateStateGUI(gameMessage);
+        this.storage.addNewUser(hostNetworkKey, new NodeRole(MASTER));
     }
 
 
@@ -90,7 +98,6 @@ public final class MessageHandler implements Runnable {
     }
 
     private void handlerJoin() {
-        log.info("JOIN HANDLER");
         SnakesProto.GameMessage.JoinMsg joinMsg = gameMessage.getJoin();
 
         SnakesProto.NodeRole rolePLayer = this.requestRole(joinMsg.getRequestedRole());
@@ -101,9 +108,10 @@ public final class MessageHandler implements Runnable {
     private SnakesProto.NodeRole requestRole(SnakesProto.NodeRole nodeRole) {
         if(nodeRole != SnakesProto.NodeRole.VIEWER && storage.getMainRole().getKeyDeputy() == null) {
             storage.updateMainRole(storage.getMainRole().getKeyMaster(), hostNetworkKey);
-            this.storage.addMessageToSendFirst(new Message(hostNetworkKey, GameMessage.createGameMessage(SnakesProto.GameMessage.RoleChangeMsg.newBuilder()
-                                                                                                         .setReceiverRole(SnakesProto.NodeRole.DEPUTY)
-                                                                                                         .build())));
+
+            this.storage.addMessageToSendFirst(new Message(hostNetworkKey,
+                                               GameMessage.createGameMessage(ChangeMsg.create(SnakesProto.NodeRole.DEPUTY))));
+
             return SnakesProto.NodeRole.DEPUTY;
         }
         return nodeRole;

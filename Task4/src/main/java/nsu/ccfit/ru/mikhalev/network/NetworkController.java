@@ -4,7 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
-import nsu.ccfit.ru.mikhalev.network.model.thread.PlayersScheduler;
+import nsu.ccfit.ru.mikhalev.network.model.thread.MasterScheduler;
+import nsu.ccfit.ru.mikhalev.network.model.thread.PingSender;
 import nsu.ccfit.ru.mikhalev.observer.*;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
@@ -94,8 +95,14 @@ public class NetworkController implements ObserverNetwork  {
         return this.networkStorage.getMasterNetworkByNameGame(nameGame);
     }
 
-    public void startPlayersScheduler(int delay) {
-        Thread thread = new Thread(new PlayersScheduler(this.networkStorage, delay, gameController));
+    public void startMasterScheduler(int delay) {
+        Thread thread = new Thread(new MasterScheduler (this.networkStorage, delay, gameController));
         thread.start();
     }
+
+    public void pingSender(int delay) {
+        Thread thread = new Thread(new PingSender(this.networkStorage, delay));
+        thread.start();
+    }
+
 }

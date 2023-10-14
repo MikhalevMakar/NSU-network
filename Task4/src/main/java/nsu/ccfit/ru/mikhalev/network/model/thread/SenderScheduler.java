@@ -15,15 +15,14 @@ public class SenderScheduler extends Thread {
         this.networkStorage = networkStorage;
     }
 
-
     @Override
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
             for(var message : networkStorage.getMessagesToSend()) {
-                if(!message.isSent()) continue;
+                if(message.getTimeSent() == 0) continue;
                 if(MessageType.isNeedConfirmation(message.getGameMessage().getTypeCase().getNumber()))
                     networkStorage.addSentMessage(message.getGameMessage().getMsgSeq(),
-                                                  new NodeInfo(message.getHostNetworkKey(), message, networkStorage.getLastSendTime()));
+                                                  new NodeInfo(message.getHostNetworkKey(), message, System.currentTimeMillis()));
                 networkStorage.removeMessageToSend(message);
             }
             try {

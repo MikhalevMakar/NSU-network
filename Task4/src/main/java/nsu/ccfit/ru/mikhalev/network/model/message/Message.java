@@ -15,10 +15,10 @@ public final class Message {
     private final SnakesProto.GameMessage gameMessage;
 
     @Getter
-    private boolean isSent = false;
+    private long timeSent;
 
-    public void statusChangeSent() {
-        this.isSent = true;
+    public void updateTimeSent() {
+         this.timeSent = System.currentTimeMillis();
     }
 
     public Message(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage gameMessage) {

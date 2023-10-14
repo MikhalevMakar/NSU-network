@@ -11,7 +11,7 @@ import nsu.ccfit.ru.mikhalev.game.model.*;
 import nsu.ccfit.ru.mikhalev.network.NetworkController;
 
 import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
-import nsu.ccfit.ru.mikhalev.network.model.message.GameMessage;
+import nsu.ccfit.ru.mikhalev.network.model.gamemessage.GameMessage;
 import nsu.ccfit.ru.mikhalev.observer.*;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 
@@ -87,22 +87,23 @@ public class GameControllerImpl implements GameController {
 
         networkController.startMulticastSender(playerManager.getAnnouncementMsg());
         networkController.startSenderUDP();
-        this.initMainNetworkNode(MASTER, gameConfig.getStateDelayMs());
 
+        networkController.startMasterScheduler(gameConfig.getStateDelayMs());
         this.playerState = new PlayerState(playerManager.getCurrentPlayerID(), namePlayer, nameGame, MASTER);
         playerManager.createPlayer(inetAddressMASTER, MASTER_PORT, namePlayer, MASTER);
-    }
-
-    private void initMainNetworkNode(SnakesProto.NodeRole roleSelf, int delay) {
-        this.networkController.addRoleSelf(roleSelf);
-        networkController.startPlayersScheduler(delay);
     }
 
     @Override
     public void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role, int delay) {
         this.networkController.updateKeyMaster(networkController.getHostMasterNyGame(nameGame), null);
         this.playerState = new PlayerState(null, playerName, nameGame, role);
-        this.initMainNetworkNode(role, delay);
+        this.networkController.addRoleSelf(role);
+        networkController.pingSender(delay);
+    }
+
+    @Override
+    public void updatePlayer(HostNetworkKey hostNetworkKey, SnakesProto.NodeRole role) {
+        this.playerManager.updatePlayer(hostNetworkKey, role);
     }
 
     @Override
@@ -159,6 +160,8 @@ public class GameControllerImpl implements GameController {
         gameContext.update(gameMessage);
         guiGameSpace.update(gameContext);
     }
+
+
 
     @Override
     public void updateError(ContextError context) {

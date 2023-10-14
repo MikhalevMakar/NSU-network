@@ -81,6 +81,19 @@ public class PlayerManager extends Observable {
         this.notifyObserversNetwork(contextMainNodeInfo);
     }
 
+    public void updatePlayer(HostNetworkKey hostNetworkKey, SnakesProto.NodeRole role) {
+        Integer id = playersID.get(hostNetworkKey);
+        SnakesProto.GamePlayer player = players.get(playersID.get(hostNetworkKey));
+        this.players.put(playersID.get(hostNetworkKey), this.buildPlayer(id, player.getName(),
+                         player.getPort(), role, player.getIpAddress(), player.getScore()));
+
+        try {
+            this.updateContext(InetAddress.getByName(player.getIpAddress()), player.getPort());
+        } catch(UnknownHostException ex) {
+            log.warn("failed to parse ip {}", player.getIpAddress());
+        }
+    }
+
     public SnakesProto.GameAnnouncement createGameAnnouncement() {
         return SnakesProto.GameAnnouncement.newBuilder()
                                     .setGameName(this.nameGame)
@@ -98,11 +111,17 @@ public class PlayerManager extends Observable {
                                       .build();
     }
 
+    private void updateContext(InetAddress ip, int port) {
+        this.contextMainNodeInfo.update(ip, port, this.getAnnouncementMsg());
+        this.notifyObserversNetwork(contextMainNodeInfo);
+    }
+
     public void deletePlayer(InetAddress ip, int port) {
         log.info("DELETE PLAYER");
         Integer id = playersID.get(new HostNetworkKey(ip, port));
         this.players.remove(id);
         game.changeStatusPlayerSnake(id, SnakesProto.GameState.Snake.SnakeState.ZOMBIE);
+        this.updateContext(ip, port);
     }
 
     public void addPointByID(Integer id) {
@@ -115,10 +134,9 @@ public class PlayerManager extends Observable {
         players.put(id, this.buildPlayer(player.getId(), player.getName(), hostPort,
                                          player.getRole(), hostIP, player.getScore() + FOOD_POINT));
         try {
-            this.contextMainNodeInfo.update(InetAddress.getByName(hostIP), hostPort, this.getAnnouncementMsg());
+            this.updateContext(InetAddress.getByName(hostIP), hostPort);
         } catch(UnknownHostException ex) {
             log.warn("failed to parse ip {}", hostIP);
         }
-        notifyObserversNetwork(contextMainNodeInfo);
     }
 }

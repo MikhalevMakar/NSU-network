@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import nsu.ccfit.ru.mikhalev.game.controller.*;
 import nsu.ccfit.ru.mikhalev.game.gui.GUIGameMenu;
-import nsu.ccfit.ru.mikhalev.network.model.message.GameMessage;
+import nsu.ccfit.ru.mikhalev.network.model.gamemessage.GameMessage;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.net.URL;

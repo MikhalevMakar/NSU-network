@@ -14,6 +14,8 @@ public interface GameController extends ObserverState, ObserverError {
 
     void createConfigGame(String nameGame, String namePlayer, SnakesProto.GameConfig gameConfig);
 
+    void updatePlayer(HostNetworkKey hostNetworkKey, SnakesProto.NodeRole role);
+
     void subscriptionOnPlayerManager(ObserverNetwork observerNetwork);
 
     void subscriptionOnMulticastService(ObserverGameState observerGameState);

@@ -31,7 +31,7 @@ public class ServiceUDP {
         receiverUDP = new ReceiverUDP(datagramSocket, gameController, networkStorage);
 
         this.networkStorage = networkStorage;
-        datagramSocket.setSoTimeout(TIMEOUT_DELAY);
+        datagramSocket.setSoTimeout(RECEIVE_DELAY);
     }
 
     public void startReceiver() {
@@ -39,15 +39,15 @@ public class ServiceUDP {
             while (!Thread.currentThread().isInterrupted()) {
                 long currentTime = System.currentTimeMillis();
                 synchronized (datagramSocket) {
-                    while (System.currentTimeMillis () - currentTime < TIMEOUT_DELAY / 10) {
+                    while (System.currentTimeMillis() - currentTime < TIMEOUT_DELAY / 10) {
                         receiverUDP.receive();
                     }
                 }
-              try {
-                  Thread.sleep(RECEIVE_DELAY);
-              } catch (InterruptedException e) {
+                try {
+                    Thread.sleep(RECEIVE_DELAY);
+                } catch (InterruptedException e) {
                     throw new ThreadInterException(e.getMessage());
-              }
+                }
             }
         });
         thread.start();
@@ -61,15 +61,15 @@ public class ServiceUDP {
                 synchronized (datagramSocket) {
                     for(var message : networkStorage.getMessagesToSend()) {
                         senderUDP.send(message);
-                        message.statusChangeSent();
                         networkStorage.updateLastSendTime();
+                        message.updateTimeSent();
                     }
                 }
-//                try {
-//                    Thread.sleep(SEND_DELAY);
-//                } catch (InterruptedException e) {
-//                    throw new ThreadInterException(e.getMessage());
-//                }
+                try {
+                    Thread.sleep(SEND_DELAY);
+                } catch (InterruptedException e) {
+                    throw new ThreadInterException(e.getMessage());
+                }
             }
         });
         thread.start();

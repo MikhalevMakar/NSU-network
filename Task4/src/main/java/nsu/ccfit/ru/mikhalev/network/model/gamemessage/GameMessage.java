@@ -1,5 +1,6 @@
-package nsu.ccfit.ru.mikhalev.network.model.message;
+package nsu.ccfit.ru.mikhalev.network.model.gamemessage;
 
+import nsu.ccfit.ru.mikhalev.network.model.message.Message;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import static nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto.PlayerType.HUMAN;

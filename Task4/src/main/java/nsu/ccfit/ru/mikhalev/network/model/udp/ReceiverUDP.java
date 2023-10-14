@@ -2,6 +2,7 @@ package nsu.ccfit.ru.mikhalev.network.model.udp;
 
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
+import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
 
 import java.io.IOException;

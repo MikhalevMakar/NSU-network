@@ -31,6 +31,10 @@ public class NetworkStorage {
     @Getter
     private long lastStateMsgNum;
 
+    public boolean isContainsPlayer(HostNetworkKey key) {
+        return players.containsKey(key);
+    }
+
     public void updaterDispatchTimePlayer(HostNetworkKey key) {
         this.players.get(key).updateTime();
     }
@@ -45,11 +49,6 @@ public class NetworkStorage {
 
     public HostNetworkKey getMasterNetworkByNameGame(String nameGame) {
         return this.mainNodesInfo.get(nameGame).getHostNetworkKey();
-    }
-
-
-    public void updateTimePLayer(HostNetworkKey key) {
-        this.players.get(key).updateTime();
     }
 
     public void removePLayer(HostNetworkKey hostNetworkKey) {
