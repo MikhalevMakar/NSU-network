@@ -31,6 +31,8 @@ public final class Message {
     }
 
     private static long seqMsg = 0;
-
+    public static void updateSeqMsg(long updateSeqMsg) {
+        seqMsg = updateSeqMsg;
+    }
     public static long getSeqNumber() { return ++seqMsg; }
 }

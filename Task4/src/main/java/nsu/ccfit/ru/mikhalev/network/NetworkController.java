@@ -4,14 +4,16 @@ import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
-import nsu.ccfit.ru.mikhalev.network.model.thread.MasterScheduler;
-import nsu.ccfit.ru.mikhalev.network.model.thread.PingSender;
+import nsu.ccfit.ru.mikhalev.network.model.thread.*;
 import nsu.ccfit.ru.mikhalev.observer.*;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.Objects;
+
+import static nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto.NodeRole.MASTER;
 
 @Slf4j
 public class NetworkController implements ObserverNetwork  {
@@ -23,6 +25,10 @@ public class NetworkController implements ObserverNetwork  {
     private final NetworkStorage networkStorage = new NetworkStorage();
 
     private final GameController gameController;
+
+    private Thread threadPing;
+
+    private Thread threadPlayerScheduler;
 
     public NetworkController(InetAddress ip, int port, GameController gameController) throws IOException {
         this.multicastService = new MulticastService(new HostNetworkKey(ip, port), networkStorage);
@@ -62,12 +68,15 @@ public class NetworkController implements ObserverNetwork  {
         this.serviceUDP.startCheckerMsgACK();
     }
 
+    public void removeMaster() {
+        this.networkStorage.removePlayer(this.networkStorage.getMainRole().getKeyMaster());
+    }
+
     @Override
-    public void updateNetworkMsg(Context context) {
-        ContextMainNodeInfo contextMainNodeInfo = (ContextMainNodeInfo)context;
-        this.multicastService.updateAnnouncementMsg(contextMainNodeInfo.getIp(),
-                                                    contextMainNodeInfo.getPort(),
-                                                    contextMainNodeInfo.getMessage());
+    public void updateNetworkMsg(ContextMainNodeInfo context) {
+        this.multicastService.updateAnnouncementMsg(context.getIp(),
+                                                    context.getPort(),
+                                                    context.getMessage());
     }
 
     public void subscriptionOnMulticastService(ObserverGameState observerGameState) {
@@ -87,11 +96,16 @@ public class NetworkController implements ObserverNetwork  {
         this.networkStorage.getMainRole().setRoleSelf(role);
     }
 
+    public void synchronizeMsgSeq() {
+        Message.updateSeqMsg(this.networkStorage.getLastStateMsgNum());
+    }
+
     public void updateKeyMaster(HostNetworkKey keyMaster, HostNetworkKey keyDeputy) {
+        this.networkStorage.addNewUser(keyMaster, new NodeRole(MASTER));
         this.networkStorage.getMainRole().updateKeys(keyMaster, keyDeputy);
     }
 
-    public HostNetworkKey getHostMasterNyGame(String nameGame) {
+    public HostNetworkKey getHostMasterByGame(String nameGame) {
         return this.networkStorage.getMasterNetworkByNameGame(nameGame);
     }
 
@@ -100,9 +114,18 @@ public class NetworkController implements ObserverNetwork  {
         thread.start();
     }
 
-    public void pingSender(int delay) {
-        Thread thread = new Thread(new PingSender(this.networkStorage, delay));
-        thread.start();
+    public void startPlayerSchedulers(int delay) {
+        threadPing = new Thread(new PingSender(this.networkStorage, delay));
+        threadPlayerScheduler = new Thread(new PlayerScheduler(delay, this.networkStorage, this.gameController));
+        threadPing.start();
+        threadPlayerScheduler.start();
     }
 
+    public void closePlayerSchedulers() {
+        log.info("close player schedulers");
+        Objects.requireNonNull(this.threadPing, "threadPing require non null");
+        Objects.requireNonNull(this.threadPlayerScheduler, "threadPlayerScheduler require non null");
+        this.threadPing.interrupt();
+        this.threadPlayerScheduler.interrupt();
+    }
 }

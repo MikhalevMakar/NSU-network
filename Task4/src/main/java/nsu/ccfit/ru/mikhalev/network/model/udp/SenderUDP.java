@@ -20,8 +20,6 @@ public class SenderUDP {
     public void send(Message message) {
         try {
             datagramSocket.send(message.getPacket());
-        } catch(IOException ex) {
-            log.error("error send message");
-        }
+        } catch(IOException ex) {}
     }
 }

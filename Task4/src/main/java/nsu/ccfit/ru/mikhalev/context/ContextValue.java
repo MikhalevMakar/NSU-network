@@ -5,7 +5,7 @@ public class ContextValue {
     private ContextValue() {
         throw new IllegalStateException("utility class");
     }
-    public static final int MAX_AFK_TIME = 30000;
+    public static final int MAX_AFK_TIME = 2000;
 
     public static final int SNAKE_PIT = 5;
 
@@ -37,4 +37,6 @@ public class ContextValue {
     public static final String SPACE_STR = " ";
 
     public static final int SPACE_BETWEEN_WORDS = 32;
+
+    public static final long DELAY = 1;
 }

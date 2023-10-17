@@ -99,8 +99,6 @@ Esrc/main/java/nsu/ccfit/ru/mikhalev/ecxeption/JoinGroupException.java,1/0/1015
 Msrc/main/java/nsu/ccfit/ru/mikhalev/network/model/multicast/MulticastUDP.java,b/6/b68b56d7f765c6638e0a50ccc4c84d25169c8bf4
 u
 Esrc/main/java/nsu/ccfit/ru/mikhalev/game/gui/imp/DisplayViewFXML.java,5/b/5b365a2bdfef86160adfadfa00af8f52659f46b9
-z
-Jsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/message/GameMessage.java,8/0/8063c3da9f6230fb7d6aef98c0b2084e16940e39
 o
 ?src/main/java/nsu/ccfit/ru/mikhalev/game/model/PlayerState.java,1/9/19f794b25479614d28496d968aa24078604fe8b9
 n
@@ -127,8 +125,6 @@ w
 Gsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/keynode/MainRole.java,2/b/2b58aede864f10c72e0bc17911b8843fbeefcb11
 }
 Msrc/main/java/nsu/ccfit/ru/mikhalev/network/model/thread/SenderScheduler.java,8/f/8f54c8e05a8d055f0f6ce99117f38b58c9e582e6
-~
-Nsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/thread/PlayersScheduler.java,3/0/30a93fb6e6ec9ba3fa4207b72d0b7ba0c2add65a
 s
 Csrc/main/java/nsu/ccfit/ru/mikhalev/observer/ObserverGameState.java,d/2/d23e0a6b97f5071168d54d2785e00b159871cec6
 z
@@ -137,3 +133,15 @@ o
 ?src/main/java/nsu/ccfit/ru/mikhalev/game/model/GameManager.java,9/d/9dbea4d150c1ccc08c258d235deeeaa9363aa048
 Å
 Qsrc/main/java/nsu/ccfit/ru/mikhalev/game/controller/impl/ControllerGameState.java,8/8/8894d623637097bbc3819984b242db2a80522bc0
+x
+Hsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/thread/PingSender.java,2/b/2b05b29bbe6607139ec8768242e73cd7d546ecd1
+~
+Nsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/gamemessage/GameMessage.java,a/d/ad38a3318d9c79b346245a1e692a7dd1be7069bd
+}
+Msrc/main/java/nsu/ccfit/ru/mikhalev/network/model/thread/MasterScheduler.java,6/6/6635b09d44831df946d88d7282047278cd573fb9
+|
+Lsrc/main/java/nsu/ccfit/ru/mikhalev/network/model/gamemessage/ChangeMsg.java,a/c/acd6996692a0000d6d14e52c3d452de10fbe1e3c
+z
+Jsrc/main/java/nsu/ccfit/ru/mikhalev/ecxeption/PlayerNotFoundException.java,b/7/b7bd2ada7d8879d47773a7cb06676fe4b8f45d82
+}
+Msrc/main/java/nsu/ccfit/ru/mikhalev/network/model/thread/PlayerScheduler.java,8/a/8abba6bf371765ba1f48c28e1f72210ad111303e

@@ -26,7 +26,7 @@ public class PlayerManager extends Observable {
 
     private static final int BEGIN_POINT = 0;
 
-    private static final int FOOD_POINT = 5;
+    private static final int FOOD_POINT = 1;
 
     @Getter
     private int currentPlayerID = MIN_SNAKE_ID;
@@ -41,6 +41,14 @@ public class PlayerManager extends Observable {
         this.nameGame = nameGame;
     }
 
+    public PlayerManager(String nameGame, Game game, SnakesProto.GamePlayers gamePlayers) {
+        this(nameGame, game);
+        gamePlayers.getPlayersList().forEach(player -> parseInetAddr(player.getIpAddress()).ifPresent(resolvedIPAddress -> {
+                                             playersID.put(new HostNetworkKey(resolvedIPAddress, player.getPort()), player.getId());
+                                             players.put(player.getId(), player);
+        }));
+    }
+
     public Integer getPlayerIDByHostNetwork(HostNetworkKey key) {
         return playersID.get(key);
     }
@@ -49,21 +57,32 @@ public class PlayerManager extends Observable {
         return this.players.values().stream().toList();
     }
 
-    private void addNewUserByIP(InetAddress ip, int port, SnakesProto.GamePlayer player) {
-        log.info ("add new user by ip {} and port {}", ip, port);
-        playersID.put(new HostNetworkKey(ip, port), player.getId());
+    private void addNewUserByIP(HostNetworkKey key, SnakesProto.GamePlayer player) {
+        playersID.put(key, player.getId());
         players.put(player.getId(), player);
     }
 
-    private SnakesProto.GamePlayer buildPlayer(int id, String nameUser, int port, SnakesProto.NodeRole role, String ip, int point) {
+    private SnakesProto.GamePlayer buildPlayer(Integer id, String nameUser, String ip, int port, SnakesProto.NodeRole role, int point) {
         return SnakesProto.GamePlayer.newBuilder().setName(nameUser).setId(id).setPort(port)
                                                   .setRole(role).setIpAddress(ip).setScore(point)
                                                   .build();
     }
 
+    private Optional<InetAddress> parseInetAddr(String ip) {
+        try {
+            InetAddress resolvedAddress = InetAddress.getByName(ip);
+            return Optional.of(resolvedAddress);
+        } catch (UnknownHostException e) {
+            log.warn("Failed to parse IP address: " + ip, e);
+            return Optional.empty();
+        }
+    }
+
     public void createPlayer(InetAddress ip, int port, String nameUser, SnakesProto.NodeRole role) {
-        log.info("create player {}", nameUser);
-        SnakesProto.GamePlayer player = buildPlayer(this.currentPlayerID, nameUser, port, role, ip.getHostAddress(), BEGIN_POINT);
+        SnakesProto.GamePlayer player;
+
+        player = buildPlayer(this.currentPlayerID, nameUser, ip.getHostAddress(), port, role, BEGIN_POINT);
+
         HostNetworkKey hostNetworkKey = new HostNetworkKey(ip, port);
         try {
             if (role != SnakesProto.NodeRole.VIEWER)
@@ -73,8 +92,7 @@ public class PlayerManager extends Observable {
             super.notifyObserversError(contextError);
         }
 
-        this.addNewUserByIP(ip, port, player);
-
+        this.addNewUserByIP(hostNetworkKey, player);
         this.contextMainNodeInfo.update(ip, port, this.getAnnouncementMsg());
 
         this.playersID.put(hostNetworkKey, this.currentPlayerID++);
@@ -82,16 +100,11 @@ public class PlayerManager extends Observable {
     }
 
     public void updatePlayer(HostNetworkKey hostNetworkKey, SnakesProto.NodeRole role) {
-        Integer id = playersID.get(hostNetworkKey);
         SnakesProto.GamePlayer player = players.get(playersID.get(hostNetworkKey));
-        this.players.put(playersID.get(hostNetworkKey), this.buildPlayer(id, player.getName(),
-                         player.getPort(), role, player.getIpAddress(), player.getScore()));
+        this.players.put(playersID.get(hostNetworkKey), this.buildPlayer(player.getId(), player.getName(),
+                         player.getIpAddress(), player.getPort(), role, player.getScore()));
 
-        try {
-            this.updateContext(InetAddress.getByName(player.getIpAddress()), player.getPort());
-        } catch(UnknownHostException ex) {
-            log.warn("failed to parse ip {}", player.getIpAddress());
-        }
+        this.updateContext(player.getIpAddress(), player.getPort());
     }
 
     public SnakesProto.GameAnnouncement createGameAnnouncement() {
@@ -111,32 +124,27 @@ public class PlayerManager extends Observable {
                                       .build();
     }
 
-    private void updateContext(InetAddress ip, int port) {
-        this.contextMainNodeInfo.update(ip, port, this.getAnnouncementMsg());
-        this.notifyObserversNetwork(contextMainNodeInfo);
+    private void updateContext(String hostIP, int hostPort) {
+        parseInetAddr(hostIP).ifPresent(resolvedIPAddress -> {
+            this.contextMainNodeInfo.update(resolvedIPAddress, hostPort, this.getAnnouncementMsg());
+            this.notifyObserversNetwork(contextMainNodeInfo);
+        });
     }
 
     public void deletePlayer(InetAddress ip, int port) {
-        log.info("DELETE PLAYER");
+        log.info("DELETE PLAYER {} {}", ip , port);
         Integer id = playersID.get(new HostNetworkKey(ip, port));
         this.players.remove(id);
         game.changeStatusPlayerSnake(id, SnakesProto.GameState.Snake.SnakeState.ZOMBIE);
-        this.updateContext(ip, port);
+        this.updateContext(ip.getHostAddress(), port);
     }
 
     public void addPointByID(Integer id) {
         SnakesProto.GamePlayer player = players.get(id);
         if(player == null) return;
 
-        String hostIP = player.getIpAddress();
-        int hostPort =  player.getPort();
-
-        players.put(id, this.buildPlayer(player.getId(), player.getName(), hostPort,
-                                         player.getRole(), hostIP, player.getScore() + FOOD_POINT));
-        try {
-            this.updateContext(InetAddress.getByName(hostIP), hostPort);
-        } catch(UnknownHostException ex) {
-            log.warn("failed to parse ip {}", hostIP);
-        }
+        players.put(id, this.buildPlayer(id, player.getName(), player.getIpAddress(),
+                                         player.getPort(), player.getRole(), player.getScore() + FOOD_POINT));
+        this.updateContext(player.getIpAddress(), player.getPort());
     }
 }

@@ -49,7 +49,7 @@ public abstract class Observable {
         }
     }
 
-    public void notifyObserversNetwork(Context context) {
+    public void notifyObserversNetwork(ContextMainNodeInfo context) {
         Objects.requireNonNull(observerNetworks, "observers can't be null");
         for (ObserverNetwork observer : observerNetworks) {
             observer.updateNetworkMsg(context);

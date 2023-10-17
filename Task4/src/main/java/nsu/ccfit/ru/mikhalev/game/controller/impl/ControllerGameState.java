@@ -15,6 +15,7 @@ import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
 
 @Slf4j
 public class ControllerGameState implements ObserverGameState {
+
     @FXML
     private ListView<String> playersState;
 

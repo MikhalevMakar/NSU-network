@@ -62,6 +62,7 @@ public class GUIMenuControllerImpl implements GUIMenuController {
         log.info("create config {}", nameGame.getText());
 
         Objects.requireNonNull(gameController, "gameController cannot be null");
+        this.launchGUIGameSpace();
         gameController.createConfigGame(nameGame.getText(),
                                         namePlayer.getText(),
                                         SnakesProto.GameConfig.newBuilder()
@@ -70,8 +71,6 @@ public class GUIMenuControllerImpl implements GUIMenuController {
                                                             .setStateDelayMs(Integer.parseInt(delay.getText()))
                                                             .setFoodStatic(Integer.parseInt(countFood.getText()))
                                                             .build());
-        this.launchGUIGameSpace();
-        gameController.startGame();
     }
 
     private void launchGUIGameSpace() {
@@ -89,7 +88,6 @@ public class GUIMenuControllerImpl implements GUIMenuController {
                                                                                SPACE_STR.repeat(SPACE_BETWEEN_WORDS),
                                                                                game.getPlayers().getPlayersList().size())).toList()));
     }
-
 
     private void openJoinWindow(String nameGame) {
         Objects.requireNonNull(this.guiGameMenu, "guiGameMenu required not null");

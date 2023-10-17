@@ -21,11 +21,12 @@ public class PingSender implements Runnable {
         while(!Thread.currentThread().isInterrupted()) {
             if (System.currentTimeMillis() - storage.getLastSendTime() > this.pingDelay) {
                 this.storage.addMessageToSend(new Message(storage.getMainRole().getKeyMaster(),
-                    GameMessage.createGameMessage()));
+                                                          GameMessage.createGameMessage()));
                 try {
                     Thread.sleep(pingDelay);
                 } catch (InterruptedException e) {
-                    throw new ThreadInterException (e.getMessage());
+                    log.warn("threwad ping was interrupted");
+                    return;
                 }
             }
         }

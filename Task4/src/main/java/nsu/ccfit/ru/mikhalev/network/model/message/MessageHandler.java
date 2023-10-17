@@ -4,18 +4,12 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.TypeCaseException;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
-import nsu.ccfit.ru.mikhalev.network.model.gamemessage.ChangeMsg;
-import nsu.ccfit.ru.mikhalev.network.model.gamemessage.GameMessage;
+import nsu.ccfit.ru.mikhalev.network.model.gamemessage.*;
 import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Optional;
-
-import static nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto.NodeRole.MASTER;
+import java.net.*;
+import java.util.*;
 
 @Slf4j
 public final class MessageHandler implements Runnable {
@@ -85,15 +79,16 @@ public final class MessageHandler implements Runnable {
                 log.warn("failed to update main roles");
             }
         });
+        this.storage.updateStateGame(gameMessage.getState().getState());
         this.storage.updateLastStateMsgNum(gameMessage.getMsgSeq());
         gameController.updateStateGUI(gameMessage);
-        this.storage.addNewUser(hostNetworkKey, new NodeRole(MASTER));
     }
 
 
     private void handlerChangeRole() {
         if(this.gameMessage.getRoleChange().hasReceiverRole()) {
-            this.storage.getMainRole().setRoleSelf(this.gameMessage.getRoleChange().getSenderRole());
+            log.info("handlerChangeRole {}", this.gameMessage.getRoleChange().getReceiverRole());
+            this.storage.getMainRole().setRoleSelf(this.gameMessage.getRoleChange().getReceiverRole());
         }
     }
 

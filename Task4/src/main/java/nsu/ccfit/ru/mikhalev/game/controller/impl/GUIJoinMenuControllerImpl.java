@@ -52,7 +52,7 @@ public class GUIJoinMenuControllerImpl implements GUIJoinController {
         Objects.requireNonNull(guiGameMenu, "guiGameMenu require non null");
         guiGameMenu.cancelJoinWindow();
 
-        gameController.initJoinGame(namePlayer.getText(), nameGame, role, this.gameConfig.getStateDelayMs());
+        gameController.initJoinGame(namePlayer.getText(), nameGame, role, this.gameConfig);
         gameController.sendMessageNetwork(nameGame, GameMessage.createGameMessage(nameGame, namePlayer.getText(), role));
     }
 

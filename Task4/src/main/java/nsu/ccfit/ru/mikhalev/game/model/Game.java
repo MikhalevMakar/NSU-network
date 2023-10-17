@@ -10,7 +10,6 @@ import java.util.*;
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.FOOD;
 import static nsu.ccfit.ru.mikhalev.game.model.Snake.*;
 
-
 @Slf4j
 public class Game {
     private final Field field;
@@ -24,8 +23,6 @@ public class Game {
     @Getter
     private final SnakesProto.GameConfig gameConfig;
 
-    private int foodFromSnake;
-
     public Game(SnakesProto.GameConfig gameConfig) {
         this.gameConfig = gameConfig;
         this.field = new Field(gameConfig.getWidth(), gameConfig.getHeight());
@@ -33,7 +30,18 @@ public class Game {
         field.foodPlacement(gameConfig.getFoodStatic());
     }
 
+    public Game(SnakesProto.GameConfig gameConfig, SnakesProto.GameState gameState) {
+        this.gameConfig = gameConfig;
+
+        gameState.getSnakesList().forEach(snake->snakes.put(snake.getPlayerId(), new Snake(snake.getPlayerId(),
+                                                                                           snake.getPointsList(),
+                                                                                           snake.getHeadDirection())));
+
+        this.field = new Field(gameConfig.getWidth(), gameConfig.getHeight(), gameState.getFoodsList(), gameState.getSnakesList());
+    }
+
     public void changeStatusPlayerSnake(Integer id, SnakesProto.GameState.Snake.SnakeState state) {
+        log.info("ID {}", id);
         snakes.get(id).changeState(state);
     }
 
@@ -49,8 +57,8 @@ public class Game {
     private void setStartPositionSnake(SnakesProto.GameState.Coord head,
                                        SnakesProto.GameState.Coord tail,
                                        int snakeID) {
-        field.setValue(head.getX(), head.getY(), snakeID);
-        field.setValue(tail.getX(), tail.getY(), snakeID);
+        field.addCoordByID(head.getX(), head.getY(), snakeID);
+        field.addCoordByID(tail.getX(), tail.getY(), snakeID);
     }
 
     public void createSnake(Integer key) throws  FindSuitableSquareException {
@@ -83,8 +91,7 @@ public class Game {
     }
 
     public void placementFood() {
-        this.field.foodPlacement(gameConfig.getFoodStatic() + foodFromSnake + snakes.size() - field.getCountPlacementFood());
-        this.foodFromSnake = 0;
+        this.field.foodPlacement(gameConfig.getFoodStatic() + snakes.size() - field.getCountPlacementFood());
     }
 
     public SnakesProto.Direction getMoveByKey(Integer key) {
@@ -114,7 +121,7 @@ public class Game {
                     SnakesProto.GameState.Coord newHeadCoord = getNextCoord(curSnake.getDirection().getNumber(),
                                                                             snake.getHead(), field);
                     snake.addNewCoord(SNAKE_HEAD, newHeadCoord);
-                    field.setValue(newHeadCoord.getX(), newHeadCoord.getY(), snake.getId());
+                    field.addCoordByID(newHeadCoord.getX(), newHeadCoord.getY(), snake.getId());
                 } else snakesToRemove.add(curSnake);
             }
             if (countEqualsIdOnCell > ONE_SNAKE) snakesToRemove.add(snake);
@@ -127,10 +134,9 @@ public class Game {
     }
 
     private void placementFoodBySnake(Snake snake) {
-        log.info("PLACEMENT FOOD BY SNAKE {}", snake.getPlacement().size());
         for(var coord : snake.getPlacement()) {
             if (!field.containsFood(coord) && Math.random() < SUCCESS_RATE_FIFTY) {
-                field.setValue(coord.getX(), coord.getY(), FOOD);
+                field.addCoordByID(coord.getX(), coord.getY(), FOOD);
                 field.setFoodByCoord(coord);
             }
         }

@@ -2,7 +2,7 @@ package nsu.ccfit.ru.mikhalev.game.controller.impl;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.ecxeption.CastIpAddressException;
+import nsu.ccfit.ru.mikhalev.ecxeption.*;
 import nsu.ccfit.ru.mikhalev.game.controller.*;
 
 import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
@@ -20,7 +20,7 @@ import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 import java.net.*;
 import java.util.Objects;
 
-import static nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto.NodeRole.MASTER;
+import static nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto.NodeRole.*;
 
 @NoArgsConstructor
 @Slf4j
@@ -29,7 +29,7 @@ public class GameControllerImpl implements GameController {
 
     public static final String MASTER_IP = "localhost";
 
-    private static final InetAddress inetAddressMASTER;
+    public static final InetAddress inetAddressMASTER;
 
     static {
         try {
@@ -51,7 +51,7 @@ public class GameControllerImpl implements GameController {
 
     private final ContextGame gameContext = new ContextGame();
 
-    private GameManager gameManager;
+    private SnakesProto.GameConfig gameConfig;
 
     @Override
     public void registrationGUIGameSpace(GUIGameSpace guiGameSpace){
@@ -70,37 +70,67 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    public void subscriptionOnMulticastService(ObserverGameState observerNetwork) {
-        this.networkController.subscriptionOnMulticastService(observerNetwork);
+    public void subscriptionOnMulticastService(ObserverGameState observerGameState) {
+        this.networkController.subscriptionOnMulticastService(observerGameState);
     }
 
     @Override
-    public void createConfigGame(String nameGame, String namePlayer, SnakesProto.GameConfig gameConfig) {
-        log.info ("create game for user {}", nameGame);
+    public void createConfigGame(String nameGame, String namePlayer, SnakesProto.GameConfig gameConfig){
+        log.info("create game for user {}", nameGame);
+        this.gameConfig = gameConfig;
         this.game = new Game(gameConfig);
         this.playerManager = new PlayerManager(nameGame, game);
+        this.defaultLauncherForMaster();
 
-        this.gameManager = new GameManager(game, playerManager);
-
-        this.gameManager.addObserverState(this);
-        this.playerManager.addObserverError(this);
-
-        networkController.startMulticastSender(playerManager.getAnnouncementMsg());
-        networkController.startSenderUDP();
-
-        networkController.startMasterScheduler(gameConfig.getStateDelayMs());
         this.playerState = new PlayerState(playerManager.getCurrentPlayerID(), namePlayer, nameGame, MASTER);
         playerManager.createPlayer(inetAddressMASTER, MASTER_PORT, namePlayer, MASTER);
     }
 
-    @Override
-    public void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role, int delay) {
-        this.networkController.updateKeyMaster(networkController.getHostMasterNyGame(nameGame), null);
-        this.playerState = new PlayerState(null, playerName, nameGame, role);
-        this.networkController.addRoleSelf(role);
-        networkController.pingSender(delay);
+    public void switchRoleToMaster(SnakesProto.GameState gameState) {
+        this.networkController.closePlayerSchedulers();
+
+        log.info("switchRoleToMaster");
+        SnakesProto.GamePlayer gamePlayer = gameState.getPlayers().getPlayersList().stream()
+                                    .filter(player -> player.getRole() == DEPUTY)
+                                    .findFirst().orElseThrow(PlayerNotFoundException::new);
+
+        this.playerState = new PlayerState(gamePlayer.getId(), playerState.playerName(), playerState.nameGame(), MASTER);
+        this.game = new Game(gameConfig, gameState);
+        this.playerManager = new PlayerManager(playerState.nameGame(), game, gameState.getPlayers());
+        networkController.synchronizeMsgSeq();
+        this.defaultLauncherForMaster();
+
+        this.deletePlayer(inetAddressMASTER, MASTER_PORT);
+        try {
+            this.playerManager.updatePlayer(new HostNetworkKey(InetAddress.getByName(gamePlayer.getIpAddress()),
+                                                                gamePlayer.getPort ()), MASTER);
+        } catch(UnknownHostException ex) {
+            log.warn("failed parse ip {}", ex.getMessage());
+        }
+
+        this.networkController.removeMaster();
     }
 
+    private void defaultLauncherForMaster() {
+        GameManager gameManager = new GameManager(game, playerManager);
+        gameManager.addObserverState(this);
+        this.playerManager.addObserverError(this);
+
+        networkController.startMulticastSender(playerManager.getAnnouncementMsg());
+        networkController.startSenderUDP();
+        networkController.startMasterScheduler(gameConfig.getStateDelayMs());
+        gameManager.run();
+    }
+
+    @Override
+    public void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role, SnakesProto.GameConfig gameConfig) {
+        this.gameConfig = gameConfig;
+        log.info("NAME GAME {} {}", networkController.getHostMasterByGame(nameGame), nameGame);
+        this.networkController.updateKeyMaster(networkController.getHostMasterByGame(nameGame), null);
+        this.playerState = new PlayerState(null, playerName, nameGame, role);
+        this.networkController.addRoleSelf(role);
+        networkController.startPlayerSchedulers(gameConfig.getStateDelayMs());
+    }
     @Override
     public void updatePlayer(HostNetworkKey hostNetworkKey, SnakesProto.NodeRole role) {
         this.playerManager.updatePlayer(hostNetworkKey, role);
@@ -138,12 +168,6 @@ public class GameControllerImpl implements GameController {
     }
 
     @Override
-    public void startGame() {
-        log.info("game controller start work");
-        this.gameManager.run();
-    }
-
-    @Override
     public void updateState() {
         SnakesProto.GameMessage gameMessage = GameMessage.createGameMessage(game.getGameState(playerManager));
 
@@ -160,8 +184,6 @@ public class GameControllerImpl implements GameController {
         gameContext.update(gameMessage);
         guiGameSpace.update(gameContext);
     }
-
-
 
     @Override
     public void updateError(ContextError context) {

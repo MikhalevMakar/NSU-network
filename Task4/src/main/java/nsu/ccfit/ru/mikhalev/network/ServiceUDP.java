@@ -29,7 +29,6 @@ public class ServiceUDP {
 
     public ServiceUDP(NetworkStorage networkStorage, GameController gameController) throws SocketException {
         receiverUDP = new ReceiverUDP(datagramSocket, gameController, networkStorage);
-
         this.networkStorage = networkStorage;
         datagramSocket.setSoTimeout(RECEIVE_DELAY);
     }

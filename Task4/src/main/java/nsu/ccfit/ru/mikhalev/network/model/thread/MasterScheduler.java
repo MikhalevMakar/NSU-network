@@ -3,15 +3,14 @@ package nsu.ccfit.ru.mikhalev.network.model.thread;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.ThreadInterException;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
-import nsu.ccfit.ru.mikhalev.network.model.gamemessage.ChangeMsg;
-import nsu.ccfit.ru.mikhalev.network.model.gamemessage.GameMessage;
+import nsu.ccfit.ru.mikhalev.network.model.gamemessage.*;
 import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
 import nsu.ccfit.ru.mikhalev.network.model.message.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.DELAY;
 
 @Slf4j
 public class MasterScheduler implements Runnable {
@@ -19,8 +18,6 @@ public class MasterScheduler implements Runnable {
     private final NetworkStorage storage;
 
     private final double kickDelay;
-
-    private static final long DELAY = 1;
 
     private final GameController gameController;
 
@@ -40,9 +37,9 @@ public class MasterScheduler implements Runnable {
 
         deputyCandidate.ifPresent(player -> {
             HostNetworkKey hostNetworkKey = new HostNetworkKey(player.getKey().getIp(), player.getKey().getPort());
-            storage.updateMainRole (storage.getMainRole().getKeyMaster(), hostNetworkKey);
+            storage.updateMainRole(storage.getMainRole().getKeyMaster(), hostNetworkKey);
             this.storage.addMessageToSend(new Message(hostNetworkKey,
-                                               GameMessage.createGameMessage(ChangeMsg.create(SnakesProto.NodeRole.DEPUTY))));
+                                                      GameMessage.createGameMessage(ChangeMsg.create(SnakesProto.NodeRole.DEPUTY))));
             this.gameController.updatePlayer(hostNetworkKey, SnakesProto.NodeRole.DEPUTY);
         });
     }
@@ -50,15 +47,14 @@ public class MasterScheduler implements Runnable {
     @Override
     public void run() {
         while(!Thread.currentThread().isInterrupted()) {
-            this.conditionCheckDeputy();
             for(var player : storage.getSetPlayers()) {
                 if(System.currentTimeMillis() - player.getValue().getCurrTime() > this.kickDelay) {
                     HostNetworkKey key = player.getKey();
                     this.gameController.deletePlayer(key.getIp(), key.getPort());
-                    this.storage.removePLayer(key);
+                    this.storage.removePlayer(key);
                 }
             }
-
+            this.conditionCheckDeputy();
             try {
                 Thread.sleep(DELAY);
             } catch (InterruptedException e) {

@@ -40,6 +40,18 @@ public class Field {
         this.height = height;
     }
 
+    public Field(int width, int height, List<SnakesProto.GameState.Coord> foods,
+                 List<SnakesProto.GameState.Snake> snakes) {
+        this(width, height);
+
+        foods.forEach(food -> {
+            this.foods.add(food);
+            this.addCoordByID(food.getX(), food.getY(), FOOD);
+        });
+        snakes.forEach(snake-> snake.getPointsList()
+            .forEach(coord -> this.addCoordByID(coord.getX(), coord.getY(), snake.getPlayerId())));
+    }
+
     public int getCountPlacementFood() {
         return foods.size();
     }
@@ -52,7 +64,7 @@ public class Field {
         return this.coords.get(coord.getX() + coord.getY() * width);
     }
 
-    public void setValue(int x, int y, int id) {
+    public void addCoordByID(int x, int y, int id) {
         this.coords.get(x + y * this.width).add(id);
     }
 

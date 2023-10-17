@@ -49,6 +49,7 @@ public class Snake implements Iterable<SnakesProto.GameState.Coord> {
     private final Random random = new Random();
 
     private final int id;
+
     public Snake(@NotNull SnakesProto.GameState.Coord head,
                  @NotNull SnakesProto.GameState.Coord tail,
                  @NotNull Integer id) {
@@ -61,6 +62,16 @@ public class Snake implements Iterable<SnakesProto.GameState.Coord> {
         log.info("choose direction {}", this.direction);
         this.placement.add(tail);
         this.placement.add(head);
+    }
+
+    public Snake(@NotNull Integer id,
+                 @NotNull List<SnakesProto.GameState.Coord> placement,
+                 @NotNull SnakesProto.Direction direction) {
+        this.id = id;
+        this.placement.addAll(placement);
+        this.direction = direction;
+        this.head = this.placement.get(SNAKE_HEAD);
+        this.tail =  this.placement.get(this.placement.size()-1);
     }
 
     public static SnakesProto.GameState.Snake createSnakeProto(Snake snake) {
@@ -77,8 +88,8 @@ public class Snake implements Iterable<SnakesProto.GameState.Coord> {
 
     public void addNewCoord(int index, SnakesProto.GameState.Coord coord) {
         if(index == SNAKE_HEAD) this.setHead(coord);
-        this.getPlacement().add(SNAKE_HEAD, coord);
-        this.setTail(this.getPlacement().get(this.getPlacement().size()-1));
+        this.placement.add(SNAKE_HEAD, coord);
+        this.tail =  this.placement.get(this.placement.size()-1);
     }
 
     private SnakesProto.Direction chooseDirection() {
@@ -97,7 +108,6 @@ public class Snake implements Iterable<SnakesProto.GameState.Coord> {
 
 
     public static SnakesProto.GameState.Coord getNextCoord(int direction, SnakesProto.GameState.Coord center, Field field) {
-        log.info("get next coord for snake");
         int y = center.getY();
         int x = center.getX();
         switch (direction) {
@@ -115,17 +125,14 @@ public class Snake implements Iterable<SnakesProto.GameState.Coord> {
         log.info("move snake");
         SnakesProto.GameState.Coord newHeadCoord = getNextCoord(direction.getNumber(), this.head, field);
 
-        log.info("get coord x {}, y {}", newHeadCoord.getX(), newHeadCoord.getY());
         this.addNewCoord(SNAKE_HEAD, newHeadCoord);
-        field.setValue(newHeadCoord.getX(), newHeadCoord.getY(), this.id);
+        field.addCoordByID(newHeadCoord.getX(), newHeadCoord.getY(), this.id);
 
         List<Integer> headCell = field.getListValue(this.head);
-        log.info("list cell {} x {} ,y {}", headCell, this.head.getX(), this.head.getY());
         if(!headCell.contains(FOOD)) {
             field.getListValue(this.tail).remove(Integer.valueOf(this.id));
             placement.remove(this.tail);
         } else {
-            log.info("came across a fruit");
             playerManager.addPointByID(this.id);
             headCell.remove(Integer.valueOf(FOOD));
             field.getFoods().remove(this.head);

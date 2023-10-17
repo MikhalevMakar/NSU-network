@@ -3,6 +3,7 @@ package nsu.ccfit.ru.mikhalev.network.model.message;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.network.model.keynode.*;
+import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -21,19 +22,28 @@ public class NetworkStorage {
     @Getter
     private final MainRole mainRole = new MainRole();
 
-    public void updateMainRole(HostNetworkKey keyMaster, HostNetworkKey keyDeputy) {
-        this.mainRole.updateKeys(keyMaster, keyDeputy);
-    }
-
     @Getter
     private long lastSendTime;
 
     @Getter
     private long lastStateMsgNum;
 
-    public boolean isContainsPlayer(HostNetworkKey key) {
-        return players.containsKey(key);
+    @Getter
+    private SnakesProto.GameState currentStateGame;
+
+    public boolean isContainsMaster(long delay) {
+        return System.currentTimeMillis() - this.players.get(mainRole.getKeyMaster()).getCurrTime() < delay;
     }
+
+    public void updateStateGame(SnakesProto.GameState currentStateGame) {
+        this.currentStateGame = currentStateGame;
+    }
+
+    public void updateMainRole(HostNetworkKey keyMaster, HostNetworkKey keyDeputy) {
+        this.mainRole.updateKeys(keyMaster, keyDeputy);
+    }
+
+    public boolean isContainsPlayer(HostNetworkKey key) { return players.containsKey(key); }
 
     public void updaterDispatchTimePlayer(HostNetworkKey key) {
         this.players.get(key).updateTime();
@@ -51,13 +61,11 @@ public class NetworkStorage {
         return this.mainNodesInfo.get(nameGame).getHostNetworkKey();
     }
 
-    public void removePLayer(HostNetworkKey hostNetworkKey) {
+    public void removePlayer(HostNetworkKey hostNetworkKey) {
         this.players.remove(hostNetworkKey);
     }
 
-    public  Set<Map.Entry<HostNetworkKey, NodeRole>> getSetPlayers() {
-        return players.entrySet();
-    }
+    public  Set<Map.Entry<HostNetworkKey, NodeRole>> getSetPlayers() { return players.entrySet(); }
 
     public void addNewUser(HostNetworkKey hostNetworkKey, NodeRole nodeRole) {
         players.put(hostNetworkKey, nodeRole);

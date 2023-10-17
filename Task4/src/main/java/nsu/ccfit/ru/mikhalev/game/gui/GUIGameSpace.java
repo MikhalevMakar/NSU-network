@@ -1,5 +1,6 @@
 package nsu.ccfit.ru.mikhalev.game.gui;
 
+import nsu.ccfit.ru.mikhalev.observer.ObserverGameState;
 import nsu.ccfit.ru.mikhalev.observer.context.ContextGame;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 

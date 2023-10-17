@@ -24,6 +24,6 @@ public class GameManager extends Observable {
                 GameManager.super.notifyObserversGameState();
             }
         };
-        timer.scheduleAtFixedRate(task, game.getGameConfig().getStateDelayMs(), game.getGameConfig().getStateDelayMs());
+        timer.scheduleAtFixedRate(task, 0, game.getGameConfig().getStateDelayMs());
     }
 }

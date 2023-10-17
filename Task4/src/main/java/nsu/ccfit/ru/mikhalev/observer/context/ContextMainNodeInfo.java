@@ -16,7 +16,6 @@ public class ContextMainNodeInfo implements Context {
     private SnakesProto.GameMessage.AnnouncementMsg message;
 
     public void update(InetAddress ip, int port, SnakesProto.GameMessage.AnnouncementMsg message){
-        log.info ("update context announcement msg");
         this.ip = ip;
         this.port= port;
         this.message = message;

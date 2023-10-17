@@ -1,5 +1,6 @@
 package nsu.ccfit.ru.mikhalev.game.controller;
 
+import nsu.ccfit.ru.mikhalev.game.controller.impl.ControllerGameState;
 import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
 import nsu.ccfit.ru.mikhalev.network.NetworkController;
 import nsu.ccfit.ru.mikhalev.network.model.keynode.HostNetworkKey;
@@ -10,9 +11,9 @@ import java.net.InetAddress;
 
 
 public interface GameController extends ObserverState, ObserverError {
-    void startGame();
-
     void createConfigGame(String nameGame, String namePlayer, SnakesProto.GameConfig gameConfig);
+
+    void switchRoleToMaster(SnakesProto.GameState gameState);
 
     void updatePlayer(HostNetworkKey hostNetworkKey, SnakesProto.NodeRole role);
 
@@ -32,7 +33,7 @@ public interface GameController extends ObserverState, ObserverError {
 
     void moveHandler(SnakesProto.Direction direction);
 
-    void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role, int delay);
+    void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role, SnakesProto.GameConfig gameConfig);
 
     void sendMessageNetwork(String nameGame, SnakesProto.GameMessage gameMessage);
 
