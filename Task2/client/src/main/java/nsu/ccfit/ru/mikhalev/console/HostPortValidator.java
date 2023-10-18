@@ -1,10 +1,8 @@
 package nsu.ccfit.ru.mikhalev.console;
 
-import com.beust.jcommander.IParameterValidator;
-import com.beust.jcommander.ParameterException;
+import com.beust.jcommander.*;
 
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.MAX_SIZE_PORT;
-import static nsu.ccfit.ru.mikhalev.context.ContextValue.MIN_SIZE_PORT;
+import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
 
 
 public class HostPortValidator implements IParameterValidator {

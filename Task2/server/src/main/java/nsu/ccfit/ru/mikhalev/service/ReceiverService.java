@@ -47,9 +47,9 @@ public class ReceiverService implements Runnable {
 
     private void checkStatusResult(long bytesReceived, long totalSize) throws IOException {
         log.info("check result and send to client");
-        if (totalSize == bytesReceived)
-            log.info("{} by client {}", SUCCESSFUL_TRANSMISSION, socket.getInetAddress());
-        else {
+        if (totalSize == bytesReceived) {
+            log.info ("{} by client {}", SUCCESSFUL_TRANSMISSION, socket.getInetAddress ());
+        } else {
             log.warn("error while sending status result to client " + socket.getInetAddress());
             throw new SessionException(UNSUCCESSFUL_TRANSMISSION);
         }

@@ -1,5 +1,4 @@
 FROM gradle:8.2-jdk19 AS build
-
 FROM openjdk:19-slim
 
 WORKDIR /app

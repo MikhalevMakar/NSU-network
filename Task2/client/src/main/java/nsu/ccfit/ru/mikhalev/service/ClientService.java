@@ -57,8 +57,9 @@ public class ClientService implements AutoCloseable {
             output.write(this.fileStream.readNBytes(DEFAULT_SIZE_BUFFER_TRANSFER));
             output.flush();
         }
-
+//        client.shutdownOutput();
         log.info("all data from the file has been sent");
+        this.handlerResponseReceipt();
     }
 
     @Override
