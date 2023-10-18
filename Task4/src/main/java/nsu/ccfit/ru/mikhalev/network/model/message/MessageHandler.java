@@ -48,12 +48,18 @@ public final class MessageHandler implements Runnable {
             case STATE -> this.handlerState();
             case ERROR -> gameController.reportErrorGUI(gameMessage.getError().getErrorMessage());
             case ROLE_CHANGE -> this.handlerChangeRole();
-            case DISCOVER -> log.info("message DISCOVER");
+            case DISCOVER -> handlerDiscover();
             case TYPE_NOT_SET -> log.info("message TYPE_NOT_SET");
             case JOIN -> this.handlerJoin();
             default -> throw new TypeCaseException();
         }
         this.storage.updaterDispatchTimePlayer(hostNetworkKey);
+    }
+
+    public void handlerDiscover() {
+        this.storage.addMessageToSend(new Message(this.hostNetworkKey,
+                                                  GameMessage.createGameMessage(this.storage.announcementMsgByNameGame(
+                                                                                                    gameController.getNameGame()))));
     }
 
     public void sendNeedConfirmation(int typeCase) {

@@ -145,3 +145,6 @@ z
 Jsrc/main/java/nsu/ccfit/ru/mikhalev/ecxeption/PlayerNotFoundException.java,b/7/b7bd2ada7d8879d47773a7cb06676fe4b8f45d82
 }
 Msrc/main/java/nsu/ccfit/ru/mikhalev/network/model/thread/PlayerScheduler.java,8/a/8abba6bf371765ba1f48c28e1f72210ad111303e
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302

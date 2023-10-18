@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.canvas.*;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
@@ -13,13 +14,12 @@ import javafx.stage.Stage;
 import static nsu.ccfit.ru.mikhalev.context.ContextField.*;
 import static nsu.ccfit.ru.mikhalev.game.model.Snake.SNAKE_HEAD;
 
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.ecxeption.ClassLoaderException;
 import nsu.ccfit.ru.mikhalev.game.controller.GameController;
 import nsu.ccfit.ru.mikhalev.game.controller.impl.ControllerGameState;
+import nsu.ccfit.ru.mikhalev.game.controller.impl.GameControllerImpl;
 import nsu.ccfit.ru.mikhalev.game.gui.GUIGameSpace;
-import nsu.ccfit.ru.mikhalev.observer.ObserverGameState;
 import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
@@ -30,7 +30,7 @@ import java.util.*;
 @Slf4j
 public class GUIGameSpaceImpl implements GUIGameSpace {
 
-    private final GameController gameController;
+    private final GameControllerImpl gameController;
 
     private static final String VIEW_GAME_FXML_PATH = "src/main/resources/configGameUI/game.fxml";
 
@@ -55,6 +55,8 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     private GraphicsContext graphicsContext;
 
+    private final Label errorMessageLabel = new Label();
+
     private final Stage stage;
 
     private final Scene scene;
@@ -62,9 +64,9 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     private final Canvas canvas = new Canvas(WIDTH_CANVAS, HEIGHT_CANVAS);
 
-    private final ControllerGameState gameState;
+    private KeyCode currentDirection;
 
-    public GUIGameSpaceImpl(String nameGame, Stage stage , GameController gameController) {
+    public GUIGameSpaceImpl(String nameGame, Stage stage , GameControllerImpl gameController) {
         File file = new File(VIEW_GAME_FXML_PATH);
         FXMLLoader gameLoader = new FXMLLoader();
 
@@ -77,13 +79,16 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
         }
 
         this.gameController = gameController;
-        this.gameState = gameLoader.getController();
-        gameState.setGameName(nameGame);
+        ControllerGameState gameState = gameLoader.getController();
+        gameState.updateStateView(nameGame, stage);
+        gameState.dependencyGameController(this.gameController);
         this.gameController.subscriptionOnMulticastService(gameState);
         this.stage = stage;
         this.stage.setTitle(nameGame);
         this.scene = new Scene(rootGameSpace);
         this.gameController.registrationGUIGameSpace(this);
+
+        this.errorMessageLabel.setTextFill(Color.RED);
     }
 
     @Override
@@ -98,22 +103,23 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
         scene.setOnKeyPressed(event -> {
             KeyCode code = event.getCode();
-            if (code == KeyCode.RIGHT || code == KeyCode.D) {
+            if (code == KeyCode.RIGHT && this.currentDirection != KeyCode.LEFT) {
                 gameController.moveHandler(SnakesProto.Direction.RIGHT);
-            } else if (code == KeyCode.LEFT || code == KeyCode.A) {
+            } else if (code == KeyCode.LEFT && this.currentDirection != KeyCode.RIGHT) {
                 gameController.moveHandler(SnakesProto.Direction.LEFT);
-            } else if (code == KeyCode.UP || code == KeyCode.W) {
+            } else if (code == KeyCode.UP && this.currentDirection != KeyCode.DOWN) {
                 gameController.moveHandler( SnakesProto.Direction.UP);
-            } else if (code == KeyCode.DOWN || code == KeyCode.S) {
+            } else if (code == KeyCode.DOWN && this.currentDirection != KeyCode.UP) {
                 gameController.moveHandler(SnakesProto.Direction.DOWN);
             }
+            this.currentDirection = code;
         });
     }
 
     @Override
     public void drawBackground() {
         Objects.requireNonNull(graphicsContext, "graphicsContext require non null");
-//        log.info("draw back ground");
+        log.info("draw back ground");
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
                 if ((i + j) % 2 == 0)
@@ -129,7 +135,7 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
     public void drawSnake(SnakesProto.GameState.Snake snake) {
         canvas.requestFocus();
         Objects.requireNonNull(snake, "snake require non null");
-//        log.info("draw snake");
+        log.info("draw snake");
         graphicsContext.setFill(colorSnake);
         graphicsContext.fillRoundRect(snake.getPoints(SNAKE_HEAD).getX() * SQUARE_SIZE, snake.getPoints(SNAKE_HEAD).getY() * SQUARE_SIZE - 1,
                                       SQUARE_SIZE - 1, SQUARE_SIZE - 1, 35, 35);
@@ -145,7 +151,7 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
 
     public void generateFood(List<SnakesProto.GameState.Coord> foods) {
         Objects.requireNonNull(foods, "foods require non null");
-//        log.info("generate food by size {}", foods.size());
+        log.info("generate food by size {}", foods.size());
         for(var food : foods) {
             Objects.requireNonNull(food, "food require non null");
             drawFood(food.getX(), food.getY());
@@ -166,5 +172,7 @@ public class GUIGameSpaceImpl implements GUIGameSpace {
     }
 
     @Override
-    public void printErrorMessage(String message) {}
+    public void printErrorMessage(String message) {
+        Platform.runLater(() -> errorMessageLabel.setText(message));
+    }
 }

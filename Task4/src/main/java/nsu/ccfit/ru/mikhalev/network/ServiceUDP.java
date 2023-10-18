@@ -38,9 +38,8 @@ public class ServiceUDP {
             while (!Thread.currentThread().isInterrupted()) {
                 long currentTime = System.currentTimeMillis();
                 synchronized (datagramSocket) {
-                    while (System.currentTimeMillis() - currentTime < TIMEOUT_DELAY / 10) {
+                    while (System.currentTimeMillis() - currentTime < TIMEOUT_DELAY / 10)
                         receiverUDP.receive();
-                    }
                 }
                 try {
                     Thread.sleep(RECEIVE_DELAY);

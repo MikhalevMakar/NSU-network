@@ -31,6 +31,10 @@ public class NetworkStorage {
     @Getter
     private SnakesProto.GameState currentStateGame;
 
+    public SnakesProto.GameMessage.AnnouncementMsg announcementMsgByNameGame(String nameGame) {
+        return mainNodesInfo.get(nameGame).getMessage();
+    }
+
     public boolean isContainsMaster(long delay) {
         return System.currentTimeMillis() - this.players.get(mainRole.getKeyMaster()).getCurrTime() < delay;
     }

@@ -13,24 +13,24 @@
     <children>
         <Line endX="191.5059356689453" endY="18.705249786376953" layoutX="637.0" layoutY="270.0" rotate="90.0" startX="-174.32888793945312" startY="18.4591007232666" stroke="#465058" strokeWidth="2.0" />
         <Accordion />
-        <Pane layoutX="694.0" layoutY="18.0" prefHeight="26.0" prefWidth="285.0" style="-fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css">
+        <Pane layoutX="694.0" layoutY="18.0" prefHeight="26.0" prefWidth="285.0" style="-fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/login.css">
             <children>
                 <Text fill="#9a9999" layoutX="176.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-color: #465058;" text="Набраные очки" wrappingWidth="110.75780267118398" />
                 <Line endX="176.56463623046875" endY="-0.40000152587890625" layoutX="-34.0" layoutY="25.0" startX="176.56463623046875" startY="-23.138681411743164" stroke="#465058" strokeWidth="2.0" />
                 <Text fill="#9a9999" layoutX="26.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-color: #465058;" text="Имя игрока" wrappingWidth="103.78923416137695" />
             </children>
         </Pane>
-        <ListView fx:id="playersState" layoutX="694.0" layoutY="44.0" prefHeight="207.0" prefWidth="285.0" style="-fx-background-color: transparent; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../gamesInfo.css" />
+        <ListView fx:id="playersState" layoutX="694.0" layoutY="44.0" prefHeight="207.0" prefWidth="285.0" style="-fx-background-color: transparent; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/gamesInfo.css" />
 
-        <Pane layoutX="696.0" layoutY="269.0" prefHeight="26.0" prefWidth="284.0" style="-fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css">
+        <Pane layoutX="696.0" layoutY="269.0" prefHeight="26.0" prefWidth="284.0" style="-fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/login.css">
             <children>
                 <Line endX="176.56463623046875" endY="-1.10546875" layoutX="-44.0" layoutY="25.0" startX="176.56463623046875" startY="-23.138681411743164" stroke="#465058" strokeWidth="2.0" />
                 <Text fill="#9a9999" layoutX="23.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-color: #465058;" text="Название игры" wrappingWidth="103.78923416137695" />
                 <Text fill="#9a9999" layoutX="149.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-color: #465058;" text="Количество игроков" wrappingWidth="146.4317512512207" />
             </children>
         </Pane>
-      <ListView fx:id="gamesState" layoutX="697.0" layoutY="295.0" prefHeight="207.0" prefWidth="282.0" style="-fx-background-color: transparent; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../gamesInfo.css" />
-      <Button layoutX="707.0" layoutY="524.0" mnemonicParsing="false" onAction="#createGame" prefHeight="41.0" prefWidth="260.0" style="-fx-background-color: #29cd72;" stylesheets="@../login.css" text="Выйти из игры" textFill="#fcf9f9">
+      <ListView fx:id="gamesState" layoutX="697.0" layoutY="295.0" prefHeight="207.0" prefWidth="282.0" style="-fx-background-color: transparent; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/gamesInfo.css" />
+      <Button layoutX="707.0" layoutY="524.0" mnemonicParsing="false" onAction="#logout" prefHeight="41.0" prefWidth="260.0" style="-fx-background-color: #29cd72;" stylesheets="@../style/login.css" text="Выйти из игры" textFill="#fcf9f9">
          <font>
             <Font size="15.0" />
          </font>

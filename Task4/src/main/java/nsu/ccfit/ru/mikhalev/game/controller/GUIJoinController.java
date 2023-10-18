@@ -9,5 +9,7 @@ public interface GUIJoinController extends Initializable {
 
     void dependencyInjection(GameController gameController, GUIGameMenu guiGameMenu);
 
+    void errorJoinToGame(String message);
+
     void intiGameState(SnakesProto.GameAnnouncement gameState);
 }

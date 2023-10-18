@@ -1,8 +1,10 @@
 package nsu.ccfit.ru.mikhalev.game.controller.impl;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
+import javafx.util.StringConverter;
 import lombok.extern.slf4j.Slf4j;
 
 import nsu.ccfit.ru.mikhalev.game.controller.*;
@@ -22,6 +24,9 @@ public class GUIJoinMenuControllerImpl implements GUIJoinController {
     @FXML
     private ChoiceBox<String> choiceRole;
 
+    @FXML
+    private Label errorJoinGame;
+
     private GameController gameController;
 
     private GUIGameMenu guiGameMenu;
@@ -30,9 +35,9 @@ public class GUIJoinMenuControllerImpl implements GUIJoinController {
 
     private SnakesProto.GameConfig gameConfig;
 
-    private static final String VIEWER = "Зритель";
+    private static final String VIEWER = "VIEWER";
 
-    private static final String PLAYER = "Игрок";
+    private static final String PLAYER = "PLAYER";
 
     @Override
     public void dependencyInjection(GameController gameController, GUIGameMenu guiGameMenu) {
@@ -58,6 +63,11 @@ public class GUIJoinMenuControllerImpl implements GUIJoinController {
 
     private SnakesProto.NodeRole getRole(String role) {
         return role.equals(VIEWER) ? SnakesProto.NodeRole.VIEWER : SnakesProto.NodeRole.NORMAL;
+    }
+
+    @Override
+    public void errorJoinToGame(String message) {
+        Platform.runLater(() -> errorJoinGame.setText(message));
     }
 
     @Override

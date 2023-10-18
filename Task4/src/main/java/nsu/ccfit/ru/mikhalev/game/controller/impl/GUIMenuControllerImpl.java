@@ -41,7 +41,7 @@ public class GUIMenuControllerImpl implements GUIMenuController {
     @FXML
     private ListView<String> gamesInfo;
 
-    private GameController gameController;
+    private GameControllerImpl gameController;
 
     public static final int OPEN_JOIN_WINDOW = 2;
 
@@ -50,7 +50,7 @@ public class GUIMenuControllerImpl implements GUIMenuController {
     private ContextGameState contextGames;
 
     @Override
-    public void dependencyInjection(GameController gameController, GUIGameMenuImpl guiGameMenu) {
+    public void dependencyInjection(GameControllerImpl gameController, GUIGameMenuImpl guiGameMenu) {
         log.info("registration game controller");
         this.gameController = gameController;
         this.guiGameMenu = guiGameMenu;

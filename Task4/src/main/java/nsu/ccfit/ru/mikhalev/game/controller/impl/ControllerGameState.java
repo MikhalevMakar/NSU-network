@@ -2,19 +2,22 @@ package nsu.ccfit.ru.mikhalev.game.controller.impl;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import lombok.Setter;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.observer.ObserverGameState;
-import nsu.ccfit.ru.mikhalev.observer.context.ContextGameState;
+import nsu.ccfit.ru.mikhalev.game.gui.imp.GUIGameMenuImpl;
+import nsu.ccfit.ru.mikhalev.observer.*;
+import nsu.ccfit.ru.mikhalev.observer.context.*;
 import nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto;
 
+import java.io.IOException;
 import java.util.*;
 
 import static nsu.ccfit.ru.mikhalev.context.ContextValue.*;
 
 @Slf4j
-public class ControllerGameState implements ObserverGameState {
+public class ControllerGameState implements ObserverGameState, ObserverError {
 
     @FXML
     private ListView<String> playersState;
@@ -22,12 +25,27 @@ public class ControllerGameState implements ObserverGameState {
     @FXML
     private ListView<String>  gamesState;
 
-    @Setter
+    @FXML
+    private Label errorJoinGame;
+
     private String gameName;
+
+    private Stage stage;
+
+    private GameControllerImpl gameController;
 
     private static final String MASTER_INSTRUCTION = "(MASTER)";
 
     private static final String DEPUTY_INSTRUCTION = "(DEPUTY)";
+
+    public void updateStateView(String nameGame, Stage stage) {
+        this.gameName = nameGame;
+        this.stage = stage;
+    }
+    public void dependencyGameController(GameControllerImpl gameController) {
+        this.gameController = gameController;
+        gameController.addObserverError(this);
+    }
 
     public String getNameByRole(String namePlayer, SnakesProto.NodeRole role) {
         return switch (role) {
@@ -61,5 +79,14 @@ public class ControllerGameState implements ObserverGameState {
                     .toList())
             );
         });
+    }
+
+    public void logout() throws IOException {
+        new GUIGameMenuImpl(gameController, stage).view();
+    }
+
+    @Override
+    public void updateError(ContextError context) {
+        errorJoinGame.setText(context.getMessage());
     }
 }

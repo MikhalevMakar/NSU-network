@@ -24,12 +24,16 @@ import static nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto.NodeRole.*;
 
 @NoArgsConstructor
 @Slf4j
-public class GameControllerImpl implements GameController {
+public class GameControllerImpl extends Observable implements GameController {
     public static final int MASTER_PORT = 0;
+
+    private static final int MAX_COUNT_SNAKE_ON_FIELD = 7;
 
     public static final String MASTER_IP = "localhost";
 
     public static final InetAddress inetAddressMASTER;
+
+    private final ContextError contextError = new ContextError();
 
     static {
         try {
@@ -72,6 +76,10 @@ public class GameControllerImpl implements GameController {
     @Override
     public void subscriptionOnMulticastService(ObserverGameState observerGameState) {
         this.networkController.subscriptionOnMulticastService(observerGameState);
+    }
+
+    public String getNameGame() {
+        return this.playerState.nameGame();
     }
 
     @Override
@@ -125,7 +133,6 @@ public class GameControllerImpl implements GameController {
     @Override
     public void initJoinGame(String playerName, String nameGame, SnakesProto.NodeRole role, SnakesProto.GameConfig gameConfig) {
         this.gameConfig = gameConfig;
-        log.info("NAME GAME {} {}", networkController.getHostMasterByGame(nameGame), nameGame);
         this.networkController.updateKeyMaster(networkController.getHostMasterByGame(nameGame), null);
         this.playerState = new PlayerState(null, playerName, nameGame, role);
         this.networkController.addRoleSelf(role);
@@ -158,6 +165,12 @@ public class GameControllerImpl implements GameController {
     @Override
     public void joinToGame(HostNetworkKey hostNetworkKey, SnakesProto.GameMessage.JoinMsg message, SnakesProto.NodeRole role) {
         log.info("join to game ip {}, port {}", hostNetworkKey.getIp(), hostNetworkKey.getPort());
+        if(game.getCountSnake() > MAX_COUNT_SNAKE_ON_FIELD) {
+            contextError.update(hostNetworkKey, "the number of players has maxed out ");
+            notifyObserversError(contextError);
+            return;
+        }
+
         this.playerManager.createPlayer(hostNetworkKey.getIp(), hostNetworkKey.getPort(),
                                         message.getPlayerName(), role);
     }

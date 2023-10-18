@@ -40,6 +40,10 @@ public class Game {
         this.field = new Field(gameConfig.getWidth(), gameConfig.getHeight(), gameState.getFoodsList(), gameState.getSnakesList());
     }
 
+    public int getCountSnake() {
+        return snakes.size();
+    }
+
     public void changeStatusPlayerSnake(Integer id, SnakesProto.GameState.Snake.SnakeState state) {
         log.info("ID {}", id);
         snakes.get(id).changeState(state);

@@ -19,7 +19,7 @@ public class ApplicationMain extends javafx.application.Application {
 
     private static String ip;
 
-    private static final GameController gameController = new GameControllerImpl();
+    private static final GameControllerImpl gameController = new GameControllerImpl();
 
     public static void main(String[] args) {
         try {

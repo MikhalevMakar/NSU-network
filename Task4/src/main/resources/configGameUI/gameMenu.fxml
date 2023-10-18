@@ -13,20 +13,20 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="746.0" style="-fx-background-color: #2A363F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nsu.ccfit.ru.mikhalev.game.controller.impl.GUIMenuControllerImpl">
     <children>
         <Line endX="191.5059356689453" endY="18.705249786376953" layoutX="388.0" layoutY="213.0" rotate="90.0" startX="-174.32888793945312" startY="18.4591007232666" stroke="#465058" strokeWidth="2.0" />
-        <TextField fx:id="namePlayer" layoutX="442.0" layoutY="94.0" prefHeight="41.0" prefWidth="282.0" promptText="Имя игрока" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css" />
-      <TextField fx:id="height" layoutX="442.0" layoutY="205.0" prefHeight="41.0" prefWidth="282.0" promptText="Высота поля в клетках (от 10 до 100)" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css" text="20" />
-      <ListView fx:id="gamesInfo" layoutX="18.0" layoutY="57.0" onMouseClicked="#joinToGame" prefHeight="412.0" prefWidth="327.0" style="-fx-background-color: transparent; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../gamesInfo.css" />
+        <TextField fx:id="namePlayer" layoutX="442.0" layoutY="94.0" prefHeight="41.0" prefWidth="282.0" promptText="Имя игрока" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/login.css" />
+      <TextField fx:id="height" layoutX="442.0" layoutY="205.0" prefHeight="41.0" prefWidth="282.0" promptText="Высота поля в клетках (от 10 до 100)" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/login.css" text="20" />
+      <ListView fx:id="gamesInfo" layoutX="18.0" layoutY="57.0" onMouseClicked="#joinToGame" prefHeight="412.0" prefWidth="327.0" style="-fx-background-color: transparent; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/gamesInfo.css" />
       <Accordion />
-      <TextField fx:id="countFood" layoutX="442.0" layoutY="260.0" prefHeight="41.0" prefWidth="282.0" promptText="Количество клеток с едой (от 0 до 100)" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css" text="5" />
-      <TextField fx:id="delay" layoutX="444.0" layoutY="315.0" prefHeight="41.0" prefWidth="282.0" promptText="Задержка (от 100 до 3000 Ms)" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css" text="200" />
-      <Button layoutX="455.0" layoutY="396.0" mnemonicParsing="false" onAction="#createGame" prefHeight="41.0" prefWidth="260.0" style="-fx-background-color: #29cd72;" stylesheets="@../login.css" text="Создать игру" textFill="#fcf9f9">
+      <TextField fx:id="countFood" layoutX="442.0" layoutY="260.0" prefHeight="41.0" prefWidth="282.0" promptText="Количество клеток с едой (от 0 до 100)" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/login.css" text="5" />
+      <TextField fx:id="delay" layoutX="444.0" layoutY="315.0" prefHeight="41.0" prefWidth="282.0" promptText="Задержка (от 100 до 3000 Ms)" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/login.css" text="200" />
+      <Button layoutX="455.0" layoutY="396.0" mnemonicParsing="false" onAction="#createGame" prefHeight="41.0" prefWidth="260.0" style="-fx-background-color: #29cd72;" stylesheets="@../style/login.css" text="Создать игру" textFill="#fcf9f9">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="width" layoutX="442.0" layoutY="149.0" prefHeight="41.0" prefWidth="282.0" promptText="Ширина поля в клетках (от 10 до 100)" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css" text="20" />
-      <TextField fx:id="nameGame" layoutX="444.0" layoutY="37.0" prefHeight="41.0" prefWidth="282.0" promptText="Название игры" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css" text="Змейка" />
-      <Pane layoutX="17.0" layoutY="28.0" prefHeight="29.0" prefWidth="328.0" style="-fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../login.css">
+      <TextField fx:id="width" layoutX="442.0" layoutY="149.0" prefHeight="41.0" prefWidth="282.0" promptText="Ширина поля в клетках (от 10 до 100)" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/login.css" text="20" />
+      <TextField fx:id="nameGame" layoutX="444.0" layoutY="37.0" prefHeight="41.0" prefWidth="282.0" promptText="Название игры" style="-fx-background-color: #2A363F; -fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/login.css" text="Змейка" />
+      <Pane layoutX="17.0" layoutY="28.0" prefHeight="29.0" prefWidth="328.0" style="-fx-border-color: #465058; -fx-border-radius: 4;" stylesheets="@../style/login.css">
          <children>
             <Line endX="176.56463623046875" endY="4.0" layoutX="-86.0" layoutY="25.0" startX="176.56463623046875" startY="-23.138681411743164" stroke="#465058" strokeWidth="2.0" />
             <Text fill="#9a9999" layoutX="92.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-color: #465058;" text="Статус  вступления" wrappingWidth="114.8001807650108" />
