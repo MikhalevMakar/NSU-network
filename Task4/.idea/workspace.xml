@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="85c26bfe-209a-4ae1-a6b3-b095ed4911fd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/style/choicebox.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task2/client/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Task2/client/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task2/client/src/main/java/nsu/ccfit/ru/mikhalev/console/HostPortValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task2/client/src/main/java/nsu/ccfit/ru/mikhalev/console/HostPortValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task2/client/src/main/java/nsu/ccfit/ru/mikhalev/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task2/client/src/main/java/nsu/ccfit/ru/mikhalev/service/ClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task2/server/src/main/java/nsu/ccfit/ru/mikhalev/service/ReceiverService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task2/server/src/main/java/nsu/ccfit/ru/mikhalev/service/ReceiverService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/0/5/058e2702f9898d7c1f0736ddfbfa7416934edba8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/0/9/091c7d9c93e9b5702fb6e342c5645ad1f0d735c1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/0/c/0c238fb7251a8d84bd9d80011d50259c898b2a81" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/1/0/10157a40cd56ed79bf6666b04b6e0143ec7789cd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/1/4/14929f90766fb2a689c155b4da619629a5446a52" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/2/3/23be5d0504f0b9d4f4f4623d4fbd910e07ab9d4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/4/4/441ce551ddf86683cd6aa05cb009762b3e3b9a71" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/5/b/5bfba66fa4d8bc6e92efc76badc9f0f7505b4c53" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/6/f/6fe3cccdb9851f7b636aea7aeef7356b69cb2e13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/7/4/749edfcc96398253e5b3416184e95c46621da850" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/8/5/850a5dabc28a42c70d371bbe59d5b24b02668a8d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/8/f/8f02984b57c74b35d0f8afa876242ed5a0d06c6b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/9/b/9b4199f5e009d451bd086b72036f1c55fd93dbbd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/9/c/9cdba40751bcf909ec018d4cda61ee3c2c3adce8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/a/3/a320a98e57e66dcae846570e00d6d75a2ba711e2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/b/a/ba028b7423024b02707c43b29dbb551b1f69a548" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/c/0/c075bb7ef3d11284ae55949fb79de5b084374523" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/d/0/d09a0d6ea7f279870cb87c44e3587f02c2fc52f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/d/c/dcfa8784415f6221e903f464337bb66dd05add02" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/e/6/e62019bf79bac1943c2cf174a6c724f4daf3cb81" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/e/9/e9ea32806f56e661ed8d1af7c1d240c7df8e9a46" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/f/0/f07866736216be0ee2aba49e392191aeae700a35" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/f/6/f66b81a00f15e604d18170519756a7373deb880b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/issuestore/index.pb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/0/5/058e2702f9898d7c1f0736ddfbfa7416934edba8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/0/9/091c7d9c93e9b5702fb6e342c5645ad1f0d735c1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/0/c/0c238fb7251a8d84bd9d80011d50259c898b2a81" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/1/0/10157a40cd56ed79bf6666b04b6e0143ec7789cd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/1/4/14929f90766fb2a689c155b4da619629a5446a52" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/2/3/23be5d0504f0b9d4f4f4623d4fbd910e07ab9d4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/4/4/441ce551ddf86683cd6aa05cb009762b3e3b9a71" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/5/b/5bfba66fa4d8bc6e92efc76badc9f0f7505b4c53" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/6/f/6fe3cccdb9851f7b636aea7aeef7356b69cb2e13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/7/4/749edfcc96398253e5b3416184e95c46621da850" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/8/5/850a5dabc28a42c70d371bbe59d5b24b02668a8d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/8/f/8f02984b57c74b35d0f8afa876242ed5a0d06c6b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/9/b/9b4199f5e009d451bd086b72036f1c55fd93dbbd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/9/c/9cdba40751bcf909ec018d4cda61ee3c2c3adce8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/a/3/a320a98e57e66dcae846570e00d6d75a2ba711e2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/b/a/ba028b7423024b02707c43b29dbb551b1f69a548" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/c/0/c075bb7ef3d11284ae55949fb79de5b084374523" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/d/0/d09a0d6ea7f279870cb87c44e3587f02c2fc52f8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/d/c/dcfa8784415f6221e903f464337bb66dd05add02" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/e/6/e62019bf79bac1943c2cf174a6c724f4daf3cb81" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/e/9/e9ea32806f56e661ed8d1af7c1d240c7df8e9a46" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/f/0/f07866736216be0ee2aba49e392191aeae700a35" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/f/6/f66b81a00f15e604d18170519756a7373deb880b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/context/ContextValue.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/ecxeption/ChooseDirectionException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/ecxeption/FindSuitableSquare.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/ecxeption/JoinGroupException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/ecxeption/ReceiverException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/ecxeption/SwitchTailException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/model/CustomAnnouncementMsg.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/model/HostNetworkKey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/model/Master.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/model/MulticastReceiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/model/snakes/Field.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/model/snakes/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/model/snakes/Snake.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/player/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/server/ConnectServer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/server/MulticastReceiverService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/server/ReceiverUDP.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/server/protobuf/snakes.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/server/protobuf/snakes/SnakesProto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/utils/ContentCoord.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task3/src/main/java/nsu/ccfit/ru/mikhalev/utils/SwitchTypeMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/7/87101c04cc57cf793e42edf1c0f75e23f97f3718" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/7/87101c04cc57cf793e42edf1c0f75e23f97f3718" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/8/8894d623637097bbc3819984b242db2a80522bc0" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/8/8894d623637097bbc3819984b242db2a80522bc0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/ApplicationMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/ApplicationMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/GUIJoinController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/GUIJoinController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/GUIMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/GUIMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/impl/ControllerGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/impl/ControllerGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/impl/GUIJoinMenuControllerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/impl/GUIJoinMenuControllerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/impl/GUIMenuControllerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/impl/GUIMenuControllerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/impl/GameControllerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/controller/impl/GameControllerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/gui/GUIGameSpace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/gui/GUIGameSpace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/gui/imp/GUIGameMenuImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/gui/imp/GUIGameMenuImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/gui/imp/GUIGameSpaceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/gui/imp/GUIGameSpaceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/game/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/network/ServiceUDP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/network/ServiceUDP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/network/model/message/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/network/model/message/MessageHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/network/model/message/NetworkStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/network/model/message/NetworkStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/configGameUI/game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/configGameUI/game.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/configGameUI/gameJoinMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/configGameUI/gameJoinMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/configGameUI/gameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/configGameUI/gameMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/gamesInfo.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style/gamesInfo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/style/login.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="FxmlFile" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MikhalevMakar&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="92b30628-9387-4f1c-b000-3d21e14704c7" />
+        <option name="url" value="https://github.com/MikhalevMakar/NSU_NETWORK.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2VnV69aiUWOnwjDdJl1nqcMm8A3" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/natasamihaleva/NSU_NETWORK/Task4&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.40876657&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="nsu.ccfit.ru.mikhalev.game.gui" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/style" />
+      <recent name="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/protobuf/" />
+      <recent name="$PROJECT_DIR$/src/main/java/nsu/ccfit/ru/mikhalev/protobuf/snakes" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/main/resources/image" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="nsu.ccfit.ru.mikhalev" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="snake" type="Application" factoryName="Application" singleton="false">
+      <option name="MAIN_CLASS_NAME" value="nsu.ccfit.ru.mikhalev.ApplicationMain" />
+      <module name="Task4.main" />
+      <option name="PROGRAM_PARAMETERS" value="239.192.0.4 9112" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="85c26bfe-209a-4ae1-a6b3-b095ed4911fd" name="Changes" comment="" />
+      <created>1695471661598</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695471661598</updated>
+      <workItem from="1695471661817" duration="124000" />
+      <workItem from="1695471945811" duration="134000" />
+      <workItem from="1695472201368" duration="2814000" />
+      <workItem from="1695478899257" duration="8791000" />
+      <workItem from="1695523423241" duration="36043000" />
+      <workItem from="1695566580317" duration="1096000" />
+      <workItem from="1695567802783" duration="1263000" />
+      <workItem from="1695611193089" duration="1956000" />
+      <workItem from="1695617724351" duration="4286000" />
+      <workItem from="1695626582551" duration="2389000" />
+      <workItem from="1695644811912" duration="6171000" />
+      <workItem from="1695653104811" duration="3961000" />
+      <workItem from="1695658741939" duration="22000" />
+      <workItem from="1695689664815" duration="1613000" />
+      <workItem from="1695693137246" duration="1227000" />
+      <workItem from="1695705440750" duration="10599000" />
+      <workItem from="1695733942621" duration="4170000" />
+      <workItem from="1695794037971" duration="1362000" />
+      <workItem from="1695796292300" duration="1759000" />
+      <workItem from="1695802171537" duration="6000" />
+      <workItem from="1695805589960" duration="396000" />
+      <workItem from="1695818993832" duration="11729000" />
+      <workItem from="1695870481640" duration="5326000" />
+      <workItem from="1695877312282" duration="602000" />
+      <workItem from="1695879345243" duration="17000" />
+      <workItem from="1695888683921" duration="3369000" />
+      <workItem from="1695892109762" duration="300000" />
+      <workItem from="1695898684607" duration="622000" />
+      <workItem from="1695959744193" duration="17203000" />
+      <workItem from="1695983266042" duration="1320000" />
+      <workItem from="1696006439732" duration="316000" />
+      <workItem from="1696044076125" duration="21895000" />
+      <workItem from="1696070284901" duration="1732000" />
+      <workItem from="1696078254750" duration="18579000" />
+      <workItem from="1696131512438" duration="10773000" />
+      <workItem from="1696143258795" duration="10000" />
+      <workItem from="1696144334700" duration="28544000" />
+      <workItem from="1696209717917" duration="304000" />
+      <workItem from="1696211537911" duration="2694000" />
+      <workItem from="1696218675990" duration="7000" />
+      <workItem from="1696218710098" duration="20000" />
+      <workItem from="1696222275152" duration="558000" />
+      <workItem from="1696232822000" duration="510000" />
+      <workItem from="1696239580236" duration="606000" />
+      <workItem from="1696245801888" duration="9404000" />
+      <workItem from="1696256921418" duration="6961000" />
+      <workItem from="1696294462737" duration="1914000" />
+      <workItem from="1696298148613" duration="2941000" />
+      <workItem from="1696305461112" duration="302000" />
+      <workItem from="1696308233071" duration="9565000" />
+      <workItem from="1696324495815" duration="5590000" />
+      <workItem from="1696338485746" duration="151000" />
+      <workItem from="1696342585433" duration="8124000" />
+      <workItem from="1696406704873" duration="1289000" />
+      <workItem from="1696410741232" duration="2065000" />
+      <workItem from="1696434104776" duration="2804000" />
+      <workItem from="1696468154470" duration="828000" />
+      <workItem from="1696471264185" duration="2023000" />
+      <workItem from="1696485852891" duration="2061000" />
+      <workItem from="1696496327751" duration="1147000" />
+      <workItem from="1696502828122" duration="612000" />
+      <workItem from="1696524868092" duration="1938000" />
+      <workItem from="1696563975835" duration="1457000" />
+      <workItem from="1696567258016" duration="23473000" />
+      <workItem from="1696595890065" duration="8404000" />
+      <workItem from="1696647426951" duration="30980000" />
+      <workItem from="1696736963211" duration="12725000" />
+      <workItem from="1696756135694" duration="321000" />
+      <workItem from="1696761388115" duration="20073000" />
+      <workItem from="1696816963992" duration="653000" />
+      <workItem from="1696819962049" duration="19889000" />
+      <workItem from="1696916923961" duration="3828000" />
+      <workItem from="1696929713909" duration="22000" />
+      <workItem from="1696943166771" duration="429000" />
+      <workItem from="1696991653077" duration="12000" />
+      <workItem from="1697022530409" duration="602000" />
+      <workItem from="1697076498434" duration="8260000" />
+      <workItem from="1697106747355" duration="2226000" />
+      <workItem from="1697115894401" duration="30000" />
+      <workItem from="1697130613330" duration="1868000" />
+      <workItem from="1697169174610" duration="41699000" />
+      <workItem from="1697257813123" duration="42409000" />
+      <workItem from="1697342087987" duration="17333000" />
+      <workItem from="1697375074847" duration="6336000" />
+      <workItem from="1697391790075" duration="157000" />
+      <workItem from="1697421387222" duration="597000" />
+      <workItem from="1697423456224" duration="1814000" />
+      <workItem from="1697425348740" duration="171000" />
+      <workItem from="1697425555479" duration="76000" />
+      <workItem from="1697425668388" duration="21693000" />
+      <workItem from="1697470349386" duration="4969000" />
+      <workItem from="1697511989041" duration="419000" />
+      <workItem from="1697522439753" duration="598000" />
+      <workItem from="1697556459050" duration="5075000" />
+      <workItem from="1697600640232" duration="6000" />
+      <workItem from="1697618167670" duration="2791000" />
+      <workItem from="1697621476163" duration="5983000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.InternalError" package="java.lang" />
+          <option name="timeStamp" value="4" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="nsu.ccfit.ru.mikhalev.ecxeption.PlayerNotFoundException" package="nsu.ccfit.ru.mikhalev.ecxeption" />
+          <option name="timeStamp" value="6" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="nsu.ccfit.ru.mikhalev.game.model.Snake" memberName="state" />
+        <PinnedItemInfo parentTag="nsu.ccfit.ru.mikhalev.protobuf.snakes.SnakesProto$GameState$Coord" memberName="unknownFields" />
+        <PinnedItemInfo parentTag="nsu.ccfit.ru.mikhalev.game.model.Snake" memberName="head" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>
