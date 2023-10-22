@@ -1,0 +1,15 @@
+
+
+java:S1186M"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ó²ıä8ÀÂ£•µ1
+G
+java:S1172M"*Remove this unused method parameter "key".(ó²ıä8†Ã£•µ1
+Z
+java:S1117l"8Rename "port" which hides the field declared at line 29.(Õ·ÙÎşÿÿÿÿ8Ã£•µ1
+G
+java:S1172p"*Remove this unused method parameter "key".(Ê»Ş8 Ã£•µ1
+E
+java:S1068"(Remove this unused "host" private field.(´Ó…8¥Ã£•µ1
+J
+java:S1068"(Remove this unused "port" private field.(™ìÅÿÿÿÿÿ8¥Ã£•µ1
+G
+java:S1144p"*Remove this unused private "write" method.(Ê»Ş8¦Ã£•µ1

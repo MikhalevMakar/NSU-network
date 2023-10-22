@@ -1,0 +1,11 @@
+
+<
+build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
+t
+Dsrc/main/java/ru/nsu/ccfit/mikhalev/exception/SelectorException.java,7/3/733984cd70592d16477db629249b22194cfb57f9
+|
+Lsrc/main/java/ru/nsu/ccfit/mikhalev/exception/BuildProxyServerException.java,b/7/b702ad9d9542721616207fcf43c1a006056be9a7
+j
+:src/main/java/ru/nsu/ccfit/mikhalev/proxy/ProxyServer.java,b/6/b631862e4b0cfa32040e2ce486a8fb3d1de56195
+]
+-src/main/java/ru/nsu/ccfit/mikhalev/Main.java,4/b/4bf73e04305e8561cbc7c33ceda05489e3349bb9
