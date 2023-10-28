@@ -6,7 +6,7 @@ import ru.nsu.ccfit.mikhalev.proxy.ProxyServer;
 @Slf4j
 public class Main {
     public static void main(String[] args) {
-        try(ProxyServer proxyServer = new ProxyServer("localhost", Short.parseShort(args[0]))) {
+        try(ProxyServer proxyServer = new ProxyServer( Short.parseShort(args[0]))) {
             log.info("run proxy service");
             proxyServer.run();
         } catch(Exception ex) {

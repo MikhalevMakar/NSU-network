@@ -6,7 +6,7 @@ import ru.nsu.ccfit.mikhalev.model.*;
 
 import java.io.IOException;
 import java.net.*;
-import java.nio.ByteBuffer;
+import java.nio.*;
 import java.nio.channels.*;
 import java.nio.channels.spi.SelectorProvider;
 import java.util.Arrays;
@@ -16,163 +16,157 @@ import static ru.nsu.ccfit.mikhalev.configuration.ContextProxy.*;
 @Slf4j
 public class ProxyServer implements AutoCloseable {
 
-    private static final int SELECT_ERROR = -1;
-
     private final short port;
 
-    private final Selector selector;
+    private final ServerSocketChannel serverSocket = ServerSocketChannel.open();
 
-    private final ServerSocketChannel serverChannel;
+    private final Selector selector = SelectorProvider.provider().openSelector();
 
-    public ProxyServer(String host, short port) throws IOException{
+    public ProxyServer(short port) throws IOException {
         this.port = port;
 
-        this.selector = SelectorProvider.provider().openSelector();
-
-        this.serverChannel = ServerSocketChannel.open();
-        this.serverChannel.configureBlocking(false);
-        this.serverChannel.socket().bind(new InetSocketAddress(host, port));
-        this.serverChannel.register(selector, serverChannel.validOps());
+        this.serverSocket.configureBlocking(false);
+        this.serverSocket.socket().bind(new InetSocketAddress(InetAddress.getLoopbackAddress(), port));
+        this.serverSocket.register(selector, serverSocket.validOps());
     }
 
     public void run() {
         try {
             while (selector.select () > SELECT_ERROR) {
-                    for (SelectionKey key : selector.selectedKeys())
-                        this.switchKey(key);
-                    selector.selectedKeys().clear();
+                for (SelectionKey key : selector.selectedKeys())
+                    this.switchKey(key);
+                selector.selectedKeys().clear();
             }
-        }  catch (IOException ex) {
+        } catch (IOException ex) {
             throw new SelectorException(ex);
         }
     }
 
-    private void switchKey(SelectionKey key) throws IOException{
+    private void switchKey(SelectionKey key) throws IOException {
         if (key.isAcceptable()) this.accept(key);
         else if(key.isConnectable()) this.connect(key);
         else if (key.isReadable()) this.read(key);
         else if (key.isWritable()) this.write(key);
     }
 
-    private void accept(SelectionKey key) throws IOException{
-        log.info("accept");
-        SocketChannel newSocketChannel = ((ServerSocketChannel) key.channel()).accept();
-        newSocketChannel.configureBlocking(false);
-        newSocketChannel.register(selector, SelectionKey.OP_READ);
+    private void read(SelectionKey key) {
+        SocketChannel channel = ((SocketChannel) key.channel());
+
+        Attachment attachment = (Attachment) key.attachment();
+        if (attachment == null) attachment = new Attachment();
+
+        try {
+            int byteRead = channel.read(attachment.getBuffer());
+
+            if (byteRead == -1 || byteRead == 0) return;
+            if (attachment.getBuffer().get(0) == VERSION_SOCKS5 && attachment.isConfirmation()) readHeader(channel, attachment, key);
+            else if (attachment.getBuffer().get(0) == VERSION_SOCKS5) this.confirmationHeader(key, attachment, byteRead);
+            else saveData(attachment, key);
+        } catch (IOException e) {}
     }
 
-    private void read(SelectionKey key) throws IOException {
-        ByteBuffer header = ByteBuffer.allocate(BUFFER_SIZE);
+    private void saveData(Attachment attachment, SelectionKey key) {
+        log.info("save data");
+        key.interestOps(key.interestOps() ^ SelectionKey.OP_READ);
+        SelectionKey peerKey = attachment.getPeerKey();
+        peerKey.interestOps(peerKey.interestOps() | SelectionKey.OP_WRITE);
+        attachment.getBuffer().flip();
+    }
+
+    private void readHeader(SocketChannel channel, Attachment headerAtt, SelectionKey key) throws IOException {
+        log.info ("header handle connection message");
+        ByteBuffer answer = ByteBuffer.allocate(SIZEOF_HEADER_ANSWER);
+
+        answer.put(VERSION_SOCKS5);
+        answer.put(AUTHENTICATION_NO_REQUIRED);
+        answer.flip();
+        channel.write(answer);
+
+        headerAtt.updateConfirmation(false);
+        key.attach(headerAtt);
+        headerAtt.clearData();
+    }
+
+    private void confirmationHeader(SelectionKey key, Attachment attachment, int bytesRead) throws IOException {
+        log.info("confirmationHeader");
+        SocksHeader socksHeader = parseHeader(attachment.getBuffer(), bytesRead);
+        this.establishConnection(key, socksHeader, attachment);
+        attachment.updateConfirmation(false);
+        attachment.clearData();
+    }
+
+    private void establishConnection(SelectionKey key, SocksHeader socksHeader, Attachment attachment) throws IOException {
+        log.info("connect new host");
+        SocketChannel peer = SocketChannel.open();
+        peer.configureBlocking(false);
+        peer.connect(new InetSocketAddress(socksHeader.dstIP(), socksHeader.dstPort()));
+        SelectionKey newPeer = peer.register(selector, SelectionKey.OP_CONNECT);
+
+        key.interestOps(REMOVE_PRIVILEGES);
+        attachment.setPeerKey(newPeer);
+        newPeer.attach(new Attachment(key));
+    }
+
+    private SocksHeader parseHeader(ByteBuffer buffer, int messageLength) throws UnknownHostException{
+        byte[] ipBytes = Arrays.copyOfRange(buffer.array(), INDEX_IP_HEADER, messageLength - SIZEOF_PORT);
+        short clientPort = (short) (((buffer.get(messageLength - SIZEOF_PORT) & 0xFF) << 8) | (buffer.get(messageLength - 1) & 0xFF));
+        InetAddress ip = InetAddress.getByName(new String(ipBytes));
+        log.info("host ip {} and port {}", ip.getHostName(), clientPort);
+
+        return new SocksHeader(ip, clientPort);
+    }
+
+    private void write(SelectionKey key) throws IOException {
         SocketChannel channel = (SocketChannel) key.channel();
 
-        int bytesRead = channel.read(header);
-        log.info("chanel read  {}", (Arrays.toString(header.array())));
         Attachment attachment = (Attachment) key.attachment();
+        if (!attachment.getBuffer().hasRemaining()) return;
 
-        if (bytesRead == -1) key.cancel();
-        else if(attachment == null) this.readHeader(channel, header, key);
-        else if(attachment.isConfirmation()) this.confirmationHeader(key, header, bytesRead, attachment);
-        else this.saveData(attachment, header, key);
-    }
+        Attachment peerAttachment = (Attachment) attachment.getPeerKey().attachment();
+        channel.write(peerAttachment.getBuffer());
 
-    private void saveData(Attachment attachment, ByteBuffer data, SelectionKey key) {
-        log.info("save data");
+        log.info("write buffer {}", Arrays.toString(peerAttachment.getBuffer().array()));
+        peerAttachment.clearData();
 
-        attachment.clearData();
-        attachment.putData(data.array());
-        data.flip();
-
-        SelectionKey peer = ((Attachment) key.attachment()).getPeer();
-
-        peer.interestOps(peer.interestOps() | SelectionKey.OP_WRITE);
-        key.interestOps(key.interestOps() ^ SelectionKey.OP_READ);
-    }
-
-    private void readHeader(SocketChannel channel, ByteBuffer header, SelectionKey key) throws IOException {
-        log.info ("header {}", Arrays.toString(header.array()));
-
-        ByteBuffer sendBuffer = ByteBuffer.allocate(2);
-
-        sendBuffer.put(VERSION_SOCKS5);
-        sendBuffer.put(AUTHENTICATION_NO_REQUIRED);
-
-        sendBuffer.flip();
-        channel.write(sendBuffer);
-        Attachment attachment = new Attachment();
-        attachment.updateConfirmation(true);
-        key.attach(attachment);
-    }
-
-    private void confirmationHeader(SelectionKey key, ByteBuffer header, int bytesRead, Attachment attachment) throws IOException {
-        log.info("confirmationHeader");
-        SocksHeader socksHeader = parseHeader(header, bytesRead);
-        this.connectToHost(key, socksHeader, attachment);
-        attachment.updateConfirmation(false);
-    }
-
-    private void requestSendingClient(SocketChannel channel) throws IOException {
-        log.info("request sending client");
-        ByteBuffer sendBuffer = ByteBuffer.allocate(DEFAULT_SIZE_PARAM + DEFAULT_ADDRESS_BIND.length());
-
-        sendBuffer.put(VERSION_SOCKS5);
-        sendBuffer.put(REP);
-        sendBuffer.put(RSV);
-        sendBuffer.put(A_TYP);
-        sendBuffer.put(DEFAULT_ADDRESS_BIND.getBytes());
-        sendBuffer.putShort(this.port);
-        sendBuffer.flip();
-        channel.write(sendBuffer);
+        key.interestOps(SelectionKey.OP_READ);
+        attachment.getPeerKey().interestOps(SelectionKey.OP_READ);
     }
 
     private void connect(SelectionKey key) throws IOException {
         log.info("connect");
-
         ((SocketChannel) key.channel()).finishConnect();
 
-        SelectionKey peerClient = ((Attachment) key.attachment()).getPeer();
-
-        this.requestSendingClient((SocketChannel) peerClient.channel());
+        SelectionKey peerKey = ((Attachment) key.attachment()).getPeerKey();
+        this.requestSendingClient((SocketChannel) peerKey.channel());
+        peerKey.interestOps(SelectionKey.OP_READ);
         key.interestOps(REMOVE_PRIVILEGES);
-        peerClient.interestOps(SelectionKey.OP_READ);
     }
 
-    private void connectToHost(SelectionKey key, SocksHeader socksHeader, Attachment attachment) throws IOException {
-        SocketChannel peer = SocketChannel.open();
-        peer.configureBlocking(false);
+    private void requestSendingClient(SocketChannel channel) throws IOException {
+        log.info("request sending client");
+        ByteBuffer request = ByteBuffer.allocate(DEFAULT_SIZE_PARAM + InetAddress.getLoopbackAddress().getAddress().length);
 
-        peer.connect(new InetSocketAddress(socksHeader.dstIP(), socksHeader.dstPort()));
-
-        SelectionKey peerKey = peer.register(selector, SelectionKey.OP_CONNECT);
-        attachment.setPeer(peerKey);
-        attachment.setIp(socksHeader.dstIP());
-        key.attach(attachment);
-        peerKey.attach(new Attachment(key, socksHeader.dstIP()));
+        request.put(VERSION_SOCKS5);
+        request.put(REP_CONNECT_SUCCESS);
+        request.put(RSV);
+        request.put(A_TYP);
+        request.put(InetAddress.getLoopbackAddress().getAddress());
+        request.putShort(this.port);
+        request.flip();
+        channel.write(request);
     }
 
-    private SocksHeader parseHeader(ByteBuffer header, int lengthHeader) throws UnknownHostException {
-        byte[] ipBytes = Arrays.copyOfRange(header.array(), 5, lengthHeader - 2);
-        InetAddress ip =  InetAddress.getByName(new String(ipBytes));
-        short clientPort = (short)(((header.get(lengthHeader - 2) & 0xFF) << 8) | (header.get(lengthHeader - 1) & 0xFF));
-        log.info("host ip {} and port {}", ip.getHostName(), clientPort);
-        return new SocksHeader(header.get(0), header.get(1), header.get(2), header.get(3), ip.getHostName(), clientPort);
-    }
-
-    private void write(SelectionKey key) throws IOException {
-        SocketChannel channel = ((SocketChannel) key.channel());
-
-        Attachment attachmentPeer = ((Attachment)((Attachment) key.attachment()).getPeer().attachment());
-        log.info("write ip {}, buffer {}", ((Attachment) key.attachment()).getIp(), Arrays.toString(attachmentPeer.getBuffer().array()));
-        channel.write(attachmentPeer.getBuffer());
-
-
-        key.interestOps(SelectionKey.OP_READ);
-        attachmentPeer.getPeer().interestOps(SelectionKey.OP_READ);
-        attachmentPeer.clearData();
+    private void accept(SelectionKey key) throws IOException{
+        log.info("accept");
+        SocketChannel client = ((ServerSocketChannel) key.channel()).accept();
+        client.configureBlocking(false);
+        client.register(selector, SelectionKey.OP_READ);
     }
 
     @Override
     public void close() throws Exception {
-        this.serverChannel.close();
+        log.info("close resources");
         this.selector.close();
+        this.serverSocket.close();
     }
 }
