@@ -15,5 +15,3 @@ i
 9src/main/java/ru/nsu/ccfit/mikhalev/model/Attachment.java,f/1/f1b6d526a3a96ed515819d557cf7851fd0dd1890
 s
 Csrc/main/java/ru/nsu/ccfit/mikhalev/configuration/ContextProxy.java,3/1/31e1e8a06009a0bbf1b397711d59ae52a52358de
-c
-3src/main/java/ru/nsu/ccfit/mikhalev/proxy/test.java,b/b/bb6b4e7bd13bc3d728974c1fcda04f5f35068cdf

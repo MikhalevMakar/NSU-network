@@ -2,6 +2,8 @@ package ru.nsu.ccfit.mikhalev.proxy;
 
 import lombok.extern.slf4j.Slf4j;
 import ru.nsu.ccfit.mikhalev.exception.SelectorException;
+import ru.nsu.ccfit.mikhalev.exception.TypeException;
+import ru.nsu.ccfit.mikhalev.exception.VersionSocksException;
 import ru.nsu.ccfit.mikhalev.model.*;
 
 import java.io.IOException;
@@ -58,9 +60,9 @@ public class ProxyServer implements AutoCloseable {
         try {
             int byteRead = channel.read(attachment.getBuffer());
 
-            if (byteRead == -1 || byteRead == 0) return;
-            if (attachment.getBuffer().get(0) == VERSION_SOCKS5 && attachment.isConfirmation()) readHeader(channel, attachment, key);
-            else if (attachment.getBuffer().get(0) == VERSION_SOCKS5) this.confirmationHeader(key, attachment, byteRead);
+            if (byteRead == READ_ERROR || byteRead == 0) return;
+            if (attachment.getBuffer().get(INDEX_SOCKS5) == VERSION_SOCKS5 && attachment.isConfirmation()) readHeader(channel, attachment, key);
+            else if (attachment.getBuffer().get(INDEX_SOCKS5) == VERSION_SOCKS5) this.confirmationHeader(key, attachment, byteRead);
             else saveData(attachment, key);
         } catch (IOException e) {}
     }
@@ -107,13 +109,19 @@ public class ProxyServer implements AutoCloseable {
         newPeer.attach(new Attachment(key));
     }
 
-    private SocksHeader parseHeader(ByteBuffer buffer, int messageLength) throws UnknownHostException{
+    private SocksHeader parseHeader(ByteBuffer buffer, int messageLength) throws UnknownHostException {
+        this.checkHeader(buffer.get(0), buffer.get(1), buffer.get(3));
         byte[] ipBytes = Arrays.copyOfRange(buffer.array(), INDEX_IP_HEADER, messageLength - SIZEOF_PORT);
         short clientPort = (short) (((buffer.get(messageLength - SIZEOF_PORT) & 0xFF) << 8) | (buffer.get(messageLength - 1) & 0xFF));
         InetAddress ip = InetAddress.getByName(new String(ipBytes));
         log.info("host ip {} and port {}", ip.getHostName(), clientPort);
-
         return new SocksHeader(ip, clientPort);
+    }
+
+    private void checkHeader(byte versionSocks, byte rep, byte aTyp) {
+        log.info("checkHeader");
+        if(versionSocks != VERSION_SOCKS5) throw new VersionSocksException(versionSocks);
+        if(aTyp != A_TYP_IP4 && aTyp != A_TYP_DOMAIN && aTyp != A_TYP_IPV6) throw new TypeException(aTyp);
     }
 
     private void write(SelectionKey key) throws IOException {
@@ -149,7 +157,7 @@ public class ProxyServer implements AutoCloseable {
         request.put(VERSION_SOCKS5);
         request.put(REP_CONNECT_SUCCESS);
         request.put(RSV);
-        request.put(A_TYP);
+        request.put(A_TYP_IP4);
         request.put(InetAddress.getLoopbackAddress().getAddress());
         request.putShort(this.port);
         request.flip();

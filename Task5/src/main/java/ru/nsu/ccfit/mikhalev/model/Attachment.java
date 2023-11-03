@@ -25,7 +25,6 @@ public class Attachment {
         this.peerKey = peer;
     }
 
-
     public void clearData(){
         this.buffer.flip();
         this.buffer.clear();
