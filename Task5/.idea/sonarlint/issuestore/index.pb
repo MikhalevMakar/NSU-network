@@ -15,3 +15,9 @@ i
 9src/main/java/ru/nsu/ccfit/mikhalev/model/Attachment.java,f/1/f1b6d526a3a96ed515819d557cf7851fd0dd1890
 s
 Csrc/main/java/ru/nsu/ccfit/mikhalev/configuration/ContextProxy.java,3/1/31e1e8a06009a0bbf1b397711d59ae52a52358de
+o
+?src/main/java/ru/nsu/ccfit/mikhalev/exception/RepException.java,7/7/77afc8edc8c349494b72510a3e454fa37a8c8af5
+x
+Hsrc/main/java/ru/nsu/ccfit/mikhalev/exception/VersionSocksException.java,a/2/a233ca868d7b1f0837a77acbdf3a4ef91dc08762
+p
+@src/main/java/ru/nsu/ccfit/mikhalev/exception/TypeException.java,7/0/704b8a28ad81f9aa6eb604d80ba097ad0c8a097a

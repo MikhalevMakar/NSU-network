@@ -33,14 +33,16 @@ public class ProxyServer implements AutoCloseable {
     }
 
     public void run() {
-        try {
-            while (selector.select () > SELECT_ERROR) {
-                for (SelectionKey key : selector.selectedKeys())
-                    this.switchKey(key);
-                selector.selectedKeys().clear();
+        while(true) {
+            try {
+                while (selector.select() > SELECT_ERROR) {
+                    for (SelectionKey key : selector.selectedKeys ())
+                        this.switchKey(key);
+                    selector.selectedKeys().clear ();
+                }
+            } catch (IOException ex) {
+                //throw new SelectorException(ex);
             }
-        } catch (IOException ex) {
-            throw new SelectorException(ex);
         }
     }
 
