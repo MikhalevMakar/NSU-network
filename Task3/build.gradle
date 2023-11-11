@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
+}
+
+group = 'nsu.ccfit.ru.mikhalev'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    /* Lombok */
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    /* JAKARTA */
+    implementation group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: "$jakartaServletVersion"
+
+    /* WEB */
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    /* SERVER */
+    implementation 'org.springframework.boot:spring-boot-starter-reactor-netty'
+
+    /* LOMBOK */
+    annotationProcessor "org.projectlombok:lombok"
+
+    /* MAP STRUCT */
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
+
+    /* ENVIRONMENT */
+    implementation group: 'me.paulschwarz', name: 'spring-dotenv', version: '4.0.0'
+
+    /* ASPECTJ */
+    implementation 'org.aspectj:aspectjweaver:1.9.7'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
