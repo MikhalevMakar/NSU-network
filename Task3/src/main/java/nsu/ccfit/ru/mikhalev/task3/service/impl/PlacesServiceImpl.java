@@ -34,6 +34,7 @@ public class PlacesServiceImpl implements PlacesService {
 //            .bodyToMono(String.class);
 //    }
 
+    @Override
     public Mono<String> findGeographicalCoord(String lang, String name) {
         return WebClient.create(openTripMapProperties.getUrl()).get()
             .uri(uriBuilder -> uriBuilder

@@ -16,6 +16,13 @@ repositories {
     mavenCentral()
 }
 
+compileJava {
+    options.compilerArgs += [
+            "-Amapstruct.defaultComponentModel=spring",
+            "-Amapstruct.unmappedTargetPolicy=IGNORE"
+    ]
+}
+
 dependencies {
     /* Lombok */
     compileOnly 'org.projectlombok:lombok'
