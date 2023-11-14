@@ -6,7 +6,6 @@ import nsu.ccfit.ru.mikhalev.task3.configuration.OpenTripMapProperties;
 import nsu.ccfit.ru.mikhalev.task3.service.PlacesService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
@@ -35,7 +34,8 @@ public class PlacesServiceImpl implements PlacesService {
 //    }
 
     @Override
-    public Mono<String> findGeographicalCoord(String lang, String name) {
+    public Mono<String> findGeographicalCoord(String name, String lang) {
+        log.info("find geacode lang name {} {}", lang, name);
         return WebClient.create(openTripMapProperties.getUrl()).get()
             .uri(uriBuilder -> uriBuilder
                 .path("/{lang}/places/geoname")

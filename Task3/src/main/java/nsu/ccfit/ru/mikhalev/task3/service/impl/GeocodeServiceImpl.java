@@ -11,8 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @AllArgsConstructor
@@ -25,11 +24,11 @@ public class GeocodeServiceImpl implements GeocodeService {
     public Mono<List<GeocodeDTO>> findGeocode(String name) {
         log.info("find geocode {}", name);
         URI uri = UriComponentsBuilder.fromHttpUrl(geocodeProperties.getUrl())
-            .queryParam("q", name)
-            .queryParam("limit", geocodeProperties.getLimitResult())
-            .queryParam("key", geocodeProperties.getKey())
-            .build()
-            .toUri();
+                                .queryParam("q", name)
+                                .queryParam("limit", geocodeProperties.getLimitResult())
+                                .queryParam("key", geocodeProperties.getKey())
+                                .build()
+                                .toUri();
 
         return WebClient.create(geocodeProperties.getUrl())
                         .get().uri(uri).retrieve()
