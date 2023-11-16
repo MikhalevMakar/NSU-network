@@ -2,13 +2,15 @@ package nsu.ccfit.ru.mikhalev.task3.handler;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.task3.requestparamaspect.ExtractedParams;
+import nsu.ccfit.ru.mikhalev.task3.requestparamaspect.ExtractedNameLangParams;
 import nsu.ccfit.ru.mikhalev.task3.service.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.*;
 import reactor.core.publisher.Mono;
+
+import static nsu.ccfit.ru.mikhalev.task3.context.ContextParamRequest.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -21,10 +23,9 @@ public class PlacesHandler {
     @Qualifier("geocodeServiceImpl")
     private final GeocodeService geocodeService;
 
-    @ExtractedParams
+    @ExtractedNameLangParams
     public Mono<ServerResponse> findPlacesNearby(ServerRequest request, String... params) {
-        log.info("find places {} {}", params[0], params[1]);
-        return placesService.findGeographicalCoord(params[0], params[1])
+        return placesService.findGeographicalCoord(params[INDEX_NAME], params[INDEX_LANG])
                             .flatMap(response -> ServerResponse.ok()
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .bodyValue(response));

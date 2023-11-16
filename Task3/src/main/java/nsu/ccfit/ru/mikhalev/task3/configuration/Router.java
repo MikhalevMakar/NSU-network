@@ -1,11 +1,8 @@
 package nsu.ccfit.ru.mikhalev.task3.configuration;
 
-import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nsu.ccfit.ru.mikhalev.task3.handler.PlacesHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.*;
