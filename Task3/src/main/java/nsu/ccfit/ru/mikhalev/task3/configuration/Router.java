@@ -17,8 +17,8 @@ public class Router {
     @Bean
     public RouterFunction<ServerResponse> route(PlacesHandler placesHandler) {
         return RouterFunctions
-            //.route(GET("/geocode").and(accept(MediaType.APPLICATION_JSON)), placesHandler::findPlacesGeocode)
-            //.andRoute(GET("/places-nearby").and(accept(MediaType.APPLICATION_JSON)), placesHandler::findPlacesNearby);
-            .route(GET("/places-nearby").and(accept(MediaType.APPLICATION_JSON)), placesHandler::findPlacesNearby);
+            .route(GET("/geocode").and(accept(MediaType.APPLICATION_JSON)), placesHandler::findPlacesGeocode)
+            .andRoute(GET("/places-nearby").and(accept(MediaType.APPLICATION_JSON)), placesHandler::findPlacesNearby)
+           .andRoute(GET("/weather").and(accept(MediaType.APPLICATION_JSON)), placesHandler::findInfoByCoord);
     }
 }

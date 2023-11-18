@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой поисковик</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #placement {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #searchInput {
+            padding: 10px;
+            font-size: 16px;
+        }
+        #searchButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #results {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .result {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer; /* Добавим стиль указывающий на возможность клика */
+        }
+        .result:hover {
+            background-color: #f0f0f0; /* Добавим стиль для выделения при наведении */
+        }
+    </style>
+</head>
+<body>
+<div id="placement">Введите название локации:</div>
+<input type="text" id="searchInput" placeholder="Название локации">
+<button onclick="search()">Поиск</button>
+
+<div id="results"></div>
+
+<script>
+    function search() {
+        var locationName = document.getElementById('searchInput').value;
+
+        fetch('http://localhost:8080/geocode?name=' + locationName)
+            .then(response => response.json())
+            .then(data => {
+                displayResults(data);
+            })
+            .catch(error => console.error('Ошибка:', error));
+    }
+
+    function displayResults(results) {
+        var resultsContainer = document.getElementById('results');
+        resultsContainer.innerHTML = '';
+
+        results.forEach(result => {
+            var resultElement = document.createElement('div');
+            resultElement.classList.add('result');
+
+            resultElement.innerHTML = `
+                <strong>${result.name}</strong><br>
+                Город: ${result.city}<br>
+                Область: ${result.state}<br>
+                Почтовый индекс: ${result.postcode}<br>
+                Координаты: ${result.point.lat}, ${result.point.lng}
+            `;
+
+            // Добавим обработчик события для клика на результат
+            resultElement.addEventListener('click', function() {
+                // Перейти на другую страницу и передать информацию через параметры URL
+                window.location.href = 'details.html?name=' + encodeURIComponent(result.name) +
+                    '&city=' + encodeURIComponent(result.city) +
+                    '&state=' + encodeURIComponent(result.state) +
+                    '&postcode=' + encodeURIComponent(result.postcode) +
+                    '&lat=' + encodeURIComponent(result.point.lat) +
+                    '&lng=' + encodeURIComponent(result.point.lng);
+            });
+
+            resultsContainer.appendChild(resultElement);
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package nsu.ccfit.ru.mikhalev.task3.requestparamaspect;
+package nsu.ccfit.ru.mikhalev.task3.requestparamaspect.annotation;
 
 import java.lang.annotation.*;
 

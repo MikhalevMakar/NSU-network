@@ -1,8 +1,12 @@
 package nsu.ccfit.ru.mikhalev.task3.service;
 
+import nsu.ccfit.ru.mikhalev.task3.models.ResponsePlaces;
 import reactor.core.publisher.Mono;
+import java.util.List;
 
 public interface PlacesService {
-//    Mono<String> findGeographicalCoord(double lat, double lon);
-    Mono<String> findGeographicalCoord(String name, String lang);
+
+    Mono<List<ResponsePlaces>>  findGeographicalCoord(double lat, double lon);
+
+    Mono<List<String>>  findGeographicalCoord(String name, String lang);
 }

@@ -8,25 +8,26 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 
+import static nsu.ccfit.ru.mikhalev.task3.context.ContextParamRequest.Index.INDEX_SERVER_REQUEST;
+import static nsu.ccfit.ru.mikhalev.task3.context.ContextParamRequest.Str.*;
+
 @Slf4j
 @Aspect
 @Component
 public class RequestParamsAspect {
 
-        @Around("@annotation(nsu.ccfit.ru.mikhalev.task3.requestparamaspect.ExtractedNameLangParams)")
+        @Around("@annotation(nsu.ccfit.ru.mikhalev.task3.requestparamaspect.annotation.ExtractedNameLangParams)")
         public Object extractedNameLangParams(ProceedingJoinPoint joinPoint) throws Throwable {
-            log.info("test aspect");
+            log.info("find places geocode");
 
-            Object[] args = joinPoint.getArgs();
+            ServerRequest request = (ServerRequest) joinPoint.getArgs()[INDEX_SERVER_REQUEST];
 
-            ServerRequest request = (ServerRequest) args[0];
+            String name = request.queryParam(NAME)
+                .orElseThrow(() -> new QueryArgumentException(NAME));
+            String lang = request.queryParam(LANG)
+                .orElseThrow(() -> new QueryArgumentException(LANG));
 
-            String name = request.queryParam("name")
-                .orElseThrow(() -> new QueryArgumentException("name"));
-            String lang = request.queryParam("lang")
-                .orElseThrow(() -> new QueryArgumentException("lang"));
-
-            Object[] modifiedArgs = {args[0], new String[] {name, lang}};
+            Object[] modifiedArgs = {request, new String[] {name, lang}};
             log.info("modified args before proceeding: {} {}", name, lang);
             return  joinPoint.proceed(modifiedArgs);
         }

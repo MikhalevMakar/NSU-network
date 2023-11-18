@@ -29,7 +29,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     /* JAKARTA */
-    implementation group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: "$jakartaServletVersion"
+    implementation "jakarta.servlet:jakarta.servlet-api:$jakartaServletVersion"
 
     /* WEB */
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
@@ -44,10 +44,13 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:$mapStructVersion"
 
     /* ENVIRONMENT */
-    implementation group: 'me.paulschwarz', name: 'spring-dotenv', version: '4.0.0'
+    implementation  "me.paulschwarz:spring-dotenv:$springDotenvVersion"
 
     /* ASPECTJ */
-    implementation 'org.aspectj:aspectjweaver:1.9.7'
+    implementation "org.aspectj:aspectjweaver:$aspectjVersion"
+
+    /* JACKSON */
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
 }
 
 tasks.named('test') {

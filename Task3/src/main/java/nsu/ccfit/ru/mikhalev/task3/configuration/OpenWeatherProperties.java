@@ -1,0 +1,19 @@
+package nsu.ccfit.ru.mikhalev.task3.configuration;
+
+
+import lombok.*;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+
+@Getter
+@Setter
+@Component
+@PropertySource(value = "classpath:application.properties")
+@ConfigurationProperties(prefix = "open.weather.api", ignoreUnknownFields = false)
+public class OpenWeatherProperties {
+
+    private String key;
+
+    private String url;
+}

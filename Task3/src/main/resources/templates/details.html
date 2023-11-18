@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали локации и погода</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #details {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        #weather {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="details"></div>
+<div id="weather"></div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    const city = urlParams.get('city');
+    const state = urlParams.get('state');
+    const postcode = urlParams.get('postcode');
+    const lat = urlParams.get('lat');
+    const lng = urlParams.get('lng');
+
+    // Отображаем информацию
+    const detailsContainer = document.getElementById('details');
+    detailsContainer.innerHTML = `
+        <strong>${name}</strong><br>
+        Город: ${city}<br>
+        Область: ${state}<br>
+        Почтовый индекс: ${postcode}<br>
+        Координаты: ${lat}, ${lng}
+    `;
+
+    fetch(`http://localhost:8080/weather?lat=${lat}&lon=${lng}`)
+        .then(response => response.json())
+        .then(data => {
+            const weatherData = Array.isArray(data) ? data[0] : data;
+
+            const temperature = weatherData.main && weatherData.main.temp !== undefined ? weatherData.main.temp : 'N/A';
+            const description = weatherData.weather && weatherData.weather[0] ? weatherData.weather[0].description : 'N/A';
+            const humidity = weatherData.main && weatherData.main.humidity !== undefined ? weatherData.main.humidity : 'N/A';
+            const windSpeed = weatherData.wind && weatherData.wind.speed !== undefined ? weatherData.wind.speed : 'N/A';
+
+            const weatherContainer = document.getElementById('weather');
+            const temperatureCelsius = (weatherData.main.temp - 273.15).toFixed(2);
+            weatherContainer.innerHTML = `
+                <h2>Информация о погоде</h2>
+                Температура: ${temperatureCelsius}°C<br>
+                Описание: ${description}<br>
+                Влажность: ${humidity}%<br>
+                Скорость ветра: ${windSpeed} м/с
+            `;
+        })
+        .catch(error => console.error('Ошибка при получении данных о погоде:', error));
+</script>
+</body>
+</html>
