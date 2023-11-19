@@ -7,6 +7,4 @@ import java.util.List;
 public interface PlacesService {
 
     Mono<List<ResponsePlaces>>  findGeographicalCoord(double lat, double lon);
-
-    Mono<List<String>>  findGeographicalCoord(String name, String lang);
 }

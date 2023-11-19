@@ -7,20 +7,46 @@
     <style>
         body {
             text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
         }
+
+        #details, #weather, #places {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
         #details {
             font-size: 24px;
-            margin-top: 20px;
+            text-align: left;
         }
-        #weather {
-            margin-top: 20px;
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin: 0;
+            color: #666;
+        }
+
+        strong {
+            color: #009688;
         }
     </style>
 </head>
 <body>
 <div id="details"></div>
 <div id="weather"></div>
+<div id="places">
+    <h2>Информация о ближайших местах</h2>
+</div>
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -31,7 +57,6 @@
     const lat = urlParams.get('lat');
     const lng = urlParams.get('lng');
 
-    // Отображаем информацию
     const detailsContainer = document.getElementById('details');
     detailsContainer.innerHTML = `
         <strong>${name}</strong><br>
@@ -40,28 +65,40 @@
         Почтовый индекс: ${postcode}<br>
         Координаты: ${lat}, ${lng}
     `;
-
-    fetch(`http://localhost:8080/weather?lat=${lat}&lon=${lng}`)
+    fetch(`http://localhost:8080/weather-and-places?lat=${lat}&lon=${lng}`)
         .then(response => response.json())
         .then(data => {
-            const weatherData = Array.isArray(data) ? data[0] : data;
-
-            const temperature = weatherData.main && weatherData.main.temp !== undefined ? weatherData.main.temp : 'N/A';
-            const description = weatherData.weather && weatherData.weather[0] ? weatherData.weather[0].description : 'N/A';
-            const humidity = weatherData.main && weatherData.main.humidity !== undefined ? weatherData.main.humidity : 'N/A';
-            const windSpeed = weatherData.wind && weatherData.wind.speed !== undefined ? weatherData.wind.speed : 'N/A';
-
             const weatherContainer = document.getElementById('weather');
-            const temperatureCelsius = (weatherData.main.temp - 273.15).toFixed(2);
+            const temperatureCelsius = (data.weather.main.temp - 273.15).toFixed(2);
             weatherContainer.innerHTML = `
                 <h2>Информация о погоде</h2>
                 Температура: ${temperatureCelsius}°C<br>
-                Описание: ${description}<br>
-                Влажность: ${humidity}%<br>
-                Скорость ветра: ${windSpeed} м/с
+                Описание: ${data.weather.weather[0].description}<br>
+                Влажность: ${data.weather.main.humidity}%<br>
+                Скорость ветра: ${data.weather.wind.speed} м/с
             `;
+
+            if (data && data.places && data.places.length > 0) {
+                const placesContainer = document.getElementById('places');
+
+                data.places.forEach(place => {
+                    const placeName = place.name || 'Unnamed Place';
+
+                    const placeDetails = document.createElement('p');
+                    placeDetails.textContent = `Место: ${placeName}`;
+
+                    const address = place.address;
+                    const addressDetails = document.createElement('p');
+                    addressDetails.textContent = `Адрес: ${address.city}, ${address.state}, ${address.neighbourhood}, ${address.county}, ${address.suburb}, ${address.country}`;
+
+                    placesContainer.appendChild(placeDetails);
+                    placesContainer.appendChild(addressDetails);
+                });
+            } else {
+                console.log('Информация о ближайших местах не найдена.');
+            }
         })
-        .catch(error => console.error('Ошибка при получении данных о погоде:', error));
+        .catch(error => console.error('Ошибка при получении данных:', error));
 </script>
 </body>
 </html>

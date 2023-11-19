@@ -11,7 +11,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
-import java.util.*;
+
+import static nsu.ccfit.ru.mikhalev.task3.context.ContextParamRequest.Str.*;
 
 @Slf4j
 @Service
@@ -23,9 +24,9 @@ public class WeatherServiceImpl implements WeatherService {
     @Override
     public Mono<ResponseWeather> findWeatherByGeocoder(double lat, double lon){
         URI uri = UriComponentsBuilder.fromHttpUrl(openWeatherProperties.getUrl())
-                                .queryParam ("lat", lat)
-                                .queryParam ("lon", lon)
-                                .queryParam ("apikey", openWeatherProperties.getKey ())
+                                .queryParam (LAT, lat)
+                                .queryParam (LON, lon)
+                                .queryParam (API_KEY, openWeatherProperties.getKey())
                                 .build()
                                 .toUri();
 

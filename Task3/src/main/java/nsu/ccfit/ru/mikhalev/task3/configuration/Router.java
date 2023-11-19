@@ -18,7 +18,6 @@ public class Router {
     public RouterFunction<ServerResponse> route(PlacesHandler placesHandler) {
         return RouterFunctions
             .route(GET("/geocode").and(accept(MediaType.APPLICATION_JSON)), placesHandler::findPlacesGeocode)
-            .andRoute(GET("/places-nearby").and(accept(MediaType.APPLICATION_JSON)), placesHandler::findPlacesNearby)
-           .andRoute(GET("/weather").and(accept(MediaType.APPLICATION_JSON)), placesHandler::findInfoByCoord);
+            .andRoute(GET("/weather-and-places").and(accept(MediaType.APPLICATION_JSON)), placesHandler::findInfoByCoord);
     }
 }

@@ -2,7 +2,6 @@ package nsu.ccfit.ru.mikhalev.task3.handler;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nsu.ccfit.ru.mikhalev.task3.models.CombinedResponse;
 import nsu.ccfit.ru.mikhalev.task3.models.*;
 import nsu.ccfit.ru.mikhalev.task3.requestparamaspect.annotation.*;
 import nsu.ccfit.ru.mikhalev.task3.service.*;
@@ -16,7 +15,6 @@ import java.util.List;
 
 import static nsu.ccfit.ru.mikhalev.task3.context.ContextParamRequest.Index.*;
 
-@Slf4j
 @RequiredArgsConstructor
 @Configuration
 public class PlacesHandler {
@@ -30,41 +28,23 @@ public class PlacesHandler {
     @Qualifier("weatherServiceImpl")
     private final WeatherService weatherService;
 
-    @ExtractedNameLangParams
-    public Mono<ServerResponse> findPlacesNearby(ServerRequest request, String... params) {
-        log.info("find places nearby");
-        return placesService.findGeographicalCoord(params[INDEX_NAME], params[INDEX_LANG])
-                            .flatMap(response -> ServerResponse.ok()
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .bodyValue(response));
-    }
-
-    @ExtractedNameParam
-    public Mono<ServerResponse> findPlacesGeocode(ServerRequest request) {
-        log.info("find places geocode");
-        String name = request.queryParam("name")
-            .orElseThrow (() -> new IllegalArgumentException ("Отсутствует параметр lat"));
-
-        return geocodeService.findGeocode(name)
+    @ExtractedPlacesGeocode
+    public Mono<ServerResponse> findPlacesGeocode(ServerRequest request, String... params) {
+        return geocodeService.findGeocode(params[INDEX_NAME])
                 .flatMap(response -> ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(response));
     }
 
-    public Mono<ServerResponse> findInfoByCoord(ServerRequest request) {
-        double lat = Double.parseDouble(request.queryParam("lat").orElseThrow (() -> new IllegalArgumentException ("Отсутствует параметр lat")));
-        double lon = Double.parseDouble(request.queryParam("lon").orElseThrow (() -> new IllegalArgumentException ("Отсутствует параметр lat")));
+    @ExtractedInfoByCoord
+    public Mono<ServerResponse> findInfoByCoord(ServerRequest request, Double... params) {
+        Mono<ResponseWeather> weather = weatherService.findWeatherByGeocoder(params[INDEX_LON], params[INDEX_LAT]);
+        Mono<List<ResponsePlaces>>  placesNearby = placesService.findGeographicalCoord(params[INDEX_LON], params[INDEX_LAT]);
 
-        Mono<ResponseWeather> weather = weatherService.findWeatherByGeocoder(lat, lon);
-        Mono<List<ResponsePlaces>>  placesNearby = placesService.findGeographicalCoord(lat, lon);
-//        return Mono.zip(weather, placesNearby)
-//            .flatMap(responseTuple ->
-//                ServerResponse.ok()
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .bodyValue(new CombinedResponse(responseTuple.getT1(), responseTuple.getT2())));
-        return placesNearby
-            .flatMap(response -> ServerResponse.ok()
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .bodyValue(response));
+        return Mono.zip(weather, placesNearby)
+            .flatMap(responseTuple ->
+                ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(new CombinedResponse(responseTuple.getT1(), responseTuple.getT2())));
     }
 }

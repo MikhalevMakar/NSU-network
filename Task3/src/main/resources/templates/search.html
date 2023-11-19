@@ -7,20 +7,30 @@
     <style>
         body {
             text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
         }
         #placement {
             font-size: 24px;
             margin-bottom: 20px;
+            color: #333;
         }
         #searchInput {
             padding: 10px;
             font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
         #searchButton {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
         }
         #results {
             margin-top: 20px;
@@ -31,17 +41,19 @@
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
-            cursor: pointer; /* Добавим стиль указывающий на возможность клика */
+            cursor: pointer;
+            background-color: #fff;
+            transition: background-color 0.3s;
         }
         .result:hover {
-            background-color: #f0f0f0; /* Добавим стиль для выделения при наведении */
+            background-color: #f0f0f0;
         }
     </style>
 </head>
 <body>
 <div id="placement">Введите название локации:</div>
 <input type="text" id="searchInput" placeholder="Название локации">
-<button onclick="search()">Поиск</button>
+<button onclick="search()" id="searchButton">Поиск</button>
 
 <div id="results"></div>
 
